@@ -10,7 +10,7 @@ public class StreamType : Type {
     public float range = 3;
 
     public override void alwaysUpdate(Element element) {
-        if (element.ps.isStopped && !Input.GetMouseButton(element.isRightHand ? 1 : 0)) {
+        if (element.ps.isStopped) {
             currentResource = Mathf.Clamp(currentResource + regenRate * Time.deltaTime, 0, maxResource);
             //regen resource
         }
@@ -22,15 +22,7 @@ public class StreamType : Type {
     }
 
     public override void update(Element element) {
-        if(Input.GetMouseButton(element.isRightHand ? 1 : 0) && currentResource > 0) {  //if we holding down and got resource
-            if (element.ps.isStopped) {
-                element.ps.Play();
-            }//ensure it only triggers once
-
-
-        }else { //go regen resource
-            alwaysUpdate(element);
-        }
+        MonoBehaviour.print(currentResource);
 
         if(Input.GetMouseButtonDown(element.isRightHand ? 1 : 0)) {
             if (element.ps.isStopped) {
@@ -56,6 +48,10 @@ public class StreamType : Type {
             if(currentResource <= 0) {
                 element.ps.Stop();
             }
+        }else {
+            currentResource = Mathf.Clamp(currentResource + regenRate * Time.deltaTime, 0, maxResource);
+            //regen resource
+            
         }
     }
 }

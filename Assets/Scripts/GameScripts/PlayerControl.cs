@@ -21,7 +21,9 @@ public class PlayerControl : MonoBehaviour {
     void Update() {
         rb.velocity = new Vector3(Input.GetAxisRaw("Horizontal"), rb.velocity.y, Input.GetAxisRaw("Vertical"));
         foreach(Element e in elements) {
-            e.alwaysUpdate();
+            if (!e.enabled) {
+                e.alwaysUpdate();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Q)) {
