@@ -22,8 +22,6 @@ public class StreamType : Type {
     }
 
     public override void update(Element element) {
-        MonoBehaviour.print(currentResource);
-
         if(Input.GetMouseButtonDown(element.isRightHand ? 1 : 0)) {
             if (element.ps.isStopped) {
                 element.ps.Play();

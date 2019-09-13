@@ -8,13 +8,21 @@ public class PlayerControl : MonoBehaviour {
 
     Rigidbody rb;
     Element[] elements;
+    List<Element> rightHandElement = new List<Element>();
+    List<Element> leftHandElement = new List<Element>();
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody>();
         elements = GetComponents<Element>();
-
+        foreach(Element e in elements) {
+            if (e.isRightHand) {
+                rightHandElement.Add(e);
+            }else {
+                leftHandElement.Add(e);
+            }
+        }
         currentLeft = 0;
-        currentRight = 2;
+        currentRight = 0;
     }
 
     // Update is called once per frame
@@ -27,11 +35,13 @@ public class PlayerControl : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.Q)) {
-            elements[currentLeft++].shutDown();
-            currentLeft %= 2;   //TODO: make sure this one not a predefined value
-            elements[currentLeft].enabled = true;
+            leftHandElement[currentLeft++].shutDown();
+            currentLeft %= leftHandElement.Count;
+            leftHandElement[currentLeft].enabled = true;
         }else if (Input.GetKeyDown(KeyCode.E)){
-
+            rightHandElement[currentRight++].shutDown();
+            currentRight %= rightHandElement.Count;
+            rightHandElement[currentRight].enabled = true;
         }
     }
 }
