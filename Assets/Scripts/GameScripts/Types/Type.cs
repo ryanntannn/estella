@@ -7,6 +7,7 @@ public abstract class Type : ScriptableObject {
     //effectTime = 1 would result in the effect ending as soon as trigger stops
     //effectTime = 2 would result in the effect ending after the amount of time it was triggered
     //hard to explain, just play around to find it
+    public GameObject thing;
 
     public abstract void start(Element element);
     public abstract void update(Element element);

@@ -146,7 +146,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129219312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.323, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1995515757}
@@ -170,7 +170,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -237,7 +237,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 0
+    scalar: 1.6
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -297,7 +297,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1.6
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -350,7 +350,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1.6
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -466,7 +466,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.4
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -788,7 +788,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.3
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -841,7 +841,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 0
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -928,7 +928,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.5
       mode: 0
       spread: 0
       speed:
@@ -1047,7 +1047,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 6
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1477,7 +1477,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -1485,9 +1485,9 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 0.985964, g: 1, b: 0.031372547, a: 1}
+        key1: {r: 1, g: 0.30269495, b: 0, a: 1}
+        key2: {r: 0.9801799, g: 1, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -1495,7 +1495,7 @@ ParticleSystem:
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
         ctime1: 65535
-        ctime2: 0
+        ctime2: 65535
         ctime3: 0
         ctime4: 0
         ctime5: 0
@@ -5021,9 +5021,7 @@ MonoBehaviour:
   types:
   - {fileID: 11400000, guid: 2bbc9665db3f52c4fa41c337e6d5a13c, type: 2}
   - {fileID: 11400000, guid: 60028ab31c0c0024393f3eacaa28753f, type: 2}
-  ps: {fileID: 2138197977}
-  bolt: {fileID: 0}
-  power: {fileID: 0}
+  - {fileID: 11400000, guid: 9d1ee0eb219743e4fa7a068fdc7d66fc, type: 2}
   isRightHand: 0
 --- !u!114 &239367487
 MonoBehaviour:
@@ -5040,9 +5038,6 @@ MonoBehaviour:
   currentType: 0
   types:
   - {fileID: 11400000, guid: f8b82861defc5a64692e81380008085d, type: 2}
-  ps: {fileID: 727950981}
-  bolt: {fileID: 0}
-  power: {fileID: 0}
   isRightHand: 1
 --- !u!114 &239367488
 MonoBehaviour:
@@ -5059,9 +5054,6 @@ MonoBehaviour:
   currentType: 0
   types:
   - {fileID: 11400000, guid: f92ad9e57ac7ad346bf0ea375a7c4df6, type: 2}
-  ps: {fileID: 296294382}
-  bolt: {fileID: 0}
-  power: {fileID: 0}
   isRightHand: 0
 --- !u!114 &239367489
 MonoBehaviour:
@@ -5078,9 +5070,6 @@ MonoBehaviour:
   currentType: 0
   types:
   - {fileID: 11400000, guid: c839e0d692eb1d546bc2146d4af91ca9, type: 2}
-  ps: {fileID: 1690177045}
-  bolt: {fileID: 0}
-  power: {fileID: 0}
   isRightHand: 1
 --- !u!1 &296294379
 GameObject:
@@ -5095,7 +5084,7 @@ GameObject:
   - component: {fileID: 296294381}
   m_Layer: 10
   m_Name: ElectricityPS
-  m_TagString: Untagged
+  m_TagString: FirePS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9936,8 +9925,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319909377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9, y: 1.17, z: 3.33}
-  m_LocalScale: {x: 2.2772, y: 2.2772, z: 2.2772}
+  m_LocalPosition: {x: 0.066, y: 1.17, z: 3.33}
+  m_LocalScale: {x: 0.6, y: 2, z: 0.6}
   m_Children:
   - {fileID: 1995515757}
   m_Father: {fileID: 0}
@@ -10112,8 +10101,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 561804356}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.153032, y: -0.17101128, z: 0.026895117, w: 0.9729404}
+  m_LocalPosition: {x: 4.5238132, y: 4.132921, z: -3.8065958}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10126,11 +10115,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 561804356}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 185abd5766ab1f34d9916e1c05c51093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sens: 0.5
 --- !u!1 &727950978
 GameObject:
   m_ObjectHideFlags: 0
@@ -10144,7 +10134,7 @@ GameObject:
   - component: {fileID: 727950980}
   m_Layer: 10
   m_Name: WaterPS
-  m_TagString: Untagged
+  m_TagString: FirePS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10241,7 +10231,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -14893,7 +14883,7 @@ GameObject:
   m_Component:
   - component: {fileID: 759023019}
   m_Layer: 10
-  m_Name: Electcricity
+  m_Name: ElectricityElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14924,7 +14914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 834064711}
   m_Layer: 10
-  m_Name: Wind
+  m_Name: WindElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14955,7 +14945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 909892940}
   m_Layer: 10
-  m_Name: Fire
+  m_Name: FireElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15077,7 +15067,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1457777662}
   m_Layer: 10
-  m_Name: Water
+  m_Name: WaterElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15111,7 +15101,7 @@ GameObject:
   - component: {fileID: 1690177044}
   m_Layer: 10
   m_Name: WindPS
-  m_TagString: Untagged
+  m_TagString: FirePS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19909,7 +19899,7 @@ GameObject:
   - component: {fileID: 2138197976}
   m_Layer: 10
   m_Name: FirePs
-  m_TagString: Untagged
+  m_TagString: FirePS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

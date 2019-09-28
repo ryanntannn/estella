@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (menuName = "Types/Bolt")]
-public class BoltType : Type {
+[CreateAssetMenu(menuName = "Types/Power")]
+public class PowerType : Type {
     public float maxResource = 5, currentResource, regenRate = 1, depeletionRate = 2;
     public float fireRate = 1;  //per second
 
@@ -19,13 +19,19 @@ public class BoltType : Type {
     }
 
     public override void update(Element element) {
-        if(internalCounter <= 0) {
+        RaycastHit hitInfo;
+        Ray ray = new Ray();
+        if (internalCounter <= 0) {
             if (Input.GetMouseButton(element.isRightHand ? 1 : 0)) {
-                GameObject instance = Instantiate(thing, element.transform.position, element.transform.rotation);
-                //make a bolt
-                internalCounter = 1 / fireRate; //reset timer
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            }else if(Input.GetMouseButtonUp(element.isRightHand ? 1 : 0)) {
+                if(Physics.Raycast(ray, out hitInfo, Mathf.Infinity)) {
+                    GameObject instance = Instantiate(thing, hitInfo.point, element.transform.rotation);
+                    //place down the power
+                    internalCounter = 1 / fireRate; //reset timer
+                }
             }
-        }else {
+        } else {
             internalCounter -= Time.deltaTime;
             //lower timer
         }
