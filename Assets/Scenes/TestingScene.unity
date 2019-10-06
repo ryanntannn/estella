@@ -5022,7 +5022,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2bbc9665db3f52c4fa41c337e6d5a13c, type: 2}
   - {fileID: 11400000, guid: 60028ab31c0c0024393f3eacaa28753f, type: 2}
   - {fileID: 11400000, guid: 9d1ee0eb219743e4fa7a068fdc7d66fc, type: 2}
-  isRightHand: 0
 --- !u!114 &239367487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5038,7 +5037,6 @@ MonoBehaviour:
   currentType: 0
   types:
   - {fileID: 11400000, guid: f8b82861defc5a64692e81380008085d, type: 2}
-  isRightHand: 1
 --- !u!114 &239367488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5046,7 +5044,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239367479}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d16656ffb773c8e46a9d2575c07461a3, type: 3}
   m_Name: 
@@ -5054,7 +5052,6 @@ MonoBehaviour:
   currentType: 0
   types:
   - {fileID: 11400000, guid: f92ad9e57ac7ad346bf0ea375a7c4df6, type: 2}
-  isRightHand: 0
 --- !u!114 &239367489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5062,7 +5059,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239367479}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 657c2528a39e4bb47a7009540504222f, type: 3}
   m_Name: 
@@ -5070,7 +5067,6 @@ MonoBehaviour:
   currentType: 0
   types:
   - {fileID: 11400000, guid: c839e0d692eb1d546bc2146d4af91ca9, type: 2}
-  isRightHand: 1
 --- !u!1 &296294379
 GameObject:
   m_ObjectHideFlags: 0
@@ -5084,7 +5080,7 @@ GameObject:
   - component: {fileID: 296294381}
   m_Layer: 10
   m_Name: ElectricityPS
-  m_TagString: FirePS
+  m_TagString: ElectricityElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10134,7 +10130,7 @@ GameObject:
   - component: {fileID: 727950980}
   m_Layer: 10
   m_Name: WaterPS
-  m_TagString: FirePS
+  m_TagString: WaterElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15101,7 +15097,7 @@ GameObject:
   - component: {fileID: 1690177044}
   m_Layer: 10
   m_Name: WindPS
-  m_TagString: FirePS
+  m_TagString: WindElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19899,7 +19895,7 @@ GameObject:
   - component: {fileID: 2138197976}
   m_Layer: 10
   m_Name: FirePs
-  m_TagString: FirePS
+  m_TagString: FireElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

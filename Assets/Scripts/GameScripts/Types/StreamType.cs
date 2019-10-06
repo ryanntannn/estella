@@ -22,17 +22,17 @@ public class StreamType : Type {
         //reset that shit
 
         //set the ps
-        //ps = GameObject.FindGameObjectWithTag("FirePS").GetComponent<ParticleSystem>();
+        ps = Helper.findChildWithTag(element.gameObject, element.GetType().Name).GetComponent<ParticleSystem>();
     }
 
     public override void update(Element element) {
-        if (Input.GetMouseButtonDown(element.isRightHand ? 1 : 0)) {
+        if (Input.GetKeyDown(element.getKey())) {
             if (ps.isStopped) {
                 ps.Play();
             }
         }//start attack
 
-        if(Input.GetMouseButtonUp(element.isRightHand ? 1 : 0)) {
+        if(Input.GetKeyUp(element.getKey())) {
             if (ps.isPlaying) {
                 ps.Stop();
             }

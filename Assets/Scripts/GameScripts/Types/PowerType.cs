@@ -22,9 +22,9 @@ public class PowerType : Type {
         RaycastHit hitInfo;
         Ray ray = new Ray();
         if (internalCounter <= 0) {
-            if (Input.GetMouseButton(element.isRightHand ? 1 : 0)) {
+            if (Input.GetKey(element.getKey())) {
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            }else if(Input.GetMouseButtonUp(element.isRightHand ? 1 : 0)) {
+            }else if(Input.GetKeyUp(element.getKey())) {
                 if(Physics.Raycast(ray, out hitInfo, Mathf.Infinity)) {
                     GameObject instance = Instantiate(thing, hitInfo.point, element.transform.rotation);
                     //place down the power

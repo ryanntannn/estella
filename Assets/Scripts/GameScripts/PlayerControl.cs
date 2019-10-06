@@ -7,40 +7,35 @@ public class PlayerControl : MonoBehaviour {
     public int currentRight, currentLeft;
 
     Rigidbody rb;
-    Element[] elements;
-    List<Element> rightHandElement = new List<Element>();
-    List<Element> leftHandElement = new List<Element>();
+    Element[] rightHandElement, leftHandElement;
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody>();
-        elements = GetComponents<Element>();
-        foreach(Element e in elements) {
-            if (e.isRightHand) {
-                rightHandElement.Add(e);
-            }else {
-                leftHandElement.Add(e);
-            }
-        }
+        rightHandElement = GetComponents<RightHandElement>();
+        leftHandElement = GetComponents<LeftHandElement>();
+
         currentLeft = 0;
         currentRight = 0;
+        for(int count = 1; count <= rightHandElement.Length - 1; count++) {
+            rightHandElement[count].enabled = false;
+        }
+        for (int count = 1; count <= leftHandElement.Length - 1; count++) {
+            leftHandElement[count].enabled = false;
+        }
     }
 
     // Update is called once per frame
     void Update() {
         rb.velocity = new Vector3(Input.GetAxisRaw("Horizontal"), rb.velocity.y, Input.GetAxisRaw("Vertical"));
-        foreach(Element e in elements) {
-            if (!e.enabled) {
-                e.alwaysUpdate();
-            }
-        }
+
 
         if (Input.GetKeyDown(KeyCode.Q)) {
             leftHandElement[currentLeft++].shutDown();
-            currentLeft %= leftHandElement.Count;
+            currentLeft %= leftHandElement.Length;
             leftHandElement[currentLeft].enabled = true;
         }else if (Input.GetKeyDown(KeyCode.E)){
             rightHandElement[currentRight++].shutDown();
-            currentRight %= rightHandElement.Count;
+            currentRight %= rightHandElement.Length;
             rightHandElement[currentRight].enabled = true;
         }
     }

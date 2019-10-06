@@ -6,11 +6,6 @@ public abstract class Element : MonoBehaviour {
     public int currentType;
     public Type[] types;
 
-    //public ParticleSystem ps;
-    //public GameObject bolt;
-    //public GameObject power;
-    public bool isRightHand;
-
     public void Start() {
         //if (ps.isPlaying) {
         //    ps.Stop();  //this can be skipped if we just turn off play on awake for the particle system
@@ -35,5 +30,6 @@ public abstract class Element : MonoBehaviour {
     }
 
     public abstract void onHit(GameObject other);
+    public abstract KeyCode getKey();
 }
 

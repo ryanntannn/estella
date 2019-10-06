@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterElement : Element {
+public class WaterElement : RightHandElement {
     public override void onHit(GameObject other) {
         Rigidbody rb = other.GetComponent<Rigidbody>();
         //finds rigidbody
