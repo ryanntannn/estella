@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LeftHandElement : Element {
-    public override void onHit(GameObject other) {
+    public override void OnHit(GameObject other) {
 
     }
 
-    public override KeyCode getKey() {
+    public override KeyCode GetKey() {
         return KeyCode.Mouse0;
     }
 }

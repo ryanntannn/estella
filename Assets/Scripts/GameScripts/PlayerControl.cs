@@ -30,11 +30,11 @@ public class PlayerControl : MonoBehaviour {
 
 
         if (Input.GetKeyDown(KeyCode.Q)) {
-            leftHandElement[currentLeft++].shutDown();
+            leftHandElement[currentLeft++].ShutDown();
             currentLeft %= leftHandElement.Length;
             leftHandElement[currentLeft].enabled = true;
         }else if (Input.GetKeyDown(KeyCode.E)){
-            rightHandElement[currentRight++].shutDown();
+            rightHandElement[currentRight++].ShutDown();
             currentRight %= rightHandElement.Length;
             rightHandElement[currentRight].enabled = true;
         }

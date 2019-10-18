@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ElectricityElement : LeftHandElement {
-    public override void onHit(GameObject other) {
+    public override void OnHit(GameObject other) {
         
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FireElement : LeftHandElement {
-    public override void onHit(GameObject other) {
+    public override void OnHit(GameObject other) {
         //set target on fire
         foreach(Transform child in other.transform) {
             if (child.name.Equals("FireOnHit")) {

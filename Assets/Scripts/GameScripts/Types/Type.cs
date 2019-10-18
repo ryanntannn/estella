@@ -9,7 +9,7 @@ public abstract class Type : ScriptableObject {
     //hard to explain, just play around to find it
     public GameObject thing;
 
-    public abstract void start(Element element);
-    public abstract void update(Element element);
-    public abstract void alwaysUpdate(Element element);
+    public abstract void TypeStart(Element element);
+    public abstract void TypeUpdate(Element element);
+    public abstract void AlwaysUpdate(Element element);
 }

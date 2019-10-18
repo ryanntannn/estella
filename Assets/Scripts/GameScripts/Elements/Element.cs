@@ -11,25 +11,25 @@ public abstract class Element : MonoBehaviour {
         //    ps.Stop();  //this can be skipped if we just turn off play on awake for the particle system
         //    //but just incase you know ;)
         //}
-        types[currentType].start(this);
+        types[currentType].TypeStart(this);
     }
 
     public void Update() {
-        types[currentType].update(this);
+        types[currentType].TypeUpdate(this);
     }
 
-    public void alwaysUpdate() {
-        types[currentType].alwaysUpdate(this);
+    public void AlwaysUpdate() {
+        types[currentType].AlwaysUpdate(this);
     }
 
-    public void shutDown() {
+    public void ShutDown() {
         //if (ps.isPlaying) {
         //    ps.Stop();
         //}
         enabled = false;
     }
 
-    public abstract void onHit(GameObject other);
-    public abstract KeyCode getKey();
+    public abstract void OnHit(GameObject other);
+    public abstract KeyCode GetKey();
 }
 
