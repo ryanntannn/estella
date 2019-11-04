@@ -13,9 +13,10 @@ public class ThirdPersonCamera : MonoBehaviour
     private GameObject playerGO;
     private GameObject cameraGO;
 
-    private Vector3 previousMousePos;
+    private Vector2 previousMousePos;
     
     [SerializeField] private Vector3 cameraOffset; //Offset value between the pivot and the camera
+    [SerializeField] private float sensitivity;
     [SerializeField] private float followDampening;
 
 
@@ -25,7 +26,9 @@ public class ThirdPersonCamera : MonoBehaviour
         //Initilise the GameObject references
         cameraGO = transform.GetChild(0).gameObject;
         playerGO = GameObject.Find("Player");
-        previousMousePos = Input.mousePosition;
+        previousMousePos = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -37,11 +40,9 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void PivotRotationUpdate()
     {
-        Vector3 mouseDelta = Input.mousePosition - previousMousePos; //Change in mouse position from the previous frame
-        Vector2 rotationDelta = new Vector2(-mouseDelta.y, mouseDelta.x) * Time.deltaTime;
+        Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        Vector2 rotationDelta = new Vector2(-mouseDelta.y, mouseDelta.x) * Time.deltaTime * 10 * sensitivity;
         transform.eulerAngles = new Vector3(rotationDelta.x + transform.eulerAngles.x, rotationDelta.y + transform.eulerAngles.y, 0);
-
-        previousMousePos = Input.mousePosition;
     }
 
     void PositionUpdate()
