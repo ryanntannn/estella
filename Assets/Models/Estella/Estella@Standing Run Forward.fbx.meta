@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9d0698fc4726b464aba2d7aa641a1ee9
+guid: 622f0f55be29085408535f5535ef4335
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
@@ -35,7 +35,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: Standing Run Forward
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
@@ -46,7 +46,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

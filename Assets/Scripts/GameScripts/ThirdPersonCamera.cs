@@ -47,7 +47,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void PositionUpdate()
     {
-        transform.position = Vector3.Lerp(playerGO.transform.position, transform.position, Time.deltaTime * followDampening);
+        transform.position = Vector3.Lerp(playerGO.transform.position, transform.position, followDampening);
         cameraGO.transform.localPosition = cameraOffset;
     }
 }
