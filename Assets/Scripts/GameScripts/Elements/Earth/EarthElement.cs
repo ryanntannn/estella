@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WindElement : Element {
+public class EarthElement : Element {
     public override void BoltType() {
         //shoot out one ball
         currentMana = Mathf.Clamp(currentMana + Time.deltaTime, 0, maxMana);
@@ -15,24 +15,6 @@ public class WindElement : Element {
     }
 
     public override void PowerType() {
-        //make one tornado
-        currentMana = Mathf.Clamp(currentMana + Time.deltaTime, 0, maxMana);
-
-        if (Input.GetKey(button)) {
-            //show the target area
-            //raycast out from center of camera
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hitinfo;
-            if (!Physics.Raycast(ray, out hitinfo, range * 5)) {
-                Physics.Raycast(Camera.main.transform.position + ray.direction * range * 5, -transform.up, out hitinfo, 100);   //100 just incase player shoot out of bounds
-            }
-
-            //draw circle at hitinfo.point
-            targetCircle.SetActive(true);
-            targetCircle.transform.position = hitinfo.point;
-        }else if (Input.GetKeyUp(button)) {
-            targetCircle.SetActive(false);
-        }
 
     }
 

@@ -40,3 +40,17 @@ public static class Helper {
         return default(T);
     }
 }
+
+public static class Layers {
+    //contains all the layer numbers DO NOT CHANGE
+    public static readonly int 
+        Default = 0,
+        TransparentFX = 1,
+        IgnoreRaycast = 2,
+        Water = 4,
+        UI = 5,
+        PostProcessing = 8,
+        Enemy = 9,
+        Player = 10,
+        Terrain = 11;
+}

@@ -3,33 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Element : MonoBehaviour {
-    public int currentType;
-    public Type[] types;
+    public enum Types { Stream, Bolt, Power }
+    public Types currentType = Types.Stream;
+    public KeyCode button = KeyCode.Mouse0;
 
-    public void Start() {
-        //if (ps.isPlaying) {
-        //    ps.Stop();  //this can be skipped if we just turn off play on awake for the particle system
-        //    //but just incase you know ;)
-        //}
-        types[currentType].TypeStart(this);
+    public bool isRightHand = true;
+    public ParticleSystem streamPS;
+    public GameObject bolt, power;
+
+    public float currentMana = 10, maxMana = 10;
+    public float manaRegenRate = 1;    //per second
+    public float range = 3;
+    public float boltCost = 1;
+    public float streamDrain = 1;
+    public float powerCost = 2;
+
+    public GameObject targetCircle;
+
+    private void Update() {
+        switch (currentType) {
+            case Types.Stream:
+                StreamType();
+                break;
+            case Types.Bolt:
+                BoltType();
+                break;
+            case Types.Power:
+                PowerType();
+                break;
+            default:
+                break;
+        }
     }
 
-    public void Update() {
-        types[currentType].TypeUpdate(this);
-    }
+    public abstract void StreamType();
 
-    public void AlwaysUpdate() {
-        types[currentType].AlwaysUpdate(this);
-    }
+    public abstract void BoltType();
 
-    public void ShutDown() {
-        //if (ps.isPlaying) {
-        //    ps.Stop();
-        //}
-        enabled = false;
-    }
-
-    public abstract void OnHit(GameObject other);
-    public abstract KeyCode GetKey();
+    public abstract void PowerType();
 }
-
