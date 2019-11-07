@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Element : MonoBehaviour {
     public enum Types { Stream, Bolt, Power }
     public Types currentType = Types.Stream;
+    [HideInInspector]
     public KeyCode button = KeyCode.Mouse0;
 
     public bool isRightHand = true;
@@ -34,6 +35,14 @@ public abstract class Element : MonoBehaviour {
             default:
                 break;
         }
+    }
+
+    public virtual void Enable() {  //start / onAwake
+        enabled = true;
+    }
+
+    public virtual void Disable() { //shutdown hook
+        enabled = false;
     }
 
     public abstract void StreamType();

@@ -19,7 +19,7 @@ public class FireProjectile : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         int otherLayer = other.gameObject.layer;
         if(otherLayer == Layers.Enemy) {
-            other.GetComponent<Enemy>().fireTimeToLive += 5;
+            other.GetComponent<Enemy>().ReactFire(Element.Types.Bolt);
             Destroy(gameObject);
         } else if(otherLayer == Layers.Terrain) {
             //can do some flame extingush here

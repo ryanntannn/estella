@@ -6,18 +6,37 @@ public class PlayerControl : MonoBehaviour {
     public float speed;
     public Animator animator;
 
+    public KeyCode leftHandButton = KeyCode.Mouse0, rightHandButton = KeyCode.Mouse1;   //activating elements
+    public KeyCode swapLeft = KeyCode.Q, swapRight = KeyCode.E; //swapping elements
+
+
     private GameObject pivot;
     Rigidbody rb;
+    int leftHand = 0, rightHand = 2;    //keep track of which one being used
+    const int NO_OF_LEFT = 2, NO_OF_RIGHT = 2;  //number of elements belonging on left and right hand
+    Element[] elements;
+
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody>();
         pivot = GameObject.Find("camera-pivot");
+
+        //element stuff
+        elements = GetComponents<Element>();
+        foreach (Element e in elements) {
+            e.button = e.isRightHand ? rightHandButton : leftHandButton;
+            e.Disable();
+        }
+
+        //enable defaults
+        elements[leftHand].Enable();
+        elements[rightHand].Enable();
     }
 
     // Update is called once per frame
     void Update() {
-        MovementUpdate();
         ElementUpdate();
+        MovementUpdate();
     }
 
     void MovementUpdate()
@@ -36,6 +55,18 @@ public class PlayerControl : MonoBehaviour {
 
     void ElementUpdate()
     {
+        if (Input.GetKeyDown(swapLeft)) {
+            elements[leftHand++].Disable();   //disable the currentLeft then bump it
+            leftHand %= NO_OF_LEFT; //prevent overflow
+            elements[leftHand].Enable();    //enable new left
+        }
+
+        if (Input.GetKeyDown(swapRight)) {
+            elements[rightHand++].Disable();
+            rightHand %= NO_OF_RIGHT;
+            rightHand += NO_OF_LEFT;    //since left hand elements should have index offset of +2
+            elements[rightHand].Enable();
+        }//same stuff here
     }
 }
 

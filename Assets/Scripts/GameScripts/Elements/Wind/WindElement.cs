@@ -4,35 +4,44 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WindElement : Element {
+    //store the position tornado is going to spawn at
+    RaycastHit hitinfo = new RaycastHit();
+
     public override void BoltType() {
         //shoot out one ball
         currentMana = Mathf.Clamp(currentMana + Time.deltaTime, 0, maxMana);
-        if (Input.GetKeyDown(button) && currentMana >= 1) {
+        if (Input.GetKeyDown(button) && currentMana >= boltCost) {
             currentMana -= boltCost;  //cost one
             //instansiate
             Instantiate(bolt, transform.position, transform.rotation);//need to do the rotation properly
         }
     }
 
+    //make one tornado
     public override void PowerType() {
-        //make one tornado
+        //regen mana
         currentMana = Mathf.Clamp(currentMana + Time.deltaTime, 0, maxMana);
 
-        if (Input.GetKey(button)) {
-            //show the target area
-            //raycast out from center of camera
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hitinfo;
-            if (!Physics.Raycast(ray, out hitinfo, range * 5)) {
-                Physics.Raycast(Camera.main.transform.position + ray.direction * range * 5, -transform.up, out hitinfo, 100);   //100 just incase player shoot out of bounds
-            }
+        //check if got enough mana
+        if (currentMana >= powerCost) {
+            //when holding down button
+            if (Input.GetKey(button)) {
+                //show the target area
+                //raycast out from center of camera
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (!Physics.Raycast(ray, out hitinfo, range * 5)) {
+                    Physics.Raycast(Camera.main.transform.position + ray.direction * range * 5, -transform.up, out hitinfo, 100);   //100 just incase player shoot out of bounds
+                }
 
-            //draw circle at hitinfo.point
-            targetCircle.SetActive(true);
-            targetCircle.transform.position = hitinfo.point;
-        }else if (Input.GetKeyUp(button)) {
-            targetCircle.SetActive(false);
-        }
+                //draw circle at hitinfo.point
+                targetCircle.SetActive(true);
+                targetCircle.transform.position = hitinfo.point;
+            } else if (Input.GetKeyUp(button)) {
+                targetCircle.SetActive(false);
+                //instaniate torado
+                Instantiate(power, hitinfo.point, Quaternion.identity);
+            }
+        }//check mana if
 
     }
 
@@ -59,7 +68,7 @@ public class WindElement : Element {
             RaycastHit hitInfo;
             if (Physics.Raycast(ray, out hitInfo, range)) { //check for hit
                 if (hitInfo.collider.gameObject.layer == Layers.Enemy) {    //enemy
-                    hitInfo.collider.GetComponent<Enemy>().ReactFire();
+                    hitInfo.collider.GetComponent<Enemy>().ReactWind(Types.Stream, transform);
                 }
             }
         } else {

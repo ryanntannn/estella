@@ -41,7 +41,7 @@ public class EarthElement : Element {
             RaycastHit hitInfo;
             if (Physics.Raycast(ray, out hitInfo, range)) { //check for hit
                 if (hitInfo.collider.gameObject.layer == Layers.Enemy) {    //enemy
-                    hitInfo.collider.GetComponent<Enemy>().ReactFire();
+                    hitInfo.collider.GetComponent<Enemy>().ReactEarth(Types.Stream);
                 }
             }
         } else {
