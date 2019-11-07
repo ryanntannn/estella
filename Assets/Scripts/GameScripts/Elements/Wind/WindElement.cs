@@ -7,6 +7,8 @@ public class WindElement : Element {
     //store the position tornado is going to spawn at
     RaycastHit hitinfo = new RaycastHit();
 
+    public override string ElementName => "Wind";
+
     public override void BoltType() {
         //shoot out one ball
         currentMana = Mathf.Clamp(currentMana + Time.deltaTime, 0, maxMana);

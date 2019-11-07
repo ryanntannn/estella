@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Element : MonoBehaviour {
+    public abstract string ElementName {
+        get;
+    }
     public enum Types { Stream, Bolt, Power }
     public Types currentType = Types.Stream;
     [HideInInspector]

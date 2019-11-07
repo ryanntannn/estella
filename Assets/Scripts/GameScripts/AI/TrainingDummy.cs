@@ -31,15 +31,12 @@ public class TrainingDummy : Enemy {
     public override void ReactWind(Element.Types type, Transform other) {
         switch (type) {
             case Element.Types.Stream:
-
                 break;
             case Element.Types.Bolt:
                 //should only happen once
                 break;
             case Element.Types.Power:
                 //tilt towards tornado
-                Vector3 force = transform.position - other.position;
-                GetComponent<Rigidbody>().AddForceAtPosition(force * 5, transform.up * 2);
                 break;
         }
     }

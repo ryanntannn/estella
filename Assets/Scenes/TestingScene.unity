@@ -5175,6 +5175,7 @@ MonoBehaviour:
   onFirePs: {fileID: 129219315}
   fireTimeToLive: 0
   health: 10
+  speed: 12
 --- !u!54 &245700849
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10327,6 +10328,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Estella
       objectReference: {fileID: 0}
+    - target: {fileID: -3214139373050596088, guid: 9fd47119ca562894bbc640df4c09963e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 9fd47119ca562894bbc640df4c09963e,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 9fd47119ca562894bbc640df4c09963e, type: 3}
+    - target: {fileID: -6057140222963153312, guid: 9fd47119ca562894bbc640df4c09963e,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2c67d71168c9e5140ade1fd85ba7dc87, type: 2}
     - target: {fileID: -9147868553947026619, guid: 9fd47119ca562894bbc640df4c09963e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10477,16 +10493,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 17.963085
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 9fd47119ca562894bbc640df4c09963e,
-        type: 3}
-      propertyPath: m_Avatar
-      value: 
-      objectReference: {fileID: 9000000, guid: 9fd47119ca562894bbc640df4c09963e, type: 3}
-    - target: {fileID: -6057140222963153312, guid: 9fd47119ca562894bbc640df4c09963e,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 2c67d71168c9e5140ade1fd85ba7dc87, type: 2}
     - target: {fileID: -5696235270323981043, guid: 9fd47119ca562894bbc640df4c09963e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10646,11 +10652,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -17.155396
-      objectReference: {fileID: 0}
-    - target: {fileID: -3214139373050596088, guid: 9fd47119ca562894bbc640df4c09963e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3167575404677891443, guid: 9fd47119ca562894bbc640df4c09963e,
         type: 3}

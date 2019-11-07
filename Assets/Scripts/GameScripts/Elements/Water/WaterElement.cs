@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WaterElement : Element {
+    public override string ElementName => "Water";
+
     public override void BoltType() {
         //shoot out one ball
         currentMana = Mathf.Clamp(currentMana + Time.deltaTime, 0, maxMana);

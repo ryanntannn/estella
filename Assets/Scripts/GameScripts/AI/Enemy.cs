@@ -7,8 +7,9 @@ public abstract class Enemy : MonoBehaviour {
     public ParticleSystem onFirePs;
     public float fireTimeToLive = 0;
 
-    //health stuff
+    //stats
     public float health = 10;
+    public float speed = 12;
 
     public virtual void ReactFire(Element.Types type) {
         switch (type) {
