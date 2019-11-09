@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TornadoScript : MonoBehaviour {
     //spin how fast
-    public float speed = 12;
+    public float rotationSpeed = 12;
     public float speedVarMin = -2, speedVarMax = 2;
     public float timeToLive = 5;    //how long before it disappears
 
@@ -16,13 +16,13 @@ public class TornadoScript : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    public virtual void Update() {
         //dt
         float deltaTime = Time.deltaTime;
 
         //rotate
         transform.rotation = Quaternion.Euler(0, totalRotation, 0);
-        totalRotation += (speed + Random.Range(speedVarMin, speedVarMax)) * deltaTime;
+        totalRotation += (rotationSpeed + Random.Range(speedVarMin, speedVarMax)) * deltaTime;
 
         //decrease timer
         timeToLive -= deltaTime;
@@ -34,7 +34,7 @@ public class TornadoScript : MonoBehaviour {
 
     }
 
-    private void OnTriggerEnter(Collider other) {
+    public virtual void OnTriggerEnter(Collider other) {
         if(other.gameObject.layer == Layers.Enemy) {
             other.GetComponent<Enemy>().ReactWind(Element.Types.Power, transform.GetChild(1));
         }else if (other.CompareTag("Bolt")) {

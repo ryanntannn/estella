@@ -42,7 +42,7 @@ public static class Helper {
 }
 
 public static class Layers {
-    //contains all the layer numbers DO NOT CHANGE
+    //contains all the layer numbers DO NOT CHANGE UNLESS LAYERS CHANGE TOO
     public static readonly int 
         Default = 0,
         TransparentFX = 1,

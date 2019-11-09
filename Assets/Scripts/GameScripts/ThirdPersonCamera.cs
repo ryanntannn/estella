@@ -49,5 +49,12 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         transform.position = Vector3.Lerp(playerGO.transform.position, transform.position, followDampening);
         cameraGO.transform.localPosition = cameraOffset;
+
+        //raycast back
+        RaycastHit hitInfo;
+        if(Physics.Raycast(transform.position, (cameraGO.transform.position - transform.position), out hitInfo, cameraOffset.magnitude))
+        {
+            cameraGO.transform.position = hitInfo.point;
+        }
     }
 }
