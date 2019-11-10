@@ -74,9 +74,7 @@ public class TrainingDummy : Enemy {
             case Element.Types.Stream:
                 break;
             case Element.Types.Bolt:
-                //splash water
-                GameObject instance = Instantiate(waterPS, transform);
-                Destroy(instance, 1);
+                //apply slow and small knockback
                 break;
             case Element.Types.Power:
                 break;
