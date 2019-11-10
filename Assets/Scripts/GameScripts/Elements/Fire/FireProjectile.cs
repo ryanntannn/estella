@@ -7,15 +7,19 @@ public class FireProjectile : Projectile {
     //future use
     Animator anim;
 
-    public override string elementName { get => "Fire"; }
-    public override float speed { get => 12; }
+    public override string elementName {
+        get { return "Fire"; }
+    }
+    public override float speed {
+        get { return 12; }
+    }
 
     private void Start() {
 
     }
 
     private void Update() {
-        transform.Translate(transform.forward * speed * Time.deltaTime);
+        transform.position += transform.forward * Time.deltaTime * speed;
     }
 
     private void OnTriggerEnter(Collider other) {

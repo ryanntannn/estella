@@ -28,12 +28,21 @@ public class ThirdPersonCamera : MonoBehaviour
         playerGO = GameObject.Find("Player");
         previousMousePos = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
+        //disable for now
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButton(0)) {
+            //look at same direction as camera
+            //rot of cam
+            Quaternion camRot = Camera.main.transform.rotation;
+            //change player rotation
+            playerGO.transform.rotation = Quaternion.Euler(0, camRot.eulerAngles.y, 0);
+        }
+
         PivotRotationUpdate();
         PositionUpdate();
     }
@@ -52,7 +61,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         //raycast back
         RaycastHit hitInfo;
-        if(Physics.Raycast(transform.position, (cameraGO.transform.position - transform.position), out hitInfo, cameraOffset.magnitude))
+        if(Physics.Raycast(transform.position, (cameraGO.transform.position - transform.position), out hitInfo, cameraOffset.magnitude, Layers.Terrain))
         {
             cameraGO.transform.position = hitInfo.point;
         }

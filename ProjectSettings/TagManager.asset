@@ -7,10 +7,6 @@ TagManager:
   - Power
   - Stream
   - Bolt
-  - FireElement
-  - WaterElement
-  - WindElement
-  - ElectricityElement
   layers:
   - Default
   - TransparentFX

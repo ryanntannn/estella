@@ -11,7 +11,7 @@ public class FireElement : Element {
         if (Input.GetKeyDown(button) && currentMana >= 1) {
             currentMana -= boltCost;  //cost one
             //instansiate
-            Instantiate(bolt, transform.position, transform.rotation);//need to do the rotation properly
+            GameObject instance = Instantiate(bolt, transform.position, transform.rotation);//need to do the rotation properly
         }
     }
 
