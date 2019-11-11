@@ -20,7 +20,7 @@ public class WaterTornado : TornadoScript {
         if (other.gameObject.layer == Layers.Enemy) {
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.ReactWater(Element.Types.Bolt);
-            enemy.ReactWind(Element.Types.Power, transform);
+            enemy.ReactWind(Element.Types.Power, transform.position);
         }
     }
 }

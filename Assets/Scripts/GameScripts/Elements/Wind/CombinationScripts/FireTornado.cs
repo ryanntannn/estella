@@ -37,7 +37,7 @@ public class FireTornado : TornadoScript {
         if(other.gameObject.layer == Layers.Enemy) {
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.ReactFire(Element.Types.Bolt);
-            enemy.ReactWind(Element.Types.Power, transform);
+            enemy.ReactWind(Element.Types.Power, transform.position);
         }
     }
 }

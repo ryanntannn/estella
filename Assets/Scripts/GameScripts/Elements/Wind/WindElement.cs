@@ -70,7 +70,7 @@ public class WindElement : Element {
             RaycastHit hitInfo;
             if (Physics.Raycast(ray, out hitInfo, range)) { //check for hit
                 if (hitInfo.collider.gameObject.layer == Layers.Enemy) {    //enemy
-                    hitInfo.collider.GetComponent<Enemy>().ReactWind(Types.Stream, transform);
+                    hitInfo.collider.GetComponent<Enemy>().ReactWind(Types.Stream, transform.position);
                 }
             }
         } else {

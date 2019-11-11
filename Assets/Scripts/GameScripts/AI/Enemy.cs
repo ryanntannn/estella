@@ -23,7 +23,7 @@ public abstract class Enemy : MonoBehaviour {
         }
     }
 
-    public virtual void ReactWind(Element.Types type, Transform other) {
+    public virtual void ReactWind(Element.Types type, Vector3 other) {
         switch (type) {
             case Element.Types.Stream:
                 break;

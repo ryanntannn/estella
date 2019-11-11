@@ -36,7 +36,7 @@ public class TornadoScript : MonoBehaviour {
 
     public virtual void OnTriggerEnter(Collider other) {
         if(other.gameObject.layer == Layers.Enemy) {
-            other.GetComponent<Enemy>().ReactWind(Element.Types.Power, transform.GetChild(1));
+            other.GetComponent<Enemy>().ReactWind(Element.Types.Power, transform.GetChild(1).position);
         }else if (other.CompareTag("Bolt")) {
             //transform this to a power of this.element + bolt.element
             GameObject instance = Resources.Load<GameObject>("Elements/Wind/" + other.GetComponent<Projectile>().elementName + "Tornado");  //load this shit up

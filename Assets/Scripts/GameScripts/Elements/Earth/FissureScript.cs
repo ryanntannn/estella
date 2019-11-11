@@ -24,12 +24,12 @@ public class FissureScript : MonoBehaviour {
         //change this please
     }
 
-    public virtual void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Bolt")) {
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Bolt")) {
             //transform this to a power of this.element + bolt.element
-            GameObject instance = Resources.Load<GameObject>("Elements/Earth/" + collision.gameObject.GetComponent<Projectile>().elementName + "Fissure");  //load this shit up
+            GameObject instance = Resources.Load<GameObject>("Elements/Earth/" + other.GetComponent<Projectile>().elementName + "Fissure");  //load this shit up
             instance = Instantiate(instance, transform.position, Quaternion.identity);
-            Destroy(collision.gameObject.gameObject);
+            Destroy(other.gameObject);
             Destroy(gameObject);
         }
     }

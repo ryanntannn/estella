@@ -30,11 +30,11 @@ public class TrainingDummy : Enemy {
         }
     }
 
-    public override void ReactWind(Element.Types type, Transform other) {
+    public override void ReactWind(Element.Types type, Vector3 other) {
         switch (type) {
             case Element.Types.Stream:
                 //slowly tilt away from direction of the wind
-                Vector3 directon = other.position - transform.position;
+                Vector3 directon = other - transform.position;
 
                 break;
             case Element.Types.Bolt:

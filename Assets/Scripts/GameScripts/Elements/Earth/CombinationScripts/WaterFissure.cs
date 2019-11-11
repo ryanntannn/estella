@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterFissure : MonoBehaviour
-{
+public class WaterFissure : FissureScript {
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Start() {
+
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    public override void Update() {
+        base.Update();
+    }
+
+    private void OnTriggerStay(Collider other) {
+        if(other.gameObject.layer == Layers.Player) {
+            //heal player
+        }
     }
 }
