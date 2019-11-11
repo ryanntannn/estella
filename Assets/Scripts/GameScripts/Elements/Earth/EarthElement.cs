@@ -6,6 +6,8 @@ using UnityEngine;
 public class EarthElement : Element {
     public override string ElementName => "Earth";
 
+    RaycastHit hitinfo;
+
     public override void BoltType() {
         //shoot out one ball
         currentMana = Mathf.Clamp(currentMana + Time.deltaTime, 0, maxMana);
@@ -17,7 +19,29 @@ public class EarthElement : Element {
     }
 
     public override void PowerType() {
+        //regen mana
+        currentMana = Mathf.Clamp(currentMana + Time.deltaTime, 0, maxMana);
+        //check if got enough mana
+        if (currentMana >= powerCost) {
+            //when holding down button
+            if (Input.GetKey(button)) {
+                //show the target area
+                //raycast out from center of camera
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (!Physics.Raycast(ray, out hitinfo, range * 2)) {
+                    Physics.Raycast(Camera.main.transform.position + ray.direction * range * 2, -transform.up, out hitinfo, 100);   //100 just incase player shoot out of bounds
+                }
 
+                //draw circle at hitinfo.point
+                targetCircle.SetActive(true);
+                targetCircle.transform.position = hitinfo.point;
+                targetCircle.transform.rotation = transform.rotation;
+            } else if (Input.GetKeyUp(button)) {
+                targetCircle.SetActive(false);
+                //instaniate torado
+                Instantiate(power, hitinfo.point - transform.up, transform.rotation);
+            }
+        }//check mana if
     }
 
     public override void StreamType() {

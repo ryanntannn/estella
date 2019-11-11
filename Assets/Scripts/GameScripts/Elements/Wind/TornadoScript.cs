@@ -39,7 +39,7 @@ public class TornadoScript : MonoBehaviour {
             other.GetComponent<Enemy>().ReactWind(Element.Types.Power, transform.GetChild(1));
         }else if (other.CompareTag("Bolt")) {
             //transform this to a power of this.element + bolt.element
-            GameObject instance = Resources.Load<GameObject>("Elements/" + other.GetComponent<Projectile>().elementName + "Tornado");  //load this shit up
+            GameObject instance = Resources.Load<GameObject>("Elements/Wind/" + other.GetComponent<Projectile>().elementName + "Tornado");  //load this shit up
             instance = Instantiate(instance, transform.position, Quaternion.identity);
             Destroy(other.gameObject);
             Destroy(gameObject);

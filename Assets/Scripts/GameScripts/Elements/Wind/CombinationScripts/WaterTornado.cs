@@ -10,6 +10,7 @@ public class WaterTornado : TornadoScript {
 
     // Update is called once per frame
     public override void Update() {
+        base.Update();
 
         //leave a trail of water that slows down enemies
 

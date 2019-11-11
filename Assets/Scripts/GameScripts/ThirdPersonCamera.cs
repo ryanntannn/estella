@@ -69,8 +69,16 @@ public class ThirdPersonCamera : MonoBehaviour {
 
         //raycast back
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, (cameraGO.transform.position - transform.position), out hitInfo, cameraOffset.magnitude, Layers.Terrain)) {
+        if (Physics.Raycast(transform.position, (cameraGO.transform.position - transform.position), out hitInfo, cameraOffset.magnitude)) {
             cameraGO.transform.position = hitInfo.point;
-        }
+        }   //I need the layer mask to work
+
+        //RaycastHit[] colliders = Physics.RaycastAll(transform.position, (cameraGO.transform.position - transform.position), cameraOffset.magnitude, layerMask: Layers.Terrain);
+        //foreach(RaycastHit hit in colliders) {
+        //    if(hit.collider.gameObject.layer == Layers.Terrain) {
+        //        cameraGO.transform.position = hit.point;
+        //        break;
+        //    }
+        //}
     }
 }

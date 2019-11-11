@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour {
     private GameObject pivot;
     Rigidbody rb;
     int leftHand = 0, rightHand = 2;    //keep track of which one being used
-    const int NO_OF_LEFT = 2, NO_OF_RIGHT = 2;  //number of elements belonging on left and right hand
+    const int NO_OF_LEFT = 2, NO_OF_RIGHT = 3;  //number of elements belonging on left and right hand
     Element[] elements;
 
     // Start is called before the first frame update
@@ -62,9 +62,11 @@ public class PlayerControl : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(swapRight)) {
-            elements[rightHand++].Disable();
+            elements[rightHand].Disable();
+            rightHand -= NO_OF_LEFT;
+            rightHand++;
             rightHand %= NO_OF_RIGHT;
-            rightHand += NO_OF_LEFT;    //since left hand elements should have index offset of +2
+            rightHand += NO_OF_LEFT;
             elements[rightHand].Enable();
         }//same stuff here
     }

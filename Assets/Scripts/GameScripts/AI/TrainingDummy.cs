@@ -34,6 +34,8 @@ public class TrainingDummy : Enemy {
         switch (type) {
             case Element.Types.Stream:
                 //slowly tilt away from direction of the wind
+                Vector3 directon = other.position - transform.position;
+
                 break;
             case Element.Types.Bolt:
                 //violently tilt away from direction wind
@@ -72,6 +74,7 @@ public class TrainingDummy : Enemy {
     public override void ReactWater(Element.Types type) {
         switch (type) {
             case Element.Types.Stream:
+                //nothing here
                 break;
             case Element.Types.Bolt:
                 //apply slow and small knockback
