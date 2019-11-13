@@ -14,6 +14,14 @@ public class ElectricityTornado : TornadoScript {
     }
 
     public override void OnTriggerEnter(Collider other) {
-        
+        if (other.gameObject.layer == Layers.Enemy) {
+            other.GetComponent<Enemy>().ReactWind(Element.Types.Power, other.transform.position);
+        }
+    }
+
+    private void OnTriggerStay(Collider other) {
+        if(other.gameObject.layer == Layers.Enemy) {
+            other.GetComponent<Enemy>().ReactElectricity(Element.Types.Stream);
+        }
     }
 }

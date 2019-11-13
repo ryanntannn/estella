@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 818930451162189490}
   m_Layer: 0
   m_Name: Nimbus
-  m_TagString: Untagged
+  m_TagString: Power
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 8278598500077523692, guid: 474a7b8a6148fb941b86c2ddfaf48094,
     type: 3}
+  timeToLive: 5
+  internalCounter: 0
 --- !u!136 &818930451162189490
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -71,6 +71,8 @@ public class WindElement : Element {
             if (Physics.Raycast(ray, out hitInfo, range)) { //check for hit
                 if (hitInfo.collider.gameObject.layer == Layers.Enemy) {    //enemy
                     hitInfo.collider.GetComponent<Enemy>().ReactWind(Types.Stream, transform.position);
+                }else if (hitInfo.collider.CompareTag("Power")) {
+                    hitInfo.collider.GetComponent<IPower>().AddValue("Wind");
                 }
             }
         } else {

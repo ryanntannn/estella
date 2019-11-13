@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 694814762748663070}
   m_Layer: 0
   m_Name: FireSpout
-  m_TagString: Untagged
+  m_TagString: Power
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,3 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e950b7ec548f5b45a4dd20c9bfd71f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firePS: {fileID: 0}
+  timeToLive: 5

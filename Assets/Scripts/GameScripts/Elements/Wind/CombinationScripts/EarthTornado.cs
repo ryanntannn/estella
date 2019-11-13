@@ -14,6 +14,9 @@ public class EarthTornado : TornadoScript {
     }
 
     public override void OnTriggerEnter(Collider other) {
-
+        //idk
+        if (other.gameObject.layer == Layers.Enemy) {
+            other.GetComponent<Enemy>().ReactWind(Element.Types.Power, transform.position);
+        }
     }
 }

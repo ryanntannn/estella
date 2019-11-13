@@ -18,9 +18,13 @@ public class WaterTornado : TornadoScript {
 
     public override void OnTriggerEnter(Collider other) {
         if (other.gameObject.layer == Layers.Enemy) {
-            Enemy enemy = other.GetComponent<Enemy>();
-            enemy.ReactWater(Element.Types.Bolt);
-            enemy.ReactWind(Element.Types.Power, transform.position);
+            other.GetComponent<Enemy>().ReactWind(Element.Types.Power, transform.position);
+        }
+    }
+
+    private void OnTriggerStay(Collider other) {
+        if (other.gameObject.layer == Layers.Enemy) {
+            other.GetComponent<Enemy>().ReactWater(Element.Types.Stream);
         }
     }
 }

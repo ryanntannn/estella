@@ -4984,7 +4984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9ea7811a31467f45b25142e114826c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentType: 1
+  currentType: 0
   button: 323
   isRightHand: 0
   streamPS: {fileID: 2138197977}

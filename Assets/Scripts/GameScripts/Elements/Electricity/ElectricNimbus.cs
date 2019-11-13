@@ -5,15 +5,15 @@ using UnityEngine;
 public class ElectricNimbus : MonoBehaviour {
     public GameObject lineRenderer;
 
-    float timeToLive = 5;
-    float internalCounter = 0;
+    public float timeToLive = 5;
+    public float internalCounter = 0;
     // Start is called before the first frame update
     void Start() {
 
     }
 
     // Update is called once per frame
-    void Update() {
+    public virtual void Update() {
         float deltaTime = Time.deltaTime;
         timeToLive -= deltaTime;
         if (timeToLive <= 0) {
@@ -21,21 +21,23 @@ public class ElectricNimbus : MonoBehaviour {
         }
 
         internalCounter += deltaTime;
-        if(internalCounter >= 2) {
+        if (internalCounter >= 2) {
             RaycastHit[] hitInfo = Physics.CapsuleCastAll(transform.position, transform.position - transform.up * 5, 3, transform.up);
-            foreach(RaycastHit hit in hitInfo) {
-                if(hit.collider.gameObject.layer == Layers.Enemy) {
+            foreach (RaycastHit hit in hitInfo) {
+                if (hit.collider.gameObject.layer == Layers.Enemy) {
                     //lightning strike
                     GameObject instance = Instantiate(lineRenderer, transform.position, Quaternion.identity);
                     instance.GetComponent<LineRenderer>().SetPositions(new Vector3[] { transform.position + transform.up * 5, hit.collider.gameObject.transform.position });
                     Destroy(instance, 1);   //delte after 1 seconds
+                    //actually dealing damage
+                    hit.collider.GetComponent<Enemy>().ReactElectricity(Element.Types.Bolt);
                 }
             }
             internalCounter = 0;
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
+    public virtual void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Bolt")) {
             string otherElement = other.GetComponent<Projectile>().elementName;
             if (otherElement.Equals("Fire")) return;    //make sure when a bolt of the same element don't trigger anything
@@ -45,9 +47,5 @@ public class ElectricNimbus : MonoBehaviour {
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
-    }
-
-    private void OnTriggerStay(Collider other) {
-        
     }
 }

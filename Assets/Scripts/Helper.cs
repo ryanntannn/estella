@@ -10,7 +10,7 @@ public static class Helper {
     /// <param name="parent">Parent to search for tag</param>
     /// <param name="tag">Tag to search for</param>
     /// <returns>Child object with the tag</returns>
-    public static GameObject FindChildWithTag(this GameObject parent, string tag){
+    public static GameObject FindChildWithTag(this GameObject parent, string tag) {
         foreach (Transform child in parent.transform) {  //search parent's childs
             if (child.CompareTag(tag)) {
                 return child.gameObject;    //when found    
@@ -43,7 +43,7 @@ public static class Helper {
 
 public static class Layers {
     //contains all the layer numbers DO NOT CHANGE UNLESS LAYERS CHANGE TOO
-    public static readonly int 
+    public static readonly int
         Default = 0,
         TransparentFX = 1,
         IgnoreRaycast = 2,
@@ -53,4 +53,43 @@ public static class Layers {
         Enemy = 9,
         Player = 10,
         Terrain = 11;
+}
+
+//I got mad at key value pairs so here is my own implementation
+public class KeyAndValue<TKey, TValue> {
+    public List<TKey> Keys { get; set; }
+    public List<TValue> Values { get; set; }
+
+    public KeyAndValue() {
+        Keys = new List<TKey>();
+        Values = new List<TValue>();
+    }
+
+    public TValue SearchForValue(TKey key) {
+        for(int count = 0; count <= Keys.Count - 1; count++) {
+            if (key.Equals(Keys[count])) {
+                return Values[count];
+            }
+        }
+        Keys.Add(key);
+        Values.Add(default(TValue));
+        return Values[Values.Count - 1];
+    }
+
+    public void ForEach(Action<TValue> a) {
+        for (int count = 0; count <= Keys.Count - 1; count++) {
+            a(Values[count]);
+        }
+    }
+
+    public int LocationOfValue(TKey key) {
+        for (int count = 0; count <= Keys.Count - 1; count++) {
+            if (key.Equals(Keys[count])) {
+                return count;
+            }
+        }
+        Keys.Add(key);
+        Values.Add(default(TValue));
+        return Keys.Count - 1;
+    }
 }

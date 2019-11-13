@@ -35,9 +35,13 @@ public class FireTornado : TornadoScript {
 
     public override void OnTriggerEnter(Collider other) {
         if(other.gameObject.layer == Layers.Enemy) {
-            Enemy enemy = other.GetComponent<Enemy>();
-            enemy.ReactFire(Element.Types.Bolt);
-            enemy.ReactWind(Element.Types.Power, transform.position);
+            other.GetComponent<Enemy>().ReactWind(Element.Types.Power, transform.position);
+        }
+    }
+
+    private void OnTriggerStay(Collider other) {
+        if (other.gameObject.layer == Layers.Enemy) {
+            other.GetComponent<Enemy>().ReactFire(Element.Types.Stream);
         }
     }
 }

@@ -44,7 +44,8 @@ public class FireElement : Element {
                 if(hitInfo.collider.gameObject.layer == Layers.Enemy) {    //enemy
                     hitInfo.collider.GetComponent<Enemy>().ReactFire(Types.Stream);
                 }else if (hitInfo.collider.CompareTag("Power")) {
-
+                    print(hitInfo.collider.name);
+                    hitInfo.collider.GetComponent<IPower>().AddValue("Fire");
                 }
             }
         }else {
