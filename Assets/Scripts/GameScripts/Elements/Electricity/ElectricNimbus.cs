@@ -37,8 +37,10 @@ public class ElectricNimbus : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Bolt")) {
+            string otherElement = other.GetComponent<Projectile>().elementName;
+            if (otherElement.Equals("Fire")) return;    //make sure when a bolt of the same element don't trigger anything
             //transform this to a power of this.element + bolt.element
-            GameObject instance = Resources.Load<GameObject>("Elements/Electricity/" + other.GetComponent<Projectile>().elementName + "Nimbus");  //load this shit up
+            GameObject instance = Resources.Load<GameObject>("Elements/Electricity/" + otherElement + "Nimbus");  //load this shit up
             instance = Instantiate(instance, transform.position, Quaternion.identity);
             Destroy(other.gameObject);
             Destroy(gameObject);
