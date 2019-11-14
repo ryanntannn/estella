@@ -7,14 +7,15 @@ public class ElectricityElement : Element {
     public override string ElementName => "Electricity";
 
     RaycastHit hitinfo;
+    public Animator anim;
 
     public override void BoltType() {
         //shoot out one ball
         currentMana = Mathf.Clamp(currentMana + Time.deltaTime, 0, maxMana);
         if (Input.GetKeyDown(button) && currentMana >= 1) {
             currentMana -= boltCost;  //cost one
-            //instansiate
-            Instantiate(bolt, transform.position, transform.rotation);//need to do the rotation properly
+            //dash forward 
+            anim.SetTrigger("whenWarp");
         }
     }
 
@@ -75,6 +76,17 @@ public class ElectricityElement : Element {
             if (currentMana < maxMana) {
                 currentMana = Mathf.Clamp(currentMana + deltaTime, 0, maxMana);
             }
+        }
+    }
+
+    public void Warp() {
+        float range = 10;
+        //raycast out front
+        RaycastHit hitInfo;
+        if(Physics.Raycast(transform.position, transform.forward, out hitInfo, range)) {
+            transform.position = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
+        }else {
+            transform.position += transform.forward * range;
         }
     }
 }
