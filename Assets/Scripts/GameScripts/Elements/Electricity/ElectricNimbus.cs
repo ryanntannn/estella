@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElectricNimbus : MonoBehaviour {
+public class ElectricNimbus : MonoBehaviour, IPower {
     public GameObject lineRenderer;
 
     public float timeToLive = 5;
     public float internalCounter = 0;
+
+    KeyAndValue<string, float> kvp = new KeyAndValue<string, float>();
     // Start is called before the first frame update
     void Start() {
 
@@ -40,12 +43,31 @@ public class ElectricNimbus : MonoBehaviour {
     public virtual void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Bolt")) {
             string otherElement = other.GetComponent<Projectile>().elementName;
-            if (otherElement.Equals("Fire")) return;    //make sure when a bolt of the same element don't trigger anything
+            if (otherElement.Equals("Electricity")) return;    //make sure when a bolt of the same element don't trigger anything
             //transform this to a power of this.element + bolt.element
-            GameObject instance = Resources.Load<GameObject>("Elements/Electricity/" + otherElement + "Nimbus");  //load this shit up
-            instance = Instantiate(instance, transform.position, Quaternion.identity);
+            Combine(otherElement);
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
+    }
+
+    void Combine(string otherElement) {
+        GameObject instance = Resources.Load<GameObject>("Elements/Electricity/" + otherElement + "Nimbus");  //load this shit up
+        instance = Instantiate(instance, transform.position, Quaternion.identity);
+    }
+
+    public void AddValue(string element) {
+        for (int count = 0; count <= kvp.Keys.Count - 1; count++) {
+            if (kvp.Keys[count].Equals(element)) {
+                kvp.Values[count] += Time.deltaTime;
+                if (kvp.Values[count] >= 2) {
+                    Combine(element);
+                    Destroy(gameObject);
+                }
+                return;
+            }
+        }
+        kvp.Keys.Add(element);
+        kvp.Values.Add(0);
     }
 }

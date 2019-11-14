@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FissureScript : MonoBehaviour {
+public class FissureScript : MonoBehaviour, IPower {
 
     public float timeToLive = 5;
     // Start is called before the first frame update
@@ -27,12 +28,31 @@ public class FissureScript : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Bolt")) {
             string otherElement = other.GetComponent<Projectile>().elementName;
-            if (otherElement.Equals("Fire")) return;    //make sure when a bolt of the same element don't trigger anything
+            if (otherElement.Equals("Earth")) return;    //make sure when a bolt of the same element don't trigger anything
             //transform this to a power of this.element + bolt.element
-            GameObject instance = Resources.Load<GameObject>("Elements/Earth/" + otherElement + "Fissure");  //load this shit up
-            instance = Instantiate(instance, transform.position, Quaternion.identity);
+            Combine(otherElement);
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
+    }
+
+    void Combine(string otherElement) {
+        GameObject instance = Resources.Load<GameObject>("Elements/Earth/" + otherElement + "Fissure");  //load this shit up
+        instance = Instantiate(instance, transform.position, Quaternion.identity);
+    }
+
+    public void AddValue(string element) {
+        for (int count = 0; count <= kvp.Keys.Count - 1; count++) {
+            if (kvp.Keys[count].Equals(element)) {
+                kvp.Values[count] += Time.deltaTime;
+                if (kvp.Values[count] >= 2) {
+                    Combine(element);
+                    Destroy(gameObject);
+                }
+                return;
+            }
+        }
+        kvp.Keys.Add(element);
+        kvp.Values.Add(0);
     }
 }

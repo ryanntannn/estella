@@ -42,7 +42,7 @@ public class TornadoScript : MonoBehaviour, IPower {
             other.GetComponent<Enemy>().ReactWind(Element.Types.Power, transform.GetChild(1).position);
         }else if (other.CompareTag("Bolt")) {
             string otherElement = other.GetComponent<Projectile>().elementName;
-            if (otherElement.Equals("Fire")) return;    //make sure when a bolt of the same element don't trigger anything
+            if (otherElement.Equals("Wind")) return;    //make sure when a bolt of the same element don't trigger anything
             Combine(otherElement);
             Destroy(other.gameObject);
             Destroy(gameObject);
