@@ -6,13 +6,8 @@ using UnityEngine;
 public class TrainingDummy : Enemy {
     public GameObject waterPS;
 
-    private void Update() {
-        if (fireTimeToLive > 0) {
-            fireTimeToLive -= Time.deltaTime;
-            if (!onFirePs.isPlaying) onFirePs.Play();
-        }else {
-            if (!onFirePs.isStopped) onFirePs.Stop();
-        }
+    public override void Update() {
+        base.Update();
     }
 
     public override void ReactFire(Element.Types type) {

@@ -7,9 +7,17 @@ public class AnimationEvents : MonoBehaviour {
     public ParticleSystem warpPS;
 
     GameObject parent;
+    Animator anim;
     // Start is called before the first frame update
     void Start() {
         parent = transform.parent.gameObject;
+        anim = GetComponent<Animator>();
+    }
+
+    void Update() {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Zap")) {
+
+        }
     }
     
     void Warp() {
@@ -17,6 +25,7 @@ public class AnimationEvents : MonoBehaviour {
     }
 
     void WarpStart() {
+        anim.SetBool("isZapping", true);
         if (!warpPS.isPlaying) warpPS.Play();
     }
 
