@@ -5,6 +5,7 @@ using UnityEngine;
 //Utility class that helps trigger animation events in the parent obj
 public class AnimationEvents : MonoBehaviour {
     public ParticleSystem warpPS;
+    public GameObject knife;
 
     GameObject parent;
     Animator anim;
@@ -14,12 +15,7 @@ public class AnimationEvents : MonoBehaviour {
         anim = GetComponent<Animator>();
     }
 
-    void Update() {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Zap")) {
-
-        }
-    }
-    
+    #region Player animation events
     void Warp() {
         parent.GetComponent<ElectricityElement>().Warp();
     }
@@ -32,4 +28,24 @@ public class AnimationEvents : MonoBehaviour {
     void WarpEnd() {
         if (!warpPS.isStopped) warpPS.Stop();
     }
+    #endregion
+
+    #region Mirage animation events
+    void TakeKnifeOut() {
+        knife.SetActive(true);
+    }
+
+    void ThrowKnifeAway() {
+        knife.SetActive(false);
+        GameObject instance = Instantiate(knife, knife.transform.position, Quaternion.Euler(-90, 0, 0));
+        instance.transform.localScale = Vector3.one * 5;
+        instance.SetActive(true);
+        //give it the script
+        instance.AddComponent<MirageProjectile>();
+    }
+
+    void GetKnifeBack() {
+        knife.SetActive(true);
+    }
+    #endregion
 }

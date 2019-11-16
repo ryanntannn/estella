@@ -6,6 +6,7 @@ using UnityEngine;
 public class FissureScript : MonoBehaviour, IPower {
 
     public float timeToLive = 5;
+    KeyAndValue<string, float> kvp = new KeyAndValue<string, float>();
     // Start is called before the first frame update
     void Start() {
 
