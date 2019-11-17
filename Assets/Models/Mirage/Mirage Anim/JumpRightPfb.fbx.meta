@@ -1,12 +1,92 @@
 fileFormatVersion: 2
-guid: fa9a89499f00ab948b48a5a895fb28fc
+guid: fd382125f55f13a4083365318894f2c1
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
   - first:
       74: 4781951162920444690
     second: Armature|ArmatureAction
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Balde Metal
+    second: {fileID: 2100000, guid: 43c7fbb60906781428c716b3d2a04002, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blade Handle
+    second: {fileID: 2100000, guid: c8d8f2fcbb1ba3a439ae76b48d837ef8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blade Handle.001
+    second: {fileID: 2100000, guid: 126f87206f35e424b83d0adbbe68bf55, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blade Sheath
+    second: {fileID: 2100000, guid: ded8dcfc600d01049a297858fe888d2b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body Cloth.005
+    second: {fileID: 2100000, guid: a309ee8bfee17e14d8a5f1b15c52d5bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body Cloth.007
+    second: {fileID: 2100000, guid: f1096e47d2c51744c9a2c6d199b9db7e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body Cloth.008
+    second: {fileID: 2100000, guid: 7cfbdd00b3f3eaf4cb95359547db0c9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boots
+    second: {fileID: 2100000, guid: 0132223fa429f6245a2a8f6a1ae3df9f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Head.001
+    second: {fileID: 2100000, guid: 0adf424a762a516449f5907be5d1cc5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mask
+    second: {fileID: 2100000, guid: d0d9ea92bd1696c4a8122eb2bcaec520, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: 2a89464e5961c3e4589e395ba02dab53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pants.011
+    second: {fileID: 2100000, guid: 11268ba16b0e4e548933e558596acbee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Steel.001
+    second: {fileID: 2100000, guid: 0693754dc88a56b459995fb1341ac1bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Steel.009
+    second: {fileID: 2100000, guid: bef1ae983faff1e44b4ac5c30feb379a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Steel.013
+    second: {fileID: 2100000, guid: 9581e38d33c4bb544b4f293e2d95632b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Waist robe
+    second: {fileID: 2100000, guid: 06018f3b55077f444bbf7d54ce9f69b9, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

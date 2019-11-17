@@ -37,7 +37,7 @@ public class AnimationEvents : MonoBehaviour {
 
     void ThrowKnifeAway() {
         knife.SetActive(false);
-        GameObject instance = Instantiate(knife, knife.transform.position, Quaternion.Euler(-90, 0, 0));
+        GameObject instance = Instantiate(knife, knife.transform.position, Quaternion.Euler(-90, parent.transform.rotation.eulerAngles.y - 180, 0));
         instance.transform.localScale = Vector3.one * 5;
         instance.SetActive(true);
         //give it the script
@@ -46,6 +46,10 @@ public class AnimationEvents : MonoBehaviour {
 
     void GetKnifeBack() {
         knife.SetActive(true);
+    }
+
+    void JumpBack() {
+        parent.GetComponent<Mirage>().JumpBack();
     }
     #endregion
 }

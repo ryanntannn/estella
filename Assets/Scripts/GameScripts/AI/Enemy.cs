@@ -12,7 +12,7 @@ public abstract class Enemy : MonoBehaviour {
     //stats
     public float health = 10;
     public float speed = 12;
-    Rigidbody rb;
+    protected Rigidbody rb;
 
     public virtual void Start() {
         rb = GetComponent<Rigidbody>();
