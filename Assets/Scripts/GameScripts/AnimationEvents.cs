@@ -6,9 +6,11 @@ using UnityEngine;
 public class AnimationEvents : MonoBehaviour {
     public ParticleSystem warpPS;
     public GameObject knife;
+    public Shader warpShd;
 
     GameObject parent;
     Animator anim;
+    Shader def;
     // Start is called before the first frame update
     void Start() {
         parent = transform.parent.gameObject;
@@ -18,15 +20,6 @@ public class AnimationEvents : MonoBehaviour {
     #region Player animation events
     void Warp() {
         parent.GetComponent<ElectricityElement>().Warp();
-    }
-
-    void WarpStart() {
-        anim.SetBool("isZapping", true);
-        if (!warpPS.isPlaying) warpPS.Play();
-    }
-
-    void WarpEnd() {
-        if (!warpPS.isStopped) warpPS.Stop();
     }
     #endregion
 

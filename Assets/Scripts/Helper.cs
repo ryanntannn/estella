@@ -39,6 +39,18 @@ public static class Helper {
         }
         return default(T);
     }
+
+    public static void ChangeShader(this Transform T, Shader shd) {
+        foreach(Transform child in T) {
+            Renderer rd = child.GetComponent<Renderer>();
+            if (rd){
+                foreach(Material mat in rd.materials) {
+                    mat.shader = shd;
+                }
+            }
+            child.ChangeShader(shd);
+        }
+    }
 }
 
 public static class Layers {

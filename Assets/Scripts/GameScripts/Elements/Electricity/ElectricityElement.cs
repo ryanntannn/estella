@@ -8,7 +8,9 @@ public class ElectricityElement : Element {
 
     RaycastHit hitinfo;
     public Animator anim;
+    public float warpDuration = 2;
 
+    float internalCounter = 0;
     public override void BoltType() {
         //shoot out one ball
         currentMana = Mathf.Clamp(currentMana + Time.deltaTime, 0, maxMana);
@@ -16,6 +18,24 @@ public class ElectricityElement : Element {
             currentMana -= boltCost;  //cost one
             //dash forward 
             anim.SetTrigger("whenWarp");
+        }
+
+        if (anim.GetBool("isZapping")) {
+            transform.position += transform.forward * Time.deltaTime * 10;
+            internalCounter += Time.deltaTime;
+            ShowSelf(false);
+            if(internalCounter >= warpDuration) {
+                internalCounter = 0;
+                anim.SetBool("isZapping", false);
+                ShowSelf(true);
+            }
+        }
+
+    }
+
+    void ShowSelf(bool state) {
+        foreach (Transform child in transform.GetChild(0)) {
+            child.gameObject.SetActive(state);
         }
     }
 
@@ -80,13 +100,6 @@ public class ElectricityElement : Element {
     }
 
     public void Warp() {
-        float range = 10;
-        //raycast out front
-        RaycastHit hitInfo;
-        if(Physics.Raycast(transform.position, transform.forward, out hitInfo, range)) {
-            transform.position = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
-        }else {
-            transform.position += transform.forward * range;
-        }
+        anim.SetBool("isZapping", true);
     }
 }
