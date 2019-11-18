@@ -26,8 +26,9 @@ public class WindElement : Element {
 
         //check if got enough mana
         if (currentMana >= powerCost) {
-            //when holding down button
-            if (Input.GetKey(button)) {
+            if (Input.GetKeyDown(button)) {
+
+            } else if (Input.GetKey(button)) {
                 //show the target area
                 //raycast out from center of camera
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -71,7 +72,7 @@ public class WindElement : Element {
             if (Physics.Raycast(ray, out hitInfo, range)) { //check for hit
                 if (hitInfo.collider.gameObject.layer == Layers.Enemy) {    //enemy
                     hitInfo.collider.GetComponent<Enemy>().ReactWind(Types.Stream, transform.position);
-                }else if (hitInfo.collider.CompareTag("Power")) {
+                } else if (hitInfo.collider.CompareTag("Power")) {
                     hitInfo.collider.GetComponent<IPower>().AddValue("Wind");
                 }
             }

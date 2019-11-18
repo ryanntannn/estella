@@ -23,6 +23,16 @@ public abstract class Element : MonoBehaviour {
     public float powerCost = 2;
 
     public GameObject targetCircle;
+    protected LockOnTarget lockOn;
+
+    private void Start() {
+        if (targetCircle) {
+            targetCircle = Instantiate(targetCircle);
+            targetCircle.SetActive(false);
+        }
+
+        lockOn = GetComponent<LockOnTarget>();
+    }
 
     private void Update() {
         switch (currentType) {

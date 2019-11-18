@@ -7,6 +7,8 @@ TagManager:
   - Power
   - Stream
   - Bolt
+  - OCrossHair
+  - LineCrossHair
   layers:
   - Default
   - TransparentFX
