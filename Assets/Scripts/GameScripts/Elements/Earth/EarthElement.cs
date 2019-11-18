@@ -28,7 +28,7 @@ public class EarthElement : Element {
                 //show the target area
                 //raycast out from center of camera
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (!Physics.Raycast(ray, out hitinfo, range * 2)) {
+                if (!Physics.Raycast(ray, out hitinfo, range * 2, 1 << Layers.Terrain)) {
                     Physics.Raycast(Camera.main.transform.position + ray.direction * range * 2, -transform.up, out hitinfo, 100);   //100 just incase player shoot out of bounds
                 }
 
