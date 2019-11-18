@@ -9,6 +9,7 @@ public class ElectricityElement : Element {
     RaycastHit hitinfo;
     public Animator anim;
     public float warpDuration = 2;
+    public Shader translucentShd, defShd;
 
     float internalCounter = 0;
     public override void BoltType() {
@@ -18,12 +19,13 @@ public class ElectricityElement : Element {
             currentMana -= boltCost;  //cost one
             //dash forward 
             anim.SetTrigger("whenWarp");
+            if (!defShd) defShd = transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material.shader;
+            ShowSelf(false);
         }
 
         if (anim.GetBool("isZapping")) {
             transform.position += transform.forward * Time.deltaTime * 10;
             internalCounter += Time.deltaTime;
-            ShowSelf(false);
             if(internalCounter >= warpDuration) {
                 internalCounter = 0;
                 anim.SetBool("isZapping", false);
@@ -34,9 +36,10 @@ public class ElectricityElement : Element {
     }
 
     void ShowSelf(bool state) {
-        foreach (Transform child in transform.GetChild(0)) {
-            child.gameObject.SetActive(state);
-        }
+        //foreach (Transform child in transform.GetChild(0)) {
+        //    child.gameObject.SetActive(state);
+        //}
+        transform.ChangeShader(state ? translucentShd : defShd);
     }
 
     public override void PowerType() {

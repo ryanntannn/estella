@@ -9,15 +9,22 @@ public class MakeInvisible : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-
+        UpdateTransparency();
     }
 
     // Update is called once per frame
     void Update() {
-        foreach(SkinnedMeshRenderer mr in transform.GetChild(0).GetComponentsInChildren<SkinnedMeshRenderer>()) {
-            Color temp = mr.materials[0].color;
-            temp.a = transparency;
-            mr.materials[0].color = temp;
+    }
+
+    public void UpdateTransparency() {
+        //updates transparency
+       foreach(SkinnedMeshRenderer mr in transform.GetChild(0).GetComponentsInChildren<SkinnedMeshRenderer>()) {    //loop thru all smr in estella model
+            Renderer[] rend = mr.GetComponents<Renderer>(); //get components
+            foreach(Renderer red in rend) { //each renderer
+                foreach(Material mat in red.materials) {    //each materials
+                    mat.SetFloat("Vector1_EA580445", transparency); //set the transparency
+                }
+            }
         }
     }
 }

@@ -20,6 +20,7 @@ public class ThirdPersonCamera : MonoBehaviour {
     private float sensitivity;
     [SerializeField]
     private float followDampening;
+    public float clampAngle;
 
     private KeyCode elementButton1, elementButton2;
     // Start is called before the first frame update
@@ -41,6 +42,9 @@ public class ThirdPersonCamera : MonoBehaviour {
     {
         MakePlayerTurn();
         PivotRotationUpdate();
+    }
+
+    private void FixedUpdate() {
         PositionUpdate();
     }
 
@@ -60,7 +64,11 @@ public class ThirdPersonCamera : MonoBehaviour {
     void PivotRotationUpdate() {
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         Vector2 rotationDelta = new Vector2(-mouseDelta.y, mouseDelta.x) * Time.deltaTime * 10 * sensitivity;
-        transform.eulerAngles = new Vector3(rotationDelta.x + transform.eulerAngles.x, rotationDelta.y + transform.eulerAngles.y, 0);
+        if (rotationDelta.x + transform.eulerAngles.x >= clampAngle && rotationDelta.x + transform.eulerAngles.x <= 360 - clampAngle) {
+            rotationDelta.x = 0;
+        }
+        Vector3 clampedAngle = new Vector3(rotationDelta.x + transform.eulerAngles.x, rotationDelta.y + transform.eulerAngles.y, 0);
+        transform.localRotation = Quaternion.Euler(clampedAngle.x, clampedAngle.y, clampedAngle.z);
     }
 
     void PositionUpdate() {
@@ -69,16 +77,8 @@ public class ThirdPersonCamera : MonoBehaviour {
 
         //raycast back
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, (cameraGO.transform.position - transform.position), out hitInfo, cameraOffset.magnitude)) {
+        if (Physics.Raycast(transform.position, (cameraGO.transform.position - transform.position), out hitInfo, cameraOffset.magnitude, 1 << Layers.Terrain)) {
             cameraGO.transform.position = hitInfo.point;
-        }   //I need the layer mask to work
-
-        //RaycastHit[] colliders = Physics.RaycastAll(transform.position, (cameraGO.transform.position - transform.position), cameraOffset.magnitude, layerMask: Layers.Terrain);
-        //foreach(RaycastHit hit in colliders) {
-        //    if(hit.collider.gameObject.layer == Layers.Terrain) {
-        //        cameraGO.transform.position = hit.point;
-        //        break;
-        //    }
-        //}
+        }
     }
 }

@@ -9,17 +9,33 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Bodymat
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _NORMALMAP
+  m_ShaderKeywords: _ALPHATEST_ON _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2050
+  m_CustomRenderQueue: 2500
   stringTagMap:
-    RenderType: Opaque
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_1C41585B:
+        m_Texture: {fileID: 2800000, guid: d610bdd529b45464a954828487f9b8b2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_7AD4ADC3:
+        m_Texture: {fileID: 2800000, guid: d760615e06df76947b8d90bd6a81362b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_962FAE11:
+        m_Texture: {fileID: 2800000, guid: f965bacc0f8e23741a48e63ab7bcb902, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_E51B02FF:
+        m_Texture: {fileID: 2800000, guid: aef23a5290dc82e45a729b4ad24f5ad0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: d610bdd529b45464a954828487f9b8b2, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -67,7 +83,8 @@ Material:
     m_Floats:
     - Vector1_1E099830: 3.31
     - Vector1_B5322B47: 0
-    - _AlphaClip: 0
+    - Vector1_EA580445: 1
+    - _AlphaClip: 1
     - _Blend: 0
     - _BlendOp: 0
     - _BumpScale: 1
@@ -98,7 +115,7 @@ Material:
     - _ReceiveShadows: 1
     - _SampleGI: 0
     - _Shininess: 0
-    - _Smoothness: 0
+    - _Smoothness: 0.5
     - _SmoothnessSource: 0
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 0
