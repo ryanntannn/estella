@@ -32,12 +32,25 @@ public class PlayerControl : MonoBehaviour {
         //enable defaults
         elements[leftHand].Enable();
         elements[rightHand].Enable();
+
     }
 
     // Update is called once per frame
     void Update() {
+        //RotationUpdate();
         ElementUpdate();
         MovementUpdate();
+    }
+
+    void RotationUpdate() {
+        //when mouse pressed
+        if (Input.GetKey(leftHandButton) || Input.GetKey(rightHandButton)) {
+            //look at same direction as camera
+            //rot of cam
+            Quaternion camRot = Camera.main.transform.rotation;
+            //change player rotation
+            transform.rotation = Quaternion.Euler(0, camRot.eulerAngles.y, 0);
+        }
     }
 
     void MovementUpdate()

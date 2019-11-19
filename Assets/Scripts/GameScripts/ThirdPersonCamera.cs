@@ -22,7 +22,6 @@ public class ThirdPersonCamera : MonoBehaviour {
     private float followDampening;
     public float clampAngle;
 
-    private KeyCode elementButton1, elementButton2;
     // Start is called before the first frame update
     void Start() {
         //Initilise the GameObject references
@@ -32,34 +31,17 @@ public class ThirdPersonCamera : MonoBehaviour {
 
         Cursor.lockState = CursorLockMode.Locked;
 
-        //set the variables for the buttons
-        elementButton1 = playerGO.GetComponent<PlayerControl>().leftHandButton;
-        elementButton2 = playerGO.GetComponent<PlayerControl>().rightHandButton;
     }
 
     // Update is called once per frame
     void Update() 
     {
-        MakePlayerTurn();
         PivotRotationUpdate();
     }
 
     private void FixedUpdate() {
         PositionUpdate();
     }
-
-    void MakePlayerTurn() 
-    {
-            //when mouse pressed
-            if (Input.GetKey(elementButton1) || Input.GetKey(elementButton2)) 
-            {
-                //look at same direction as camera
-                //rot of cam
-                Quaternion camRot = Camera.main.transform.rotation;
-                //change player rotation
-                playerGO.transform.rotation = Quaternion.Euler(0, camRot.eulerAngles.y, 0);
-            }
-        }
 
     void PivotRotationUpdate() {
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));

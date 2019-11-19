@@ -7,6 +7,8 @@ public class FireProjectile : Projectile {
     //future use
     Animator anim;
 
+    public GameObject target;
+
     public override string elementName {
         get { return "Fire"; }
     }
@@ -19,7 +21,13 @@ public class FireProjectile : Projectile {
     }
 
     private void Update() {
-        transform.position += transform.forward * Time.deltaTime * speed;
+        if (target) {
+            Vector3 vecTarget = target.transform.position - transform.position;
+            Quaternion rot = Quaternion.LookRotation(vecTarget);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * 5);
+        }
+        transform.position += transform.forward * speed * Time.deltaTime;
+
     }
 
     private void OnTriggerEnter(Collider other) {

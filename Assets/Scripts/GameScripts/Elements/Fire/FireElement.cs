@@ -12,6 +12,7 @@ public class FireElement : Element {
             currentMana -= boltCost;  //cost one
             //instansiate
             GameObject instance = Instantiate(bolt, transform.position, transform.rotation);//need to do the rotation properly
+            instance.GetComponent<FireProjectile>().target = lockOn.target;
         }
     }
 
@@ -37,16 +38,22 @@ public class FireElement : Element {
         if (streamPS.isPlaying && currentMana > 0) {
             //drain mana
             currentMana = Mathf.Clamp(currentMana - deltaTime * streamDrain, 0, maxMana);
-            //raycast out and check for target
-            Ray ray = new Ray(transform.position, transform.forward);
-            RaycastHit hitInfo;
-            if(Physics.Raycast(ray, out hitInfo, range)) { //check for hit
-                if(hitInfo.collider.gameObject.layer == Layers.Enemy) {    //enemy
-                    hitInfo.collider.GetComponent<Enemy>().ReactFire(Types.Stream);
-                }else if (hitInfo.collider.CompareTag("Power")) {
-                    print(hitInfo.collider.name);
-                    hitInfo.collider.GetComponent<IPower>().AddValue("Fire");
-                }
+            ////raycast out and check for target
+            //Ray ray = new Ray(transform.position, transform.forward);
+            //RaycastHit hitInfo;
+            //if(Physics.Raycast(ray, out hitInfo, range)) { //check for hit
+            //    if(hitInfo.collider.gameObject.layer == Layers.Enemy) {    //enemy
+            //        hitInfo.collider.GetComponent<Enemy>().ReactFire(Types.Stream);
+            //    }else if (hitInfo.collider.CompareTag("Power")) {
+            //        print(hitInfo.collider.name);
+            //        hitInfo.collider.GetComponent<IPower>().AddValue("Fire");
+            //    }
+            //}
+
+            if (lockOn.target) {
+                streamPS.transform.LookAt(lockOn.target.transform.position + lockOn.transform.up);
+            } else {
+                streamPS.transform.localRotation = Quaternion.identity;
             }
         }else {
             //refil mana if it is less than max
