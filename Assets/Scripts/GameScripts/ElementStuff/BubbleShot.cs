@@ -6,6 +6,7 @@ public class BubbleShot : MonoBehaviour {
     public float speed = 12;
     public GameObject waterDie;
 
+    public GameObject target;
     // Start is called before the first frame update
     void Start() {
 
@@ -13,7 +14,11 @@ public class BubbleShot : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (target) {
+            transform.LookAt(target.transform.position);
+        }
         transform.position += transform.forward * speed * Time.deltaTime;
+
     }
 
     private void OnTriggerEnter(Collider other) {

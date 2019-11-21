@@ -11,9 +11,10 @@ public class ElementControl : MonoBehaviour {
     public KeyCode rightHand = KeyCode.Mouse0, leftHand = KeyCode.Mouse1;
 
     bool doneAlr = false;
+    LockOnTarget lockOn;
     // Start is called before the first frame update
     void Start() {
-
+        lockOn = GetComponent<LockOnTarget>();
     }
 
     // Update is called once per frame
@@ -208,6 +209,7 @@ public class ElementControl : MonoBehaviour {
     void BubbleShot() {
         GameObject instance = Resources.Load<GameObject>("Elements/Water/BubbleShot");
         instance = Instantiate(instance, transform.position, transform.rotation);
+        instance.GetComponent<BubbleShot>().target = lockOn.target;
     }
 
     void Fireball() {

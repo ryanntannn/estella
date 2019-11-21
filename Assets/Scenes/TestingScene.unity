@@ -5072,8 +5072,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e6b0ff64e346b441a3a348fa6d159cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 7
-  indicator: {fileID: 0}
+  radius: 1.5
+  indicator: {fileID: 1600295067}
+  target: {fileID: 0}
 --- !u!114 &239367486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22243,7 +22244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1600295068
 Transform:
   m_ObjectHideFlags: 0
