@@ -222,6 +222,13 @@ public class ElementControl : MonoBehaviour {
     void Fireball() {
         GameObject instance = Resources.Load<GameObject>("Elements/Fire/Fireball");
         instance = Instantiate(instance, transform.position, transform.rotation);
+        if (lockOn.target && enableLockOn) {
+            instance.GetComponent<BubbleShot>().target = lockOn.target;
+        } else {
+            Vector3 newRot = Camera.main.transform.eulerAngles;
+            newRot.x = 0;
+            instance.transform.rotation = Quaternion.Euler(newRot);
+        }
     }
 
     void Fissure() {
