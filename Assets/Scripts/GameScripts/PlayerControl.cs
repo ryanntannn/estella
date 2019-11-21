@@ -16,11 +16,18 @@ public class PlayerControl : MonoBehaviour {
     const int NO_OF_LEFT = 2, NO_OF_RIGHT = 3;  //number of elements belonging on left and right hand
     float rotation = 0;
 
+    //Radial Menu
+    GameObject radialMenu1;
+    GameObject radialMenu2;
+
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody>();
         pivot = GameObject.Find("camera-pivot");
-
+        radialMenu1 = GameObject.Find("RadialMenu 1");
+        radialMenu2 = GameObject.Find("RadialMenu 2");
+        radialMenu1.SetActive(false);
+        radialMenu2.SetActive(false);
     }
 
     // Update is called once per frame
@@ -42,6 +49,28 @@ public class PlayerControl : MonoBehaviour {
 
     void MovementUpdate()
     {
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            radialMenu1.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if (Input.GetKeyUp(KeyCode.Q))
+        {
+            radialMenu1.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            radialMenu2.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            radialMenu2.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
             rotation = Mathf.Atan2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * Mathf.Rad2Deg;
@@ -56,6 +85,13 @@ public class PlayerControl : MonoBehaviour {
         {
             animator.SetBool("running", false);
         }
+    }
+
+
+    void ChangeElement(int i)
+    {
+        //TODO Change Element Code Tiong ples do
+
     }
 
    
