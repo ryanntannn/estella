@@ -88,10 +88,10 @@ public class PlayerControl : MonoBehaviour {
     }
 
 
-    void ChangeElement(int i)
+    public void ChangeElement(int i, bool isRight)
     {
         //TODO Change Element Code Tiong ples do
-
+        GetComponent<ElementControl>().ChangeElement(isRight, i);
     }
 
    

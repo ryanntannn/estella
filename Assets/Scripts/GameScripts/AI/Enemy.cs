@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour {
     //element stuff
     public ParticleSystem onFirePs;
-    public float fireTimeToLive = 0;
+    float fireTimeToLive = 0;
     public float resistanceLevel = 1;
 
     //stats
@@ -32,12 +32,17 @@ public abstract class Enemy : MonoBehaviour {
 
         if(slowTimer > 0) {
             slowTimer = Mathf.Clamp(slowTimer - Time.deltaTime, 0, 20);
-
+            currentSpeed = speed * 0.5f;    //TO BE CHANGED
+        } else {
+            currentSpeed = speed;
         }
     }
 
     public virtual void SlowEnemy(float duration) {
-
+        slowTimer += duration;
     }
   
+    public virtual void SetOnFire(float duration) {
+        fireTimeToLive += duration;
+    }
 }
