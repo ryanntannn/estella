@@ -7,6 +7,7 @@ public class ElementControl : MonoBehaviour {
     [Tooltip("Displays current element")]
     public string lHandCurrent, rHandCurrent;
     public float delay = 0.3f;
+    public bool enableLockOn = true;
 
     public KeyCode rightHand = KeyCode.Mouse0, leftHand = KeyCode.Mouse1;
 
@@ -209,7 +210,13 @@ public class ElementControl : MonoBehaviour {
     void BubbleShot() {
         GameObject instance = Resources.Load<GameObject>("Elements/Water/BubbleShot");
         instance = Instantiate(instance, transform.position, transform.rotation);
-        instance.GetComponent<BubbleShot>().target = lockOn.target;
+        if(lockOn.target && enableLockOn) {
+            instance.GetComponent<BubbleShot>().target = lockOn.target;
+        } else {
+            Vector3 newRot = Camera.main.transform.eulerAngles;
+            newRot.x = 0;
+            instance.transform.rotation = Quaternion.Euler(newRot);
+        }
     }
 
     void Fireball() {
