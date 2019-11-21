@@ -13,9 +13,12 @@ public abstract class Enemy : MonoBehaviour {
     public float health = 10;
     public float speed = 12;
     protected Rigidbody rb;
+    protected float slowTimer = 0;
+    protected float currentSpeed = 12;
 
     public virtual void Start() {
         rb = GetComponent<Rigidbody>();
+        currentSpeed = speed;
     }
 
     public virtual void Update() {
@@ -26,6 +29,14 @@ public abstract class Enemy : MonoBehaviour {
         }else {
             if (!onFirePs.isStopped) onFirePs.Stop();
         }
+
+        if(slowTimer > 0) {
+            slowTimer = Mathf.Clamp(slowTimer - Time.deltaTime, 0, 20);
+
+        }
+    }
+
+    public virtual void SlowEnemy(float duration) {
 
     }
   

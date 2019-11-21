@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ElementControl : MonoBehaviour {
-    public int lHand = 1, rHand = 1;
-
+    public int lHand = 1, rHand = 2;
+    [Tooltip("Displays current element")]
     public string lHandCurrent, rHandCurrent;
+    public float delay = 0.3f;
 
-    bool isCounting = false;
+    public KeyCode rightHand = KeyCode.Mouse0, leftHand = KeyCode.Mouse1;
 
+    bool doneAlr = false;
     // Start is called before the first frame update
     void Start() {
 
     }
 
-    float internalCounter = 0;
     // Update is called once per frame
     void Update() {
         //I really dont wanna do movement yet
@@ -22,43 +23,36 @@ public class ElementControl : MonoBehaviour {
         lHandCurrent = Elements.ByteToName(lHand);
         rHandCurrent = Elements.ByteToName(rHand);
 
-        //switch elements
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            lHand <<= 1;
-            lHand %= 32;
-            if (lHand == 0) {
-                lHand++;
-            }
-        } else if (Input.GetKeyDown(KeyCode.E)) {
-            rHand <<= 1;
-            rHand %= 32;
-            if (rHand == 0) {
-                rHand++;
-            }
+        if (Input.GetKeyDown(rightHand)) {
+            StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(lHand) : NoCombination(lHand));
+        }
+        if (Input.GetKeyDown(leftHand)) {
+            StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(rHand) : NoCombination(rHand));
         }
 
-        //if (Input.GetKeyDown(KeyCode.Mouse0) && Input.GetKeyDown(KeyCode.Mouse1)) {
-        //    print("Comb");
-        //    //do combination
-        //    Combination();
-        //    internalCounter = 0;
-
-        //} else if (internalCounter >= 0.2f) {
-        //    if (Input.GetKeyDown(KeyCode.Mouse0)) {
-        //        NoCombination(lHand);
-        //    } else if (Input.GetKeyDown(KeyCode.Mouse1)) {
-        //        NoCombination(rHand);
-        //    }
-        //    internalCounter = 0;
-        //}
-
-        if (isCounting) internalCounter += Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.Mouse0)) {
-            if(internalCounter >= 0.2f) {
-                internalCounter = 0;
-            }
+        if(Input.GetKey(rightHand) && Input.GetKey(leftHand) && !doneAlr) {
+            StopAllCoroutines();
+            print("Comb");
+            doneAlr = true;
+            Combination();
         }
+
+        if(Input.GetKeyUp(rightHand) || Input.GetKeyUp(leftHand)) {
+            doneAlr = false;
+        }
+
+    }
+
+    //I swear if you put some dumbass number
+    /// <summary>
+    /// <para>Change the hand's element to a new number</para>
+    /// <para>Please use Element.(name of new element)</para>
+    /// </summary>
+    /// <param name="isRight"></param>
+    /// <param name="newInput"></param>
+    public void ChangeElement(bool isRight, int newInput) {
+        if (isRight) rHand = newInput;
+        else lHand = newInput;
     }
 
     void Combination() {
@@ -93,6 +87,15 @@ public class ElementControl : MonoBehaviour {
             case Elements.Wind | Elements.Electricity:
                 DoStorm();
                 break;
+            default:
+                print("Something wrong");
+                break;
+        }
+    }
+
+    IEnumerator DoBigBoy(int input) {
+        yield return new WaitForSeconds(delay);
+        switch (input) {
             case Elements.Wind:
                 DoTornado();
                 break;
@@ -108,28 +111,26 @@ public class ElementControl : MonoBehaviour {
             case Elements.Electricity:
                 DoFlash();
                 break;
-            default:
-                print("Something wrong");
-                break;
         }
     }
 
-    void NoCombination(int input) {
+    IEnumerator NoCombination(int input) {
+        yield return new WaitForSeconds(delay);
         switch (input) {
             case 1:
-                print("Bubble sort");
+                BubbleShot();
                 break;
             case 2:
-                print("Fire ball");
+                Fireball();
                 break;
             case 4:
-                print("Fissure");
+                Fissure();
                 break;
             case 8:
-                print("Wind slash");
+                WindSlash();
                 break;
             case 16:
-                print("Gay shock therapy");
+                ShockChain();
                 break;
             default:
                 print("Something wrong");
@@ -183,7 +184,7 @@ public class ElementControl : MonoBehaviour {
     void DoTsunami() {
         //load in tsunami behind player
         GameObject tsunami = Resources.Load<GameObject>("Elements/Water/Tsunami");
-        tsunami = Instantiate(tsunami, transform.position - transform.forward, transform.rotation);
+        tsunami = Instantiate(tsunami, transform.position - transform.forward - transform.up, transform.rotation);
     }
 
     void DoFirepit() {
@@ -199,6 +200,29 @@ public class ElementControl : MonoBehaviour {
     }
 
     void DoGroundBreaker() {
+
+    }
+    #endregion
+
+    #region Regular stuff
+    void BubbleShot() {
+        GameObject instance = Resources.Load<GameObject>("Elements/Water/BubbleShot");
+        instance = Instantiate(instance, transform.position, transform.rotation);
+    }
+
+    void Fireball() {
+
+    }
+
+    void Fissure() {
+
+    }
+
+    void WindSlash() {
+
+    }
+
+    void ShockChain() {
 
     }
     #endregion
