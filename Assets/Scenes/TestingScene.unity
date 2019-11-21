@@ -4924,10 +4924,6 @@ GameObject:
   - component: {fileID: 239367490}
   - component: {fileID: 239367484}
   - component: {fileID: 239367486}
-  - component: {fileID: 239367485}
-  - component: {fileID: 239367488}
-  - component: {fileID: 239367487}
-  - component: {fileID: 239367489}
   - component: {fileID: 239367483}
   m_Layer: 10
   m_Name: Player
@@ -4988,26 +4984,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239367479}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f58d2bd053ac9404c8d19e3c4b0867af, type: 3}
+  m_Script: {fileID: 11500000, guid: dc83128cf02adb6488164ba8d42fa370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentType: 2
-  button: 323
-  isRightHand: 1
-  streamPS: {fileID: 0}
-  bolt: {fileID: 0}
-  power: {fileID: 6697931532965847791, guid: 8167474742a0c874787e46e40e990ac5, type: 3}
-  currentMana: 10
-  maxMana: 10
-  manaRegenRate: 1
-  range: 3
-  boltCost: 1
-  streamDrain: 1
-  powerCost: 2
-  targetCircle: {fileID: 7290041152597187386, guid: 0a74a8d02f57c164e8e59212572ddcb7,
-    type: 3}
+  lHand: 1
+  rHand: 1
+  lHandCurrent: 
+  rHandCurrent: 
 --- !u!114 &239367484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5024,33 +5009,6 @@ MonoBehaviour:
   target: {fileID: 0}
   shd: {fileID: -6465566751694194690, guid: d216274bc6db3cf42b26aab3bda7ee04, type: 3}
   defaultShd: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
---- !u!114 &239367485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239367479}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ea7811a31467f45b25142e114826c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentType: 1
-  button: 323
-  isRightHand: 0
-  streamPS: {fileID: 2138197977}
-  bolt: {fileID: 4384073625426036001, guid: 7a081694a0a2de541adfee2b5d4d81b4, type: 3}
-  power: {fileID: 0}
-  currentMana: 10
-  maxMana: 10
-  manaRegenRate: 1
-  range: 3
-  boltCost: 1
-  streamDrain: 1
-  powerCost: 2
-  targetCircle: {fileID: 3792551822210646395, guid: 13f4870eb93f4b746ae82f2a188db736,
-    type: 3}
 --- !u!114 &239367486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5069,91 +5027,6 @@ MonoBehaviour:
   rightHandButton: 324
   swapLeft: 113
   swapRight: 101
---- !u!114 &239367487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239367479}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16caf8e0aa2a677488987686adf85d23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentType: 2
-  button: 324
-  isRightHand: 1
-  streamPS: {fileID: 1690177045}
-  bolt: {fileID: 0}
-  power: {fileID: 5850316481161051651, guid: 6e30d20080c5b994e85f4029a8d65c33, type: 3}
-  currentMana: 10
-  maxMana: 10
-  manaRegenRate: 1
-  range: 3
-  boltCost: 1
-  streamDrain: 1
-  powerCost: 2
-  targetCircle: {fileID: 3792551822210646395, guid: 13f4870eb93f4b746ae82f2a188db736,
-    type: 3}
---- !u!114 &239367488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239367479}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f13401b9777abe147a035bb88a608854, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentType: 0
-  button: 324
-  isRightHand: 0
-  streamPS: {fileID: 296294382}
-  bolt: {fileID: 0}
-  power: {fileID: 442668882004750571, guid: 1d621430637b65949b1fb74ae56af741, type: 3}
-  currentMana: 10
-  maxMana: 10
-  manaRegenRate: 1
-  range: 3
-  boltCost: 1
-  streamDrain: 1
-  powerCost: 2
-  targetCircle: {fileID: 3792551822210646395, guid: 13f4870eb93f4b746ae82f2a188db736,
-    type: 3}
-  anim: {fileID: 3166231813219992693}
-  warpDuration: 1
-  translucentShd: {fileID: 0}
-  defShd: {fileID: -6465566751694194690, guid: c8769ca2c1fa0aa4e9938ecb77d8c5ad, type: 3}
---- !u!114 &239367489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239367479}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 202b5b15894a6ff4ab7e7ab6967ca35c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentType: 0
-  button: 323
-  isRightHand: 1
-  streamPS: {fileID: 727950981}
-  bolt: {fileID: 8570801765547136152, guid: 9422b93110d78ff48ae1b2f166174812, type: 3}
-  power: {fileID: 0}
-  currentMana: 10
-  maxMana: 10
-  manaRegenRate: 1
-  range: 3
-  boltCost: 1
-  streamDrain: 1
-  powerCost: 2
-  targetCircle: {fileID: 3792551822210646395, guid: 13f4870eb93f4b746ae82f2a188db736,
-    type: 3}
 --- !u!114 &239367490
 MonoBehaviour:
   m_ObjectHideFlags: 0

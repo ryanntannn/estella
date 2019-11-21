@@ -19,7 +19,7 @@ public class AnimationEvents : MonoBehaviour {
 
     #region Player animation events
     void Warp() {
-        parent.GetComponent<ElectricityElement>().Warp();
+
     }
     #endregion
 
