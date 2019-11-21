@@ -190,11 +190,11 @@ public class ElementControl : MonoBehaviour {
     }
 
     void DoFirepit() {
-
+        //fire spout
     }
 
     void DoFlash() {
-
+        //ember sof
     }
 
     void DoTornado() {
@@ -236,11 +236,13 @@ public class ElementControl : MonoBehaviour {
     }
 
     void WindSlash() {
+        //get some cool effects here
 
     }
 
     void ShockChain() {
-
+        //note to self: stream
+        //can make bounce
     }
     #endregion
 }
