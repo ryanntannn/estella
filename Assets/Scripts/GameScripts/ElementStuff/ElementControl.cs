@@ -7,11 +7,14 @@ public class ElementControl : MonoBehaviour {
 
     public string lHandCurrent, rHandCurrent;
 
+    bool isCounting = false;
+
     // Start is called before the first frame update
     void Start() {
 
     }
 
+    float internalCounter = 0;
     // Update is called once per frame
     void Update() {
         //I really dont wanna do movement yet
@@ -34,17 +37,26 @@ public class ElementControl : MonoBehaviour {
             }
         }
 
-        //no combinationing
-        if (!Input.GetKey(KeyCode.LeftAlt)) {
-            if (Input.GetKey(KeyCode.Mouse0)) {
+        //if (Input.GetKeyDown(KeyCode.Mouse0) && Input.GetKeyDown(KeyCode.Mouse1)) {
+        //    print("Comb");
+        //    //do combination
+        //    Combination();
+        //    internalCounter = 0;
 
-            } else if (Input.GetKey(KeyCode.Mouse1)) {
+        //} else if (internalCounter >= 0.2f) {
+        //    if (Input.GetKeyDown(KeyCode.Mouse0)) {
+        //        NoCombination(lHand);
+        //    } else if (Input.GetKeyDown(KeyCode.Mouse1)) {
+        //        NoCombination(rHand);
+        //    }
+        //    internalCounter = 0;
+        //}
 
-            }
-        } else {
-            if (Input.GetKey(KeyCode.Mouse0) && Input.GetKey(KeyCode.Mouse1)) {
-                //do combination
-                Combination();
+        if (isCounting) internalCounter += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0)) {
+            if(internalCounter >= 0.2f) {
+                internalCounter = 0;
             }
         }
     }
@@ -52,55 +64,144 @@ public class ElementControl : MonoBehaviour {
     void Combination() {
         switch (lHand | rHand) {
             case Elements.Water | Elements.Fire:
-                print("Steam");
+                DoSteam();
                 break;
             case Elements.Water | Elements.Earth:
-                print("Mud");
+                DoMud();
                 break;
             case Elements.Water | Elements.Wind:
-                print("Blizzard");
+                DoBlizzard();
                 break;
             case Elements.Water | Elements.Electricity:
-                print("Shock");
+                DoShock();
                 break;
             case Elements.Fire | Elements.Earth:
-                print("Magma");
+                DoMagma();
                 break;
             case Elements.Fire | Elements.Wind:
-                print("Blaze");
+                DoBlaze();
                 break;
             case Elements.Fire | Elements.Electricity:
-                print("Plasma");
+                DoPlasma();
                 break;
             case Elements.Earth | Elements.Wind:
-                print("Dust");
+                DoDust();
                 break;
             case Elements.Earth | Elements.Electricity:
-                print("Magnitize");
+                DoMagnetize();
                 break;
             case Elements.Wind | Elements.Electricity:
-                print("Strom");
+                DoStorm();
                 break;
             case Elements.Wind:
-                print("Big wind");
+                DoTornado();
                 break;
             case Elements.Water:
-                print("Big water");
+                DoTsunami();
                 break;
             case Elements.Fire:
-                print("Big fire");
+                DoFirepit();
                 break;
             case Elements.Earth:
-                print("Big earth");
+                DoGroundBreaker();
                 break;
             case Elements.Electricity:
-                print("Fat zap");
+                DoFlash();
                 break;
             default:
                 print("Something wrong");
                 break;
         }
     }
+
+    void NoCombination(int input) {
+        switch (input) {
+            case 1:
+                print("Bubble sort");
+                break;
+            case 2:
+                print("Fire ball");
+                break;
+            case 4:
+                print("Fissure");
+                break;
+            case 8:
+                print("Wind slash");
+                break;
+            case 16:
+                print("Gay shock therapy");
+                break;
+            default:
+                print("Something wrong");
+                break;
+        }
+    }
+
+    #region Combination stuff
+    void DoSteam() {
+
+    }
+
+    void DoMud() {
+
+    }
+
+    void DoBlizzard() {
+
+    }
+
+    void DoShock() {
+
+    }
+
+    void DoMagma() {
+
+    }
+
+    void DoDust() {
+
+    }
+
+    void DoPlasma() {
+
+    }
+
+    void DoStorm() {
+
+    }
+
+    void DoMagnetize() {
+
+    }
+
+    void DoBlaze() {
+
+    }
+    #endregion
+
+    #region Big boy single elements
+    void DoTsunami() {
+        //load in tsunami behind player
+        GameObject tsunami = Resources.Load<GameObject>("Elements/Water/Tsunami");
+        tsunami = Instantiate(tsunami, transform.position - transform.forward, transform.rotation);
+    }
+
+    void DoFirepit() {
+
+    }
+
+    void DoFlash() {
+
+    }
+
+    void DoTornado() {
+
+    }
+
+    void DoGroundBreaker() {
+
+    }
+    #endregion
 }
 
 public static class Elements {

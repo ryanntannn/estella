@@ -48,7 +48,9 @@ public class PlayerControl : MonoBehaviour {
             //transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotAngle + pivot.transform.eulerAngles.y, transform.eulerAngles.z);
 
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.eulerAngles.x, rotation + pivot.transform.eulerAngles.y, transform.eulerAngles.z), Time.deltaTime * 15);
-            rb.velocity = transform.forward * speed;
+            Vector3 temp = transform.forward * speed;
+            temp.y = rb.velocity.y;
+            rb.velocity = temp;
             animator.SetBool("running", true);
         } else
         {
