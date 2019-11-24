@@ -4970,9 +4970,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onFirePs: {fileID: 129219315}
-  resistanceLevel: 1
+  debuffTimer: 0
+  currentDebuff: 0
   health: 10
   speed: 12
+  resistanceLevel: 1
+  unfreezeThreshold: 2
   waterPS: {fileID: 0}
 --- !u!54 &245700849
 Rigidbody:
@@ -6832,9 +6835,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onFirePs: {fileID: 129219315}
-  resistanceLevel: 1
+  debuffTimer: 0
+  currentDebuff: 0
   health: 10
   speed: 12
+  resistanceLevel: 1
+  unfreezeThreshold: 2
   moveSpeed: 3
   lengthOfDash: 6
   anim: {fileID: 0}
@@ -11961,9 +11967,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onFirePs: {fileID: 1281910068}
-  resistanceLevel: 1
+  debuffTimer: 0
+  currentDebuff: 0
   health: 10
   speed: 12
+  resistanceLevel: 1
+  unfreezeThreshold: 2
   waterPS: {fileID: 0}
 --- !u!4 &1964113254
 Transform:
@@ -11973,7 +11982,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964113250}
   m_LocalRotation: {x: -0.00000046193594, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9, y: 0, z: 6}
+  m_LocalPosition: {x: 2, y: 0, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1483569200}
@@ -12174,5 +12183,10 @@ PrefabInstance:
       propertyPath: indicator
       value: 
       objectReference: {fileID: 1600295067}
+    - target: {fileID: 5338631622277769823, guid: cabae6f271e8db84a90a3a38cceb449b,
+        type: 3}
+      propertyPath: rHand
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cabae6f271e8db84a90a3a38cceb449b, type: 3}

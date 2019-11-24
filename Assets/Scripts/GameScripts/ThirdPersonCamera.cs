@@ -39,7 +39,8 @@ public class ThirdPersonCamera : MonoBehaviour {
         PivotRotationUpdate();
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         PositionUpdate();
     }
 

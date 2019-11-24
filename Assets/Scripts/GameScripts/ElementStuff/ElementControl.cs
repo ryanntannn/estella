@@ -13,6 +13,7 @@ public class ElementControl : MonoBehaviour {
 
     bool doneAlr = false;
     LockOnTarget lockOn;
+    bool isFlash = false;
     // Start is called before the first frame update
     void Start() {
         lockOn = GetComponent<LockOnTarget>();
@@ -43,6 +44,15 @@ public class ElementControl : MonoBehaviour {
             doneAlr = false;
         }
 
+        if (isFlash) {
+            StartCoroutine(DoFlash());
+        }else {
+            StopCoroutine(DoFlash());
+        }
+    }
+
+    private void OnDrawGizmos() {
+        
     }
 
     //I swear if you put some dumbass number
@@ -111,7 +121,8 @@ public class ElementControl : MonoBehaviour {
                 DoGroundBreaker();
                 break;
             case Elements.Electricity:
-                DoFlash();
+                //DoFlash();
+                isFlash = true;
                 break;
         }
     }
@@ -193,8 +204,21 @@ public class ElementControl : MonoBehaviour {
         //fire spout
     }
 
-    void DoFlash() {
-        //ember sof
+    IEnumerator DoFlash() {
+        float delay = 0.25f;
+        //dash forward 
+        //sof
+        float range = 2.5f;
+        //raycast in circle
+        RaycastHit[] hitInfo = Physics.CapsuleCastAll(transform.position + transform.forward * range, transform.position + transform.forward * range, range, transform.forward, range, 1 << Layers.Enemy);
+        foreach(RaycastHit hit in hitInfo) {
+            Vector2 randomPos = Random.insideUnitCircle;
+            transform.position = hit.transform.position + new Vector3(randomPos.x, transform.position.y, randomPos.y);
+           // Vector3 dir = hit.transform.position - transform.position;
+            //transform.rotation = Quaternion.LookRotation(dir, transform.up);
+            yield return new WaitForSeconds(delay);
+        }
+        isFlash = false;
     }
 
     void DoTornado() {
