@@ -56,6 +56,26 @@ public class ElementControl : MonoBehaviour {
         }else {
             StopCoroutine(DoFlash());
         }
+
+        SetTargetCircle();
+    }
+
+    void SetTargetCircle() {
+        float range = 10;
+        if (isTargeting) {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitInfo;
+            Debug.DrawRay(Camera.main.transform.position, ray.direction * range, Color.red);
+            if (!Physics.Raycast(ray, out hitInfo, range, 1 << Layers.Terrain)) {
+                Vector3 newPos = Camera.main.transform.position + ray.direction * range;
+                Physics.Raycast(newPos, -Vector3.up, out hitInfo, 100, 1 << Layers.Terrain);
+            }
+            targetCircle.transform.position = hitInfo.point;
+            targetCircle.SetActive(true);
+        } else {
+            targetCircle.SetActive(false);
+            
+        }
     }
 
     private void OnDrawGizmos() {
