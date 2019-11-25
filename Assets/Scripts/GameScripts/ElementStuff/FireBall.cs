@@ -18,7 +18,10 @@ public class FireBall : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.layer == Layers.Enemy) {
-
+            Enemy enemyRef = other.GetComponent<Enemy>();
+            enemyRef.currentDebuff = Enemy.Effects.Burn;
+            enemyRef.debuffTimer += 5;
+            Destroy(gameObject);
         }else if(other.gameObject.layer == Layers.Terrain) {
 
         }

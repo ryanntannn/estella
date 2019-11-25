@@ -13,7 +13,9 @@ public class ElementControl : MonoBehaviour {
 
     bool doneAlr = false;
     LockOnTarget lockOn;
+    //zap zap
     bool isFlash = false;
+
     // Start is called before the first frame update
     void Start() {
         lockOn = GetComponent<LockOnTarget>();
@@ -202,6 +204,7 @@ public class ElementControl : MonoBehaviour {
 
     void DoFirepit() {
         //fire spout
+
     }
 
     IEnumerator DoFlash() {
