@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour {
     //Radial Menu
     GameObject radialMenu1;
     GameObject radialMenu2;
+    bool isInRadialMenu;
 
     // Start is called before the first frame update
     void Start() {
@@ -50,28 +51,36 @@ public class PlayerControl : MonoBehaviour {
     void MovementUpdate()
     {
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && !isInRadialMenu)
         {
             radialMenu1.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
+            isInRadialMenu = true;
+            Time.timeScale = 0.25f;
         }
         else if (Input.GetKeyUp(KeyCode.Q))
         {
             radialMenu1.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+            isInRadialMenu = false;
+            Time.timeScale = 1.0f;
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKeyDown(KeyCode.E) && !isInRadialMenu)
         {
             radialMenu2.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
+            isInRadialMenu = true;
+            Time.timeScale = 0.25f;
         }
         else if (Input.GetKeyUp(KeyCode.E))
         {
             radialMenu2.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+            isInRadialMenu = false;
+            Time.timeScale = 1.0f;
         }
 
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0 && !isInRadialMenu)
         {
             rotation = Mathf.Atan2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * Mathf.Rad2Deg;
             //transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotAngle + pivot.transform.eulerAngles.y, transform.eulerAngles.z);
@@ -88,12 +97,18 @@ public class PlayerControl : MonoBehaviour {
     }
 
 
-    public void ChangeElement(int i, bool isRight)
+    public void ChangeElement(int i)
     {
         //TODO Change Element Code Tiong ples do
-        GetComponent<ElementControl>().ChangeElement(isRight, i);
+        Debug.Log("its not my fault " + i);
+        GetComponent<ElementControl>().ChangeElement(true, i);
     }
 
-   
+    public void ChangeElement2(int i)
+    {
+        //TODO Change Element Code Tiong ples do
+        Debug.Log("its not my fault " + i);
+        GetComponent<ElementControl>().ChangeElement(false, i);
+    }
 }
 
