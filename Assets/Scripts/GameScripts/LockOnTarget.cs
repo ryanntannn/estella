@@ -35,7 +35,7 @@ public class LockOnTarget : MonoBehaviour {
         //RaycastHit hitInfo;
         RaycastHit[] hitInfo = Physics.SphereCastAll(ray, radius, 7, 1 << Layers.Enemy);
         GameObject closest = null;
-        float closestDistance = 0f;
+        float closestDistance = 0f; 
         foreach(RaycastHit hit in hitInfo)
         {
             float distance = Vector3.Cross(ray.direction, hit.transform.position - ray.origin).magnitude;
