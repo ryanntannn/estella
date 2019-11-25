@@ -23,7 +23,7 @@ public class FireBall : MonoBehaviour {
             enemyRef.debuffTimer += 5;
             Destroy(gameObject);
         }else if(other.gameObject.layer == Layers.Terrain) {
-
+            Destroy(gameObject);
         }
     }
 }

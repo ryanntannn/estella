@@ -8,13 +8,17 @@ public class ElementControl : MonoBehaviour {
     public string lHandCurrent, rHandCurrent;
     public float delay = 0.3f;
     public bool enableLockOn = true;
+    public GameObject targetCircle;
 
     public KeyCode rightHand = KeyCode.Mouse0, leftHand = KeyCode.Mouse1;
 
+    bool isTargeting = false;
     bool doneAlr = false;
     LockOnTarget lockOn;
     //zap zap
     bool isFlash = false;
+
+    //fire
 
     // Start is called before the first frame update
     void Start() {
@@ -44,6 +48,7 @@ public class ElementControl : MonoBehaviour {
 
         if(Input.GetKeyUp(rightHand) || Input.GetKeyUp(leftHand)) {
             doneAlr = false;
+            isTargeting = false;
         }
 
         if (isFlash) {
@@ -123,8 +128,7 @@ public class ElementControl : MonoBehaviour {
                 DoGroundBreaker();
                 break;
             case Elements.Electricity:
-                //DoFlash();
-                isFlash = true;
+                DoFlash();
                 break;
         }
     }
@@ -208,6 +212,7 @@ public class ElementControl : MonoBehaviour {
     }
 
     IEnumerator DoFlash() {
+        isFlash = true;
         float delay = 0.25f;
         //dash forward 
         //sof
