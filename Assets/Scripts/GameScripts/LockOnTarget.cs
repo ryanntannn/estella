@@ -32,7 +32,27 @@ public class LockOnTarget : MonoBehaviour {
     void SetTarget() {
         //what we want is a targeting system that targets enemies closest to the cross hair
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitInfo;
-        target = Physics.SphereCast(ray, radius, out hitInfo, 7, 1 << Layers.Enemy) ? hitInfo.collider.gameObject : null;
+        //RaycastHit hitInfo;
+        RaycastHit[] hitInfo = Physics.SphereCastAll(ray, radius, 7, 1 << Layers.Enemy);
+        GameObject closest = null;
+        float closestDistance = 0f;
+        foreach(RaycastHit hit in hitInfo)
+        {
+            float distance = Vector3.Cross(ray.direction, hit.transform.position - ray.origin).magnitude;
+            if(closest)
+            {
+                if(distance < closestDistance)
+                {
+                    closest = hit.transform.gameObject;
+                    closestDistance = distance;
+                }
+            } else
+            {
+                closest = hit.transform.gameObject;
+                closestDistance = distance;
+            }
+        }
+        target = closest;
+        //target = Physics.SphereCast(ray, radius, out hitInfo, 7, 1 << Layers.Enemy) ? hitInfo.collider.gameObject : null;
     }
 }
