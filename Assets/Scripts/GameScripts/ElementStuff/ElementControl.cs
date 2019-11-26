@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ElementControl : MonoBehaviour {
-    public int lHand = 1, rHand = 2;
+    int lHand = 1, rHand = 2;
     [Tooltip("Displays current element")]
     public string lHandCurrent, rHandCurrent;
     public float delay = 0.3f;
@@ -23,6 +23,9 @@ public class ElementControl : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         lockOn = GetComponent<LockOnTarget>();
+
+        lHand = PlayerPrefs.GetInt("lHand", 1);
+        rHand = PlayerPrefs.GetInt("rHand", 2);
     }
 
     // Update is called once per frame
@@ -32,6 +35,9 @@ public class ElementControl : MonoBehaviour {
         lHandCurrent = Elements.ByteToName(lHand);
         rHandCurrent = Elements.ByteToName(rHand);
 
+        rHand = PlayerPrefs.GetInt("rHand");
+        lHand = PlayerPrefs.GetInt("lHand");
+
         if (Input.GetKeyDown(rightHand)) {
             StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(lHand) : NoCombination(lHand));
         }
@@ -39,21 +45,21 @@ public class ElementControl : MonoBehaviour {
             StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(rHand) : NoCombination(rHand));
         }
 
-        if(Input.GetKey(rightHand) && Input.GetKey(leftHand) && !doneAlr) {
+        if (Input.GetKey(rightHand) && Input.GetKey(leftHand) && !doneAlr) {
             StopAllCoroutines();
             print("Comb");
             doneAlr = true;
             Combination();
         }
 
-        if(Input.GetKeyUp(rightHand) || Input.GetKeyUp(leftHand)) {
+        if (Input.GetKeyUp(rightHand) || Input.GetKeyUp(leftHand)) {
             doneAlr = false;
             isTargeting = false;
         }
 
         if (isFlash) {
             StartCoroutine(DoFlash());
-        }else {
+        } else {
             StopCoroutine(DoFlash());
         }
 
@@ -74,12 +80,12 @@ public class ElementControl : MonoBehaviour {
             targetCircle.SetActive(true);
         } else {
             targetCircle.SetActive(false);
-            
+
         }
     }
 
     private void OnDrawGizmos() {
-        
+
     }
 
     //I swear if you put some dumbass number
@@ -90,8 +96,11 @@ public class ElementControl : MonoBehaviour {
     /// <param name="isRight"></param>
     /// <param name="newInput"></param>
     public void ChangeElement(bool isRight, int newInput) {
-        if (isRight) rHand = newInput;
-        else lHand = newInput;
+        if (isRight) {
+            PlayerPrefs.SetInt("rHand", newInput);
+        } else {
+            PlayerPrefs.SetInt("lHand", newInput);
+        }
     }
 
     void Combination() {
@@ -239,10 +248,10 @@ public class ElementControl : MonoBehaviour {
         float range = 2.5f;
         //raycast in circle
         RaycastHit[] hitInfo = Physics.CapsuleCastAll(transform.position + transform.forward * range, transform.position + transform.forward * range, range, transform.forward, range, 1 << Layers.Enemy);
-        foreach(RaycastHit hit in hitInfo) {
+        foreach (RaycastHit hit in hitInfo) {
             Vector2 randomPos = Random.insideUnitCircle;
             transform.position = hit.transform.position + new Vector3(randomPos.x, transform.position.y, randomPos.y);
-           // Vector3 dir = hit.transform.position - transform.position;
+            // Vector3 dir = hit.transform.position - transform.position;
             //transform.rotation = Quaternion.LookRotation(dir, transform.up);
             yield return new WaitForSeconds(delay);
         }
@@ -262,7 +271,7 @@ public class ElementControl : MonoBehaviour {
     void BubbleShot() {
         GameObject instance = Resources.Load<GameObject>("Elements/Water/BubbleShot");
         instance = Instantiate(instance, transform.position, transform.rotation);
-        if(lockOn.target && enableLockOn) {
+        if (lockOn.target && enableLockOn) {
             instance.GetComponent<BubbleShot>().target = lockOn.target;
         } else {
             Vector3 newRot = Camera.main.transform.eulerAngles;
@@ -275,7 +284,7 @@ public class ElementControl : MonoBehaviour {
         GameObject instance = Resources.Load<GameObject>("Elements/Fire/Fireball");
         instance = Instantiate(instance, transform.position, transform.rotation);
         if (lockOn.target && enableLockOn) {
-            instance.GetComponent<BubbleShot>().target = lockOn.target;
+            instance.GetComponent<FireBall>().target = lockOn.target;
         } else {
             Vector3 newRot = Camera.main.transform.eulerAngles;
             newRot.x = 0;

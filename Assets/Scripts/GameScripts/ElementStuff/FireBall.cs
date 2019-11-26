@@ -5,6 +5,7 @@ using UnityEngine;
 public class FireBall : MonoBehaviour {
     public float speed = 12;
     public GameObject fireDie;
+    public GameObject target;
 
     // Start is called before the first frame update
     void Start() {
@@ -13,6 +14,9 @@ public class FireBall : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (target) {
+            transform.LookAt(target.transform);
+        }
         transform.position += transform.forward * speed * Time.deltaTime;
     }
 

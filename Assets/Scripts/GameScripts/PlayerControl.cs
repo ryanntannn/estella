@@ -100,14 +100,11 @@ public class PlayerControl : MonoBehaviour {
     public void ChangeElement(int i)
     {
         //TODO Change Element Code Tiong ples do
-        Debug.Log("its not my fault " + i);
         GetComponent<ElementControl>().ChangeElement(true, i);
     }
 
     public void ChangeElement2(int i)
     {
-        //TODO Change Element Code Tiong ples do
-        Debug.Log("its not my fault " + i);
         GetComponent<ElementControl>().ChangeElement(false, i);
     }
 }
