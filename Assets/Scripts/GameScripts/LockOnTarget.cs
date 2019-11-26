@@ -9,9 +9,11 @@ public class LockOnTarget : MonoBehaviour {
 
     public GameObject target;
 
+    GameObject cameraGO; 
+
     // Start is called before the first frame update
     void Start() {
-
+        cameraGO = GameObject.Find("Main Camera");
     }
 
     // Update is called once per frame
@@ -41,7 +43,8 @@ public class LockOnTarget : MonoBehaviour {
             float distance = Vector3.Cross(ray.direction, hit.transform.position - ray.origin).magnitude;
             if(closest)
             {
-                if(distance < closestDistance)
+                //Checks if target is not between the camera and the player
+                if(distance < closestDistance && Vector3.Distance(hit.transform.position, cameraGO.transform.position) > 3f)
                 {
                     closest = hit.transform.gameObject;
                     closestDistance = distance;

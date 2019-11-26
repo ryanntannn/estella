@@ -56,7 +56,7 @@ public class PlayerControl : MonoBehaviour {
             radialMenu1.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             isInRadialMenu = true;
-            Time.timeScale = 0.25f;
+            Time.timeScale = 0.5f;
         }
         else if (Input.GetKeyUp(KeyCode.Q))
         {
@@ -70,7 +70,7 @@ public class PlayerControl : MonoBehaviour {
             radialMenu2.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             isInRadialMenu = true;
-            Time.timeScale = 0.25f;
+            Time.timeScale = 0.5f;
         }
         else if (Input.GetKeyUp(KeyCode.E))
         {
