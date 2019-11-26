@@ -12310,5 +12310,10 @@ PrefabInstance:
       propertyPath: rHand
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 5338631622277769823, guid: cabae6f271e8db84a90a3a38cceb449b,
+        type: 3}
+      propertyPath: targetCircle
+      value: 
+      objectReference: {fileID: 1540570545}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cabae6f271e8db84a90a3a38cceb449b, type: 3}
