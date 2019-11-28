@@ -188,14 +188,15 @@ public class ElementControl : MonoBehaviour {
 
     #region Combination stuff
     void DoSteam() {
-
+        //debuff enemy / buff own attack
     }
 
     void DoMud() {
-
+        //summon golem
     }
 
     void DoBlizzard() {
+        //summon one big cloud?
 
     }
 
@@ -293,7 +294,8 @@ public class ElementControl : MonoBehaviour {
     }
 
     void Fissure() {
-
+        GameObject fissure = Resources.Load<GameObject>("Elements/Ground/FissureAttack");
+        fissure = Instantiate(fissure, targetCircle.transform.position, Quaternion.identity);
     }
 
     void WindSlash() {
