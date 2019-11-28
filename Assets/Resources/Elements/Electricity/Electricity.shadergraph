@@ -10,7 +10,7 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.TextureShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Name\": \"MainTexture\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"a7549b00-fec0-468a-a27b-63efaa9857cb\"\n    },\n    \"m_DefaultReferenceName\": \"Texture2D_86A04E85\",\n    \"m_OverrideReferenceName\": \"\",\n    \"m_Value\": {\n        \"m_SerializedTexture\": \"\",\n        \"m_Guid\": \"cc9ff2cee23e7714f988594c5983a74b\"\n    },\n    \"m_Modifiable\": true,\n    \"m_DefaultType\": 3\n}"
+            "JSONnodeData": "{\n    \"m_Name\": \"MainTexture\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"a7549b00-fec0-468a-a27b-63efaa9857cb\"\n    },\n    \"m_DefaultReferenceName\": \"Texture2D_86A04E85\",\n    \"m_OverrideReferenceName\": \"\",\n    \"m_Value\": {\n        \"m_SerializedTexture\": \"\",\n        \"m_Guid\": \"cc9ff2cee23e7714f988594c5983a74b\"\n    },\n    \"m_Modifiable\": true,\n    \"m_DefaultType\": 0\n}"
         },
         {
             "typeInfo": {
