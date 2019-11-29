@@ -47,7 +47,6 @@ public class ElementControl : MonoBehaviour {
 
         if (Input.GetKey(rightHand) && Input.GetKey(leftHand) && !doneAlr) {
             StopAllCoroutines();
-            print("Comb");
             doneAlr = true;
             Combination();
         }
@@ -68,20 +67,19 @@ public class ElementControl : MonoBehaviour {
 
     void SetTargetCircle() {
         float range = 10;
-        if (isTargeting) {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hitInfo;
-            Debug.DrawRay(Camera.main.transform.position, ray.direction * range, Color.red);
-            if (!Physics.Raycast(ray, out hitInfo, range, 1 << Layers.Terrain)) {
-                Vector3 newPos = Camera.main.transform.position + ray.direction * range;
-                Physics.Raycast(newPos, -Vector3.up, out hitInfo, 100, 1 << Layers.Terrain);
-            }
-            targetCircle.transform.position = hitInfo.point;
-            targetCircle.SetActive(true);
-        } else {
-            targetCircle.SetActive(false);
-
+        //if (isTargeting) {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitInfo;
+        Debug.DrawRay(Camera.main.transform.position, ray.direction * range, Color.red);
+        if (!Physics.Raycast(ray, out hitInfo, range, 1 << Layers.Terrain)) {
+            Vector3 newPos = Camera.main.transform.position + ray.direction * range;
+            Physics.Raycast(newPos, -Vector3.up, out hitInfo, 100, 1 << Layers.Terrain);
         }
+        targetCircle.transform.position = hitInfo.point;
+        //    targetCircle.SetActive(true);
+        //} else {
+        //    targetCircle.SetActive(false);
+        //}
     }
 
     private void OnDrawGizmos() {
@@ -189,15 +187,20 @@ public class ElementControl : MonoBehaviour {
     #region Combination stuff
     void DoSteam() {
         //debuff enemy / buff own attack
+        GameObject steampit = Resources.Load<GameObject>("Elements/Steam/SteamPit");
+        steampit = Instantiate(steampit, targetCircle.transform.position, Quaternion.identity);
     }
 
     void DoMud() {
         //summon golem
+        GameObject golem = Resources.Load<GameObject>("Elements/Mud/Golem");
+        golem = Instantiate(golem, targetCircle.transform.position - Vector3.up * 2, Quaternion.identity);
     }
 
     void DoBlizzard() {
         //summon one big cloud?
-
+        GameObject cloud = Resources.Load<GameObject>("Elements/Ice/Blizzard");
+        cloud = Instantiate(cloud, transform.position, Quaternion.identity);
     }
 
     void DoShock() {
@@ -221,7 +224,9 @@ public class ElementControl : MonoBehaviour {
     }
 
     void DoMagnetize() {
-
+        //play some shit
+        GameObject blackhole = Resources.Load<GameObject>("Elements/Magnetise/Blackhole");
+        blackhole = Instantiate(blackhole, targetCircle.transform.position, Quaternion.identity);
     }
 
     void DoBlaze() {
@@ -238,7 +243,8 @@ public class ElementControl : MonoBehaviour {
 
     void DoFirepit() {
         //fire spout
-
+        GameObject firepit = Resources.Load<GameObject>("Elements/Fire/Firepit");
+        firepit = Instantiate(firepit, targetCircle.transform.position, Quaternion.identity);
     }
 
     IEnumerator DoFlash() {
@@ -260,7 +266,9 @@ public class ElementControl : MonoBehaviour {
     }
 
     void DoTornado() {
-
+        //instaniate tornado
+        GameObject tornado = Resources.Load<GameObject>("Elements/Wind/Tornado");
+        tornado = Instantiate(tornado, targetCircle.transform.position, Quaternion.identity);
     }
 
     void DoGroundBreaker() {
@@ -306,6 +314,7 @@ public class ElementControl : MonoBehaviour {
     void ShockChain() {
         //note to self: stream
         //can make bounce
+        
     }
     #endregion
 }
