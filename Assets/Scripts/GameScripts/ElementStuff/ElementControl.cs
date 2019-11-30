@@ -193,8 +193,9 @@ public class ElementControl : MonoBehaviour {
 
     void DoMud() {
         //summon golem
-        GameObject golem = Resources.Load<GameObject>("Elements/Mud/Golem");
-        golem = Instantiate(golem, targetCircle.transform.position - Vector3.up * 2, Quaternion.identity);
+        GameObject golem = Resources.Load<GameObject>("Elements/Mud/MudGolem");
+        golem = Instantiate(golem, targetCircle.transform.position - Vector3.up * 3, Quaternion.identity);
+        golem.GetComponent<MudGolem>().yValue = targetCircle.transform.position.y;
     }
 
     void DoBlizzard() {
