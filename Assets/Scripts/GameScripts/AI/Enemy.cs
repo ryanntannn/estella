@@ -29,8 +29,12 @@ public abstract class Enemy : MonoBehaviour {
     }
 
     public virtual void Update() {
+        float deltaTime = Time.deltaTime;
+
         if (debuffTimer <= 0) {
             currentDebuff = Effects.None;
+        }else {
+            debuffTimer = Mathf.Clamp(debuffTimer - deltaTime, 0, 100);
         }
 
         //check debuffs
@@ -69,12 +73,17 @@ public abstract class Enemy : MonoBehaviour {
                     if (hit.collider.CompareTag("Bolt")) {
                         //drag bolt closer
                         Vector3 direction = transform.position - hit.transform.position;
-                        hit.transform.position += direction * Time.deltaTime;
+                        hit.transform.position += direction * deltaTime;
                     }
                 }
                 break;
             default:
                 break;
+        }
+
+        //check if enemy is dead
+        if(health <= 0) {
+            Destroy(gameObject);
         }
     }
 
