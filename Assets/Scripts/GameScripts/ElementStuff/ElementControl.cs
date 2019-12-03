@@ -9,6 +9,8 @@ public class ElementControl : MonoBehaviour {
     public float delay = 0.3f;
     public bool enableLockOn = true;
     public GameObject targetCircle;
+    public float globalCd = 1;
+    float gcdTimer = 0;
 
     public KeyCode rightHand = KeyCode.Mouse0, leftHand = KeyCode.Mouse1;
 
@@ -30,30 +32,35 @@ public class ElementControl : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        //I really dont wanna do movement yet
-
         lHandCurrent = Elements.ByteToName(lHand);
         rHandCurrent = Elements.ByteToName(rHand);
 
         rHand = PlayerPrefs.GetInt("rHand");
         lHand = PlayerPrefs.GetInt("lHand");
 
-        if (Input.GetKeyDown(rightHand)) {
-            StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(lHand) : NoCombination(lHand));
-        }
-        if (Input.GetKeyDown(leftHand)) {
-            StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(rHand) : NoCombination(rHand));
-        }
+        gcdTimer += Time.deltaTime;
 
-        if (Input.GetKey(rightHand) && Input.GetKey(leftHand) && !doneAlr) {
-            StopAllCoroutines();
-            doneAlr = true;
-            Combination();
-        }
+        if (gcdTimer >= globalCd) {
+            if (Input.GetKeyDown(rightHand)) {
+                StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(lHand) : NoCombination(lHand));
+                gcdTimer = 0;
+            }
+            if (Input.GetKeyDown(leftHand)) {
+                StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(rHand) : NoCombination(rHand));
+                gcdTimer = 0;
+            }
 
-        if (Input.GetKeyUp(rightHand) || Input.GetKeyUp(leftHand)) {
-            doneAlr = false;
-            isTargeting = false;
+            if (Input.GetKey(rightHand) && Input.GetKey(leftHand) && !doneAlr) {
+                StopAllCoroutines();
+                doneAlr = true;
+                gcdTimer = 0;
+                Combination();
+            }
+
+            if (Input.GetKeyUp(rightHand) || Input.GetKeyUp(leftHand)) {
+                doneAlr = false;
+                isTargeting = false;
+            }
         }
 
         if (isFlash) {
@@ -315,7 +322,7 @@ public class ElementControl : MonoBehaviour {
     void ShockChain() {
         //note to self: stream
         //can make bounce
-        
+
     }
     #endregion
 }
