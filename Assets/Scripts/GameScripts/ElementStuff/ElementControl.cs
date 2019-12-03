@@ -38,8 +38,6 @@ public class ElementControl : MonoBehaviour {
         rHand = PlayerPrefs.GetInt("rHand");
         lHand = PlayerPrefs.GetInt("lHand");
 
-        gcdTimer += Time.deltaTime;
-
         if (gcdTimer >= globalCd) {
             if (Input.GetKeyDown(rightHand)) {
                 StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(lHand) : NoCombination(lHand));
@@ -61,6 +59,8 @@ public class ElementControl : MonoBehaviour {
                 doneAlr = false;
                 isTargeting = false;
             }
+        }else {
+            gcdTimer += Time.deltaTime;
         }
 
         if (isFlash) {
@@ -212,23 +212,29 @@ public class ElementControl : MonoBehaviour {
     }
 
     void DoShock() {
-
+        GameObject shock = Resources.Load<GameObject>("Elements/Shock/Shock");
+        shock = Instantiate(shock, transform.position, transform.rotation);
     }
 
     void DoMagma() {
-
+        GameObject magma = Resources.Load<GameObject>("Elements/Magma/Magma");
+        magma = Instantiate(magma, targetCircle.transform.position, Quaternion.identity);
     }
 
     void DoDust() {
-
+        GameObject dust = Resources.Load<GameObject>("Elements/Dust/Dust");
+        dust = Instantiate(dust, targetCircle.transform.position, Quaternion.identity);
     }
 
     void DoPlasma() {
-
+        GameObject plasma = Resources.Load<GameObject>("Elements/Shock/Shock");
+        plasma = Instantiate(plasma, targetCircle.transform.position, Quaternion.identity);
     }
 
     void DoStorm() {
-
+        //spark wraith
+        GameObject storm = Resources.Load<GameObject>("Elements/Storm/Storm");
+        storm = Instantiate(storm, targetCircle.transform.position, Quaternion.identity);
     }
 
     void DoMagnetize() {
@@ -238,7 +244,8 @@ public class ElementControl : MonoBehaviour {
     }
 
     void DoBlaze() {
-
+        GameObject blaze = Resources.Load<GameObject>("Elements/Blaze/Blaze");
+        blaze = Instantiate(blaze, targetCircle.transform.position, Quaternion.identity);
     }
     #endregion
 
@@ -280,7 +287,8 @@ public class ElementControl : MonoBehaviour {
     }
 
     void DoGroundBreaker() {
-
+        GameObject groundBreaker = Resources.Load<GameObject>("Elements/Ground/GroundBreaker");
+        groundBreaker = Instantiate(groundBreaker, targetCircle.transform.position, Quaternion.identity);
     }
     #endregion
 
@@ -317,12 +325,14 @@ public class ElementControl : MonoBehaviour {
     void WindSlash() {
         //get some cool effects here
 
+        
     }
 
     void ShockChain() {
         //note to self: stream
         //can make bounce
 
+        //I need the line renderer for this
     }
     #endregion
 }
