@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FissureScript : MonoBehaviour {
-    public float riseTime = 2;
+public class EarthSplitter : MonoBehaviour {
+    public float riseTime = 1;
 
-    const float TOTAL_HEIGHT = 2;
+    const float TOTAL_HEIGHT = 5;
     Vector3 direction;
     float internalCounter = 0;
     // Start is called before the first frame update

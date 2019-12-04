@@ -38,29 +38,25 @@ public class ElementControl : MonoBehaviour {
         rHand = PlayerPrefs.GetInt("rHand");
         lHand = PlayerPrefs.GetInt("lHand");
 
-        if (gcdTimer >= globalCd) {
-            if (Input.GetKeyDown(rightHand)) {
-                StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(lHand) : NoCombination(lHand));
-                gcdTimer = 0;
-            }
-            if (Input.GetKeyDown(leftHand)) {
-                StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(rHand) : NoCombination(rHand));
-                gcdTimer = 0;
-            }
+        if (Input.GetKeyDown(rightHand)) {
+            StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(lHand) : NoCombination(lHand));
+            gcdTimer = 0;
+        }
+        if (Input.GetKeyDown(leftHand)) {
+            StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(rHand) : NoCombination(rHand));
+            gcdTimer = 0;
+        }
 
-            if (Input.GetKey(rightHand) && Input.GetKey(leftHand) && !doneAlr) {
-                StopAllCoroutines();
-                doneAlr = true;
-                gcdTimer = 0;
-                Combination();
-            }
+        if (Input.GetKey(rightHand) && Input.GetKey(leftHand) && !doneAlr) {
+            StopAllCoroutines();
+            doneAlr = true;
+            gcdTimer = 0;
+            Combination();
+        }
 
-            if (Input.GetKeyUp(rightHand) || Input.GetKeyUp(leftHand)) {
-                doneAlr = false;
-                isTargeting = false;
-            }
-        }else {
-            gcdTimer += Time.deltaTime;
+        if (Input.GetKeyUp(rightHand) || Input.GetKeyUp(leftHand)) {
+            doneAlr = false;
+            isTargeting = false;
         }
 
         if (isFlash) {
@@ -83,6 +79,8 @@ public class ElementControl : MonoBehaviour {
             Physics.Raycast(newPos, -Vector3.up, out hitInfo, 100, 1 << Layers.Terrain);
         }
         targetCircle.transform.position = hitInfo.point;
+        Vector3 lookRotation = Camera.main.transform.rotation.eulerAngles;
+        targetCircle.transform.rotation = Quaternion.Euler(0, lookRotation.y, 0);
         //    targetCircle.SetActive(true);
         //} else {
         //    targetCircle.SetActive(false);
@@ -217,8 +215,8 @@ public class ElementControl : MonoBehaviour {
     }
 
     void DoMagma() {
-        GameObject magma = Resources.Load<GameObject>("Elements/Magma/Magma");
-        magma = Instantiate(magma, targetCircle.transform.position, Quaternion.identity);
+        GameObject magma = Resources.Load<GameObject>("Elements/Magma/EarthSplinter");
+        magma = Instantiate(magma, targetCircle.transform.position - targetCircle.transform.up * 5, targetCircle.transform.rotation);
     }
 
     void DoDust() {
@@ -227,7 +225,8 @@ public class ElementControl : MonoBehaviour {
     }
 
     void DoPlasma() {
-        GameObject plasma = Resources.Load<GameObject>("Elements/Shock/Shock");
+        //laguna
+        GameObject plasma = Resources.Load<GameObject>("Elements/Plasma/Plasma");
         plasma = Instantiate(plasma, targetCircle.transform.position, Quaternion.identity);
     }
 
@@ -319,13 +318,13 @@ public class ElementControl : MonoBehaviour {
 
     void Fissure() {
         GameObject fissure = Resources.Load<GameObject>("Elements/Ground/FissureAttack");
-        fissure = Instantiate(fissure, targetCircle.transform.position, Quaternion.identity);
+        fissure = Instantiate(fissure, targetCircle.transform.position - Vector3.up * 2, targetCircle.transform.rotation);
     }
 
     void WindSlash() {
         //get some cool effects here
 
-        
+
     }
 
     void ShockChain() {
