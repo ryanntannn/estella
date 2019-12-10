@@ -26,6 +26,27 @@ public static class Helper {
     }
 
     /// <summary>
+    /// Same as the Gameobject version, but with Transform instead
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="tag"></param>
+    /// <returns></returns>
+    public static Transform FindChildWithTag(this Transform parent, string tag) {
+        foreach (Transform child in parent) {  //search parent's childs
+            if (child.CompareTag(tag)) {
+                return child;    //when found    
+            } else if (child.childCount > 0) {    //if not found, we search the childs children
+                Transform temp = child.FindChildWithTag(tag);
+                if (temp) {
+                    return temp;    //if childs children have it
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
     /// Returns the component T in the child with tag
     /// </summary>
     /// <typeparam name="T">Component</typeparam>
@@ -40,6 +61,11 @@ public static class Helper {
         return default(T);
     }
 
+    /// <summary>
+    /// Changes all the shaders of a transform
+    /// </summary>
+    /// <param name="T"></param>
+    /// <param name="shd"></param>
     public static void ChangeShader(this Transform T, Shader shd) {
         foreach(Transform child in T) {
             Renderer rd = child.GetComponent<Renderer>();

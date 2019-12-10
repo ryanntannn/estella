@@ -9,8 +9,6 @@ public class ElementControl : MonoBehaviour {
     public float delay = 0.3f;
     public bool enableLockOn = true;
     public GameObject targetCircle;
-    public float globalCd = 1;
-    float gcdTimer = 0;
 
     public KeyCode rightHand = KeyCode.Mouse0, leftHand = KeyCode.Mouse1;
 
@@ -40,17 +38,14 @@ public class ElementControl : MonoBehaviour {
 
         if (Input.GetKeyDown(rightHand)) {
             StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(lHand) : NoCombination(lHand));
-            gcdTimer = 0;
         }
         if (Input.GetKeyDown(leftHand)) {
             StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(rHand) : NoCombination(rHand));
-            gcdTimer = 0;
         }
 
         if (Input.GetKey(rightHand) && Input.GetKey(leftHand) && !doneAlr) {
             StopAllCoroutines();
             doneAlr = true;
-            gcdTimer = 0;
             Combination();
         }
 
@@ -332,6 +327,10 @@ public class ElementControl : MonoBehaviour {
         //can make bounce
 
         //I need the line renderer for this
+        GameObject lightning = Resources.Load<GameObject>("Elements/Electricity/ChainLightning");
+        lightning = Instantiate(lightning);
+        lightning.GetComponent<ChainLightningScript>().isRightHand = rHand == Elements.Electricity;
+        lightning.GetComponent<ChainLightningScript>().initalTarget = lockOn.target;
     }
     #endregion
 }
