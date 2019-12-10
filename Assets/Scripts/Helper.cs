@@ -67,10 +67,10 @@ public static class Helper {
     /// <param name="T"></param>
     /// <param name="shd"></param>
     public static void ChangeShader(this Transform T, Shader shd) {
-        foreach(Transform child in T) {
+        foreach (Transform child in T) {
             Renderer rd = child.GetComponent<Renderer>();
-            if (rd){
-                foreach(Material mat in rd.materials) {
+            if (rd) {
+                foreach (Material mat in rd.materials) {
                     mat.shader = shd;
                 }
             }
@@ -104,7 +104,7 @@ public class KeyAndValue<TKey, TValue> {
     }
 
     public TValue SearchForValue(TKey key) {
-        for(int count = 0; count <= Keys.Count - 1; count++) {
+        for (int count = 0; count <= Keys.Count - 1; count++) {
             if (key.Equals(Keys[count])) {
                 return Values[count];
             }
@@ -129,5 +129,46 @@ public class KeyAndValue<TKey, TValue> {
         Keys.Add(key);
         Values.Add(default(TValue));
         return Keys.Count - 1;
+    }
+}
+
+//For aStar path finding
+public class PiorityQueue<T> where T : IComparable {
+    //member function
+    private List<T> m_queue = new List<T>();
+
+    //properties
+    public int Count { get { return m_queue.Count; } }
+    public T Head {
+        get {
+            if (m_queue.Count > 0) {
+                return m_queue[0];
+            }
+            return default(T);
+        }
+    }
+
+    public PiorityQueue() { } //default 
+
+    /// <summary>
+    /// Push new object in
+    /// </summary>
+    /// <param name="_input"></param>
+    /// <returns></returns>
+    public void Enqueue(T _input) {
+        m_queue.Add(_input);
+        m_queue.Sort();
+    }
+
+    /// <summary>
+    /// Remove head of m_queue
+    /// </summary>
+    public T Dequeue() {
+        if (m_queue.Count > 0) {
+            T temp = m_queue[0];
+            m_queue.RemoveAt(0);
+            return temp;
+        }
+        return default(T);
     }
 }
