@@ -5233,7 +5233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &257716527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5588,7 +5588,7 @@ MonoBehaviour:
   cameraOffset: {x: 0.7, y: 0.2, z: -3}
   sensitivity: 10
   followDampening: 0.8
-  clampAngle: 60
+  clampAngle: 70
 --- !u!4 &475298154
 Transform:
   m_ObjectHideFlags: 0
