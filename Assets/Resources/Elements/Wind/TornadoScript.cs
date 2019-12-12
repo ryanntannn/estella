@@ -8,9 +8,11 @@ public class TornadoScript : MonoBehaviour, ISteamable {
     public bool isEmpowered = false;
 
     ParticleSystem[] ps;
+    Rigidbody rb;
     // Start is called before the first frame update
     void Start() {
         ps = GetComponentsInChildren<ParticleSystem>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -26,7 +28,7 @@ public class TornadoScript : MonoBehaviour, ISteamable {
         }
 
         //move it forward
-        transform.position += transform.forward * Time.deltaTime;
+        rb.velocity = transform.forward * Time.deltaTime * 100;
     }
 
     public void SetSteamy(bool state) {

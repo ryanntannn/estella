@@ -280,7 +280,7 @@ public class ElementControl : MonoBehaviour {
     void DoTornado() {
         //instaniate tornado
         GameObject tornado = Resources.Load<GameObject>("Elements/Wind/Tornado");
-        tornado = Instantiate(tornado, targetCircle.transform.position, Quaternion.identity);
+        tornado = Instantiate(tornado, targetCircle.transform.position, targetCircle.transform.rotation);
     }
 
     void DoGroundBreaker() {
@@ -326,10 +326,7 @@ public class ElementControl : MonoBehaviour {
     }
 
     void ShockChain() {
-        //note to self: stream
-        //can make bounce
-
-        //I need the line renderer for this
+        //set the shits
         GameObject lightning = Resources.Load<GameObject>("Elements/Electricity/ChainLightning");
         lightning = Instantiate(lightning);
         lightning.GetComponent<ChainLightningScript>().isRightHand = rHand == Elements.Electricity;

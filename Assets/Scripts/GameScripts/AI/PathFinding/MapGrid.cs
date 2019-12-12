@@ -12,8 +12,6 @@ public class MapGrid : MonoBehaviour {
     public bool debug = true;
     Node[,] grid;
 
-    public GameObject balls;
-
     public void Start() {
         InitGrid();
     }
@@ -22,15 +20,6 @@ public class MapGrid : MonoBehaviour {
         if (grid != null && debug) {
             foreach (Node n in grid) {
                 n.DrawGizmos(nodeSize);
-            }
-
-            Node t = WorldPointToNode(balls.transform.position);
-            Gizmos.color = Color.blue;
-            Gizmos.DrawCube(t.worldPos, Vector3.one);
-
-            foreach (Node n in GetNeighbours(t)) {
-                Gizmos.color = Color.black;
-                Gizmos.DrawCube(n.worldPos, Vector3.one);
             }
         }
     }
@@ -48,7 +37,7 @@ public class MapGrid : MonoBehaviour {
                 Vector3 worldPos = bottomLeft +
                     (transform.right * (x * nodeSize + nodeSize / 2)) +
                     (transform.forward * (y * nodeSize + nodeSize / 2));
-                bool walkable = !Physics.CheckBox(worldPos, Vector3.one * (nodeSize / 2), Quaternion.identity, 1 << obstacles);
+                bool walkable = !Physics.CheckBox(worldPos, Vector3.one * (nodeSize / 2), Quaternion.identity, obstacles);
                 Vector2Int gridPos = new Vector2Int(x, y);
                 grid[x, y] = new Node(worldPos, gridPos, walkable);
             }

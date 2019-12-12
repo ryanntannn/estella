@@ -48,6 +48,8 @@ public class ChainLightningScript : MonoBehaviour {
         Vector3 targetPos = target.transform.position;
         targets.Add(target);
         positions.Add(targetPos);
+        target.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime, Enemy.Effects.Stun);
+
         if (targets.Count <= maxTargets) {
             //find more targets
             Collider[] hitInfo = Physics.OverlapSphere(targetPos, radius, 1 << Layers.Enemy);
