@@ -91,6 +91,10 @@ public static class Helper {
         }
         return false;
     }
+
+    public static T FindComponentInScene<T>(string tag) {
+        return GameObject.FindWithTag(tag).GetComponent<T>();
+    }
 }
 
 public static class Layers {

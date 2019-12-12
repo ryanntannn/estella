@@ -7,6 +7,7 @@ TagManager:
   - RightHand
   - LeftHand
   - FireBall
+  - Map
   layers:
   - Default
   - TransparentFX

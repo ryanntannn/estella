@@ -83,6 +83,7 @@ public class Node {
     public Vector3 worldPos;
     public Vector2Int gridPos;
     public bool walkable;
+    public Node parentNode;
 
     public Node(Vector3 _worldPos, Vector2Int _gridPos, bool _walkable) {
         worldPos = _worldPos;
