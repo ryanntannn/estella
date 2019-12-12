@@ -16,7 +16,7 @@ public class PlayerControl : MonoBehaviour {
     //Radial Menu
     GameObject radialMenu1;
     GameObject radialMenu2;
-    bool isInRadialMenu;
+    public bool isInRadialMenu;
 
     // Start is called before the first frame update
     void Start() {

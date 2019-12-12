@@ -77,6 +77,11 @@ public static class Helper {
             child.ChangeShader(shd);
         }
     }
+
+    public static IEnumerator KillSelf(this GameObject gameObject, float ttl) {
+        yield return new WaitForSeconds(ttl);
+        MonoBehaviour.Destroy(gameObject);   
+    }
 }
 
 public static class Layers {

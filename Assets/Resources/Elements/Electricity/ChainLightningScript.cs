@@ -28,6 +28,10 @@ public class ChainLightningScript : MonoBehaviour {
 
         if (initalTarget) {
             FindEnemy(initalTarget);
+        }else {
+            //make it go stright
+            Vector3 strightPos = transform.forward * 3;
+            lr.SetPosition(1, strightPos);
         }
     }
 

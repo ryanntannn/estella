@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class BubbleShot : MonoBehaviour {
     public float speed = 12;
+    public float timeToLive = 10;
     public GameObject waterDie;
 
     public GameObject target;
     // Start is called before the first frame update
     void Start() {
-
+        StartCoroutine(gameObject.KillSelf(timeToLive));
     }
 
     // Update is called once per frame

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3686749137000166894}
   - component: {fileID: 2254187670430041112}
+  - component: {fileID: 3992691696751410794}
   m_Layer: 0
   m_Name: FissureAttack
   m_TagString: Untagged
@@ -45,6 +46,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   riseTime: 2
+--- !u!65 &3992691696751410794
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3686749137000166893}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &3686749138789957497
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,7 +10,9 @@ public class ElementControl : MonoBehaviour {
     public bool enableLockOn = true;
     public GameObject targetCircle;
 
-    public KeyCode rightHand = KeyCode.Mouse0, leftHand = KeyCode.Mouse1;
+    PlayerControl pc;
+
+    KeyCode rightHand = KeyCode.Mouse0, leftHand = KeyCode.Mouse1;
 
     bool isTargeting = false;
     bool doneAlr = false;
@@ -23,9 +25,12 @@ public class ElementControl : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         lockOn = GetComponent<LockOnTarget>();
+        pc = GetComponent<PlayerControl>();
 
         lHand = PlayerPrefs.GetInt("lHand", 1);
         rHand = PlayerPrefs.GetInt("rHand", 2);
+        rightHand = pc.rightHandButton;
+        leftHand = pc.leftHandButton;
     }
 
     // Update is called once per frame
@@ -36,22 +41,24 @@ public class ElementControl : MonoBehaviour {
         rHand = PlayerPrefs.GetInt("rHand");
         lHand = PlayerPrefs.GetInt("lHand");
 
-        if (Input.GetKeyDown(rightHand)) {
-            StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(lHand) : NoCombination(lHand));
-        }
-        if (Input.GetKeyDown(leftHand)) {
-            StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(rHand) : NoCombination(rHand));
-        }
+        if (!pc.isInRadialMenu) {
+            if (Input.GetKeyDown(rightHand)) {
+                StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(lHand) : NoCombination(lHand));
+            }
+            if (Input.GetKeyDown(leftHand)) {
+                StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(rHand) : NoCombination(rHand));
+            }
 
-        if (Input.GetKey(rightHand) && Input.GetKey(leftHand) && !doneAlr) {
-            StopAllCoroutines();
-            doneAlr = true;
-            Combination();
-        }
+            if (Input.GetKey(rightHand) && Input.GetKey(leftHand) && !doneAlr) {
+                StopAllCoroutines();
+                doneAlr = true;
+                Combination();
+            }
 
-        if (Input.GetKeyUp(rightHand) || Input.GetKeyUp(leftHand)) {
-            doneAlr = false;
-            isTargeting = false;
+            if (Input.GetKeyUp(rightHand) || Input.GetKeyUp(leftHand)) {
+                doneAlr = false;
+                isTargeting = false;
+            }
         }
 
         if (isFlash) {

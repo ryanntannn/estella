@@ -5086,8 +5086,6 @@ MonoBehaviour:
   delay: 0.2
   enableLockOn: 1
   targetCircle: {fileID: 1540570545}
-  rightHand: 323
-  leftHand: 324
 --- !u!114 &239367484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5117,10 +5115,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   animator: {fileID: 3166231813219992693}
-  leftHandButton: 323
-  rightHandButton: 324
+  leftHandButton: 324
+  rightHandButton: 323
   swapLeft: 113
   swapRight: 101
+  isInRadialMenu: 0
 --- !u!114 &239367490
 MonoBehaviour:
   m_ObjectHideFlags: 0
