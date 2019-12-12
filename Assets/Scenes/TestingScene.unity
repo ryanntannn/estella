@@ -5086,6 +5086,7 @@ MonoBehaviour:
   delay: 0.2
   enableLockOn: 1
   targetCircle: {fileID: 1540570545}
+  showTargetCircle: 1
 --- !u!114 &239367484
 MonoBehaviour:
   m_ObjectHideFlags: 0

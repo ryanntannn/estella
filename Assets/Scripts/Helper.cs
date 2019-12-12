@@ -78,9 +78,18 @@ public static class Helper {
         }
     }
 
-    public static IEnumerator KillSelf(this GameObject gameObject, float ttl) {
-        yield return new WaitForSeconds(ttl);
-        MonoBehaviour.Destroy(gameObject);   
+    public static IEnumerator KillSelf(this GameObject _gameObject, float _ttl) {
+        yield return new WaitForSeconds(_ttl);
+        MonoBehaviour.Destroy(_gameObject);   
+    }
+
+    public static bool ArrContains<T>(this T[] _arr, T _item) {
+        foreach(T item in _arr) {
+            if (item.Equals(_item)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

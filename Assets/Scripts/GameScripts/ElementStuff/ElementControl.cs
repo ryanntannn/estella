@@ -9,12 +9,12 @@ public class ElementControl : MonoBehaviour {
     public float delay = 0.3f;
     public bool enableLockOn = true;
     public GameObject targetCircle;
+    public bool showTargetCircle = true;
 
     PlayerControl pc;
 
     KeyCode rightHand = KeyCode.Mouse0, leftHand = KeyCode.Mouse1;
 
-    bool isTargeting = false;
     bool doneAlr = false;
     LockOnTarget lockOn;
     //zap zap
@@ -31,6 +31,8 @@ public class ElementControl : MonoBehaviour {
         rHand = PlayerPrefs.GetInt("rHand", 2);
         rightHand = pc.rightHandButton;
         leftHand = pc.leftHandButton;
+
+        targetCircle.SetActive(showTargetCircle);
     }
 
     // Update is called once per frame
@@ -57,7 +59,6 @@ public class ElementControl : MonoBehaviour {
 
             if (Input.GetKeyUp(rightHand) || Input.GetKeyUp(leftHand)) {
                 doneAlr = false;
-                isTargeting = false;
             }
         }
 
@@ -72,7 +73,6 @@ public class ElementControl : MonoBehaviour {
 
     void SetTargetCircle() {
         float range = 10;
-        //if (isTargeting) {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
         Debug.DrawRay(Camera.main.transform.position, ray.direction * range, Color.red);
@@ -83,10 +83,6 @@ public class ElementControl : MonoBehaviour {
         targetCircle.transform.position = hitInfo.point;
         Vector3 lookRotation = Camera.main.transform.rotation.eulerAngles;
         targetCircle.transform.rotation = Quaternion.Euler(0, lookRotation.y, 0);
-        //    targetCircle.SetActive(true);
-        //} else {
-        //    targetCircle.SetActive(false);
-        //}
     }
 
     private void OnDrawGizmos() {
