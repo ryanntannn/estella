@@ -137,6 +137,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToRise: 2
   yValue: 0
+  isSteamed: 0
+  target: {fileID: 0}
+  range: 3
 --- !u!1 &3449568289733206510
 GameObject:
   m_ObjectHideFlags: 0

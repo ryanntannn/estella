@@ -10,10 +10,11 @@ public class MudGolem : MonoBehaviour, ISteamable {
 
     MapGrid map;
     //states of a mud golem
-    FiniteStateMachine.State FindTarget, Walk, Attack;
+    FiniteStateMachine.State FindTarget, Wander, Walk, Attack;
     FiniteStateMachine fsm = new FiniteStateMachine();
-    GameObject target;
+    public GameObject target;
     public float range = 3;
+
     // Start is called before the first frame update
     void Start() {
         map = Helper.FindComponentInScene<MapGrid>("Map");
@@ -29,7 +30,7 @@ public class MudGolem : MonoBehaviour, ISteamable {
             Node startNode = map.WorldPointToNode(transform.position);
             openList.Enqueue(startNode);
             int justInCase = 0;
-            while(openList.Count > 0 && ++justInCase <= 1000) {
+            while (openList.Count > 0 && ++justInCase <= 10000) {
                 Node currentNode = openList.Dequeue();
                 //check if node has an enemy on it
                 Collider[] hitInfo = Physics.OverlapBox(currentNode.worldPos, Vector3.one * (map.nodeSize / 2), Quaternion.identity, 1 << Layers.Enemy);
@@ -40,28 +41,34 @@ public class MudGolem : MonoBehaviour, ISteamable {
 
                 foreach (Node n in map.GetNeighbours(currentNode)) {
                     if (!closedList.Contains(n)) {
-                        n.parentNode = currentNode;
                         openList.Enqueue(n);
                     }
                 }
+                closedList.Add(currentNode);
             }
 
-            if (target) {
-                fsm.currentState = Walk;
-            }
+            fsm.currentState = target ? Walk : Wander;
         };
 
         Walk = (gameObject) => {
             //go towards target
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Time.deltaTime);
-
-            if((transform.position - target.transform.position).sqrMagnitude > range) {
-                fsm.currentState = Attack;
+            if (target) {
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Time.deltaTime);
+                if ((target.transform.position - transform.position).sqrMagnitude <= range) {
+                    fsm.currentState = Attack;
+                }
+            }else {
+                //target died before golem can reach
+                fsm.currentState = FindTarget;
             }
         };
 
+        Wander = (gameObject) => {
+            //walk around
+        };
+
         Attack = (gameObject) => {
-            
+
         };
 
         fsm.currentState = FindTarget;
@@ -75,13 +82,7 @@ public class MudGolem : MonoBehaviour, ISteamable {
             transform.position = newPos;
         }//rising up
         else {
-            //fsm.currentState(gameObject);
-            //if (!target) {
-            //    print("XD");
-            //}
-
-            Node currentNode = map.WorldPointToNode(transform.position);
-            Collider[] hitInfo = Physics.OverlapBox(currentNode.worldPos, Vector3.one * (map.nodeSize / 2), Quaternion.identity, 1 << Layers.Enemy);
+            fsm.currentState(gameObject);
         }
     }
 
