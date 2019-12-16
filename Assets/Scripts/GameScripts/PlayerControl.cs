@@ -77,7 +77,7 @@ public class PlayerControl : MonoBehaviour {
             Time.timeScale = 1.0f;
         }
 
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0 && !isInRadialMenu)
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0 && !isInRadialMenu && !animator.GetBool("IsDoingSomething"))
         {
             rotation = Mathf.Atan2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * Mathf.Rad2Deg;
             //transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotAngle + pivot.transform.eulerAngles.y, transform.eulerAngles.z);
@@ -97,12 +97,12 @@ public class PlayerControl : MonoBehaviour {
     public void ChangeElement(int i)
     {
         //TODO Change Element Code Tiong ples do
-        GetComponent<ElementControl>().ChangeElement(true, i);
+        PlayerPrefs.SetInt("rHand", i);
     }
 
     public void ChangeElement2(int i)
     {
-        GetComponent<ElementControl>().ChangeElement(false, i);
+        PlayerPrefs.SetInt("lHand", i);
     }
 }
 

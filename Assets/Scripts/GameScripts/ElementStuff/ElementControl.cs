@@ -10,6 +10,7 @@ public class ElementControl : MonoBehaviour {
     public bool enableLockOn = true;
     public GameObject targetCircle;
     public bool showTargetCircle = true;
+    public Animator anim;
 
     PlayerControl pc;
 
@@ -31,7 +32,6 @@ public class ElementControl : MonoBehaviour {
         rHand = PlayerPrefs.GetInt("rHand", 2);
         rightHand = pc.rightHandButton;
         leftHand = pc.leftHandButton;
-
         targetCircle.SetActive(showTargetCircle);
     }
 
@@ -83,25 +83,6 @@ public class ElementControl : MonoBehaviour {
         targetCircle.transform.position = hitInfo.point;
         Vector3 lookRotation = Camera.main.transform.rotation.eulerAngles;
         targetCircle.transform.rotation = Quaternion.Euler(0, lookRotation.y, 0);
-    }
-
-    private void OnDrawGizmos() {
-
-    }
-
-    //I swear if you put some dumbass number
-    /// <summary>
-    /// <para>Change the hand's element to a new number</para>
-    /// <para>Please use Element.(name of new element)</para>
-    /// </summary>
-    /// <param name="isRight"></param>
-    /// <param name="newInput"></param>
-    public void ChangeElement(bool isRight, int newInput) {
-        if (isRight) {
-            PlayerPrefs.SetInt("rHand", newInput);
-        } else {
-            PlayerPrefs.SetInt("lHand", newInput);
-        }
     }
 
     void Combination() {
@@ -166,19 +147,19 @@ public class ElementControl : MonoBehaviour {
     IEnumerator NoCombination(int input) {
         yield return new WaitForSeconds(delay);
         switch (input) {
-            case 1:
+            case Elements.Water:
                 BubbleShot();
                 break;
-            case 2:
-                Fireball();
+            case Elements.Fire:
+                anim.SetTrigger("WhenShootFireBall");
                 break;
-            case 4:
+            case Elements.Earth:
                 Fissure();
                 break;
-            case 8:
+            case Elements.Wind:
                 WindSlash();
                 break;
-            case 16:
+            case Elements.Electricity:
                 ShockChain();
                 break;
             default:
@@ -302,7 +283,7 @@ public class ElementControl : MonoBehaviour {
         }
     }
 
-    void Fireball() {
+    public void Fireball() {
         GameObject instance = Resources.Load<GameObject>("Elements/Fire/Fireball");
         instance = Instantiate(instance, transform.position, transform.rotation);
         if (lockOn.target && enableLockOn) {
@@ -353,4 +334,10 @@ public static class Elements {
             default: return "Unknown";
         }
     }
+}
+
+public static class AnimTypes {
+    public static readonly int
+        ShootBolt1 = 1,
+        ShootBolt2 = 2;
 }
