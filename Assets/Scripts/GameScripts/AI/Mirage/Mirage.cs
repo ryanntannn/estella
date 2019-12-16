@@ -11,22 +11,34 @@ public class Mirage : Enemy {
     public GameObject mirageShadow;
 
     GameObject player;
-
+    FiniteStateMachine fsm;
     // Start is called before the first frame update
     public override void Start() {
         base.Start();
         player = GameObject.FindGameObjectWithTag("Player");
         if (!anim) anim = transform.GetComponentInChildren<Animator>(); //if nothing set
+        InitStates();
+    }
+
+    void InitStates() {
+        FiniteStateMachine.State Idle = (gameObject) => {
+
+        };
+
+        FiniteStateMachine.State JumpBack = (gameObject) => {
+
+        };
+
+        FiniteStateMachine.State Chase = (gameObject) => {
+
+        };
     }
 
     //Update is called once per frame
     public override void Update() {
         base.Update();
 
-        anim.SetBool("isWalking", Input.GetKey(KeyCode.P));
-        if (Input.GetKeyDown(KeyCode.L)) {
-            anim.SetTrigger("jump");
-        }
+        fsm.currentState(gameObject);
     }
 
     public void JumpBack() {
