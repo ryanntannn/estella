@@ -40,7 +40,7 @@ public class MudGolem : MonoBehaviour, ISteamable {
                 }
 
                 foreach (Node n in map.GetNeighbours(currentNode)) {
-                    if (!closedList.Contains(n)) {
+                    if (!closedList.Contains(n) && n.walkable) {
                         openList.Enqueue(n);
                     }
                 }

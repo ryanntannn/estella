@@ -11,7 +11,7 @@ public class Mirage : Enemy {
     public GameObject mirageShadow;
 
     GameObject player;
-    FiniteStateMachine fsm;
+    FiniteStateMachine fsm = new FiniteStateMachine();
     // Start is called before the first frame update
     public override void Start() {
         base.Start();
@@ -26,12 +26,14 @@ public class Mirage : Enemy {
         };
 
         FiniteStateMachine.State JumpBack = (gameObject) => {
-
+            anim.SetTrigger("whenThrowKnife");
         };
 
         FiniteStateMachine.State Chase = (gameObject) => {
 
         };
+
+        fsm.currentState = Idle;
     }
 
     //Update is called once per frame

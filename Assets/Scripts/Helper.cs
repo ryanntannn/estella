@@ -189,4 +189,11 @@ public class PiorityQueue<T> where T : IComparable {
         }
         return default(T);
     }
+
+    /// <summary>
+    /// Checks if _input is in the queue
+    /// </summary>
+    public bool Contains(T _input) {
+        return m_queue.Contains(_input);
+    }
 }

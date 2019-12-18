@@ -12,14 +12,25 @@ public class MapGrid : MonoBehaviour {
     public bool debug = true;
     Node[,] grid;
 
+    public GameObject balls1, balls2;
+    List<Node> path = new List<Node>();
+
     public void Start() {
         InitGrid();
+        path = Algorithms.AStar(this, balls1.transform.position, balls2.transform.position);
     }
 
     public void OnDrawGizmos() {
         if (grid != null && debug) {
             foreach (Node n in grid) {
                 n.DrawGizmos(nodeSize);
+            }
+        }
+
+        if(path != null) {
+            for(int count = 0; count < path.Count - 1; count++) {
+                Gizmos.color = Color.black;
+                Gizmos.DrawLine(path[count].worldPos, path[count + 1].worldPos);
             }
         }
     }
@@ -79,11 +90,15 @@ public class MapGrid : MonoBehaviour {
 
 //base node for map grid
 [System.Serializable]
-public class Node {
+public class Node : IComparable {
     public Vector3 worldPos;
     public Vector2Int gridPos;
     public bool walkable;
     public Node parentNode;
+
+    //AStar
+    public float G = 0, H = 0, Cost = 1;
+    public float F { get { return G + H + Cost; } }
 
     public Node(Vector3 _worldPos, Vector2Int _gridPos, bool _walkable) {
         worldPos = _worldPos;
@@ -94,5 +109,16 @@ public class Node {
     public void DrawGizmos(float radius) {
         Gizmos.color = walkable ? Color.green : Color.red;
         Gizmos.DrawWireCube(worldPos, Vector3.one * radius * 0.9f);
+    }
+
+
+    public int CompareTo(object obj) {
+        Node node = obj as Node;
+        if (node.F > F) {
+            return -1;
+        } else if (node.F < F) {
+            return 1;
+        }
+        return node.H > H ? 1 : -1;
     }
 }
