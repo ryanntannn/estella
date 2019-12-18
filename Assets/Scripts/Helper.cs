@@ -111,45 +111,6 @@ public static class Layers {
         Terrain = 11;
 }
 
-//I got mad at key value pairs so here is my own implementation
-public class KeyAndValue<TKey, TValue> {
-    public List<TKey> Keys { get; set; }
-    public List<TValue> Values { get; set; }
-
-    public KeyAndValue() {
-        Keys = new List<TKey>();
-        Values = new List<TValue>();
-    }
-
-    public TValue SearchForValue(TKey key) {
-        for (int count = 0; count <= Keys.Count - 1; count++) {
-            if (key.Equals(Keys[count])) {
-                return Values[count];
-            }
-        }
-        Keys.Add(key);
-        Values.Add(default(TValue));
-        return Values[Values.Count - 1];
-    }
-
-    public void ForEach(Action<TValue> a) {
-        for (int count = 0; count <= Keys.Count - 1; count++) {
-            a(Values[count]);
-        }
-    }
-
-    public int LocationOfValue(TKey key) {
-        for (int count = 0; count <= Keys.Count - 1; count++) {
-            if (key.Equals(Keys[count])) {
-                return count;
-            }
-        }
-        Keys.Add(key);
-        Values.Add(default(TValue));
-        return Keys.Count - 1;
-    }
-}
-
 //For aStar path finding
 public class PiorityQueue<T> where T : IComparable {
     //member function

@@ -13,6 +13,11 @@ public class EarthSplitter : MonoBehaviour {
     void Start() {
         Vector3 properPosition = transform.position + transform.up * TOTAL_HEIGHT;
         direction = (properPosition - transform.position) / riseTime;
+        //ray cast up and check for enemies
+        RaycastHit[] hitInfo = Physics.RaycastAll(transform.position, transform.up, TOTAL_HEIGHT * 2, 1 << Layers.Enemy);
+        foreach(RaycastHit hit in hitInfo) {
+            hit.collider.GetComponent<Enemy>().DebuffEnemy(2, Enemy.Effects.Stun);
+        }
 
         StartCoroutine(gameObject.KillSelf(timeToLive));
     }

@@ -12,25 +12,14 @@ public class MapGrid : MonoBehaviour {
     public bool debug = true;
     Node[,] grid;
 
-    public GameObject balls1, balls2;
-    List<Node> path = new List<Node>();
-
     public void Start() {
         InitGrid();
-        path = Algorithms.AStar(this, balls1.transform.position, balls2.transform.position);
     }
 
     public void OnDrawGizmos() {
         if (grid != null && debug) {
             foreach (Node n in grid) {
                 n.DrawGizmos(nodeSize);
-            }
-        }
-
-        if(path != null) {
-            for(int count = 0; count < path.Count - 1; count++) {
-                Gizmos.color = Color.black;
-                Gizmos.DrawLine(path[count].worldPos, path[count + 1].worldPos);
             }
         }
     }

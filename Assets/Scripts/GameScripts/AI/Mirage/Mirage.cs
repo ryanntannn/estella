@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,36 +12,17 @@ public class Mirage : Enemy {
     public GameObject mirageShadow;
 
     GameObject player;
-    FiniteStateMachine fsm = new FiniteStateMachine();
     // Start is called before the first frame update
     public override void Start() {
         base.Start();
         player = GameObject.FindGameObjectWithTag("Player");
         if (!anim) anim = transform.GetComponentInChildren<Animator>(); //if nothing set
-        InitStates();
-    }
-
-    void InitStates() {
-        FiniteStateMachine.State Idle = (gameObject) => {
-
-        };
-
-        FiniteStateMachine.State JumpBack = (gameObject) => {
-            anim.SetTrigger("whenThrowKnife");
-        };
-
-        FiniteStateMachine.State Chase = (gameObject) => {
-
-        };
-
-        fsm.currentState = Idle;
     }
 
     //Update is called once per frame
     public override void Update() {
         base.Update();
 
-        fsm.currentState(gameObject);
     }
 
     public void JumpBack() {
