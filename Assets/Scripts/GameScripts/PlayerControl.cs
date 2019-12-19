@@ -9,17 +9,14 @@ public class PlayerControl : MonoBehaviour {
     public KeyCode leftHandButton = KeyCode.Mouse0, rightHandButton = KeyCode.Mouse1;   //activating elements
     public KeyCode swapLeft = KeyCode.Q, swapRight = KeyCode.E; //swapping elements
 
-
     private GameObject pivot;
     Rigidbody rb;
-    int leftHand = 0, rightHand = 2;    //keep track of which one being used
-    const int NO_OF_LEFT = 2, NO_OF_RIGHT = 3;  //number of elements belonging on left and right hand
     float rotation = 0;
 
     //Radial Menu
     GameObject radialMenu1;
     GameObject radialMenu2;
-    bool isInRadialMenu;
+    public bool isInRadialMenu;
 
     // Start is called before the first frame update
     void Start() {
@@ -80,7 +77,7 @@ public class PlayerControl : MonoBehaviour {
             Time.timeScale = 1.0f;
         }
 
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0 && !isInRadialMenu)
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0 && !isInRadialMenu && !animator.GetBool("IsDoingSomething"))
         {
             rotation = Mathf.Atan2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * Mathf.Rad2Deg;
             //transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotAngle + pivot.transform.eulerAngles.y, transform.eulerAngles.z);
@@ -100,12 +97,12 @@ public class PlayerControl : MonoBehaviour {
     public void ChangeElement(int i)
     {
         //TODO Change Element Code Tiong ples do
-        GetComponent<ElementControl>().ChangeElement(true, i);
+        PlayerPrefs.SetInt("rHand", i);
     }
 
     public void ChangeElement2(int i)
     {
-        GetComponent<ElementControl>().ChangeElement(false, i);
+        PlayerPrefs.SetInt("lHand", i);
     }
 }
 

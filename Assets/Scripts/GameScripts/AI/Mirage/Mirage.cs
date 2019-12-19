@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,21 +12,17 @@ public class Mirage : Enemy {
     public GameObject mirageShadow;
 
     GameObject player;
-
     // Start is called before the first frame update
     public override void Start() {
         base.Start();
-        resistanceLevel = 10;
         player = GameObject.FindGameObjectWithTag("Player");
         if (!anim) anim = transform.GetComponentInChildren<Animator>(); //if nothing set
     }
 
     //Update is called once per frame
     public override void Update() {
-        anim.SetBool("isWalking", Input.GetKey(KeyCode.P));
-        if (Input.GetKeyDown(KeyCode.L)) {
-            anim.SetTrigger("jump");
-        }
+        base.Update();
+
     }
 
     public void JumpBack() {

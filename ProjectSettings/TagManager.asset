@@ -4,11 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Power
-  - Stream
-  - Bolt
-  - OCrossHair
-  - LineCrossHair
+  - RightHand
+  - LeftHand
+  - FireBall
+  - Map
   layers:
   - Default
   - TransparentFX

@@ -26,6 +26,27 @@ public static class Helper {
     }
 
     /// <summary>
+    /// Same as the Gameobject version, but with Transform instead
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="tag"></param>
+    /// <returns></returns>
+    public static Transform FindChildWithTag(this Transform parent, string tag) {
+        foreach (Transform child in parent) {  //search parent's childs
+            if (child.CompareTag(tag)) {
+                return child;    //when found    
+            } else if (child.childCount > 0) {    //if not found, we search the childs children
+                Transform temp = child.FindChildWithTag(tag);
+                if (temp) {
+                    return temp;    //if childs children have it
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
     /// Returns the component T in the child with tag
     /// </summary>
     /// <typeparam name="T">Component</typeparam>
@@ -40,16 +61,39 @@ public static class Helper {
         return default(T);
     }
 
+    /// <summary>
+    /// Changes all the shaders of a transform
+    /// </summary>
+    /// <param name="T"></param>
+    /// <param name="shd"></param>
     public static void ChangeShader(this Transform T, Shader shd) {
-        foreach(Transform child in T) {
+        foreach (Transform child in T) {
             Renderer rd = child.GetComponent<Renderer>();
-            if (rd){
-                foreach(Material mat in rd.materials) {
+            if (rd) {
+                foreach (Material mat in rd.materials) {
                     mat.shader = shd;
                 }
             }
             child.ChangeShader(shd);
         }
+    }
+
+    public static IEnumerator KillSelf(this GameObject _gameObject, float _ttl) {
+        yield return new WaitForSeconds(_ttl);
+        MonoBehaviour.Destroy(_gameObject);   
+    }
+
+    public static bool ArrContains<T>(this T[] _arr, T _item) {
+        foreach(T item in _arr) {
+            if (item.Equals(_item)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static T FindComponentInScene<T>(string tag) {
+        return GameObject.FindWithTag(tag).GetComponent<T>();
     }
 }
 
@@ -67,41 +111,50 @@ public static class Layers {
         Terrain = 11;
 }
 
-//I got mad at key value pairs so here is my own implementation
-public class KeyAndValue<TKey, TValue> {
-    public List<TKey> Keys { get; set; }
-    public List<TValue> Values { get; set; }
+//For aStar path finding
+public class PiorityQueue<T> where T : IComparable {
+    //member function
+    private List<T> m_queue = new List<T>();
 
-    public KeyAndValue() {
-        Keys = new List<TKey>();
-        Values = new List<TValue>();
-    }
-
-    public TValue SearchForValue(TKey key) {
-        for(int count = 0; count <= Keys.Count - 1; count++) {
-            if (key.Equals(Keys[count])) {
-                return Values[count];
+    //properties
+    public int Count { get { return m_queue.Count; } }
+    public T Head {
+        get {
+            if (m_queue.Count > 0) {
+                return m_queue[0];
             }
-        }
-        Keys.Add(key);
-        Values.Add(default(TValue));
-        return Values[Values.Count - 1];
-    }
-
-    public void ForEach(Action<TValue> a) {
-        for (int count = 0; count <= Keys.Count - 1; count++) {
-            a(Values[count]);
+            return default(T);
         }
     }
 
-    public int LocationOfValue(TKey key) {
-        for (int count = 0; count <= Keys.Count - 1; count++) {
-            if (key.Equals(Keys[count])) {
-                return count;
-            }
+    public PiorityQueue() { } //default 
+
+    /// <summary>
+    /// Push new object in
+    /// </summary>
+    /// <param name="_input"></param>
+    /// <returns></returns>
+    public void Enqueue(T _input) {
+        m_queue.Add(_input);
+        m_queue.Sort();
+    }
+
+    /// <summary>
+    /// Remove head of m_queue
+    /// </summary>
+    public T Dequeue() {
+        if (m_queue.Count > 0) {
+            T temp = m_queue[0];
+            m_queue.RemoveAt(0);
+            return temp;
         }
-        Keys.Add(key);
-        Values.Add(default(TValue));
-        return Keys.Count - 1;
+        return default(T);
+    }
+
+    /// <summary>
+    /// Checks if _input is in the queue
+    /// </summary>
+    public bool Contains(T _input) {
+        return m_queue.Contains(_input);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class Enemy : MonoBehaviour {
     //element stuff
-    public enum Effects { None, Stun, Drenched, Burn, Freeze, Knockback, Slow, Magnatised }
+    public enum Effects { None, Stun, Drenched, Burn, Freeze, Knockback, Slow }
     public ParticleSystem onFirePs;
     public float debuffTimer = 0;
     public Effects currentDebuff = Effects.None;
@@ -29,8 +29,12 @@ public abstract class Enemy : MonoBehaviour {
     }
 
     public virtual void Update() {
+        float deltaTime = Time.deltaTime;
+
         if (debuffTimer <= 0) {
             currentDebuff = Effects.None;
+        }else {
+            debuffTimer = Mathf.Clamp(debuffTimer - deltaTime, 0, 100);
         }
 
         //check debuffs
@@ -60,21 +64,26 @@ public abstract class Enemy : MonoBehaviour {
             case Effects.Slow:
                 currentSpeed *= 0.5f;
                 break;
-            case Effects.Magnatised:
-                //bullet magnetism
-                float range = 5;
-                //cast and look for projectiles
-                RaycastHit[] hitInfo = Physics.CapsuleCastAll(transform.position - transform.up, transform.position + transform.up, range, transform.up, 5);
-                foreach (RaycastHit hit in hitInfo) {
-                    if (hit.collider.CompareTag("Bolt")) {
-                        //drag bolt closer
-                        Vector3 direction = transform.position - hit.transform.position;
-                        hit.transform.position += direction * Time.deltaTime;
-                    }
-                }
-                break;
+            //case Effects.Magnatised:
+            //    //bullet magnetism
+            //    float range = 5;
+            //    //cast and look for projectiles
+            //    RaycastHit[] hitInfo = Physics.CapsuleCastAll(transform.position - transform.up, transform.position + transform.up, range, transform.up, 5);
+            //    foreach (RaycastHit hit in hitInfo) {
+            //        if (hit.collider.CompareTag("Bolt")) {
+            //            //drag bolt closer
+            //            Vector3 direction = transform.position - hit.transform.position;
+            //            hit.transform.position += direction * deltaTime;
+            //        }
+            //    }
+            //    break;
             default:
                 break;
+        }
+
+        //check if enemy is dead
+        if(health <= 0) {
+            Destroy(gameObject);
         }
     }
 

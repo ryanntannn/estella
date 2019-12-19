@@ -18,8 +18,8 @@ public class AnimationEvents : MonoBehaviour {
     }
 
     #region Player animation events
-    void Warp() {
-
+    void Fireball() {
+        parent.GetComponent<ElementControl>().Fireball();
     }
     #endregion
 
