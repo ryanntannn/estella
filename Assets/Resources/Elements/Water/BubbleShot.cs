@@ -24,7 +24,9 @@ public class BubbleShot : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.layer == Layers.Enemy) {
-            //slow enemies
+            //deal damage
+            other.GetComponent<Enemy>().TakeDamage(5);
+            //slow enemy
             other.GetComponent<Enemy>().DebuffEnemy(5, Enemy.Effects.Slow);
             //then go make some puddle
 

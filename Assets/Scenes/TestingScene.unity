@@ -4922,7 +4922,7 @@ GameObject:
   - component: {fileID: 184678064}
   - component: {fileID: 184678063}
   - component: {fileID: 184678062}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: slope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5863,7 +5863,7 @@ GameObject:
   - component: {fileID: 794571951}
   - component: {fileID: 794571950}
   - component: {fileID: 794571949}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: slope (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7297,12 +7297,13 @@ MonoBehaviour:
   debuffTimer: 0
   currentDebuff: 0
   health: 10
-  speed: 12
+  speed: 3
   resistanceLevel: 1
   unfreezeThreshold: 2
   moveSpeed: 3
   lengthOfDash: 6
-  anim: {fileID: 0}
+  anim: {fileID: 1851810509}
+  maxIdleTime: 7
   mirageShadow: {fileID: 2920683599268800264, guid: 13e432f95bb42f24b93885f9ade7ad35,
     type: 3}
 --- !u!54 &1092488056
@@ -12441,6 +12442,12 @@ MonoBehaviour:
   warpPS: {fileID: 0}
   knife: {fileID: 0}
   warpShd: {fileID: 0}
+--- !u!95 &1851810509 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8137350379846810163, guid: b13dc4d5f35afc249a6bdb4c97da0ec0,
+    type: 3}
+  m_PrefabInstance: {fileID: 837474681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1964113250
 GameObject:
   m_ObjectHideFlags: 0

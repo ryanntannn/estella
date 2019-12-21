@@ -333,7 +333,7 @@ public class ElementControl : MonoBehaviour {
         GameObject lightning = Resources.Load<GameObject>("Elements/Electricity/ChainLightning");
         lightning = Instantiate(lightning);
         lightning.GetComponent<ChainLightningScript>().isRightHand = rHand == Elements.Electricity;
-        lightning.GetComponent<ChainLightningScript>().initalTarget = lockOn.target;
+        lightning.GetComponent<ChainLightningScript>().lockOn = lockOn;
     }
     #endregion
 }

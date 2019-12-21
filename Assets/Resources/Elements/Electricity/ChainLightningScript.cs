@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ChainLightningScript : MonoBehaviour {
     public bool isRightHand = false;
-    public GameObject initalTarget;
+    GameObject initalTarget;
     public int maxTargets = 3;
 
     Transform hand;
     LineRenderer lr;
     List<GameObject> targets = new List<GameObject>();
     List<Vector3> positions = new List<Vector3>();
+    public LockOnTarget lockOn;
 
     // Start is called before the first frame update
     void Start() {
@@ -24,6 +25,8 @@ public class ChainLightningScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        initalTarget = lockOn.target;
+
         targets.Clear();
         positions.Clear();
 
@@ -35,8 +38,14 @@ public class ChainLightningScript : MonoBehaviour {
         if (initalTarget) {
             FindEnemy(initalTarget);
         } else {
-            //make it go stright
-            positions.Add(transform.forward * 3);
+            RaycastHit hitInfo;
+            //raycast forward
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, 5, 1 << Layers.Enemy)) {
+                FindEnemy(hitInfo.collider.gameObject);
+            } else {
+                //make it go stright
+                positions.Add(transform.position + transform.forward * 5);
+            }
         }
 
         lr.positionCount = positions.Count;
