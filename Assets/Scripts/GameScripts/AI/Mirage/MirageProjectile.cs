@@ -17,6 +17,8 @@ public class MirageProjectile : MonoBehaviour {
         rb.useGravity = false;
         rb.AddForce(transform.up * 300);
         rb.drag = 0.5f;
+
+        gameObject.KillSelf(5);
     }
 
     // Update is called once per frame

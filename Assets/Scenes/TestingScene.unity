@@ -7261,7 +7261,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092488052}
   m_LocalRotation: {x: -0, y: -0.965926, z: -0, w: -0.2588186}
-  m_LocalPosition: {x: 11, y: 1, z: 0}
+  m_LocalPosition: {x: 18.55, y: 1, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 837474682}
@@ -7300,10 +7300,8 @@ MonoBehaviour:
   speed: 3
   resistanceLevel: 1
   unfreezeThreshold: 2
-  moveSpeed: 3
-  lengthOfDash: 6
   anim: {fileID: 1851810509}
-  maxIdleTime: 7
+  maxIdleTime: 3
   mirageShadow: {fileID: 2920683599268800264, guid: 13e432f95bb42f24b93885f9ade7ad35,
     type: 3}
 --- !u!54 &1092488056

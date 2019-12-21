@@ -5,7 +5,6 @@ using UnityEngine;
 
 //mirage boss fight
 public class Mirage : Enemy {
-    public float lengthOfDash = 6;
     public Animator anim;
     public float maxIdleTime = 5;
 
@@ -32,10 +31,17 @@ public class Mirage : Enemy {
             //only idle for a set amount of time
             if(Time.time - timeStartIdle >= idleTime) {
                 //decide which state to go to next
-                //temp
-                fsm.currentState = RegularAttack;
+                Vector3 directionOfPlayer = player.transform.position - transform.position;
+
+                if (directionOfPlayer.magnitude > 10 && !skillCd[(int)Skills.KnifeThrow]) {
+                    fsm.currentState = KnifeThrow;
+                }else {
+                    fsm.currentState = RegularAttack;
+                }
             }
-            //idk just chill lol
+            
+            //watch out for incomming projectiles and try to dodge
+
         };
 
         RegularAttack = (gameObject) => {
@@ -65,10 +71,12 @@ public class Mirage : Enemy {
 
             //set it on cd
             skillCd[(int)Skills.JumpBack] = true;
-            StartCoroutine(SetCd(Skills.JumpBack, 5));  //5 second cd
+            StartCoroutine(SetCd(Skills.JumpBack, 20));  //20 second cd
         };
 
         KnifeThrow = (gameObject) => {
+            //look at player
+            transform.LookAt(player.transform);
 
             //set trigger
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("KnifeThrow")) {
@@ -77,7 +85,9 @@ public class Mirage : Enemy {
 
             //set it on cd
             skillCd[(int)Skills.KnifeThrow] = true;
-            StartCoroutine(SetCd(Skills.KnifeThrow, 3));  //5 second cd
+            StartCoroutine(SetCd(Skills.KnifeThrow, 10));  //10 second cd
+
+            GoToIdle(anim.GetCurrentAnimatorStateInfo(0).length);
         };
 
 
@@ -94,7 +104,7 @@ public class Mirage : Enemy {
         //set start idle time
         timeStartIdle = Time.time;
         //set total idle time
-        idleTime = UnityEngine.Random.Range(3.0f, maxIdleTime) + clipLength;
+        idleTime = UnityEngine.Random.Range(1.0f, maxIdleTime) + clipLength;
         fsm.currentState = Idle;
     }
 
