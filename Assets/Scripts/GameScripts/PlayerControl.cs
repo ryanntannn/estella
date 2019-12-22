@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
     public float speed;
+    public float maxHealth = 100;
+    private float currentHealth = 100;
     public Animator animator;
 
     public KeyCode leftHandButton = KeyCode.Mouse0, rightHandButton = KeyCode.Mouse1;   //activating elements
@@ -26,6 +28,9 @@ public class PlayerControl : MonoBehaviour {
         radialMenu2 = GameObject.Find("RadialMenu 2");
         radialMenu1.SetActive(false);
         radialMenu2.SetActive(false);
+
+        //init health
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -103,6 +108,16 @@ public class PlayerControl : MonoBehaviour {
     public void ChangeElement2(int i)
     {
         PlayerPrefs.SetInt("lHand", i);
+    }
+
+    /// <summary>
+    /// All damage taken would come through here
+    /// </summary>
+    public void TakeDamage(float damage) {
+        currentHealth -= damage;
+        if(currentHealth <= 0) {
+            //die
+        }
     }
 }
 

@@ -44,5 +44,9 @@ public class AnimationEvents : MonoBehaviour {
     void JumpBack() {
         parent.GetComponent<Mirage>().JumpBack();
     }
+
+    void KnifeAttack() {
+
+    }
     #endregion
 }
