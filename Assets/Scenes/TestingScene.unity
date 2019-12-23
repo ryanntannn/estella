@@ -4922,7 +4922,7 @@ GameObject:
   - component: {fileID: 184678064}
   - component: {fileID: 184678063}
   - component: {fileID: 184678062}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: slope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5252,7 +5252,7 @@ MonoBehaviour:
   nodeSize: 1
   obstacles:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 4096
   debug: 1
 --- !u!4 &257716528
 Transform:
@@ -5358,7 +5358,7 @@ GameObject:
   - component: {fileID: 334488784}
   - component: {fileID: 334488783}
   - component: {fileID: 334488782}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5591,7 +5591,7 @@ MonoBehaviour:
   cameraOffset: {x: 0.7, y: 0.2, z: -3}
   sensitivity: 10
   followDampening: 0.8
-  clampAngle: 70
+  clampAngle: 60
 --- !u!4 &475298154
 Transform:
   m_ObjectHideFlags: 0
@@ -5722,7 +5722,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -5864,7 +5864,7 @@ GameObject:
   - component: {fileID: 794571951}
   - component: {fileID: 794571950}
   - component: {fileID: 794571949}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: slope (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12226,7 +12226,7 @@ GameObject:
   - component: {fileID: 1657491301}
   - component: {fileID: 1657491300}
   - component: {fileID: 1657491299}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

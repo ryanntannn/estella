@@ -61,9 +61,9 @@ public class ThirdPersonCamera : MonoBehaviour {
 
         //raycast back
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, (cameraGO.transform.position - transform.position), out hitInfo, cameraOffset.magnitude, 1 << Layers.Terrain)) 
+        if (Physics.Raycast(transform.position, (cameraGO.transform.position - transform.position), out hitInfo, cameraOffset.magnitude, (1 << Layers.Terrain | 1 << Layers.Obstacles))) 
         {
-            cameraGO.transform.position = hitInfo.point;
+            cameraGO.transform.position = hitInfo.point - (cameraGO.transform.position - transform.position) * 0.1f;
         }
     }
 }
