@@ -40,9 +40,7 @@ public class RMF_RadialMenu : MonoBehaviour {
 
     [HideInInspector]
     public float currentAngle = 0f; //Our current angle from the center of the radial menu.
-
-
-    [HideInInspector]
+    
     public int index = 0; //The current index of the element we're pointing at.
 
     private int elementCount;

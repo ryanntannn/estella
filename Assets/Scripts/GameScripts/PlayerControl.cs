@@ -64,6 +64,8 @@ public class PlayerControl : MonoBehaviour {
         {
             radialMenu1.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+            int index = radialMenu1.GetComponent<RMF_RadialMenu>().index;
+            ChangeElementBasedOnIndex(false, index);
             isInRadialMenu = false;
             Time.timeScale = 1.0f;
         }
@@ -78,6 +80,8 @@ public class PlayerControl : MonoBehaviour {
         {
             radialMenu2.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+            int index = radialMenu2.GetComponent<RMF_RadialMenu>().index;
+            ChangeElementBasedOnIndex(true, index);
             isInRadialMenu = false;
             Time.timeScale = 1.0f;
         }
@@ -98,6 +102,33 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
+    public void ChangeElementBasedOnIndex(bool hand, int i)
+    {
+        int outi = 0;
+        switch (i){
+            case 0:
+                outi = 1;
+                break;
+            case 1:
+                outi = 2;
+                break;
+            case 2:
+                outi = 4;
+                break;
+            case 3:
+                outi = 8;
+                break;
+            case 4:
+                outi = 16;
+                break;
+        }
+        if (hand)
+        {
+            ChangeElement(outi);
+        } else {
+            ChangeElement2(outi);
+        }
+    }
 
     public void ChangeElement(int i)
     {
