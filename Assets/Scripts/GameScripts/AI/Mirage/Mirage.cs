@@ -23,7 +23,7 @@ public class Mirage : Enemy {
     MapGrid map;
     List<Node> path = new List<Node>();
     int currentNode = 0;
-    float pathTimer = 5;    //reset every 5 seconds
+    float pathTimer = 1;    //reset every 1 second
     Node prevNode = null;
     // Start is called before the first frame update
     public override void Start() {
@@ -67,7 +67,7 @@ public class Mirage : Enemy {
                 GoToIdle(anim.GetCurrentAnimatorStateInfo(0).length);
             } else {
                 pathTimer += Time.deltaTime;
-                if (pathTimer >= 5) {
+                if (pathTimer >= 1) {
                     QueryPath();
                 }
                 Vector3 toLookAt = path[currentNode].worldPos;
@@ -78,6 +78,9 @@ public class Mirage : Enemy {
 
                 if ((transform.position - toLookAt).magnitude <= 0.2f) {
                     currentNode++;
+                    if(currentNode >= path.Count) {
+                        QueryPath();
+                    }
                 }
             }
         };
