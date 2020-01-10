@@ -7,6 +7,7 @@ public class Steering : MonoBehaviour {
     public bool drawDebugLines = true;
     public enum RayCastMode { Single, Double, Triple }
     public RayCastMode mode = RayCastMode.Triple;
+    public LayerMask obs;
 
     float colliderSize = 1;
     // Start is called before the first frame update
@@ -26,26 +27,52 @@ public class Steering : MonoBehaviour {
         switch (mode) {
             case RayCastMode.Single:
                 //raycast forward
-                if (Physics.Raycast(transform.position, transform.forward, range)) {
+                if (Physics.Raycast(transform.position, transform.forward, range, layerMask: obs)) {
                     //new rotation
                     Quaternion newRot = Quaternion.Euler(0, 10, 0) * currentRotation;
                     currentRotation = Quaternion.Lerp(currentRotation, newRot, Time.deltaTime);
                 }
                 break;
             case RayCastMode.Double:
-                bool rightRay = Physics.Raycast(transform.position + transform.right * colliderSize, transform.forward, range);
-                bool leftRay = Physics.Raycast(transform.position - transform.right * colliderSize, transform.forward, range);
+                RaycastHit rightHitInfo, leftHitInfo;
+                bool rightRay = Physics.Raycast(transform.position + transform.right * colliderSize, transform.forward, out rightHitInfo, range, layerMask: obs);
+                bool leftRay = Physics.Raycast(transform.position - transform.right * colliderSize, transform.forward, out leftHitInfo, range, layerMask: obs);
                 //if right ray hit and left ray don't hit
                 if (rightRay && !leftRay) {
                     //turn towards left
-                }else //if left ray hit and right ray don't hit
+                    Quaternion newRot = Quaternion.Euler(0, -10, 0) * currentRotation;
+                    currentRotation = Quaternion.Lerp(currentRotation, newRot, Time.deltaTime);
+                } else //if left ray hit and right ray don't hit
                 if (leftRay && !rightRay) {
                     //turn towards right
-                }else if(!leftRay && !rightRay){
-                    //turn some direction I guess
+                    Quaternion newRot = Quaternion.Euler(0, 10, 0) * currentRotation;
+                    currentRotation = Quaternion.Lerp(currentRotation, newRot, Time.deltaTime);
+                } else if (!leftRay && !rightRay) {
+                    //turn towards direction whose ray is longer
+                    Quaternion newRot = Quaternion.Euler(0, (rightHitInfo.distance > leftHitInfo.distance) ? 10 : -10, 0) * currentRotation;
+                    currentRotation = Quaternion.Lerp(currentRotation, newRot, Time.deltaTime);
                 }
                 break;
             case RayCastMode.Triple:
+                //left to right
+                float direction = 0;
+                bool gotSomething = false;
+                for (int count = -1; count <= 1; count++) {
+                    RaycastHit hitInfo;
+                    if (!Physics.Raycast(transform.position, transform.forward + transform.right * count, out hitInfo, range, layerMask: obs)) {
+                        direction += count;
+                    }else if(count != 0) {
+                        direction += hitInfo.distance * count;
+                        gotSomething = true;
+                    } else {
+                        gotSomething = true;
+                    }
+                }
+                //determine which direction to turn to
+                if (gotSomething) {
+                    Quaternion dir = Quaternion.Euler(0, 10 * (direction >= 0 ? 1 : -1), 0) * currentRotation;
+                    currentRotation = Quaternion.Lerp(currentRotation, dir, Time.deltaTime);
+                }
                 break;
             default:
                 break;
@@ -74,11 +101,10 @@ public class Steering : MonoBehaviour {
                     Debug.DrawRay(transform.position - transform.right * colliderSize, transform.forward * range, Color.red);
                     break;
                 case RayCastMode.Triple:
-                    //forward ray + tilited left and right rays
-                    Debug.DrawRay(transform.position, (transform.forward + transform.right) * range, Color.red);
-                    Debug.DrawRay(transform.position, (transform.forward - transform.right) * range, Color.red);
-                    //forward ray
-                    goto case RayCastMode.Single;
+                    for (int count = -1; count <= 1; count++) {
+                        Debug.DrawRay(transform.position, (transform.forward + transform.right * count) * range, Color.red);
+                    }
+                    break;
                 default:
                     break;
             }
