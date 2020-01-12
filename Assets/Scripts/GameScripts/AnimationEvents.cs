@@ -19,7 +19,7 @@ public class AnimationEvents : MonoBehaviour {
 
     #region Player animation events
     void Fireball() {
-        parent.GetComponent<ElementControl>().Fireball();
+        //parent.GetComponent<ElementControl>().Fireball();
     }
     #endregion
 

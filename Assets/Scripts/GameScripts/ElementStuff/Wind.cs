@@ -1,18 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wind : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+[CreateAssetMenu(menuName = "Elements/Wind")]
+public class Wind : Element {
+    public override string ElementName { get { return "Wind"; } }
+
+    public override void DoBasic(ElementControl agent, Hand hand) {
+        //win slash
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public override void DoBig(ElementControl agent, Hand hand) {
+        GameObject tornado = Instantiate(Resources.Load<GameObject>("Elements/Wind/Tornado"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
+        //tornado.transform.parent = createdByPlayer;
+        agent.isCasting = false;
     }
 }

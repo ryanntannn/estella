@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ChainLightningScript : MonoBehaviour {
-    public bool isRightHand = false;
+    public Hand hand;
     GameObject initalTarget;
     public int maxTargets = 3;
 
-    Transform hand;
     LineRenderer lr;
     List<GameObject> targets = new List<GameObject>();
     List<Vector3> positions = new List<Vector3>();
@@ -15,11 +14,9 @@ public class ChainLightningScript : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        //find position of hand
-        hand = GameObject.FindGameObjectWithTag("Player").transform.FindChildWithTag(isRightHand ? "RightHand" : "LeftHand");
         //lr
         lr = GetComponent<LineRenderer>();
-        transform.parent = hand;
+        transform.parent = transform.parent;
         transform.localPosition = Vector3.zero;
     }
 
@@ -30,7 +27,8 @@ public class ChainLightningScript : MonoBehaviour {
         targets.Clear();
         positions.Clear();
 
-        if (!Input.GetKey(isRightHand ? KeyCode.Mouse1 : KeyCode.Mouse0)) {
+        if (!Input.GetKey(hand.bind)) {
+            hand.elementControl.isCasting = false;
             Destroy(gameObject);
         }
         positions.Add(transform.position);

@@ -7,8 +7,9 @@ public class PlayerControl : MonoBehaviour {
     public float maxHealth = 100;
     private float currentHealth = 100;
     public Animator animator;
+    public Element[] elements;
 
-    public KeyCode leftHandButton = KeyCode.Mouse0, rightHandButton = KeyCode.Mouse1;   //activating elements
+    public Hand rHand, lHand;
     public KeyCode swapLeft = KeyCode.Q, swapRight = KeyCode.E; //swapping elements
 
     private GameObject pivot;
@@ -31,6 +32,14 @@ public class PlayerControl : MonoBehaviour {
 
         //init health
         currentHealth = maxHealth;
+
+        //check for lHand rHand
+        if (!lHand) {
+            lHand = GetComponent<ElementControl>().lHand;
+        }
+        if (!rHand) {
+            rHand = GetComponent<ElementControl>().rHand;
+        }
     }
 
     // Update is called once per frame
@@ -41,7 +50,7 @@ public class PlayerControl : MonoBehaviour {
 
     void RotationUpdate() {
         //when mouse pressed
-        if (Input.GetKey(leftHandButton) || Input.GetKey(rightHandButton)) {
+        if (Input.GetKey(lHand.bind) || Input.GetKey(rHand.bind)) {
             //look at same direction as camera
             //rot of cam
             Quaternion camRot = Camera.main.transform.rotation;
@@ -104,41 +113,27 @@ public class PlayerControl : MonoBehaviour {
 
     public void ChangeElementBasedOnIndex(bool hand, int i)
     {
-        int outi = 0;
-        switch (i){
-            case 0:
-                outi = 2;
-                break;
-            case 1:
-                outi = 4;
-                break;
-            case 2:
-                outi = 1;
-                break;
-            case 3:
-                outi = 8;
-                break;
-            case 4:
-                outi = 16;
-                break;
-        }
         if (hand)
         {
-            ChangeElement(outi);
-        } else {
-            ChangeElement2(outi);
+            ChangeElement(i);
+        } 
+        else
+        {
+            ChangeElement2(i);
         }
     }
 
+    //rightHand
     public void ChangeElement(int i)
     {
         //TODO Change Element Code Tiong ples do
-        PlayerPrefs.SetInt("rHand", i);
+        rHand.currentElement = elements[i];
     }
 
+    //leftHand
     public void ChangeElement2(int i)
     {
-        PlayerPrefs.SetInt("lHand", i);
+        lHand.currentElement = elements[i];
     }
 
     /// <summary>
