@@ -108,7 +108,8 @@ public static class Layers {
         PostProcessing = 8,
         Enemy = 9,
         Player = 10,
-        Terrain = 11;
+        Terrain = 11,
+        Obstacles = 12;
 }
 
 //For aStar path finding

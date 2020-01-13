@@ -3,74 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ElementControl : MonoBehaviour {
-    int lHand = 1, rHand = 2;
-    [Tooltip("Displays current element")]
-    public string lHandCurrent, rHandCurrent;
+    public Hand lHand, rHand;
     public float delay = 0.3f;
+    public Animator anim;
+    public bool isCasting = false;
+    //targing
+    [HideInInspector]
+    public LockOnTarget lockOn;
     public bool enableLockOn = true;
     public GameObject targetCircle;
     public bool showTargetCircle = true;
-    public Animator anim;
 
     PlayerControl pc;
+    Coroutine lHandCr, rHandCr;
 
-    KeyCode rightHand = KeyCode.Mouse0, leftHand = KeyCode.Mouse1;
-
-    Transform parent;
-
-    bool doneAlr = false;
-    LockOnTarget lockOn;
-    //zap zap
-    bool isFlash = false;
-
-    //fire
-
+    Transform createdByPlayer;
     // Start is called before the first frame update
     void Start() {
         lockOn = GetComponent<LockOnTarget>();
         pc = GetComponent<PlayerControl>();
-        parent = GameObject.Find("CreatedbyPlayer").transform;
+        createdByPlayer = GameObject.Find("CreatedbyPlayer").transform;
 
-        lHand = PlayerPrefs.GetInt("lHand", 1);
-        rHand = PlayerPrefs.GetInt("rHand", 2);
-        rightHand = pc.rightHandButton;
-        leftHand = pc.leftHandButton;
         targetCircle.SetActive(showTargetCircle);
+        rHand.waitingOnOther = false;
+        lHand.waitingOnOther = false;
     }
 
     // Update is called once per frame
     void Update() {
-        lHandCurrent = Elements.ByteToName(lHand);
-        rHandCurrent = Elements.ByteToName(rHand);
-
-        rHand = PlayerPrefs.GetInt("rHand");
-        lHand = PlayerPrefs.GetInt("lHand");
-
+        //make sure not in menu
         if (!pc.isInRadialMenu) {
-            if (Input.GetKeyDown(rightHand)) {
-                StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(lHand) : NoCombination(lHand));
-            }
-            if (Input.GetKeyDown(leftHand)) {
-                StartCoroutine(Input.GetKey(KeyCode.LeftAlt) ? DoBigBoy(rHand) : NoCombination(rHand));
-            }
+            //check hand binds
+            if (Input.GetKeyDown(lHand.bind) && !isCasting && !lHand.waitingOnOther) lHandCr = StartCoroutine(WaitDelay(lHand));
+            if (Input.GetKeyDown(rHand.bind) && !isCasting && !rHand.waitingOnOther) rHandCr = StartCoroutine(WaitDelay(rHand));
 
-            if (Input.GetKey(rightHand) && Input.GetKey(leftHand) && !doneAlr) {
-                StopAllCoroutines();
-                doneAlr = true;
-                Combination();
-            }
-
-            if (Input.GetKeyUp(rightHand) || Input.GetKeyUp(leftHand)) {
-                doneAlr = false;
+            if(lHand.waitingOnOther && rHand.waitingOnOther) {
+                StopCoroutine(rHandCr);
+                StopCoroutine(lHandCr);
+                lHand.waitingOnOther = false;
+                rHand.waitingOnOther = false;
+                isCasting = true;
+                Elements.Combination(lHand.currentElement, rHand.currentElement, this);
             }
         }
-
-        if (isFlash) {
-            StartCoroutine(DoFlash());
-        } else {
-            StopCoroutine(DoFlash());
-        }
-
+        //target circle
         SetTargetCircle();
     }
 
@@ -79,263 +55,26 @@ public class ElementControl : MonoBehaviour {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
         Debug.DrawRay(Camera.main.transform.position, ray.direction * range, Color.red);
-        if (!Physics.Raycast(ray, out hitInfo, range, Layers.Terrain)) {
+        if (!Physics.Raycast(ray, out hitInfo, range, 1 << Layers.Terrain)) {
             Vector3 newPos = Camera.main.transform.position + ray.direction * range;
-            Physics.Raycast(newPos, -Vector3.up, out hitInfo, 100, Layers.Terrain);
+            Physics.Raycast(newPos, -Vector3.up, out hitInfo, 100, 1<< Layers.Terrain);
         }
         targetCircle.transform.position = hitInfo.point;
         Vector3 lookRotation = Camera.main.transform.rotation.eulerAngles;
         targetCircle.transform.rotation = Quaternion.Euler(0, lookRotation.y, 0);
     }
 
-    void Combination() {
-        switch (lHand | rHand) {
-            case Elements.Water | Elements.Fire:
-                DoSteam();
-                break;
-            case Elements.Water | Elements.Earth:
-                DoMud();
-                break;
-            case Elements.Water | Elements.Wind:
-                DoBlizzard();
-                break;
-            case Elements.Water | Elements.Electricity:
-                DoShock();
-                break;
-            case Elements.Fire | Elements.Earth:
-                DoMagma();
-                break;
-            case Elements.Fire | Elements.Wind:
-                DoBlaze();
-                break;
-            case Elements.Fire | Elements.Electricity:
-                DoPlasma();
-                break;
-            case Elements.Earth | Elements.Wind:
-                DoDust();
-                break;
-            case Elements.Earth | Elements.Electricity:
-                DoMagnetize();
-                break;
-            case Elements.Wind | Elements.Electricity:
-                DoStorm();
-                break;
-            default:
-                print("Something wrong");
-                break;
-        }
-    }
-
-    IEnumerator DoBigBoy(int input) {
+    //cast after delay
+    IEnumerator WaitDelay(Hand hand) {
+        hand.waitingOnOther = true;
         yield return new WaitForSeconds(delay);
-        switch (input) {
-            case Elements.Wind:
-                DoTornado();
-                break;
-            case Elements.Water:
-                DoTsunami();
-                break;
-            case Elements.Fire:
-                DoFirepit();
-                break;
-            case Elements.Earth:
-                DoGroundBreaker();
-                break;
-            case Elements.Electricity:
-                DoFlash();
-                break;
-        }
+        hand.waitingOnOther = false;
+        isCasting = true;
+
+        //start casting
+        if (Input.GetKey(KeyCode.LeftAlt)) hand.currentElement.DoBig(this, hand);
+        else hand.currentElement.DoBasic(this, hand);
     }
-
-    IEnumerator NoCombination(int input) {
-        yield return new WaitForSeconds(delay);
-        switch (input) {
-            case Elements.Water:
-                BubbleShot();
-                break;
-            case Elements.Fire:
-                anim.SetTrigger("WhenShootFireBall");
-                break;
-            case Elements.Earth:
-                Fissure();
-                break;
-            case Elements.Wind:
-                WindSlash();
-                break;
-            case Elements.Electricity:
-                ShockChain();
-                break;
-            default:
-                print("Something wrong");
-                break;
-        }
-    }
-
-    #region Combination stuff
-    void DoSteam() {
-        //debuff enemy / buff own attack
-        GameObject steampit = Resources.Load<GameObject>("Elements/Steam/SteamPit");
-        steampit = Instantiate(steampit, targetCircle.transform.position, Quaternion.identity);
-        steampit.transform.parent = parent;
-    }
-
-    void DoMud() {
-        //summon golem
-        GameObject golem = Resources.Load<GameObject>("Elements/Mud/MudGolem");
-        golem = Instantiate(golem, targetCircle.transform.position - Vector3.up * 3, Quaternion.identity);
-        golem.GetComponent<MudGolem>().yValue = targetCircle.transform.position.y;
-        golem.transform.parent = parent;
-    }
-
-    void DoBlizzard() {
-        //summon one big cloud?
-        GameObject cloud = Resources.Load<GameObject>("Elements/Ice/Blizzard");
-        cloud = Instantiate(cloud, transform.position, Quaternion.identity);
-        cloud.transform.parent = parent;
-    }
-
-    void DoShock() {
-        GameObject shock = Resources.Load<GameObject>("Elements/Shock/Shock");
-        shock = Instantiate(shock, transform.position, transform.rotation);
-        shock.transform.parent = parent;
-    }
-
-    void DoMagma() {
-        GameObject magma = Resources.Load<GameObject>("Elements/Magma/EarthSplinter");
-        magma = Instantiate(magma, targetCircle.transform.position - targetCircle.transform.up * 5, targetCircle.transform.rotation);
-        magma.transform.parent = parent;
-    }
-
-    void DoDust() {
-        GameObject dust = Resources.Load<GameObject>("Elements/Dust/Dust");
-        dust = Instantiate(dust, targetCircle.transform.position, Quaternion.identity);
-        dust.transform.parent = parent;
-    }
-
-    void DoPlasma() {
-        //laguna
-        GameObject plasma = Resources.Load<GameObject>("Elements/Plasma/Plasma");
-        plasma = Instantiate(plasma, targetCircle.transform.position, Quaternion.identity);
-        plasma.transform.parent = parent;
-    }
-
-    void DoStorm() {
-        //spark wraith
-        GameObject storm = Resources.Load<GameObject>("Elements/Storm/Storm");
-        storm = Instantiate(storm, targetCircle.transform.position, Quaternion.identity);
-        storm.transform.parent = parent;
-    }
-
-    void DoMagnetize() {
-        //play some shit
-        GameObject blackhole = Resources.Load<GameObject>("Elements/Magnetise/Blackhole");
-        blackhole = Instantiate(blackhole, targetCircle.transform.position, Quaternion.identity);
-        blackhole.transform.parent = parent;
-    }
-
-    void DoBlaze() {
-        GameObject blaze = Resources.Load<GameObject>("Elements/Blaze/Blaze");
-        blaze = Instantiate(blaze, targetCircle.transform.position, Quaternion.identity);
-        blaze.transform.parent = parent;
-    }
-    #endregion
-
-    #region Big boy single elements
-    void DoTsunami() {
-        //load in tsunami behind player
-        GameObject tsunami = Resources.Load<GameObject>("Elements/Water/Tsunami");
-        tsunami = Instantiate(tsunami, transform.position - transform.forward - transform.up, transform.rotation);
-        tsunami.transform.parent = parent;
-    }
-
-    void DoFirepit() {
-        //fire spout
-        GameObject firepit = Resources.Load<GameObject>("Elements/Fire/Firepit");
-        firepit = Instantiate(firepit, targetCircle.transform.position, Quaternion.identity);
-        firepit.transform.parent = parent;
-    }
-
-    IEnumerator DoFlash() {
-        isFlash = true;
-        float delay = 0.25f;
-        //dash forward 
-        //sof
-        float range = 2.5f;
-        //raycast in circle
-        RaycastHit[] hitInfo = Physics.CapsuleCastAll(transform.position + transform.forward * range, transform.position + transform.forward * range, range, transform.forward, range, 1 << Layers.Enemy);
-        foreach (RaycastHit hit in hitInfo) {
-            Vector2 randomPos = Random.insideUnitCircle;
-            transform.position = hit.transform.position + new Vector3(randomPos.x, transform.position.y, randomPos.y);
-            // Vector3 dir = hit.transform.position - transform.position;
-            //transform.rotation = Quaternion.LookRotation(dir, transform.up);
-            yield return new WaitForSeconds(delay);
-        }
-        isFlash = false;
-    }
-
-    void DoTornado() {
-        //instaniate tornado
-        GameObject tornado = Resources.Load<GameObject>("Elements/Wind/Tornado");
-        tornado = Instantiate(tornado, targetCircle.transform.position, targetCircle.transform.rotation);
-        tornado.transform.parent = parent;
-    }
-
-    void DoGroundBreaker() {
-        GameObject groundBreaker = Resources.Load<GameObject>("Elements/Ground/GroundBreaker");
-        groundBreaker = Instantiate(groundBreaker, targetCircle.transform.position, Quaternion.identity);
-        groundBreaker.transform.parent = parent;
-    }
-    #endregion
-
-    #region Regular stuff
-    void BubbleShot() {
-        GameObject instance = Resources.Load<GameObject>("Elements/Water/BubbleShot");
-        instance = Instantiate(instance, transform.position, transform.rotation);
-        if (lockOn.target && enableLockOn) {
-            instance.GetComponent<BubbleShot>().target = lockOn.target;
-        } else {
-            Vector3 newRot = Camera.main.transform.eulerAngles;
-            newRot.x = 0;
-            instance.transform.rotation = Quaternion.Euler(newRot);
-        }
-        instance.transform.parent = parent;
-    }
-
-    public void Fireball() {
-        GameObject instance = Resources.Load<GameObject>("Elements/Fire/Fireball");
-        instance = Instantiate(instance, transform.position, transform.rotation);
-        if (lockOn.target && enableLockOn) {
-            instance.GetComponent<FireBall>().target = lockOn.target;
-        } else {
-            Vector3 newRot = Camera.main.transform.eulerAngles;
-            newRot.x = 0;
-            instance.transform.rotation = Quaternion.Euler(newRot);
-        }
-        instance.transform.parent = parent;
-
-    }
-
-    void Fissure() {
-        GameObject fissure = Resources.Load<GameObject>("Elements/Ground/FissureAttack");
-        fissure = Instantiate(fissure, targetCircle.transform.position - Vector3.up * 2, targetCircle.transform.rotation);
-        fissure.transform.parent = parent;
-
-    }
-
-    void WindSlash() {
-        //get some cool effects here
-
-
-    }
-
-    void ShockChain() {
-        //set the shits
-        GameObject lightning = Resources.Load<GameObject>("Elements/Electricity/ChainLightning");
-        lightning = Instantiate(lightning);
-        lightning.GetComponent<ChainLightningScript>().isRightHand = rHand == Elements.Electricity;
-        lightning.GetComponent<ChainLightningScript>().initalTarget = lockOn.target;
-    }
-    #endregion
 }
 
 public static class Elements {
@@ -356,10 +95,60 @@ public static class Elements {
             default: return "Unknown";
         }
     }
-}
 
-public static class AnimTypes {
-    public static readonly int
-        ShootBolt1 = 1,
-        ShootBolt2 = 2;
+    public static int NameToByte(string input) {
+        switch (input) {
+            case "Water": return Water;
+            case "Fire": return Fire;
+            case "Earth": return Earth;
+            case "Wind": return Wind;
+            case "Electricity": return Electricity;
+            default: return -1;
+        }
+    }
+
+    public static void Combination(Element eLHand, Element eRHand, ElementControl agent) {
+        int lHandInt = NameToByte(eLHand.ElementName);
+        int rHandInt = NameToByte(eRHand.ElementName);
+        //switch to int and work with bits so that the order doesn't matter
+        //i.e fire + water is the same as water + fire
+        switch (lHandInt | rHandInt) {
+            case Water | Fire:
+                //debuff enemy / buff own attack
+                GameObject steampit = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Steam/SteamPit"), agent.targetCircle.transform.position, Quaternion.identity);
+                //steampit.transform.parent = createdByPlayer;
+                agent.isCasting = false;
+                break;
+            case Water | Earth:
+                //DoMud();
+                break;
+            case Water | Wind:
+                //DoBlizzard();
+                break;
+            case Water | Electricity:
+                //DoShock();
+                break;
+            case Fire | Earth:
+                //DoMagma();
+                break;
+            case Fire | Wind:
+                //DoBlaze();
+                break;
+            case Fire | Electricity:
+                //DoPlasma();
+                break;
+            case Earth | Wind:
+                //DoDust();
+                break;
+            case Earth | Electricity:
+                //DoMagnetize();
+                break;
+            case Wind | Electricity:
+                //DoStorm();
+                break;
+            default:
+                MonoBehaviour.print("Something wrong");
+                break;
+        }
+    }
 }

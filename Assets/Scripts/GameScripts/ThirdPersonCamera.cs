@@ -47,7 +47,8 @@ public class ThirdPersonCamera : MonoBehaviour {
     void PivotRotationUpdate() {
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         Vector2 rotationDelta = new Vector2(-mouseDelta.y, mouseDelta.x) * Time.deltaTime * 10 * sensitivity;
-        if (rotationDelta.x + transform.eulerAngles.x >= clampAngle && rotationDelta.x + transform.eulerAngles.x <= 360 - clampAngle) {
+        if (rotationDelta.x + transform.eulerAngles.x >= clampAngle && rotationDelta.x + transform.eulerAngles.x <= 360 - clampAngle)
+        {
             rotationDelta.x = 0;
         }
         Vector3 clampedAngle = new Vector3(rotationDelta.x + transform.eulerAngles.x, rotationDelta.y + transform.eulerAngles.y, 0);
@@ -60,8 +61,9 @@ public class ThirdPersonCamera : MonoBehaviour {
 
         //raycast back
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, (cameraGO.transform.position - transform.position), out hitInfo, cameraOffset.magnitude, 1 << Layers.Terrain)) {
-            cameraGO.transform.position = hitInfo.point;
+        if (Physics.Raycast(transform.position, (cameraGO.transform.position - transform.position), out hitInfo, cameraOffset.magnitude, (1 << Layers.Terrain | 1 << Layers.Obstacles))) 
+        {
+            cameraGO.transform.position = hitInfo.point - (cameraGO.transform.position - transform.position) * 0.1f;
         }
     }
 }

@@ -15,8 +15,12 @@ public class MudGolem : MonoBehaviour, ISteamable {
     public GameObject target;
     public float range = 3;
 
+    //animator
+    Animator anim;
     // Start is called before the first frame update
     void Start() {
+        //anim = GetComponent<Animator>();
+
         map = Helper.FindComponentInScene<MapGrid>("Map");
         range = Mathf.Pow(range, 2);
         InitStates();

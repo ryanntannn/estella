@@ -3,31 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ChainLightningScript : MonoBehaviour {
-    public bool isRightHand = false;
-    public GameObject initalTarget;
+    public Hand hand;
+    GameObject initalTarget;
     public int maxTargets = 3;
 
-    Transform hand;
     LineRenderer lr;
     List<GameObject> targets = new List<GameObject>();
     List<Vector3> positions = new List<Vector3>();
+    public LockOnTarget lockOn;
 
     // Start is called before the first frame update
     void Start() {
-        //find position of hand
-        hand = GameObject.FindGameObjectWithTag("Player").transform.FindChildWithTag(isRightHand ? "RightHand" : "LeftHand");
         //lr
         lr = GetComponent<LineRenderer>();
-        transform.parent = hand;
+        transform.parent = transform.parent;
         transform.localPosition = Vector3.zero;
     }
 
     // Update is called once per frame
     void Update() {
+        initalTarget = lockOn.target;
+
         targets.Clear();
         positions.Clear();
 
-        if (!Input.GetKey(isRightHand ? KeyCode.Mouse1 : KeyCode.Mouse0)) {
+        if (!Input.GetKey(hand.bind)) {
+            hand.elementControl.isCasting = false;
             Destroy(gameObject);
         }
         positions.Add(transform.position);
@@ -35,8 +36,14 @@ public class ChainLightningScript : MonoBehaviour {
         if (initalTarget) {
             FindEnemy(initalTarget);
         } else {
-            //make it go stright
-            positions.Add(transform.forward * 3);
+            RaycastHit hitInfo;
+            //raycast forward
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, 5, 1 << Layers.Enemy)) {
+                FindEnemy(hitInfo.collider.gameObject);
+            } else {
+                //make it go stright
+                positions.Add(transform.position + transform.forward * 5);
+            }
         }
 
         lr.positionCount = positions.Count;

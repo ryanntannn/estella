@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
     public float speed;
+    public float maxHealth = 100;
+    private float currentHealth = 100;
     public Animator animator;
+    public Element[] elements;
 
-    public KeyCode leftHandButton = KeyCode.Mouse0, rightHandButton = KeyCode.Mouse1;   //activating elements
+    public Hand rHand, lHand;
     public KeyCode swapLeft = KeyCode.Q, swapRight = KeyCode.E; //swapping elements
 
     private GameObject pivot;
@@ -26,6 +29,17 @@ public class PlayerControl : MonoBehaviour {
         radialMenu2 = GameObject.Find("RadialMenu 2");
         radialMenu1.SetActive(false);
         radialMenu2.SetActive(false);
+
+        //init health
+        currentHealth = maxHealth;
+
+        //check for lHand rHand
+        if (!lHand) {
+            lHand = GetComponent<ElementControl>().lHand;
+        }
+        if (!rHand) {
+            rHand = GetComponent<ElementControl>().rHand;
+        }
     }
 
     // Update is called once per frame
@@ -36,7 +50,7 @@ public class PlayerControl : MonoBehaviour {
 
     void RotationUpdate() {
         //when mouse pressed
-        if (Input.GetKey(leftHandButton) || Input.GetKey(rightHandButton)) {
+        if (Input.GetKey(lHand.bind) || Input.GetKey(rHand.bind)) {
             //look at same direction as camera
             //rot of cam
             Quaternion camRot = Camera.main.transform.rotation;
@@ -59,6 +73,8 @@ public class PlayerControl : MonoBehaviour {
         {
             radialMenu1.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+            int index = radialMenu1.GetComponent<RMF_RadialMenu>().index;
+            ChangeElementBasedOnIndex(false, index);
             isInRadialMenu = false;
             Time.timeScale = 1.0f;
         }
@@ -73,6 +89,8 @@ public class PlayerControl : MonoBehaviour {
         {
             radialMenu2.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+            int index = radialMenu2.GetComponent<RMF_RadialMenu>().index;
+            ChangeElementBasedOnIndex(true, index);
             isInRadialMenu = false;
             Time.timeScale = 1.0f;
         }
@@ -93,16 +111,39 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
+    public void ChangeElementBasedOnIndex(bool hand, int i)
+    {
+        if (hand)
+        {
+            ChangeElement(i);
+        } 
+        else
+        {
+            ChangeElement2(i);
+        }
+    }
 
+    //rightHand
     public void ChangeElement(int i)
     {
         //TODO Change Element Code Tiong ples do
-        PlayerPrefs.SetInt("rHand", i);
+        rHand.currentElement = elements[i];
     }
 
+    //leftHand
     public void ChangeElement2(int i)
     {
-        PlayerPrefs.SetInt("lHand", i);
+        lHand.currentElement = elements[i];
+    }
+
+    /// <summary>
+    /// All damage taken would come through here
+    /// </summary>
+    public void TakeDamage(float damage) {
+        currentHealth -= damage;
+        if(currentHealth <= 0) {
+            //die
+        }
     }
 }
 
