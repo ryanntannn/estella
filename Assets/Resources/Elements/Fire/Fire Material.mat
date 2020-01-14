@@ -30,6 +30,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_6F2AB300: {r: 2.805209, g: 12.509635, b: 53.579506, a: 1}
+    - Color_6F2AB300: {r: 2.8052096, g: 12.623444, b: 53.579506, a: 1}
     - Vector2_4EBC73BF: {r: -0.5, g: 0.1, b: 0, a: 0}
     - Vector2_83CBB3A3: {r: 0, g: 1, b: 0, a: 0}
