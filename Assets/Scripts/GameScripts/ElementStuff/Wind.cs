@@ -8,7 +8,7 @@ public class Wind : Element {
     public override string ElementName { get { return "Wind"; } }
 
     public override void DoBasic(ElementControl agent, Hand hand) {
-        //win slash
+        //wind slash
     }
 
     public override void DoBig(ElementControl agent, Hand hand) {

@@ -53,25 +53,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5968780822508457516}
     m_Modifications:
-    - target: {fileID: 3397996738464662119, guid: 12703c6c061bbe342bf4b473938930d5,
-        type: 3}
-      propertyPath: m_Name
-      value: vfx_VortexWall
-      objectReference: {fileID: 0}
     - target: {fileID: 3397996738464662112, guid: 12703c6c061bbe342bf4b473938930d5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.331482
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3397996738464662112, guid: 12703c6c061bbe342bf4b473938930d5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.62898076
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3397996738464662112, guid: 12703c6c061bbe342bf4b473938930d5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.461662
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3397996738464662112, guid: 12703c6c061bbe342bf4b473938930d5,
         type: 3}
@@ -112,6 +107,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397996738464662119, guid: 12703c6c061bbe342bf4b473938930d5,
+        type: 3}
+      propertyPath: m_Name
+      value: vfx_VortexWall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12703c6c061bbe342bf4b473938930d5, type: 3}

@@ -7,7 +7,7 @@ public class ChainLightningScript : MonoBehaviour {
     GameObject initalTarget;
     public int maxTargets = 3;
 
-    LineRenderer lr;
+    public LineRenderer lr;
     List<GameObject> targets = new List<GameObject>();
     List<Vector3> positions = new List<Vector3>();
     public LockOnTarget lockOn;
@@ -15,9 +15,7 @@ public class ChainLightningScript : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         //lr
-        lr = GetComponent<LineRenderer>();
-        transform.parent = transform.parent;
-        transform.localPosition = Vector3.zero;
+        if(!lr) lr = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -31,18 +29,18 @@ public class ChainLightningScript : MonoBehaviour {
             hand.elementControl.isCasting = false;
             Destroy(gameObject);
         }
-        positions.Add(transform.position);
+        positions.Add(Vector3.zero);
 
         if (initalTarget) {
             FindEnemy(initalTarget);
         } else {
             RaycastHit hitInfo;
             //raycast forward
-            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, 5, 1 << Layers.Enemy)) {
+            if (Physics.Raycast(transform.position, hand.transform.forward, out hitInfo, 5, 1 << Layers.Enemy)) {
                 FindEnemy(hitInfo.collider.gameObject);
             } else {
                 //make it go stright
-                positions.Add(transform.position + transform.forward * 5);
+                positions.Add(hand.transform.forward * 5);
             }
         }
 

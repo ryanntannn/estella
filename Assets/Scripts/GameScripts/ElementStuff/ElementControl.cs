@@ -23,7 +23,6 @@ public class ElementControl : MonoBehaviour {
         lockOn = GetComponent<LockOnTarget>();
         pc = GetComponent<PlayerControl>();
         createdByPlayer = GameObject.Find("CreatedbyPlayer").transform;
-
         targetCircle.SetActive(showTargetCircle);
         rHand.waitingOnOther = false;
         lHand.waitingOnOther = false;
@@ -134,6 +133,8 @@ public static class Elements {
                 break;
             case Fire | Earth:
                 //DoMagma();
+                GameObject earthSplinter = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magma/EarthShatter"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
+                agent.isCasting = false;
                 break;
             case Fire | Wind:
                 //DoBlaze();
@@ -143,9 +144,13 @@ public static class Elements {
                 break;
             case Earth | Wind:
                 //DoDust();
+                GameObject dustStorm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Dust/DustStorm"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
+                agent.isCasting = false;
                 break;
             case Earth | Electricity:
                 //DoMagnetize();
+                GameObject blackhole = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magnetise/Blackhole"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
+                agent.isCasting = false;
                 break;
             case Wind | Electricity:
                 //DoStorm();
