@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BlizzardScript : MonoBehaviour {
-    public float lerpValue = 1;
-
     GameObject player;
     // Start is called before the first frame update
     void Start() {
@@ -14,9 +12,7 @@ public class BlizzardScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        Vector3 targetDestination = player.transform.position;
-        targetDestination.y = transform.position.y;
-        transform.position = Vector3.Lerp(transform.position, targetDestination, Time.deltaTime * lerpValue);
+		transform.position = player.transform.position;
     }
 
     IEnumerator FreezeAll() {

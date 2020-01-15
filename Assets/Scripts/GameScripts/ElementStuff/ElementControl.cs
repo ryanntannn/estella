@@ -120,10 +120,14 @@ public static class Elements {
                 agent.isCasting = false;
                 break;
             case Water | Earth:
-                //DoMud();
-                break;
+				//DoMud();
+				GameObject golem = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Mud/MudGolem"), agent.targetCircle.transform.position, agent.transform.rotation);
+				agent.isCasting = false;
+				break;
             case Water | Wind:
-                //DoBlizzard();
+				//DoBlizzard();
+				GameObject blizzard = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Ice/Blizzard"), agent.transform.position, agent.transform.rotation);
+				agent.isCasting = false;
                 break;
             case Water | Electricity:
                 //DoShock();
