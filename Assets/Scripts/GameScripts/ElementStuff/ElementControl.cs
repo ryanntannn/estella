@@ -70,9 +70,14 @@ public class ElementControl : MonoBehaviour {
         hand.waitingOnOther = false;
         isCasting = true;
 
-        //start casting
-        if (Input.GetKey(KeyCode.LeftAlt)) hand.currentElement.DoBig(this, hand);
-        else hand.currentElement.DoBasic(this, hand);
+		//start casting
+		if (Input.GetKey(KeyCode.LeftAlt)) {
+			//hand.currentElement.DoBig(this, hand);
+		} else {
+			//hand.currentElement.DoBasic(this, hand);
+			anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
+			anim.SetTrigger("WhenShootWater");
+		}
     }
 }
 
@@ -116,17 +121,14 @@ public static class Elements {
                 //debuff enemy / buff own attack
                 GameObject steampit = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Steam/SteamPit"), agent.targetCircle.transform.position, Quaternion.identity);
                 //steampit.transform.parent = createdByPlayer;
-                agent.isCasting = false;
                 break;
             case Water | Earth:
 				//DoMud();
 				GameObject golem = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Mud/MudGolem"), agent.targetCircle.transform.position, agent.transform.rotation);
-				agent.isCasting = false;
 				break;
             case Water | Wind:
 				//DoBlizzard();
 				GameObject blizzard = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Ice/Blizzard"), agent.transform.position, agent.transform.rotation);
-				agent.isCasting = false;
                 break;
             case Water | Electricity:
                 //DoShock();
@@ -134,27 +136,26 @@ public static class Elements {
             case Fire | Earth:
                 //DoMagma();
                 GameObject earthSplinter = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magma/EarthShatter"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
-                agent.isCasting = false;
                 break;
             case Fire | Wind:
-                //DoBlaze();
-                break;
+				//DoBlaze();
+				GameObject fireTornado = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Blaze/FireTornado"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
+				break;
             case Fire | Electricity:
                 //DoPlasma();
                 break;
             case Earth | Wind:
                 //DoDust();
                 GameObject dustStorm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Dust/DustStorm"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
-                agent.isCasting = false;
                 break;
             case Earth | Electricity:
                 //DoMagnetize();
                 GameObject blackhole = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magnetise/Blackhole"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
-                agent.isCasting = false;
                 break;
             case Wind | Electricity:
-                //DoStorm();
-                break;
+				//DoStorm();
+				GameObject storm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Storm/Storm"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
+				break;
             default:
                 MonoBehaviour.print("Something wrong");
                 break;

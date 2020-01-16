@@ -5,13 +5,12 @@ using UnityEngine;
 public class StormScript : MonoBehaviour {
     public int noOfSparks = 5;
 
-    GameObject sparkWraith;
+    public GameObject sparkWraith;
     Vector3 centerOfStorm;
     GameObject[] sparkWraiths;
     // Start is called before the first frame update
     void Start() {
         centerOfStorm = transform.position + transform.up * 2.5f;
-        sparkWraith = Resources.Load<GameObject>("Elements/Storm/SparkWraith");
         sparkWraiths = new GameObject[noOfSparks];
 
         float step = 360 / noOfSparks;

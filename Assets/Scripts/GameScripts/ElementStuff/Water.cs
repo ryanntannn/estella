@@ -13,11 +13,12 @@ public class Water : Element {
         if (agent.lockOn.target && agent.enableLockOn) {
             instance.GetComponent<BubbleShot>().target = agent.lockOn.target;
         } else {
-            Vector3 newRot = Camera.main.transform.eulerAngles;
-            newRot.x = 0;
-            instance.transform.rotation = Quaternion.Euler(newRot);
+			//Vector3 newRot = Camera.main.transform.eulerAngles;
+			//newRot.x = 0;
+			//instance.transform.rotation = Quaternion.Euler(newRot);
+			instance.transform.rotation = hand.transform.rotation;
         }
-        agent.isCasting = false;
+        //agent.isCasting = false;
         //instance.transform.parent = createdByPlayer;
     }
 

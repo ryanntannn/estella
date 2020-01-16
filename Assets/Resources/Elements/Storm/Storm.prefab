@@ -57,3 +57,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38d3c2e0e54bef40814302752aed99e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noOfSparks: 5
+  sparkWraith: {fileID: 5687460801868481140, guid: 80c5a52bac1fc2845b63cc944bf1d1b9,
+    type: 3}
