@@ -22,8 +22,8 @@ public class AnimationEvents : MonoBehaviour {
 			ec = parent.GetComponent<ElementControl>();
 			lHand = ec.lHand;
 			rHand = ec.rHand;
-		}
-	}
+        }
+    }
 
 	#region Player animation events
 	void Fireball() {
@@ -38,7 +38,7 @@ public class AnimationEvents : MonoBehaviour {
 		if (anim.GetBool("IsUsingRightHand")) {
 			rHand.currentElement.DoBasic(ec, rHand);
 		} else {
-			lHand.currentElement.DoBasic(ec, lHand);
+            lHand.currentElement.DoBasic(ec, lHand);
 		}
 	}
 

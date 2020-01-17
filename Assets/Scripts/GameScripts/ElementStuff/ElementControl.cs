@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ElementControl : MonoBehaviour {
+    [HideInInspector]
     public Hand lHand, rHand;
     public float delay = 0.3f;
     public Animator anim;
@@ -22,6 +23,8 @@ public class ElementControl : MonoBehaviour {
         targetCircle.SetActive(showTargetCircle);
         rHand.waitingOnOther = false;
         lHand.waitingOnOther = false;
+        rHand = pc.rHand;
+        lHand = pc.lHand;
     }
 
     // Update is called once per frame

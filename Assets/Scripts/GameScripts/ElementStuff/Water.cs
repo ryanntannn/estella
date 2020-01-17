@@ -9,11 +9,10 @@ public class Water : Element {
 
 	public override void DoBasic(ElementControl agent, Hand hand) {
 		//bubble shot
-		GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Water/BubbleShot"), hand.transform.position, agent.transform.rotation);
+		GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Water/BubbleShot"), hand.transform.position, hand.transform.rotation);
 		//Vector3 newRot = Camera.main.transform.eulerAngles;
 		//newRot.x = 0;
 		//instance.transform.rotation = Quaternion.Euler(newRot);
-		instance.transform.rotation = hand.transform.rotation;
 
 		//agent.isCasting = false;
 		//instance.transform.parent = createdByPlayer;

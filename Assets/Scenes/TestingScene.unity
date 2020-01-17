@@ -90031,7 +90031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4458c8912ad3c4caf72973973045ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: {x: 100, y: 100}
+  mapSize: {x: 50, y: 50}
   nodeSize: 1
   obstacles:
     serializedVersion: 2
