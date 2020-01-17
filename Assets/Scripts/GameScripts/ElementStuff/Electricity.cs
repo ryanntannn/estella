@@ -10,7 +10,6 @@ public class Electricity : Element {
     public override void DoBasic(ElementControl agent, Hand hand) {
         //instantiate chain lightning
         GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Electricity/Shock_Chain"), hand.handPos);
-        instance.GetComponent<ChainLightningScript>().lockOn = agent.lockOn;
         instance.GetComponent<ChainLightningScript>().hand = hand;
 
         //start animation

@@ -10,7 +10,6 @@ public class ChainLightningScript : MonoBehaviour {
     public LineRenderer lr;
     List<GameObject> targets = new List<GameObject>();
     List<Vector3> positions = new List<Vector3>();
-    public LockOnTarget lockOn;
 
     // Start is called before the first frame update
     void Start() {
@@ -20,8 +19,6 @@ public class ChainLightningScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        initalTarget = lockOn.target;
-
         targets.Clear();
         positions.Clear();
 

@@ -8,9 +8,6 @@ public class ElementControl : MonoBehaviour {
     public Animator anim;
     public bool isCasting = false;
     //targing
-    [HideInInspector]
-    public LockOnTarget lockOn;
-    public bool enableLockOn = true;
     public GameObject targetCircle;
     public bool showTargetCircle = true;
 
@@ -20,7 +17,6 @@ public class ElementControl : MonoBehaviour {
     Transform createdByPlayer;
     // Start is called before the first frame update
     void Start() {
-        lockOn = GetComponent<LockOnTarget>();
         pc = GetComponent<PlayerControl>();
         createdByPlayer = GameObject.Find("CreatedbyPlayer").transform;
         targetCircle.SetActive(showTargetCircle);
