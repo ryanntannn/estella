@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class MudGolem : MonoBehaviour, ISteamable {
     public bool isSteamed = false;
@@ -12,6 +13,8 @@ public class MudGolem : MonoBehaviour, ISteamable {
     FiniteStateMachine fsm = new FiniteStateMachine();
     public GameObject target;
     public float range = 3;
+    List<Node> path = new List<Node>();
+    int onNode = 0;
 
     //animator
     Animator anim;
@@ -27,11 +30,17 @@ public class MudGolem : MonoBehaviour, ISteamable {
     void InitStates() {
         FindTarget = (gameObject) => {
             //Dijkstras to find an enemy
-            fsm.currentState = target ? Walk : Wander;
+            //get positions
+            IEnumerable<Vector3> positions = from enemy in map.enemies select enemy.transform.position;
+            //set the path of the golem
+            path = Algorithms.Dijkstras(map, transform.position, positions.ToArray());
+            //set target
+
+            fsm.currentState = path.Count > 0 ? Walk : Wander;
         };
 
         Walk = (gameObject) => {
-            //go towards target
+            //follow path
             if (target) {
                 transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Time.deltaTime);
                 if ((target.transform.position - transform.position).sqrMagnitude <= range) {

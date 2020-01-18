@@ -11,6 +11,7 @@ public class MapGrid : MonoBehaviour {
     public LayerMask obstacles = Layers.Terrain;
     public bool debug = true;
     Node[,] grid;
+    public List<Enemy> enemies = new List<Enemy>();
 
     public void Start() {
         InitGrid();

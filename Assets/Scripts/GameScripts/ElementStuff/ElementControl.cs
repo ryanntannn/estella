@@ -35,6 +35,7 @@ public class ElementControl : MonoBehaviour {
             if (Input.GetKeyDown(lHand.bind) && !isCasting && !lHand.waitingOnOther) lHandCr = StartCoroutine(WaitDelay(lHand));
             if (Input.GetKeyDown(rHand.bind) && !isCasting && !rHand.waitingOnOther) rHandCr = StartCoroutine(WaitDelay(rHand));
 
+            //combinations
             if(lHand.waitingOnOther && rHand.waitingOnOther) {
                 StopCoroutine(rHandCr);
                 StopCoroutine(lHandCr);
@@ -77,6 +78,16 @@ public class ElementControl : MonoBehaviour {
 			anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
 			anim.SetTrigger("WhenShootWater");
 		}
+    }
+
+    public void SummonGolem() {
+        GameObject golem = Instantiate(Resources.Load<GameObject>("Elements/Mud/MudGolem"), targetCircle.transform.position, targetCircle.transform.rotation);
+    }
+
+    public void DoPlasma() {
+        //average position of both hands
+        Vector3 avg = (rHand.handPos.position + lHand.handPos.position) / 2;
+        GameObject plasma = Instantiate(Resources.Load<GameObject>("Elements/Plasma/Plasma"), transform.position + transform.forward * 1.5f, transform.rotation);
     }
 }
 
@@ -122,8 +133,8 @@ public static class Elements {
                 //steampit.transform.parent = createdByPlayer;
                 break;
             case Water | Earth:
-				//DoMud();
-				GameObject golem = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Mud/MudGolem"), agent.targetCircle.transform.position, agent.transform.rotation);
+                //DoMud();
+                agent.anim.SetTrigger("SummonGolem");
 				break;
             case Water | Wind:
 				//DoBlizzard();
@@ -142,6 +153,7 @@ public static class Elements {
 				break;
             case Fire | Electricity:
                 //DoPlasma();
+                agent.anim.SetTrigger("WhenShootPlasma");
                 break;
             case Earth | Wind:
                 //DoDust();

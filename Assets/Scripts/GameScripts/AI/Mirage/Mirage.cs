@@ -20,7 +20,6 @@ public class Mirage : Enemy {
     float idleTime;
 
     //astar
-    MapGrid map;
     List<Node> path = new List<Node>();
     int currentNode = 0;
     float pathTimer = 1;    //reset every 1 second
@@ -30,7 +29,7 @@ public class Mirage : Enemy {
         base.Start();
         player = GameObject.FindGameObjectWithTag("Player");
         if (!anim) anim = transform.GetComponentInChildren<Animator>(); //if nothing set
-        map = Helper.FindComponentInScene<MapGrid>("Map");
+        ReferenceMap(Helper.FindComponentInScene<MapGrid>("Map"));  //set the reference to the map
         InitStates();
     }
 

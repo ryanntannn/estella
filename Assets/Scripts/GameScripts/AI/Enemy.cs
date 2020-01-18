@@ -21,11 +21,19 @@ public abstract class Enemy : MonoBehaviour {
     protected float currentResistance = 1;
     protected float currentFreezeThreshold = 2;
 
+    //pathfinding
+    public MapGrid map { get; private set; }
+
     public virtual void Start() {
         rb = GetComponent<Rigidbody>();
         currentSpeed = speed;
         currentResistance = resistanceLevel;
         currentFreezeThreshold = unfreezeThreshold;
+    }
+
+    public void ReferenceMap(MapGrid _map) {
+        this.map = _map;
+        _map.enemies.Add(this);
     }
 
     public virtual void Update() {
@@ -53,7 +61,7 @@ public abstract class Enemy : MonoBehaviour {
                 break;
             case Effects.Burn:
                 if (!onFirePs.isStopped) onFirePs.Play();
-                health -= Time.deltaTime * (1 / currentResistance);
+                TakeDamage(deltaTime * (1 / currentResistance));
                 break;
             case Effects.Freeze:
                 //cannot move
@@ -79,11 +87,6 @@ public abstract class Enemy : MonoBehaviour {
             //    break;
             default:
                 break;
-        }
-
-        //check if enemy is dead
-        if(health <= 0) {
-            Destroy(gameObject);
         }
     }
 

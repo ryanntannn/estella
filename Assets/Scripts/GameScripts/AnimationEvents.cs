@@ -45,6 +45,14 @@ public class AnimationEvents : MonoBehaviour {
 	void Done() {
 		ec.isCasting = false;
 	}
+
+    void SummonGolem() {
+        ec.SummonGolem();
+    }
+
+    void ShootPlasma() {
+        ec.DoPlasma();
+    }
 	#endregion
 
 	#region Mirage animation events
