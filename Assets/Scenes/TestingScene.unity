@@ -120123,6 +120123,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: camera-pivot
       objectReference: {fileID: 0}
+    - target: {fileID: 2921247291468237799, guid: 400a65bbe643397488d8c7653b5c272a,
+        type: 3}
+      propertyPath: cameraOffset.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921247291468237799, guid: 400a65bbe643397488d8c7653b5c272a,
+        type: 3}
+      propertyPath: cameraOffset.x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 400a65bbe643397488d8c7653b5c272a, type: 3}
 --- !u!4 &2946212468850875683
