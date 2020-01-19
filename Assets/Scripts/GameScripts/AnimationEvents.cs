@@ -26,11 +26,7 @@ public class AnimationEvents : MonoBehaviour {
     }
 
 	#region Player animation events
-	void Fireball() {
-		//parent.GetComponent<ElementControl>().Fireball();
-	}
-
-	void Attack() {
+	void BigAttack() {
 		
 	}
 
@@ -52,6 +48,10 @@ public class AnimationEvents : MonoBehaviour {
 
     void ShootPlasma() {
         ec.DoPlasma();
+    }
+
+    void SteamPit() {
+        ec.DoSteam();
     }
 	#endregion
 

@@ -5,6 +5,9 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Elements/Electricity")]
 public class Electricity : Element {
+    public override string BigAttackTrigger { get { return "WhenFlash"; } }
+    public override string SmallAttackTrigger { get { return "WhenShockchain"; } }
+
     public override string ElementName { get { return "Electricity"; } }
 
     public override void DoBasic(ElementControl agent, Hand hand) {

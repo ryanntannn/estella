@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877a0e6e43946bc46be58277aa25d598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 4
+  radius: 2
 --- !u!65 &2366546100810878661
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -361,7 +361,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4846,7 +4846,7 @@ ParticleSystem:
 --- !u!199 &1289390077554516655
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -4870,6 +4870,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5349,6 +5350,16 @@ PrefabInstance:
         type: 3}
       propertyPath: SizeModule.z.maxCurve.m_Curve.Array.data[3].outWeight
       value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 198111228059077286, guid: b52403e04ba9fb34b958f67128fe5613,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 198111228059077286, guid: b52403e04ba9fb34b958f67128fe5613,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b52403e04ba9fb34b958f67128fe5613, type: 3}

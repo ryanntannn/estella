@@ -70,14 +70,9 @@ public class ElementControl : MonoBehaviour {
         hand.waitingOnOther = false;
         isCasting = true;
 
-		//start casting
-		if (Input.GetKey(KeyCode.LeftAlt)) {
-			//hand.currentElement.DoBig(this, hand);
-		} else {
-			//hand.currentElement.DoBasic(this, hand);
-			anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
-			anim.SetTrigger("WhenShootWater");
-		}
+        //animations
+		anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
+        anim.SetTrigger(Input.GetKey(KeyCode.LeftAlt) ? hand.currentElement.BigAttackTrigger : hand.currentElement.SmallAttackTrigger);
     }
 
     public void SummonGolem() {
@@ -88,6 +83,11 @@ public class ElementControl : MonoBehaviour {
         //average position of both hands
         Vector3 avg = (rHand.handPos.position + lHand.handPos.position) / 2;
         GameObject plasma = Instantiate(Resources.Load<GameObject>("Elements/Plasma/Plasma"), transform.position + transform.forward * 1.5f, transform.rotation);
+    }
+
+    public void DoSteam() {
+        GameObject steampit = Instantiate(Resources.Load<GameObject>("Elements/Steam/SteamPit"), targetCircle.transform.position, Quaternion.identity);
+
     }
 }
 
@@ -129,8 +129,7 @@ public static class Elements {
         switch (lHandInt | rHandInt) {
             case Water | Fire:
                 //debuff enemy / buff own attack
-                GameObject steampit = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Steam/SteamPit"), agent.targetCircle.transform.position, Quaternion.identity);
-                //steampit.transform.parent = createdByPlayer;
+                agent.anim.SetTrigger("WhenSteamPit");
                 break;
             case Water | Earth:
                 //DoMud();
