@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.6886792, g: 0.5704343, b: 0.3930669, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.008
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.7435147, g: 0.70489055, b: 0.6710944, a: 1}
@@ -278,7 +278,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1186452821
 GameObject:
@@ -362,6 +362,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2921247291251705544, guid: 400a65bbe643397488d8c7653b5c272a,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921247291251705544, guid: 400a65bbe643397488d8c7653b5c272a,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.6918832
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921247291251705544, guid: 400a65bbe643397488d8c7653b5c272a,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.7977718
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921247291251705544, guid: 400a65bbe643397488d8c7653b5c272a,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.8679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921247291251705544, guid: 400a65bbe643397488d8c7653b5c272a,
+        type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2921247291468237796, guid: 400a65bbe643397488d8c7653b5c272a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -431,6 +456,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4590939294264814348, guid: cabae6f271e8db84a90a3a38cceb449b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 293
+      objectReference: {fileID: 0}
+    - target: {fileID: 4590939294264814348, guid: cabae6f271e8db84a90a3a38cceb449b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 4590939294264814348, guid: cabae6f271e8db84a90a3a38cceb449b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 213.78
+      objectReference: {fileID: 0}
     - target: {fileID: 5338631622277769811, guid: cabae6f271e8db84a90a3a38cceb449b,
         type: 3}
       propertyPath: m_Name
@@ -688,7 +728,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 2
       minColor: {r: 0, g: 0, b: 0, a: 0.62352943}
-      maxColor: {r: 0.6132076, g: 0.41122076, b: 0, a: 1}
+      maxColor: {r: 0.7075472, g: 0.42784455, b: 0.31038624, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1331,7 +1371,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 60
+      scalar: 120
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5231,7 +5271,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &8502388257051979852
 GameObject:
