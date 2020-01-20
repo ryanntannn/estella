@@ -60,8 +60,7 @@ public class MapGrid : MonoBehaviour {
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
                 //no diagonal movement
-                if (x == y) continue;
-                if (!(x == 0 || y == 0)) continue;
+                if ((x + y) == 0 || x == y) continue;
                 try {
                     returnNodes.Add(grid[_input.gridPos.x + x, _input.gridPos.y + y]);
                 } catch (IndexOutOfRangeException) { };

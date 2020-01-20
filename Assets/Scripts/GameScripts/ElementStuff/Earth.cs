@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Elements/Earth")]
 public class Earth : Element {
     public override string BigAttackTrigger { get { return "WhenGroundbreaker"; } }
-    public override string SmallAttackTrigger { get { return "WhenFissure"; } }
+    public override string SmallAttackTrigger { get { return "WhenSmallAttack"; } }
 
     public override string ElementName { get { return "Earth"; } }
 
