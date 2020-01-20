@@ -32,7 +32,7 @@ public abstract class Enemy : MonoBehaviour {
     }
 
     public void ReferenceMap(MapGrid _map) {
-        this.map = _map;
+        map = _map;
         _map.enemies.Add(this);
     }
 

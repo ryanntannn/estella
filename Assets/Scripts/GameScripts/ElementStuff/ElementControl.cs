@@ -70,12 +70,26 @@ public class ElementControl : MonoBehaviour {
         hand.waitingOnOther = false;
         isCasting = true;
 
-        //animations
+		StartCoroutine(TurnTowards());
+
+		//animations
 		anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
         anim.SetTrigger(Input.GetKey(KeyCode.LeftAlt) ? hand.currentElement.BigAttackTrigger : hand.currentElement.SmallAttackTrigger);
     }
 
-    public void SummonGolem() {
+	IEnumerator TurnTowards() {
+		//look at same direction as camera
+		//rot of cam
+		Quaternion camRot = Camera.main.transform.rotation;
+		while (isCasting) {
+			//change player rotation
+			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, camRot.eulerAngles.y, 0), Time.deltaTime * 2.5f);
+			yield return null;
+		}
+	}
+
+	#region Combinations
+	public void SummonGolem() {
         GameObject golem = Instantiate(Resources.Load<GameObject>("Elements/Mud/MudGolem"), targetCircle.transform.position, targetCircle.transform.rotation);
     }
 
@@ -112,6 +126,7 @@ public class ElementControl : MonoBehaviour {
 	public void DoStorm() {
 		GameObject storm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Storm/Storm"), targetCircle.transform.position, targetCircle.transform.rotation);
 	}
+	#endregion
 }
 
 public static class Elements {

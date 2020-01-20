@@ -21,6 +21,9 @@ public class PlayerControl : MonoBehaviour {
     GameObject radialMenu2;
     public bool isInRadialMenu;
 
+	//element control
+	ElementControl ec;
+
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody>();
@@ -33,12 +36,15 @@ public class PlayerControl : MonoBehaviour {
         //init health
         currentHealth = maxHealth;
 
+		//set ec
+		ec = GetComponent<ElementControl>();
+
         //check for lHand rHand
         if (!lHand) {
-            lHand = GetComponent<ElementControl>().lHand;
+            lHand = ec.lHand;
         }
         if (!rHand) {
-            rHand = GetComponent<ElementControl>().rHand;
+            rHand = ec.rHand;
         }
     }
 
@@ -94,9 +100,11 @@ public class PlayerControl : MonoBehaviour {
             isInRadialMenu = false;
             Time.timeScale = 1.0f;
         }
-
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0 && !isInRadialMenu && !animator.GetBool("IsDoingSomething"))
+		//animator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+		//animator.SetFloat("Vertical", Input.GetAxis("Vertical"));
+		if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && !isInRadialMenu && !ec.isCasting)
         {
+
             rotation = Mathf.Atan2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * Mathf.Rad2Deg;
             //transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotAngle + pivot.transform.eulerAngles.y, transform.eulerAngles.z);
 

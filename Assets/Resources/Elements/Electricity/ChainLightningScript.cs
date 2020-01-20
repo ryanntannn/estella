@@ -23,7 +23,7 @@ public class ChainLightningScript : MonoBehaviour {
         positions.Clear();
 
         if (!Input.GetKey(hand.bind)) {
-            hand.elementControl.isCasting = false;
+			hand.transform.GetChild(0).GetComponent<Animator>().SetBool("IsShocking", false);
             Destroy(gameObject);
         }
         positions.Add(Vector3.zero);
