@@ -5,6 +5,9 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Elements/Wind")]
 public class Wind : Element {
+    public override string BigAttackTrigger { get { return "WhenTornado"; } }
+    public override string SmallAttackTrigger { get { return "WhenWindslash"; } }
+
     public override string ElementName { get { return "Wind"; } }
 
     public override void DoBasic(ElementControl agent, Hand hand) {

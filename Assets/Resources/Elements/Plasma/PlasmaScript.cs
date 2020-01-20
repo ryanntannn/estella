@@ -12,19 +12,16 @@ public class PlasmaScript : MonoBehaviour {
 
     IEnumerator KillSelf() {
         yield return new WaitForSeconds(ttl);
-        DisablePS(transform);
+        DisablePs(transform);
+        Destroy(gameObject, 5);
     }
 
-    void DisablePS(Transform _t) {
-        foreach(Transform t in _t) {
-            DisablePS(t);
-            ParticleSystem temp = t.GetComponent<ParticleSystem>();
-            if (temp != null) {
-                temp.Stop();
-            }
-            Destroy(t.gameObject);
+    void DisablePs(Transform _t) {
+        ParticleSystem ps = _t.GetComponent<ParticleSystem>();
+        if (ps) ps.Stop();
+        foreach (Transform child in _t) {
+            DisablePs(child);
         }
-        Destroy(_t.gameObject);
     }
 
     // Update is called once per frame

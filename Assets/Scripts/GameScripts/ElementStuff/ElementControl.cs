@@ -19,7 +19,7 @@ public class ElementControl : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         pc = GetComponent<PlayerControl>();
-        createdByPlayer = GameObject.Find("CreatedbyPlayer").transform;
+        //createdByPlayer = GameObject.Find("CreatedbyPlayer").transform;
         targetCircle.SetActive(showTargetCircle);
         rHand.waitingOnOther = false;
         lHand.waitingOnOther = false;
@@ -70,14 +70,9 @@ public class ElementControl : MonoBehaviour {
         hand.waitingOnOther = false;
         isCasting = true;
 
-		//start casting
-		if (Input.GetKey(KeyCode.LeftAlt)) {
-			//hand.currentElement.DoBig(this, hand);
-		} else {
-			//hand.currentElement.DoBasic(this, hand);
-			anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
-			anim.SetTrigger("WhenShootWater");
-		}
+        //animations
+		anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
+        anim.SetTrigger(Input.GetKey(KeyCode.LeftAlt) ? hand.currentElement.BigAttackTrigger : hand.currentElement.SmallAttackTrigger);
     }
 
     public void SummonGolem() {
@@ -89,6 +84,34 @@ public class ElementControl : MonoBehaviour {
         Vector3 avg = (rHand.handPos.position + lHand.handPos.position) / 2;
         GameObject plasma = Instantiate(Resources.Load<GameObject>("Elements/Plasma/Plasma"), transform.position + transform.forward * 1.5f, transform.rotation);
     }
+
+    public void DoSteam() {
+        GameObject steampit = Instantiate(Resources.Load<GameObject>("Elements/Steam/SteamPit"), targetCircle.transform.position, Quaternion.identity);
+    }
+
+	public void DoIce() {
+		GameObject blizzard = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Ice/Blizzard"), transform.position, transform.rotation);
+	}
+
+	public void DoMagma() {
+		GameObject earthSplinter = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magma/EarthShatter"), targetCircle.transform.position, targetCircle.transform.rotation);
+	}
+
+	public void DoFireTornado() {
+		GameObject fireTornado = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Blaze/FireTornado"), targetCircle.transform.position, targetCircle.transform.rotation);
+	}
+
+	public void DoDust() {
+		GameObject dustStorm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Dust/DustStorm"), targetCircle.transform.position, targetCircle.transform.rotation);
+	}
+
+	public void DoMagnet() {
+		GameObject blackhole = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magnetise/Blackhole"), targetCircle.transform.position, targetCircle.transform.rotation);
+	}
+
+	public void DoStorm() {
+		GameObject storm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Storm/Storm"), targetCircle.transform.position, targetCircle.transform.rotation);
+	}
 }
 
 public static class Elements {
@@ -129,8 +152,7 @@ public static class Elements {
         switch (lHandInt | rHandInt) {
             case Water | Fire:
                 //debuff enemy / buff own attack
-                GameObject steampit = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Steam/SteamPit"), agent.targetCircle.transform.position, Quaternion.identity);
-                //steampit.transform.parent = createdByPlayer;
+                agent.anim.SetTrigger("WhenSteamPit");
                 break;
             case Water | Earth:
                 //DoMud();
@@ -138,34 +160,34 @@ public static class Elements {
 				break;
             case Water | Wind:
 				//DoBlizzard();
-				GameObject blizzard = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Ice/Blizzard"), agent.transform.position, agent.transform.rotation);
+				agent.anim.SetTrigger("WhenIce");
                 break;
             case Water | Electricity:
                 //DoShock();
                 break;
             case Fire | Earth:
-                //DoMagma();
-                GameObject earthSplinter = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magma/EarthShatter"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
+				//DoMagma();
+				agent.anim.SetTrigger("WhenMagma");
                 break;
             case Fire | Wind:
 				//DoBlaze();
-				GameObject fireTornado = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Blaze/FireTornado"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
+				agent.anim.SetTrigger("WhenFireTornado");
 				break;
             case Fire | Electricity:
                 //DoPlasma();
                 agent.anim.SetTrigger("WhenShootPlasma");
                 break;
             case Earth | Wind:
-                //DoDust();
-                GameObject dustStorm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Dust/DustStorm"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
+				//DoDust();
+				agent.anim.SetTrigger("WhenDustStorm");
                 break;
             case Earth | Electricity:
-                //DoMagnetize();
-                GameObject blackhole = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magnetise/Blackhole"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
+				//DoMagnetize();
+				agent.anim.SetTrigger("WhenMagnetise");
                 break;
             case Wind | Electricity:
 				//DoStorm();
-				GameObject storm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Storm/Storm"), agent.targetCircle.transform.position, agent.targetCircle.transform.rotation);
+				agent.anim.SetTrigger("WhenStorm");
 				break;
             default:
                 MonoBehaviour.print("Something wrong");

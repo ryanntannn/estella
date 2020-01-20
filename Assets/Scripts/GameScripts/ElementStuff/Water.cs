@@ -5,11 +5,14 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Elements/Water")]
 public class Water : Element {
-	public override string ElementName { get { return "Water"; } }
+    public override string BigAttackTrigger { get { return "WhenTsunami"; } }
+    public override string SmallAttackTrigger { get { return "WhenSmallAttack"; } }
+
+    public override string ElementName { get { return "Water"; } }
 
 	public override void DoBasic(ElementControl agent, Hand hand) {
 		//bubble shot
-		GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Water/BubbleShot"), hand.transform.position, hand.transform.rotation);
+		GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Water/BubbleShot"), hand.handPos.position, hand.transform.rotation);
 		//Vector3 newRot = Camera.main.transform.eulerAngles;
 		//newRot.x = 0;
 		//instance.transform.rotation = Quaternion.Euler(newRot);

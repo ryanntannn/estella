@@ -12,7 +12,7 @@ public class BlizzardScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-		transform.position = player.transform.position;
+		transform.position = player.transform.position + Vector3.up * 0.01f;
     }
 
     IEnumerator FreezeAll() {
@@ -22,6 +22,15 @@ public class BlizzardScript : MonoBehaviour {
             //we can do another check here, but it is redundant
             hit.collider.GetComponent<Enemy>().DebuffEnemy(5, Enemy.Effects.Freeze);
         }
-        Destroy(gameObject);
+		DisablePS(transform);
+        Destroy(gameObject, 10);
     }
+
+	void DisablePS(Transform _t) {
+		ParticleSystem ps = _t.GetComponent<ParticleSystem>();
+		if (ps) ps.Stop();
+		foreach(Transform child in _t) {
+			DisablePS(child);
+		}
+	}
 }

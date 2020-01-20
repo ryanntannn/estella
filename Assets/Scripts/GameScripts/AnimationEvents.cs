@@ -26,11 +26,7 @@ public class AnimationEvents : MonoBehaviour {
     }
 
 	#region Player animation events
-	void Fireball() {
-		//parent.GetComponent<ElementControl>().Fireball();
-	}
-
-	void Attack() {
+	void BigAttack() {
 		
 	}
 
@@ -53,6 +49,34 @@ public class AnimationEvents : MonoBehaviour {
     void ShootPlasma() {
         ec.DoPlasma();
     }
+
+    void SteamPit() {
+        ec.DoSteam();
+    }
+
+	void DoIce() {
+		ec.DoIce();
+	}
+
+	void DoMagma() {
+		ec.DoMagma();
+	}
+
+	void DoFireTornado() {
+		ec.DoFireTornado();
+	}
+
+	void DoDust() {
+		ec.DoDust();
+	}
+
+	void DoMagnet() {
+		ec.DoMagnet();
+	}
+
+	void DoStorm() {
+		ec.DoStorm();
+	}
 	#endregion
 
 	#region Mirage animation events
