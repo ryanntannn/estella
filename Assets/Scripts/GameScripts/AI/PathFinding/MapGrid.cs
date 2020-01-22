@@ -23,7 +23,6 @@ public class MapGrid : MonoBehaviour {
                 n.DrawGizmos(nodeSize);
             }
 		}
-
 	}
 
     public void InitGrid() {
@@ -38,15 +37,9 @@ public class MapGrid : MonoBehaviour {
         for (int x = 0; x < noOfX; x++) {
             for (int y = 0; y < noOfY; y++) {
 				Vector3 worldPos = Vector3.zero;
-				if(y % 2 == 0) {
-					worldPos = bottomLeft +
-					(transform.right * (x * nodeSize * 2 + nodeSize / 2)) +
-					(transform.forward * (y * nodeSize * 2 + nodeSize / 2));
-				} else {
-					worldPos = bottomLeft +
-					(transform.right * (x * nodeSize * 2 + nodeSize / 2 + centerToSide)) +
-					(transform.forward * (y * nodeSize * 2 + nodeSize / 2));
-				}
+                worldPos = bottomLeft +
+                (transform.right * (x * nodeSize * 2 + nodeSize / 2 + centerToSide * (y & 1))) +
+                (transform.forward * (y * nodeSize * 2 + nodeSize / 2));
                 bool walkable = !Physics.CheckBox(worldPos, Vector3.one * nodeSize, Quaternion.identity, obstacles);
                 Vector2Int gridPos = new Vector2Int(x, y);
                 grid[x, y] = new Node(worldPos, gridPos, walkable);
@@ -86,8 +79,8 @@ public class MapGrid : MonoBehaviour {
         _input -= bottomLeft;
 		float centerToSide = Mathf.Sqrt(Mathf.Pow(nodeSize, 2) - Mathf.Pow(nodeSize / 2, 2));
 
-		int y = (int)((_input.z - nodeSize) / (nodeSize * 1.98f));
-		int x = (int)(_input.x / (centerToSide * 2.28f));
+        int y = (int)((_input.z + nodeSize / 2) / (nodeSize * 2));
+		int x = (int)((_input.x * centerToSide + ((y & 0) * centerToSide)) / (centerToSide * 2));
         return grid[x, y];
     }
 }
