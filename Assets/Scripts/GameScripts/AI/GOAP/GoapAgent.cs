@@ -3,17 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoapAgent : MonoBehaviour {
-    FiniteStateMachine fsm = new FiniteStateMachine();
-    IGoap dataProvider;
-    GoapPlanner planner = new GoapPlanner();
-    GoapAction[] actions;
+public class GoapAgent : MonoBehaviour, IGoap {
+	public List<KeyValuePair<string, object>> GetWorldState() {
+		List<KeyValuePair<string, object>> worldState = new List<KeyValuePair<string, object>>();
 
-    // Start is called before the first frame update
-    void Start() {
-        dataProvider = GetComponent<IGoap>();
-        actions = GetComponents<GoapAction>();
-        //planner.PlanActions(gameObject, actions, dataProvider.GetWorldState());
+		return worldState;
+	}
+
+	// Start is called before the first frame update
+	void Start() {
+
     }
 
     // Update is called once per frame
