@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 //mirage boss fight
 public class Mirage : Enemy {
@@ -24,12 +25,21 @@ public class Mirage : Enemy {
     int currentNode = 0;
     float pathTimer = 1;    //reset every 1 second
     Node prevNode = null;
+    Thread pathFinder;
+    Vector3 playerPos = Vector3.zero, miragePos = Vector3.zero;
     // Start is called before the first frame update
     public override void Start() {
         base.Start();
         player = GameObject.FindGameObjectWithTag("Player");
         if (!anim) anim = transform.GetComponentInChildren<Animator>(); //if nothing set
         ReferenceMap(Helper.FindComponentInScene<MapGrid>("Map"));  //set the reference to the map
+
+        miragePos = transform.position;
+        playerPos = player.transform.position;
+        pathFinder = new Thread(FindPath);
+        pathFinder.Start();
+        pathFinder.IsBackground = true;
+
         InitStates();
     }
 
@@ -65,10 +75,12 @@ public class Mirage : Enemy {
                 }
                 GoToIdle(anim.GetCurrentAnimatorStateInfo(0).length);
             } else {
-                pathTimer += Time.deltaTime;
-                if (pathTimer >= 1) {
-                    QueryPath();
-                }
+                //pathTimer += Time.deltaTime;
+                //if (pathTimer >= 1) {
+                //    //QueryPath();
+                //    //pathTimer = 0;
+                //    if(!pathFinder.IsAlive) pathFinder.Start();
+                //}
                 Vector3 toLookAt = path[currentNode].worldPos;
                 toLookAt.y = transform.position.y;
                 transform.LookAt(toLookAt);
@@ -150,14 +162,31 @@ public class Mirage : Enemy {
         if (prevNode != path[0]) {
             currentNode = 0;
         }
-        pathTimer = 0;  //reset timer
+    }
+
+    void FindPath() {
+        path = Algorithms.AStar(map, miragePos, playerPos);
+        //if (prevNode != path[0]) {
+            currentNode = 1;
+        //}
     }
 
     //Update is called once per frame
     public override void Update() {
+        miragePos = transform.position;
+        playerPos = player.transform.position;
+        if (!pathFinder.IsAlive) {
+            pathFinder = new Thread(FindPath);
+            pathFinder.Start();
+        }
+
         base.Update();
 
         fsm.currentState(gameObject);
+    }
+
+    private void OnApplicationQuit() {
+        pathFinder.Abort();
     }
 
     public void JumpBack() {
@@ -176,4 +205,6 @@ public class Mirage : Enemy {
             hitInfo.collider.GetComponent<PlayerControl>().TakeDamage(5);
         }
     }
+
+
 }

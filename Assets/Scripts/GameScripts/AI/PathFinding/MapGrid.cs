@@ -17,8 +17,19 @@ public class MapGrid : MonoBehaviour {
 
     [HideInInspector]
     public float centerToSide;
+    Vector3 bottomLeft;
+    Vector3 right;
+    Vector3 up;
+    Vector3 forward;
 
-    public void Start() {
+    public void Awake() {
+        bottomLeft = transform.position -
+            transform.right * (mapSize.x / 2) -
+            transform.forward * (mapSize.y / 2);
+        right = transform.right;
+        up = transform.up;
+        forward = transform.forward;
+
         InitGrid();
     }
 
@@ -49,9 +60,6 @@ public class MapGrid : MonoBehaviour {
     public void InitGrid() {
         centerToSide = Mathf.Sqrt(Mathf.Pow(nodeSize, 2) - Mathf.Pow(nodeSize / 2, 2));
 
-        Vector3 bottomLeft = transform.position -
-            transform.right * (mapSize.x / 2) -
-            transform.forward * (mapSize.y / 2);
         int noOfX = (int)(mapSize.x / (centerToSide * 2));
         int noOfY = (int)(mapSize.y / (nodeSize * 1.5f));
 
@@ -59,8 +67,8 @@ public class MapGrid : MonoBehaviour {
         for (int x = 0; x < noOfX; x++) {
             for (int y = 0; y < noOfY; y++) {
                 Vector3 worldPos = bottomLeft +
-                (transform.right * (x * centerToSide * 2 + centerToSide * (y & 1))) +
-                (transform.forward * (y * nodeSize * 1.5f));
+                (right * (x * centerToSide * 2 + centerToSide * (y & 1))) +
+                (forward * (y * nodeSize * 1.5f));
                 bool walkable = !Physics.CheckBox(worldPos, Vector3.one * nodeSize, Quaternion.identity, obstacles);
                 Vector2Int gridPos = new Vector2Int(x, y);
                 grid[x, y] = new Node(worldPos, gridPos, walkable);
@@ -96,7 +104,6 @@ public class MapGrid : MonoBehaviour {
     }
 
     public Node WorldPointToNode(Vector3 _input) {
-        Vector3 bottomLeft = transform.position - transform.right * (mapSize.x / 2) - transform.forward * (mapSize.y / 2);
         _input -= bottomLeft;
 
         int y = (int)((_input.z + nodeSize) / (nodeSize * 1.5f));
