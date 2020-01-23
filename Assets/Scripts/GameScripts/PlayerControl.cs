@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
     public float speed;
+    private float cspeed;
     public float maxHealth = 100;
     private float currentHealth = 100;
     public Animator animator;
@@ -100,6 +101,15 @@ public class PlayerControl : MonoBehaviour {
             isInRadialMenu = false;
             Time.timeScale = 1.0f;
         }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            cspeed = speed * 3f;
+        } else
+        {
+            cspeed = speed;
+        }
+
 		//animator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
 		//animator.SetFloat("Vertical", Input.GetAxis("Vertical"));
 		if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && !isInRadialMenu && !ec.isCasting)
@@ -109,7 +119,7 @@ public class PlayerControl : MonoBehaviour {
             //transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotAngle + pivot.transform.eulerAngles.y, transform.eulerAngles.z);
 
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.eulerAngles.x, rotation + pivot.transform.eulerAngles.y, transform.eulerAngles.z), Time.deltaTime * 15);
-            Vector3 temp = transform.forward * speed;
+            Vector3 temp = transform.forward * cspeed;
             temp.y = rb.velocity.y;
             rb.velocity = temp;
             animator.SetBool("running", true);
