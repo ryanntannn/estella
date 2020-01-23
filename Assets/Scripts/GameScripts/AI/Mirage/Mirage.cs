@@ -75,7 +75,7 @@ public class Mirage : Enemy {
                 anim.SetBool("isWalking", true);
                 transform.position += transform.forward * speed * Time.deltaTime;
 
-                if ((transform.position - toLookAt).magnitude <= 0.02f) {
+                if ((transform.position - toLookAt).magnitude <= 0.4f) {
                     currentNode++;
                     if(currentNode >= path.Count) {
                         QueryPath();
