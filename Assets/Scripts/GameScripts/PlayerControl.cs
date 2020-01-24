@@ -6,7 +6,7 @@ public class PlayerControl : MonoBehaviour {
     public float speed;
     private float cspeed;
     public float maxHealth = 100;
-    private float currentHealth = 100;
+    public float currentHealth = 100;
     public Animator animator;
     public Element[] elements;
 
