@@ -86,18 +86,20 @@ public class GoapPlanner{
         return returnList;
     }
 
-    //check for child in parent
+    //check if action can be carried out
     bool HasCorrectWorldState(List<KeyValuePair<string, object>> parent, List<KeyValuePair<string, object>> child) {
         bool allMatch = true;
-        foreach(KeyValuePair<string, object> worldState in parent) {
-            bool match = false;
-            foreach(KeyValuePair<string, object> precon in child) {
-                if (precon.Equals(worldState)) {
-                    match = true;
+        foreach(KeyValuePair<string, object> precondition in child) {
+            bool matchFound = false;
+            //foreach precondition, check if it is met
+            foreach (KeyValuePair<string, object> worldState in parent) {
+                if (precondition.Equals(worldState)) {
+                    //precondition found
+                    matchFound = true;
                     break;
                 }
             }
-            if (!match) allMatch = false;
+            if (!matchFound) allMatch = false;
         }
         return allMatch;
     }

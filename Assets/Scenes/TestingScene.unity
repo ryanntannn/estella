@@ -10247,6 +10247,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e4b58090561fb40888749c08e3853a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &273088640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273088633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d7fbb79744e6c4488f0d36a27d2f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 1
+  target: {fileID: 0}
 --- !u!1 &319909377
 GameObject:
   m_ObjectHideFlags: 0
@@ -120754,10 +120768,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 290769368601072229, guid: daffffbbcef0ef9438dc7f257951d683,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 4716308938621295858, guid: daffffbbcef0ef9438dc7f257951d683,
         type: 3}
       propertyPath: m_Name
       value: EnemyKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716308938621295868, guid: daffffbbcef0ef9438dc7f257951d683,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4716308938621295869, guid: daffffbbcef0ef9438dc7f257951d683,
         type: 3}
@@ -120767,7 +120791,7 @@ PrefabInstance:
     - target: {fileID: 4716308938621295869, guid: daffffbbcef0ef9438dc7f257951d683,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4716308938621295869, guid: daffffbbcef0ef9438dc7f257951d683,
         type: 3}
