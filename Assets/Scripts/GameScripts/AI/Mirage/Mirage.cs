@@ -22,8 +22,6 @@ public class Mirage : Enemy {
 
     //astar
     List<Node> path = new List<Node>();
-    int currentNode = 0;
-    float pathTimer = 1;    //reset every 1 second
     Node prevNode = null;
     Thread pathFinder;
     Vector3 playerPos = Vector3.zero, miragePos = Vector3.zero;
@@ -75,24 +73,11 @@ public class Mirage : Enemy {
                 }
                 GoToIdle(anim.GetCurrentAnimatorStateInfo(0).length);
             } else {
-                //pathTimer += Time.deltaTime;
-                //if (pathTimer >= 1) {
-                //    //QueryPath();
-                //    //pathTimer = 0;
-                //    if(!pathFinder.IsAlive) pathFinder.Start();
-                //}
-                Vector3 toLookAt = path[currentNode].worldPos;
+                Vector3 toLookAt = path[1].worldPos;
                 toLookAt.y = transform.position.y;
                 transform.LookAt(toLookAt);
                 anim.SetBool("isWalking", true);
                 transform.position += transform.forward * speed * Time.deltaTime;
-
-                if ((transform.position - toLookAt).magnitude <= 0.4f) {
-                    currentNode++;
-                    if(currentNode >= path.Count) {
-                        QueryPath();
-                    }
-                }
             }
         };
 
@@ -157,18 +142,8 @@ public class Mirage : Enemy {
         skillCd[(int)skill] = false;
     }
 
-    void QueryPath() {
-        path = Algorithms.AStar(map, transform.position, player.transform.position);
-        if (prevNode != path[0]) {
-            currentNode = 0;
-        }
-    }
-
     void FindPath() {
         path = Algorithms.AStar(map, miragePos, playerPos);
-        //if (prevNode != path[0]) {
-            currentNode = 1;
-        //}
     }
 
     //Update is called once per frame
