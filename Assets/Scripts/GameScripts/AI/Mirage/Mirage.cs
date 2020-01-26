@@ -6,7 +6,6 @@ using System.Threading;
 
 //mirage boss fight
 public class Mirage : Enemy {
-    public Animator anim;
     public float maxIdleTime = 5;
 
     public GameObject mirageShadow;
@@ -29,7 +28,6 @@ public class Mirage : Enemy {
     public override void Start() {
         base.Start();
         player = GameObject.FindGameObjectWithTag("Player");
-        if (!anim) anim = transform.GetComponentInChildren<Animator>(); //if nothing set
         ReferenceMap(Helper.FindComponentInScene<MapGrid>("Map"));  //set the reference to the map
 
         miragePos = transform.position;

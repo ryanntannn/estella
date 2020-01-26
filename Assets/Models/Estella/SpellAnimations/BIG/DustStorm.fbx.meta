@@ -60,8 +60,8 @@ ModelImporter:
       curves: []
       events:
       - time: 0.40781513
-        functionName: DoDust
-        data: 
+        functionName: ECTrigger
+        data: DoDust
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0

@@ -13,6 +13,7 @@ public class MapGrid : MonoBehaviour {
     public LayerMask obstacles = Layers.Terrain;
     public bool debug = true;
     Node[,] grid;
+    public Node[,] Grid { get { return grid; } }
     public List<Enemy> enemies = new List<Enemy>();
 
     [HideInInspector]
@@ -32,6 +33,8 @@ public class MapGrid : MonoBehaviour {
 
         InitGrid();
     }
+
+    public MapGrid() { }//default
 
     public void OnDrawGizmos() {
         Gizmos.DrawWireCube(transform.position, new Vector3(mapSize.x, 1, mapSize.y));

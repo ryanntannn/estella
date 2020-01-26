@@ -17,6 +17,7 @@ public abstract class Enemy : MonoBehaviour {
     public float unfreezeThreshold = 2;
 
     protected Rigidbody rb;
+    protected Animator anim;
     protected float currentSpeed = 12;
     protected float currentResistance = 1;
     protected float currentFreezeThreshold = 2;
@@ -26,6 +27,7 @@ public abstract class Enemy : MonoBehaviour {
 
     public virtual void Start() {
         rb = GetComponent<Rigidbody>();
+        anim = transform.GetComponentInChildren<Animator>();
         currentSpeed = speed;
         currentResistance = resistanceLevel;
         currentFreezeThreshold = unfreezeThreshold;

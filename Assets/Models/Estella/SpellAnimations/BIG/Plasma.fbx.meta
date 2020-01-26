@@ -21,7 +21,8 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: Event Done has a time (2.629750) outside the clip's valid
+      range (0.000000..2.400000). It will never be fired
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -60,8 +61,8 @@ ModelImporter:
       curves: []
       events:
       - time: 0.5650054
-        functionName: ShootPlasma
-        data: 
+        functionName: ECTrigger
+        data: DoPlasma
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0

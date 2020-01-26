@@ -4,9 +4,7 @@ using UnityEngine;
 
 //Utility class that helps trigger animation events in the parent obj
 public class AnimationEvents : MonoBehaviour {
-	public ParticleSystem warpPS;
 	public GameObject knife;
-	public Shader warpShd;
 
 	GameObject parent;
 	Animator anim;
@@ -42,41 +40,9 @@ public class AnimationEvents : MonoBehaviour {
 		ec.isCasting = false;
 	}
 
-    void SummonGolem() {
-        ec.SummonGolem();
+    void ECTrigger(string message) {
+        ec.SendMessage(message);
     }
-
-    void ShootPlasma() {
-        ec.DoPlasma();
-    }
-
-    void SteamPit() {
-        ec.DoSteam();
-    }
-
-	void DoIce() {
-		ec.DoIce();
-	}
-
-	void DoMagma() {
-		ec.DoMagma();
-	}
-
-	void DoFireTornado() {
-		ec.DoFireTornado();
-	}
-
-	void DoDust() {
-		ec.DoDust();
-	}
-
-	void DoMagnet() {
-		ec.DoMagnet();
-	}
-
-	void DoStorm() {
-		ec.DoStorm();
-	}
 	#endregion
 
 	#region Mirage animation events
@@ -104,5 +70,9 @@ public class AnimationEvents : MonoBehaviour {
 	void KnifeAttack() {
 
 	}
-	#endregion
+    #endregion
+
+    #region Knight animation events
+
+    #endregion
 }

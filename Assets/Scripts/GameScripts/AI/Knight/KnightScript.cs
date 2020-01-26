@@ -10,7 +10,7 @@ public class KnightScript : Enemy {
     GameObject player;
     //fsm stuff
     FiniteStateMachine fsm = new FiniteStateMachine();
-    FiniteStateMachine.State IdleState, ChasePlayer;
+    FiniteStateMachine.State IdleState, ChasePlayer, AttackPlayer, nullState;
     List<Node> path = new List<Node>();
     Thread pathFinder;
     Vector3 playerPos, enemyPos;
@@ -21,16 +21,19 @@ public class KnightScript : Enemy {
 		base.Start();
 
         player = GameObject.FindWithTag("Player");
+        playerPos = player.transform.position;
+        enemyPos = transform.position;
+
         ResetThread();
         ReferenceMap(FindObjectOfType<MapGrid>());
-        stoppingSqrt = Mathf.Pow(stoppingSqrt, 2);
+        stoppingSqrt = Mathf.Pow(stoppingDistance, 2);
         InitStates();
 	}
 
     void ResetThread() {
         pathFinder = new Thread(SetPath);
-        pathFinder.IsBackground = true;
         pathFinder.Start();
+        pathFinder.IsBackground = true;
     }
 
     void InitStates() {
@@ -40,7 +43,8 @@ public class KnightScript : Enemy {
         };
 
         ChasePlayer = (gameObject) => {
-            if(path.Count > 0) {
+            if(path.Count > 1) {
+                anim.SetBool("IsWalking", true);
                 //move to second path
                 Vector3 toLookAt = path[1].worldPos;
                 toLookAt.y = transform.position.y;
@@ -50,9 +54,18 @@ public class KnightScript : Enemy {
 
             //check for stopping distance
             if ((transform.position - player.transform.position).sqrMagnitude <= stoppingSqrt) {
-                fsm.currentState = IdleState;
+                anim.SetBool("IsWalking", false);
+                fsm.currentState = AttackPlayer;
             }
         };
+
+        AttackPlayer = (gameObject) => {
+            anim.SetTrigger("WhenSpin");
+            fsm.currentState = nullState;
+        };
+
+        //actually do nothing
+        nullState = (gameObject) => { };
 
         //set default state to idle
         fsm.currentState = IdleState;
@@ -63,6 +76,7 @@ public class KnightScript : Enemy {
     }
 
     private void OnApplicationQuit() {
+        //kill thread
         if (pathFinder.IsAlive) pathFinder.Abort();
     }
 
@@ -91,4 +105,8 @@ public class KnightScript : Enemy {
 	public override void DebuffEnemy(float duration, Effects effect) {
 		base.DebuffEnemy(duration, effect);
 	}
+
+    public void GoIdle() {
+        fsm.currentState = IdleState;
+    }
 }

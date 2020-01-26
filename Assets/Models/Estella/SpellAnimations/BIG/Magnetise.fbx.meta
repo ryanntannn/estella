@@ -60,8 +60,8 @@ ModelImporter:
       curves: []
       events:
       - time: 0.40781513
-        functionName: DoMagnet
-        data: 
+        functionName: ECTrigger
+        data: DoMagnet
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0

@@ -60,8 +60,8 @@ ModelImporter:
       curves: []
       events:
       - time: 0.67532796
-        functionName: DoMagma
-        data: 
+        functionName: ECTrigger
+        data: DoMagma
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
