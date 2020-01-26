@@ -18,6 +18,7 @@ public abstract class Enemy : MonoBehaviour {
 
     protected Rigidbody rb;
     protected Animator anim;
+    protected PlayerControl player;
     protected float currentSpeed = 12;
     protected float currentResistance = 1;
     protected float currentFreezeThreshold = 2;
@@ -28,6 +29,7 @@ public abstract class Enemy : MonoBehaviour {
     public virtual void Start() {
         rb = GetComponent<Rigidbody>();
         anim = transform.GetComponentInChildren<Animator>();
+        player = GameObject.FindObjectOfType<PlayerControl>();
         currentSpeed = speed;
         currentResistance = resistanceLevel;
         currentFreezeThreshold = unfreezeThreshold;
@@ -106,6 +108,12 @@ public abstract class Enemy : MonoBehaviour {
             }
         } else {
             health -= damage;
+        }
+    }
+
+    public void DealDamage(float amount) {
+        if((player.transform.position - transform.position).magnitude <= 3) {
+            player.TakeDamage(amount, transform.position);
         }
     }
 }

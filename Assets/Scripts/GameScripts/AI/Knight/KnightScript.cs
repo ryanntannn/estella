@@ -7,7 +7,6 @@ using System.Threading;
 public class KnightScript : Enemy {
     public bool useFSM = true;
 
-    GameObject player;
     //fsm stuff
     FiniteStateMachine fsm = new FiniteStateMachine();
     FiniteStateMachine.State IdleState, ChasePlayer, AttackPlayer, nullState;
@@ -20,7 +19,6 @@ public class KnightScript : Enemy {
 	public override void Start() {
 		base.Start();
 
-        player = GameObject.FindWithTag("Player");
         playerPos = player.transform.position;
         enemyPos = transform.position;
 
@@ -76,6 +74,11 @@ public class KnightScript : Enemy {
     }
 
     private void OnApplicationQuit() {
+        //kill thread
+        if (pathFinder.IsAlive) pathFinder.Abort();
+    }
+
+    private void OnDestroy() {
         //kill thread
         if (pathFinder.IsAlive) pathFinder.Abort();
     }

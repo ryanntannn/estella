@@ -161,6 +161,20 @@ public class PlayerControl : MonoBehaviour {
         currentHealth -= damage;
         if(currentHealth <= 0) {
             //die
+            print("PlayerDied");
+            animator.SetTrigger("WhenDie");
+        }
+    }
+
+    public void TakeDamage(float damage, Vector3 sourcePos) {
+        currentHealth -= damage;
+        if (currentHealth <= 0) {
+            Vector3 targetDir = transform.position - sourcePos;
+            float angle = Vector3.SignedAngle(targetDir, -transform.forward, Vector3.up);
+            animator.SetFloat("DieRection", angle);
+            //die
+            print("PlayerDied");
+            animator.SetTrigger("WhenDie");
         }
     }
 }

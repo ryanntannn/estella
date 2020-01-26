@@ -12,7 +12,6 @@ public class Mirage : Enemy {
     FiniteStateMachine fsm = new FiniteStateMachine();
     //states
     FiniteStateMachine.State Idle, RegularAttack, JumpAttack, KnifeThrow, TeleToPlayer;
-    GameObject player;
 
     enum Skills { JumpBack, KnifeThrow, TeleToPlayer }
     bool[] skillCd = new bool[3];
@@ -27,7 +26,6 @@ public class Mirage : Enemy {
     // Start is called before the first frame update
     public override void Start() {
         base.Start();
-        player = GameObject.FindGameObjectWithTag("Player");
         ReferenceMap(Helper.FindComponentInScene<MapGrid>("Map"));  //set the reference to the map
 
         miragePos = transform.position;
@@ -159,7 +157,12 @@ public class Mirage : Enemy {
     }
 
     private void OnApplicationQuit() {
-        pathFinder.Abort();
+        if(pathFinder.IsAlive) pathFinder.Abort();
+    }
+
+    private void OnDestroy() {
+        //kill thread
+        if (pathFinder.IsAlive) pathFinder.Abort();
     }
 
     public void JumpBack() {

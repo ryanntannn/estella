@@ -73,6 +73,8 @@ public class AnimationEvents : MonoBehaviour {
     #endregion
 
     #region Knight animation events
-
+    void EnemyDmgTrigger(float damage) {
+        parent.GetComponent<Enemy>().DealDamage(damage);
+    }
     #endregion
 }
