@@ -14,9 +14,6 @@ public class Electricity : Element {
         //instantiate chain lightning
         GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Electricity/Shock_Chain"), hand.handPos);
         instance.GetComponent<ChainLightningScript>().hand = hand;
-
-        //start animation
-        agent.anim.SetBool("IsShocking", true);
     }
 
     public override void DoBig(ElementControl agent, Hand hand) {

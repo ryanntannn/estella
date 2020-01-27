@@ -113,7 +113,9 @@ public abstract class Enemy : MonoBehaviour {
 
     public void DealDamage(float amount) {
         if((player.transform.position - transform.position).magnitude <= 3) {
-            player.TakeDamage(amount, transform.position);
+            if(player.TakeDamage(amount, transform.position)) {
+                anim.SetTrigger("WhenPlayerDie");
+            }
         }
     }
 }
