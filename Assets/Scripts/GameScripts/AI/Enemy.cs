@@ -108,14 +108,22 @@ public abstract class Enemy : MonoBehaviour {
             }
         } else {
             health -= damage;
+            if(health <= 0) {
+                anim.SetTrigger("WhenDie");
+            }
         }
     }
 
     public void DealDamage(float amount) {
         if((player.transform.position - transform.position).magnitude <= 3) {
             if(player.TakeDamage(amount, transform.position)) {
-                anim.SetTrigger("WhenPlayerDie");
+                StartCoroutine(TriggerAfterDelay(1));
             }
         }
+    }
+
+    IEnumerator TriggerAfterDelay(float delay) {
+        yield return new WaitForSeconds(delay);
+        anim.SetTrigger("WhenPlayerDie");
     }
 }

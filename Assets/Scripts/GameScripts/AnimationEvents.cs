@@ -76,5 +76,10 @@ public class AnimationEvents : MonoBehaviour {
     void EnemyDmgTrigger(float damage) {
         parent.GetComponent<Enemy>().DealDamage(damage);
     }
+
+    void DieTrigger() {
+        Destroy(parent.GetComponent<Enemy>());
+        Destroy(parent.gameObject, 5);
+    }
     #endregion
 }
