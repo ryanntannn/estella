@@ -24,7 +24,6 @@ public class Fire : Element {
 			toLookAt.y = instance.transform.position.y;
 			instance.transform.LookAt(toLookAt);
 		}
-		agent.isCasting = false;
     }
 
     public override void DoBig(ElementControl agent, Hand hand) {

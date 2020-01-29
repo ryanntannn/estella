@@ -178,6 +178,7 @@ public static class Elements {
 				agent.anim.SetTrigger("WhenIce");
                 break;
             case Water | Electricity:
+				//TODO Shock
                 //DoShock();
                 break;
             case Fire | Earth:
