@@ -13,12 +13,17 @@ public class Water : Element {
 	public override void DoBasic(ElementControl agent, Hand hand) {
 		//bubble shot
 		GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Water/BubbleShot"), hand.handPos.position, hand.transform.rotation);
-		//Vector3 newRot = Camera.main.transform.eulerAngles;
-		//newRot.x = 0;
-		//instance.transform.rotation = Quaternion.Euler(newRot);
-
-		//agent.isCasting = false;
-		//instance.transform.parent = createdByPlayer;
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hitInfo;
+		if (Physics.Raycast(ray, out hitInfo, 100)) {
+			Vector3 toLookAt = hitInfo.point;
+			toLookAt.y = instance.transform.position.y;
+			instance.transform.LookAt(toLookAt);
+		} else {
+			Vector3 toLookAt = ray.direction * hitInfo.distance;
+			toLookAt.y = instance.transform.position.y;
+			instance.transform.LookAt(toLookAt);
+		}
 	}
 
 	public override void DoBig(ElementControl agent, Hand hand) {

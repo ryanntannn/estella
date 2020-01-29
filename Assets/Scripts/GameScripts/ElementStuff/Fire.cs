@@ -13,7 +13,18 @@ public class Fire : Element {
     public override void DoBasic(ElementControl agent, Hand hand) {
         //fireball
         GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Fire/Fireball"), hand.handPos.position, hand.transform.rotation);
-        agent.isCasting = false;
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hitInfo;
+		if(Physics.Raycast(ray, out hitInfo, 100)) {
+			Vector3 toLookAt = hitInfo.point;
+			toLookAt.y = instance.transform.position.y;
+			instance.transform.LookAt(toLookAt);
+		} else {
+			Vector3 toLookAt = ray.direction * hitInfo.distance;
+			toLookAt.y = instance.transform.position.y;
+			instance.transform.LookAt(toLookAt);
+		}
+		agent.isCasting = false;
     }
 
     public override void DoBig(ElementControl agent, Hand hand) {

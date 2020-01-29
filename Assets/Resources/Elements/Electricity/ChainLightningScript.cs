@@ -39,8 +39,9 @@ public class ChainLightningScript : MonoBehaviour {
         if (Physics.Raycast(transform.position, ray.direction, out hitInfo, 5, 1 << Layers.Enemy)) {
             FindEnemy(hitInfo.collider.gameObject);
         } else {
-            //make it go stright
-            positions.Add(hand.transform.up * 5);
+			//make it go stright at cross hair
+			//positions.Add(ray.direction * 5);
+			positions.Add(hand.transform.up * 5);
         }
 
         lr.positionCount = positions.Count;
