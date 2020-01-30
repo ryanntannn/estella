@@ -29,7 +29,7 @@ public class LightningStrikeScript : MonoBehaviour {
 	void Update() {
 		//raycast up and do damage
 		RaycastHit hitInfo;
-		if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, 100, ~Layers.Terrain)) {
+		if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, 100)) {
 			transform.position = hitInfo.point;
 			print(hitInfo.point);
 			if (hitInfo.collider.gameObject.CompareTag("Puddle")) {

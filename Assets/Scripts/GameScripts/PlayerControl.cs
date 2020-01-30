@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
     public float speed;
-    private float cspeed;
+    private float speedMult;
     public float maxHealth = 100;
     public float currentHealth = 100;
     public Animator animator;
@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour {
     private GameObject pivot;
     Rigidbody rb;
     float rotation = 0;
+    bool dodging = false;
 
     //Radial Menu
     GameObject radialMenu1;
@@ -51,49 +52,31 @@ public class PlayerControl : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        //RotationUpdate();
+        RotationUpdate();
+        RadialMenuUpdate();
+        InputUpdate();
         MovementUpdate();
     }
 
-    void RotationUpdate() {
-        //when mouse pressed
-        if (Input.GetKey(lHand.bind) || Input.GetKey(rHand.bind)) {
-            //look at same direction as camera
-            //rot of cam
-            Quaternion camRot = Camera.main.transform.rotation;
-            //change player rotation
-            transform.rotation = Quaternion.Euler(0, camRot.eulerAngles.y, 0);
-        }
-    }
-
-    void MovementUpdate()
-    {
-
-        if (Input.GetKeyDown(KeyCode.Q) && !isInRadialMenu)
-        {
+    void RadialMenuUpdate() {
+        if (Input.GetKeyDown(KeyCode.Q) && !isInRadialMenu) {
             radialMenu1.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             isInRadialMenu = true;
             Time.timeScale = 0.5f;
-        }
-        else if (Input.GetKeyUp(KeyCode.Q))
-        {
+        } else if (Input.GetKeyUp(KeyCode.Q)) {
             radialMenu1.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             int index = radialMenu1.GetComponent<RMF_RadialMenu>().index;
             ChangeElementBasedOnIndex(false, index);
             isInRadialMenu = false;
             Time.timeScale = 1.0f;
-        }
-        else if (Input.GetKeyDown(KeyCode.E) && !isInRadialMenu)
-        {
+        } else if (Input.GetKeyDown(KeyCode.E) && !isInRadialMenu) {
             radialMenu2.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             isInRadialMenu = true;
             Time.timeScale = 0.5f;
-        }
-        else if (Input.GetKeyUp(KeyCode.E))
-        {
+        } else if (Input.GetKeyUp(KeyCode.E)) {
             radialMenu2.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             int index = radialMenu2.GetComponent<RMF_RadialMenu>().index;
@@ -101,39 +84,51 @@ public class PlayerControl : MonoBehaviour {
             isInRadialMenu = false;
             Time.timeScale = 1.0f;
         }
+    }
 
-        //if (Input.GetKey(KeyCode.LeftShift))
-        //{
-        //    cspeed = speed * 3f;
-        //} else
-        //{
-        //    cspeed = speed;
-        //}
+    void InputUpdate() {
+        speedMult = 0;
+        if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && !isInRadialMenu && !ec.isCasting) {
+            speedMult = (Input.GetKey(KeyCode.LeftShift) ? 1.5f : 1);
+        }
+        animator.SetFloat("Speed", speedMult);
 
-		cspeed = speed * (Input.GetKey(KeyCode.LeftShift) ? 1.5f : 1);
+        if (Input.GetKeyDown(KeyCode.Space) && !dodging) {
+            dodging = true;
+            animator.SetTrigger("WhenDodge");
+        }
+    }
 
+    public void StartJump() {
+        rb.AddForce(transform.forward * 2 * speed, ForceMode.Impulse);
+    }
+
+    public void DoneJumping() {
+        Vector3 newVelocity = rb.velocity;
+        newVelocity.x = 0;
+        newVelocity.z = 0;
+        rb.velocity = newVelocity;
+        dodging = false;
+    }
+
+    void MovementUpdate() {
+        if (speedMult > 0 && !dodging) {
+            Vector3 temp = transform.forward * speedMult * speed;
+            temp.y = rb.velocity.y;
+            rb.velocity = temp;
+        }
+    }
+
+    void RotationUpdate()
+    {
 		//animator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
 		//animator.SetFloat("Vertical", Input.GetAxis("Vertical"));
-		if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && !isInRadialMenu && !ec.isCasting)
+		if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && !isInRadialMenu && !ec.isCasting && !dodging)
         {
             rotation = Mathf.Atan2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * Mathf.Rad2Deg;
             //transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotAngle + pivot.transform.eulerAngles.y, transform.eulerAngles.z);
-
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.eulerAngles.x, rotation + pivot.transform.eulerAngles.y, transform.eulerAngles.z), Time.deltaTime * 15);
-            Vector3 temp = transform.forward * cspeed;
-            temp.y = rb.velocity.y;
-            rb.velocity = temp;
-			animator.SetBool("IsWalking", cspeed == speed);
-			animator.SetBool("IsRunning", cspeed > speed);		
-		} else
-        {
-            animator.SetBool("IsWalking", false);
-            animator.SetBool("IsRunning", false);
-        }
-
-		if (Input.GetKeyDown(KeyCode.Space)) {
-			animator.SetTrigger("WhenDodge");
-		}
+		} 
 	}
 
     public void ChangeElementBasedOnIndex(bool hand, int i)

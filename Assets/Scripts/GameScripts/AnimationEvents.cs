@@ -48,10 +48,13 @@ public class AnimationEvents : MonoBehaviour {
         ec.SendMessage(message);
     }
 
-	void MoveTo() {
-		Vector3 newPos = parent.transform.position + transform.localPosition;
-		parent.transform.position = newPos; 
+	void DoneJumping() {
+        parent.GetComponent<PlayerControl>().DoneJumping();
 	}
+
+    void StartJump() {
+        parent.GetComponent<PlayerControl>().StartJump();
+    }
 	#endregion
 
 	#region Mirage animation events

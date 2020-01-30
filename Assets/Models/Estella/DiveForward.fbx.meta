@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2eae32ecef532dc42993399f847d648c
+guid: 01426a1930778ea4ea7539bba883777a
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
@@ -39,7 +39,7 @@ ModelImporter:
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 59
+      lastFrame: 98
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -59,8 +59,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 1
-        functionName: MoveTo
+      - time: 0.07436208
+        functionName: StartJump
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9317073
+        functionName: DoneJumping
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
