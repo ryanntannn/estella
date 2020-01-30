@@ -28,7 +28,11 @@ public class BubbleShot : MonoBehaviour {
             other.GetComponent<Enemy>().TakeDamage(5);
             //slow enemy
             other.GetComponent<Enemy>().DebuffEnemy(5, Enemy.Effects.Slow);
-            //then go make some puddle
+			//then go make some puddle on ground
+			RaycastHit hitInfo;
+			if(Physics.Raycast(other.transform.position, -Vector3.up, out hitInfo, 1 << Layers.Terrain)) {
+				GameObject puddle = Instantiate(Resources.Load<GameObject>("Elements/Water/Puddle"), hitInfo.point, Quaternion.identity);
+			}
 
             //then die
             GameObject instance = Instantiate(waterDie, transform.position, transform.rotation);

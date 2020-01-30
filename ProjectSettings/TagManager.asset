@@ -8,6 +8,7 @@ TagManager:
   - LeftHand
   - FireBall
   - Map
+  - Puddle
   layers:
   - Default
   - TransparentFX

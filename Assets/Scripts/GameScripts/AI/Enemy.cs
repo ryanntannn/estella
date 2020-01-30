@@ -115,7 +115,7 @@ public abstract class Enemy : MonoBehaviour {
     }
 
     public void DealDamage(float amount) {
-        if((player.transform.position - transform.position).magnitude <= 3) {
+        if((player.transform.position - transform.position).magnitude <= 1.5f) {
             if(player.TakeDamage(amount, transform.position)) {
                 StartCoroutine(TriggerAfterDelay(1));
             }

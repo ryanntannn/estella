@@ -54,13 +54,15 @@ public class ElementControl : MonoBehaviour {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
         Debug.DrawRay(Camera.main.transform.position, ray.direction * range, Color.red);
-        if (!Physics.Raycast(ray, out hitInfo, range, 1 << Layers.Terrain)) {
-            Vector3 newPos = Camera.main.transform.position + ray.direction * range;
-            Physics.Raycast(newPos, -Vector3.up, out hitInfo, 100, 1<< Layers.Terrain);
-        }
-        targetCircle.transform.position = hitInfo.point;
-        Vector3 lookRotation = Camera.main.transform.rotation.eulerAngles;
-        targetCircle.transform.rotation = Quaternion.Euler(0, lookRotation.y, 0);
+		//check if infront got anything
+		if (!Physics.Raycast(ray, out hitInfo, range, 1 << Layers.Terrain)) {
+			Vector3 newPos = Camera.main.transform.position + ray.direction * range;
+			Physics.Raycast(newPos, -Vector3.up, out hitInfo, 100, 1 << Layers.Terrain);
+		} 
+		targetCircle.transform.position = hitInfo.point;
+		Vector3 lookRotation = Camera.main.transform.rotation.eulerAngles;
+		targetCircle.transform.rotation = Quaternion.Euler(0, lookRotation.y, 0);
+		
     }
 
     //cast after delay
@@ -125,6 +127,10 @@ public class ElementControl : MonoBehaviour {
 
 	public void DoStorm() {
 		GameObject storm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Storm/Storm"), targetCircle.transform.position, targetCircle.transform.rotation);
+	}
+
+	public void DoShock() {
+
 	}
 	#endregion
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 673e4f1d624b9f548a14e4a445cf50f1
+guid: dfad059041d7cb1499b1607d80e9ac5f
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
@@ -37,9 +37,9 @@ ModelImporter:
     - serializedVersion: 16
       name: mixamo.com
       takeName: mixamo.com
-      internalID: -203655887218126122
+      internalID: 0
       firstFrame: 0
-      lastFrame: 65
+      lastFrame: 160
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -59,9 +59,9 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.67532796
-        functionName: ECTrigger
-        data: SummonGolem
+      - time: 0.37671232
+        functionName: DoBig
+        data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0

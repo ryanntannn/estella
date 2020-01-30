@@ -5,7 +5,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Elements/Electricity")]
 public class Electricity : Element {
-    public override string BigAttackTrigger { get { return "WhenFlash"; } }
+    public override string BigAttackTrigger { get { return "WhenBigAttack"; } }
     public override string SmallAttackTrigger { get { return "WhenSmallAttack"; } }
 
     public override string ElementName { get { return "Electricity"; } }
@@ -17,8 +17,8 @@ public class Electricity : Element {
     }
 
     public override void DoBig(ElementControl agent, Hand hand) {
-        //flash
-        /* TODO
+		//flash
+		/* TODO
              IEnumerator DoFlash() {
         float delay = 0.25f;
         //dash forward 
@@ -35,5 +35,8 @@ public class Electricity : Element {
         }
     }
          * */
-    }
+
+		GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Electricity/Lightningstrike"), agent.targetCircle.transform.position, Quaternion.Euler(-90, 0, 0));
+		
+	}
 }

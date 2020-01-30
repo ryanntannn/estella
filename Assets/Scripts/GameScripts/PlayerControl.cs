@@ -102,19 +102,20 @@ public class PlayerControl : MonoBehaviour {
             Time.timeScale = 1.0f;
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            cspeed = speed * 3f;
-        } else
-        {
-            cspeed = speed;
-        }
+        //if (Input.GetKey(KeyCode.LeftShift))
+        //{
+        //    cspeed = speed * 3f;
+        //} else
+        //{
+        //    cspeed = speed;
+        //}
+
+		cspeed = speed * (Input.GetKey(KeyCode.LeftShift) ? 1.5f : 1);
 
 		//animator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
 		//animator.SetFloat("Vertical", Input.GetAxis("Vertical"));
 		if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && !isInRadialMenu && !ec.isCasting)
         {
-
             rotation = Mathf.Atan2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * Mathf.Rad2Deg;
             //transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotAngle + pivot.transform.eulerAngles.y, transform.eulerAngles.z);
 
@@ -122,12 +123,18 @@ public class PlayerControl : MonoBehaviour {
             Vector3 temp = transform.forward * cspeed;
             temp.y = rb.velocity.y;
             rb.velocity = temp;
-            animator.SetBool("running", true);
-        } else
+			animator.SetBool("IsWalking", cspeed == speed);
+			animator.SetBool("IsRunning", cspeed > speed);		
+		} else
         {
-            animator.SetBool("running", false);
+            animator.SetBool("IsWalking", false);
+            animator.SetBool("IsRunning", false);
         }
-    }
+
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			animator.SetTrigger("WhenDodge");
+		}
+	}
 
     public void ChangeElementBasedOnIndex(bool hand, int i)
     {

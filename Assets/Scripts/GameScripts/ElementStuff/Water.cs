@@ -5,7 +5,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Elements/Water")]
 public class Water : Element {
-    public override string BigAttackTrigger { get { return "WhenTsunami"; } }
+    public override string BigAttackTrigger { get { return "WhenBigAttack"; } }
     public override string SmallAttackTrigger { get { return "WhenSmallAttack"; } }
 
     public override string ElementName { get { return "Water"; } }

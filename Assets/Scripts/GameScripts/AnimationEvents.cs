@@ -24,8 +24,12 @@ public class AnimationEvents : MonoBehaviour {
     }
 
 	#region Player animation events
-	void BigAttack() {
-		
+	void DoBig() {
+		if (anim.GetBool("IsUsingRightHand")) {
+			rHand.currentElement.DoBig(ec, rHand);
+		} else {
+			lHand.currentElement.DoBig(ec, lHand);
+		}
 	}
 
 	void SmallAttack() {
@@ -43,6 +47,11 @@ public class AnimationEvents : MonoBehaviour {
     void ECTrigger(string message) {
         ec.SendMessage(message);
     }
+
+	void MoveTo() {
+		Vector3 newPos = parent.transform.position + transform.localPosition;
+		parent.transform.position = newPos; 
+	}
 	#endregion
 
 	#region Mirage animation events
