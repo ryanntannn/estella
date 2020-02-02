@@ -36,7 +36,7 @@ public class ElementControl : MonoBehaviour {
             if (Input.GetKeyDown(rHand.bind) && !isCasting && !rHand.waitingOnOther) rHandCr = StartCoroutine(WaitDelay(rHand));
 
             //combinations
-            if(lHand.waitingOnOther && rHand.waitingOnOther) {
+            if (lHand.waitingOnOther && rHand.waitingOnOther) {
                 StopCoroutine(rHandCr);
                 StopCoroutine(lHandCr);
                 lHand.waitingOnOther = false;
@@ -54,15 +54,15 @@ public class ElementControl : MonoBehaviour {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
         Debug.DrawRay(Camera.main.transform.position, ray.direction * range, Color.red);
-		//check if infront got anything
-		if (!Physics.Raycast(ray, out hitInfo, range, 1 << Layers.Terrain)) {
-			Vector3 newPos = Camera.main.transform.position + ray.direction * range;
-			Physics.Raycast(newPos, -Vector3.up, out hitInfo, 100, 1 << Layers.Terrain);
-		} 
-		targetCircle.transform.position = hitInfo.point;
-		Vector3 lookRotation = Camera.main.transform.rotation.eulerAngles;
-		targetCircle.transform.rotation = Quaternion.Euler(0, lookRotation.y, 0);
-		
+        //check if infront got anything
+        if (!Physics.Raycast(ray, out hitInfo, range, 1 << Layers.Terrain)) {
+            Vector3 newPos = Camera.main.transform.position + ray.direction * range;
+            Physics.Raycast(newPos, -Vector3.up, out hitInfo, 100, 1 << Layers.Terrain);
+        }
+        targetCircle.transform.position = hitInfo.point;
+        Vector3 lookRotation = Camera.main.transform.rotation.eulerAngles;
+        targetCircle.transform.rotation = Quaternion.Euler(0, lookRotation.y, 0);
+
     }
 
     //cast after delay
@@ -72,26 +72,26 @@ public class ElementControl : MonoBehaviour {
         hand.waitingOnOther = false;
         isCasting = true;
 
-		StartCoroutine(TurnTowards());
+        StartCoroutine(TurnTowards());
 
-		//animations
-		anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
+        //animations
+        anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
         anim.SetTrigger(Input.GetKey(KeyCode.LeftAlt) ? hand.currentElement.BigAttackTrigger : hand.currentElement.SmallAttackTrigger);
     }
 
-	IEnumerator TurnTowards() {
-		//look at same direction as camera
-		//rot of cam
-		Quaternion camRot = Camera.main.transform.rotation;
-		while (isCasting) {
-			//change player rotation
-			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, camRot.eulerAngles.y, 0), Time.deltaTime * 2.5f);
-			yield return null;
-		}
-	}
+    IEnumerator TurnTowards() {
+        //look at same direction as camera
+        //rot of cam
+        Quaternion camRot = Camera.main.transform.rotation;
+        while (isCasting) {
+            //change player rotation
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, camRot.eulerAngles.y, 0), Time.deltaTime * 2.5f);
+            yield return null;
+        }
+    }
 
-	#region Combinations
-	public void SummonGolem() {
+    #region Combinations
+    public void SummonGolem() {
         GameObject golem = Instantiate(Resources.Load<GameObject>("Elements/Mud/MudGolem"), targetCircle.transform.position, targetCircle.transform.rotation);
     }
 
@@ -105,34 +105,60 @@ public class ElementControl : MonoBehaviour {
         GameObject steampit = Instantiate(Resources.Load<GameObject>("Elements/Steam/SteamPit"), targetCircle.transform.position, Quaternion.identity);
     }
 
-	public void DoIce() {
-		GameObject blizzard = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Ice/Blizzard"), transform.position, transform.rotation);
-	}
+    public void DoIce() {
+        GameObject blizzard = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Ice/Blizzard"), transform.position, transform.rotation);
+    }
 
-	public void DoMagma() {
-		GameObject earthSplinter = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magma/EarthShatter"), targetCircle.transform.position, targetCircle.transform.rotation);
-	}
+    public void DoMagma() {
+        GameObject earthSplinter = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magma/EarthShatter"), targetCircle.transform.position, targetCircle.transform.rotation);
+    }
 
-	public void DoFireTornado() {
-		GameObject fireTornado = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Blaze/FireTornado"), targetCircle.transform.position, targetCircle.transform.rotation);
-	}
+    public void DoFireTornado() {
+        GameObject fireTornado = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Blaze/FireTornado"), targetCircle.transform.position, targetCircle.transform.rotation);
+    }
 
-	public void DoDust() {
-		GameObject dustStorm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Dust/DustStorm"), targetCircle.transform.position, targetCircle.transform.rotation);
-	}
+    public void DoDust() {
+        GameObject dustStorm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Dust/DustStorm"), targetCircle.transform.position, targetCircle.transform.rotation);
+    }
 
-	public void DoMagnet() {
-		GameObject blackhole = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magnetise/Blackhole"), targetCircle.transform.position, targetCircle.transform.rotation);
-	}
+    public void DoMagnet() {
+        GameObject blackhole = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magnetise/Blackhole"), targetCircle.transform.position, targetCircle.transform.rotation);
+    }
 
-	public void DoStorm() {
-		GameObject storm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Storm/Storm"), targetCircle.transform.position, targetCircle.transform.rotation);
-	}
+    public void DoStorm() {
+        GameObject storm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Storm/Storm"), targetCircle.transform.position, targetCircle.transform.rotation);
+    }
 
-	public void DoShock() {
+    public void StartShock() {
+        //find enemies in sphere
+        Collider[] hits = Physics.OverlapSphere(targetCircle.transform.position, 3, 1 << Layers.Enemy);
+        StartCoroutine(DoShock(100, hits, 2));
+    }
 
-	}
-	#endregion
+    public IEnumerator DoShock(float totalDamage, Collider[] enemies, float totalDuration) {
+        anim.speed = 0;
+        
+        //calculate damage to deal to each enemy
+        float indvDmg = totalDamage / enemies.Length;
+        //calculate downtime before going to next enemy
+        float indvTime = totalDuration / enemies.Length;
+
+        //if no enemies just teleport
+        if(enemies.Length <= 0) {
+            transform.position = targetCircle.transform.position + targetCircle.transform.up;
+        }
+
+        //start moving
+        for(int count = 0; count <= enemies.Length - 1; count++) {
+            transform.position = enemies[count].transform.position - enemies[count].transform.forward;
+            enemies[count].GetComponent<Enemy>().TakeDamage(indvDmg);
+            yield return new WaitForSeconds(indvTime);
+        }
+
+        anim.speed = 1;
+        isCasting = false;
+    }
+    #endregion
 }
 
 public static class Elements {
@@ -178,39 +204,40 @@ public static class Elements {
             case Water | Earth:
                 //DoMud();
                 agent.anim.SetTrigger("SummonGolem");
-				break;
+                break;
             case Water | Wind:
-				//DoBlizzard();
-				agent.anim.SetTrigger("WhenIce");
+                //DoBlizzard();
+                agent.anim.SetTrigger("WhenIce");
                 break;
             case Water | Electricity:
-				//TODO Shock
+                //TODO Shock
+                agent.anim.SetTrigger("WhenShock");
                 //DoShock();
                 break;
             case Fire | Earth:
-				//DoMagma();
-				agent.anim.SetTrigger("WhenMagma");
+                //DoMagma();
+                agent.anim.SetTrigger("WhenMagma");
                 break;
             case Fire | Wind:
-				//DoBlaze();
-				agent.anim.SetTrigger("WhenFireTornado");
-				break;
+                //DoBlaze();
+                agent.anim.SetTrigger("WhenFireTornado");
+                break;
             case Fire | Electricity:
                 //DoPlasma();
                 agent.anim.SetTrigger("WhenShootPlasma");
                 break;
             case Earth | Wind:
-				//DoDust();
-				agent.anim.SetTrigger("WhenDustStorm");
+                //DoDust();
+                agent.anim.SetTrigger("WhenDustStorm");
                 break;
             case Earth | Electricity:
-				//DoMagnetize();
-				agent.anim.SetTrigger("WhenMagnetise");
+                //DoMagnetize();
+                agent.anim.SetTrigger("WhenMagnetise");
                 break;
             case Wind | Electricity:
-				//DoStorm();
-				agent.anim.SetTrigger("WhenStorm");
-				break;
+                //DoStorm();
+                agent.anim.SetTrigger("WhenStorm");
+                break;
             default:
                 MonoBehaviour.print("Something wrong");
                 break;
