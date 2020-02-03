@@ -89,6 +89,10 @@ public class AnimationEvents : MonoBehaviour {
         parent.GetComponent<Enemy>().DealDamage(damage);
     }
 
+    void KnightGoIdle() {
+        parent.GetComponent<KnightScript>().GoIdle();
+    }
+
     void DieTrigger() {
         Destroy(parent.GetComponent<Enemy>());
         Destroy(parent.gameObject, 5);

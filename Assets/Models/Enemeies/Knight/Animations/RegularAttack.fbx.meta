@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9b0f46e245a448541ac5cdbe225c5e70
+guid: 6322b68f3a56c644297bdcf134717eb5
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
@@ -39,7 +39,7 @@ ModelImporter:
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 146
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -48,10 +48,10 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 1
+      keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
@@ -59,11 +59,11 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.5825763
+      - time: 0.42616034
         functionName: EnemyDmgTrigger
         data: 
         objectReferenceParameter: {instanceID: 0}
-        floatParameter: 50
+        floatParameter: 10
         intParameter: 0
         messageOptions: 0
       - time: 1

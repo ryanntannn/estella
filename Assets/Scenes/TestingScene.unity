@@ -56166,7 +56166,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1730314408}
-  - component: {fileID: 1730314409}
   - component: {fileID: 1730314412}
   - component: {fileID: 1730314411}
   - component: {fileID: 273088636}
@@ -56181,7 +56180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1730314408
 Transform:
   m_ObjectHideFlags: 0
@@ -56190,26 +56189,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730314407}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.66, y: 1, z: -5.18}
+  m_LocalPosition: {x: 10.85, y: 1, z: -8.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5006512735165860836}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1730314409
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730314407}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 1.8, z: 0.3}
-  m_Center: {x: 0, y: -0.1, z: 0}
 --- !u!195 &1730314410
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -56219,9 +56205,9 @@ NavMeshAgent:
   m_GameObject: {fileID: 1730314407}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 1
-  m_Acceleration: 1
+  m_Radius: 0.3
+  m_Speed: 1.5
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 360
   m_StoppingDistance: 0.3
@@ -56229,7 +56215,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.8
-  m_BaseOffset: 0.9
+  m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &1730314411
@@ -56245,7 +56231,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useFSM: 1
-  stoppingDist: 2
+  stoppingDist: 1
+  aggroRange: 20
 --- !u!114 &1730314412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97998,6 +97985,8 @@ MonoBehaviour:
   speed: 3
   maxHealth: 100
   currentHealth: 100
+  maxStamina: 100
+  currentStamina: 100
   animator: {fileID: 5125822277388029135}
   elements:
   - {fileID: 11400000, guid: de845f4377d27cc42aa97d7cf7b03ec2, type: 2}

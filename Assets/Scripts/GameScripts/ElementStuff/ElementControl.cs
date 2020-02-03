@@ -11,6 +11,8 @@ public class ElementControl : MonoBehaviour {
     //targing
     public GameObject targetCircle;
     public bool showTargetCircle = true;
+    public float currentMana = 100, maxMana = 100;
+    public float manaRegenRate = 1.0f;
 
     PlayerControl pc;
     Coroutine lHandCr, rHandCr;
@@ -47,6 +49,10 @@ public class ElementControl : MonoBehaviour {
         }
         //target circle
         SetTargetCircle();
+
+        if (!isCasting) {
+            currentMana = Mathf.Clamp(currentMana + Time.deltaTime * manaRegenRate, 0, maxMana);
+        }
     }
 
     void SetTargetCircle() {
@@ -92,44 +98,54 @@ public class ElementControl : MonoBehaviour {
 
     #region Combinations
     public void SummonGolem() {
+        currentMana -= Elements.GolemCost;
         GameObject golem = Instantiate(Resources.Load<GameObject>("Elements/Mud/MudGolem"), targetCircle.transform.position, targetCircle.transform.rotation);
     }
 
     public void DoPlasma() {
+        currentMana -= Elements.PlasmaCost;
         //average position of both hands
         Vector3 avg = (rHand.handPos.position + lHand.handPos.position) / 2;
         GameObject plasma = Instantiate(Resources.Load<GameObject>("Elements/Plasma/Plasma"), transform.position + transform.forward * 1.5f, transform.rotation);
     }
 
     public void DoSteam() {
+        currentMana -= Elements.SteamCost;
         GameObject steampit = Instantiate(Resources.Load<GameObject>("Elements/Steam/SteamPit"), targetCircle.transform.position, Quaternion.identity);
     }
 
     public void DoIce() {
+        currentMana -= Elements.IceCost;
         GameObject blizzard = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Ice/Blizzard"), transform.position, transform.rotation);
     }
 
     public void DoMagma() {
+        currentMana -= Elements.MagmaCost;
         GameObject earthSplinter = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magma/EarthShatter"), targetCircle.transform.position, targetCircle.transform.rotation);
     }
 
     public void DoFireTornado() {
+        currentMana -= Elements.BlazeCost;
         GameObject fireTornado = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Blaze/FireTornado"), targetCircle.transform.position, targetCircle.transform.rotation);
     }
 
     public void DoDust() {
+        currentMana -= Elements.DustCost;
         GameObject dustStorm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Dust/DustStorm"), targetCircle.transform.position, targetCircle.transform.rotation);
     }
 
     public void DoMagnet() {
+        currentMana -= Elements.MagnetiseCost;
         GameObject blackhole = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Magnetise/Blackhole"), targetCircle.transform.position, targetCircle.transform.rotation);
     }
 
     public void DoStorm() {
+        currentMana -= Elements.StormCost;
         GameObject storm = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Elements/Storm/Storm"), targetCircle.transform.position, targetCircle.transform.rotation);
     }
 
     public void StartShock() {
+        currentMana -= Elements.ShockCost;
         //find enemies in sphere
         Collider[] hits = Physics.OverlapSphere(targetCircle.transform.position, 3, 1 << Layers.Enemy);
         StartCoroutine(DoShock(100, hits, 2));
@@ -169,6 +185,19 @@ public static class Elements {
         Wind = 8,
         Electricity = 16;
 
+    public const int
+        SteamCost = 20,
+        GolemCost = 20,
+        IceCost = 30,
+        ShockCost = 30,
+        MagmaCost = 30,
+        BlazeCost = 40,
+        PlasmaCost = 90,
+        DustCost = 40,
+        MagnetiseCost = 45,
+        StormCost = 45;
+
+
     public static string ByteToName(int input) {
         switch (input) {
             case 1: return "Water";
@@ -198,43 +227,52 @@ public static class Elements {
         //i.e fire + water is the same as water + fire
         switch (lHandInt | rHandInt) {
             case Water | Fire:
+                if (agent.currentMana < SteamCost) break;
                 //debuff enemy / buff own attack
                 agent.anim.SetTrigger("WhenSteamPit");
                 break;
             case Water | Earth:
                 //DoMud();
+                if (agent.currentMana < GolemCost) break;
                 agent.anim.SetTrigger("SummonGolem");
                 break;
             case Water | Wind:
                 //DoBlizzard();
+                if (agent.currentMana < IceCost) break;
                 agent.anim.SetTrigger("WhenIce");
                 break;
             case Water | Electricity:
-                //TODO Shock
+                if (agent.currentMana < ShockCost) break;
                 agent.anim.SetTrigger("WhenShock");
                 //DoShock();
                 break;
             case Fire | Earth:
+                if (agent.currentMana < MagmaCost) break;
                 //DoMagma();
                 agent.anim.SetTrigger("WhenMagma");
                 break;
             case Fire | Wind:
+                if (agent.currentMana < BlazeCost) break;
                 //DoBlaze();
                 agent.anim.SetTrigger("WhenFireTornado");
                 break;
             case Fire | Electricity:
+                if (agent.currentMana < PlasmaCost) break;
                 //DoPlasma();
                 agent.anim.SetTrigger("WhenShootPlasma");
                 break;
             case Earth | Wind:
+                if (agent.currentMana < DustCost) break;
                 //DoDust();
                 agent.anim.SetTrigger("WhenDustStorm");
                 break;
             case Earth | Electricity:
+                if (agent.currentMana < MagnetiseCost) break;
                 //DoMagnetize();
                 agent.anim.SetTrigger("WhenMagnetise");
                 break;
             case Wind | Electricity:
+                if (agent.currentMana < StormCost) break;
                 //DoStorm();
                 agent.anim.SetTrigger("WhenStorm");
                 break;

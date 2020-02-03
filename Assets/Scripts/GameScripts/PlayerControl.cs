@@ -7,6 +7,8 @@ public class PlayerControl : MonoBehaviour {
     private float speedMult;
     public float maxHealth = 100;
     public float currentHealth = 100;
+    public float maxStamina = 100;
+    public float currentStamina = 100;
     public Animator animator;
     public Element[] elements;
 
@@ -37,6 +39,7 @@ public class PlayerControl : MonoBehaviour {
 
         //init health
         currentHealth = maxHealth;
+        currentStamina = maxStamina;
 
 		//set ec
 		ec = GetComponent<ElementControl>();
@@ -89,11 +92,17 @@ public class PlayerControl : MonoBehaviour {
     void InputUpdate() {
         speedMult = 0;
         if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && !isInRadialMenu && !ec.isCasting) {
-            speedMult = (Input.GetKey(KeyCode.LeftShift) ? 1.5f : 1);
+            speedMult = ((Input.GetKey(KeyCode.LeftShift) && currentStamina > 0) ? 1.5f : 1);
         }
         animator.SetFloat("Speed", speedMult);
+        if(speedMult > 1) {
+            currentStamina -= Time.deltaTime * 2;
+        } else {
+            currentStamina = Mathf.Clamp(currentStamina + Time.deltaTime * (speedMult > 0.5f ? 1 : dodging ? 0 : 2), 0, maxStamina);
+        }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !dodging) {
+        if (Input.GetKeyDown(KeyCode.Space) && !dodging && currentStamina > 20) {
+            currentStamina -= 20;
             dodging = true;
             animator.SetTrigger("WhenDodge");
         }

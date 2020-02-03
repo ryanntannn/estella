@@ -7,71 +7,121 @@ using UnityEngine.AI;
 
 public class KnightScript : MonoBehaviour {
     public bool useFSM = true;
-	public float stoppingDist = 2;
-	private float stoppingSqrt;
+	public float stoppingDist = 2, aggroRange = 10;
+	private float stoppingSqrt, aggroSqrt;
 
-	//use navmesh
-	NavMeshAgent navAgent;
 	//data provider
 	Enemy dataProvider;
 	//fsm stuff
 	FiniteStateMachine fsm = new FiniteStateMachine();
-	FiniteStateMachine.State IdleState, ChasePlayer, AttackPlayer, nullState;
+	FiniteStateMachine.State IdleState, Wander, ChasePlayer, SpinAttack, RegularAttack, nullState;
+    //ai
+    NavMeshAgent navAgent;
+    Vector3 targetLocation = Vector3.zero;
+    float currentIdleTime;
+    float internalCounter = 0;
+    float walkDist = 20;
+    bool spinOnCd = false;
 
-	public void Start() {
+    public void Start() {
 		dataProvider = GetComponent<Enemy>();
 		navAgent = GetComponent<NavMeshAgent>();
-		stoppingSqrt = Mathf.Sqrt(stoppingDist);
-		InitStates();
+        stoppingSqrt = Mathf.Pow(stoppingDist, 2);
+        aggroSqrt = Mathf.Pow(aggroRange, 2);
+
+        InitStates();
 	}
 
 	void InitStates() {
 		//well, idle
 		IdleState = (gameObject) => {
-			if (dataProvider.player) fsm.currentState = ChasePlayer;
+            internalCounter += Time.deltaTime;
+            CheckForPlayer();
+
+            if (internalCounter > currentIdleTime) {  //wait long enough
+                internalCounter = 0;
+                currentIdleTime = Random.Range(2.0f, 5.0f);
+                fsm.currentState = Wander;
+            }
 		};
+
+        Wander = (gameObject) => {
+            //walk to radom pos
+            navAgent.SetDestination(targetLocation);
+            if((transform.position - targetLocation).sqrMagnitude <= 3) {
+                GoIdle();
+            }
+
+            CheckForPlayer();
+        };
 
 		ChasePlayer = (gameObject) => {
-			navAgent.speed = dataProvider.currentSpeed;
-			if (navAgent.SetDestination(dataProvider.player.transform.position)) {
-				dataProvider.anim.SetBool("IsWalking", true);
-				Vector3 toLookAt = navAgent.nextPosition;
-				toLookAt.y = transform.position.y;
-				transform.LookAt(toLookAt);
-			}
+            navAgent.SetDestination(dataProvider.player.transform.position);		
 
 			//check for stopping distance
-			if ((transform.position - dataProvider.player.transform.position).sqrMagnitude <= stoppingSqrt) {
+			if ((transform.position - dataProvider.player.transform.position).sqrMagnitude < stoppingSqrt) {
 				navAgent.isStopped = true;
-				dataProvider.anim.SetBool("IsWalking", false);
-				fsm.currentState = AttackPlayer;
+				fsm.currentState = spinOnCd ? RegularAttack : SpinAttack;
 			}
 		};
 
-		AttackPlayer = (gameObject) => {
+		SpinAttack = (gameObject) => {
+            StartCoroutine(GoSpinCd());
 			dataProvider.anim.SetTrigger("WhenSpin");
 			fsm.currentState = nullState;
 		};
 
+        RegularAttack = (gameObject) => {
+            dataProvider.anim.SetTrigger("WhenRegularAttack");
+            fsm.currentState = nullState;
+        };
+
 		//actually do nothing
 		nullState = (gameObject) => { };
 
-		//set default state to idle
-		fsm.currentState = IdleState;
+        //set default state to idle
+        GoIdle();
 	}
+
+    IEnumerator GoSpinCd() {
+        spinOnCd = true;
+        yield return new WaitForSeconds(5);
+        spinOnCd = false;
+    }
 
 	private void OnDrawGizmos() {
-
+        Gizmos.color = new Color(1, 0, 0, 0.4f);
+        Gizmos.DrawSphere(transform.position, aggroRange / 2);
 	}
+
+    void CheckForPlayer() {
+        Vector3 enemyToPlayer = dataProvider.player.transform.position - transform.position;
+        if (enemyToPlayer.sqrMagnitude < aggroSqrt) {   //check if near enough
+            //check for los        
+            if (!Physics.Raycast(transform.position, enemyToPlayer, Mathf.Infinity, 1 << ~Layers.Player)) {
+                fsm.currentState = ChasePlayer;
+            }
+        }
+    }
 
 	public void Update() {
 		if (useFSM) {
-			fsm.currentState(gameObject);
+            navAgent.speed = dataProvider.currentSpeed;
+            fsm.currentState(gameObject);
 		}
-	}
 
-	public void GoIdle() {
-		navAgent.isStopped = false;
+        dataProvider.anim.SetBool("IsWalking", navAgent.velocity.sqrMagnitude > 0.5f);
+    }
+
+    public void GoIdle() {
+        internalCounter = 0;
+        currentIdleTime = Random.Range(2.0f, 5.0f);
+        Vector3 randomLoc = transform.position + Random.insideUnitSphere * walkDist;
+        NavMeshHit hitInfo;
+        NavMesh.SamplePosition(randomLoc, out hitInfo, walkDist, 1);
+        targetLocation = hitInfo.position;
+
+        navAgent.isStopped = false;
 		fsm.currentState = IdleState;
-	}
+    }
 }
