@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
-public abstract class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour {
     //element stuff
     public enum Effects { None, Stun, Drenched, Burn, Freeze, Knockback, Slow }
     public ParticleSystem onFirePs;
@@ -16,12 +17,15 @@ public abstract class Enemy : MonoBehaviour {
     public float resistanceLevel = 1;
     public float unfreezeThreshold = 2;
 
-    protected Rigidbody rb;
-    protected Animator anim;
-    protected PlayerControl player;
-    protected float currentSpeed = 12;
-    protected float currentResistance = 1;
-    protected float currentFreezeThreshold = 2;
+    public Rigidbody rb;
+	public Animator anim;
+	public PlayerControl player;
+	[HideInInspector]
+	public float currentSpeed = 12;
+	[HideInInspector]
+	public float currentResistance = 1;
+	[HideInInspector]
+	public float currentFreezeThreshold = 2;
 
     //pathfinding
     public MapGrid map { get; private set; }
