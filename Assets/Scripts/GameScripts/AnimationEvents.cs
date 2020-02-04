@@ -85,17 +85,27 @@ public class AnimationEvents : MonoBehaviour {
     #endregion
 
     #region Knight animation events
-    void EnemyDmgTrigger(float damage) {
-        parent.GetComponent<Enemy>().DealDamage(damage);
-    }
-
     void KnightGoIdle() {
         parent.GetComponent<KnightScript>().GoIdle();
     }
+    #endregion
+
+    #region Archer animation events
+    void GetArrow() {
+        parent.GetComponent<ArcherScript>().GetArrow();
+    }
+
+    void ShootArrow() {
+        parent.GetComponent<ArcherScript>().ShootArrow();
+    }
+    #endregion
 
     void DieTrigger() {
         Destroy(parent.GetComponent<Enemy>());
         Destroy(parent.gameObject, 5);
     }
-    #endregion
+
+    void EnemyDmgTrigger(float damage) {
+        parent.GetComponent<Enemy>().DealDamage(damage);
+    }
 }

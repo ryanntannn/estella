@@ -7,8 +7,12 @@ public class PlayerControl : MonoBehaviour {
     private float speedMult;
     public float maxHealth = 100;
     public float currentHealth = 100;
+    [Range(0, 10.0f)]
+    public float healthRegenRate = 1.0f;
     public float maxStamina = 100;
     public float currentStamina = 100;
+    [Range(0, 10.0f)]
+    public float staminaRegenRate = 1.0f;
     public Animator animator;
     public Element[] elements;
 
@@ -98,7 +102,7 @@ public class PlayerControl : MonoBehaviour {
         if(speedMult > 1) {
             currentStamina -= Time.deltaTime * 2;
         } else {
-            currentStamina = Mathf.Clamp(currentStamina + Time.deltaTime * (speedMult > 0.5f ? 1 : dodging ? 0 : 2), 0, maxStamina);
+            currentStamina = Mathf.Clamp(currentStamina + Time.deltaTime * (speedMult > 0.5f ? 1 : dodging ? 0 : 2) * staminaRegenRate, 0, maxStamina);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && !dodging && currentStamina > 20) {
@@ -186,6 +190,8 @@ public class PlayerControl : MonoBehaviour {
             float angle = Vector3.SignedAngle(targetDir, -transform.forward, Vector3.up);
             animator.SetFloat("DieRection", angle);
             animator.SetTrigger("WhenDie");
+            //disable this component
+            enabled = false;
         }
         return currentHealth <= 0;
     }

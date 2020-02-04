@@ -21,7 +21,6 @@ public class ElementControl : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         pc = GetComponent<PlayerControl>();
-        //createdByPlayer = GameObject.Find("CreatedbyPlayer").transform;
         targetCircle.SetActive(showTargetCircle);
         rHand.waitingOnOther = false;
         lHand.waitingOnOther = false;
