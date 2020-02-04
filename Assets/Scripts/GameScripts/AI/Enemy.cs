@@ -139,7 +139,6 @@ public class Enemy : MonoBehaviour {
         if (player.TakeDamage(amount, transform.position)) {
             StartCoroutine(TriggerAfterDelay(1));
         }
-
     }
 
     IEnumerator TriggerAfterDelay(float delay) {

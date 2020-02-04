@@ -15,6 +15,7 @@ public class PlayerControl : MonoBehaviour {
     public float staminaRegenRate = 1.0f;
     public Animator animator;
     public Element[] elements;
+    public bool InVulnerable = false;
 
     public Hand rHand, lHand;
     public KeyCode swapLeft = KeyCode.Q, swapRight = KeyCode.E; //swapping elements
@@ -174,24 +175,32 @@ public class PlayerControl : MonoBehaviour {
     /// Returns if attack killed player
     /// </summary>
     public bool TakeDamage(float damage) {
-        currentHealth -= damage;
-        if(currentHealth <= 0) {
-            //die
-            print("PlayerDied");
-            animator.SetTrigger("WhenDie");
+        if (!InVulnerable && !dodging) {
+            currentHealth -= damage;
+            if (currentHealth <= 0) {
+                //die
+                print("PlayerDied");
+                animator.SetTrigger("WhenDie");
+            }
         }
+
         return currentHealth <= 0;
     }
 
     public bool TakeDamage(float damage, Vector3 sourcePos) {
-        currentHealth -= damage;
-        if (currentHealth <= 0) {
-            Vector3 targetDir = transform.position - sourcePos;
-            float angle = Vector3.SignedAngle(targetDir, -transform.forward, Vector3.up);
-            animator.SetFloat("DieRection", angle);
-            animator.SetTrigger("WhenDie");
-            //disable this component
-            enabled = false;
+        if (!InVulnerable && !dodging) {
+            currentHealth -= damage;
+            if (currentHealth <= 0) {
+                Vector3 targetDir = transform.position - sourcePos;
+                float angle = Vector3.SignedAngle(targetDir, -transform.forward, Vector3.up);
+                animator.SetFloat("DieRection", angle);
+                animator.SetTrigger("WhenDie");
+                //disable this component
+                enabled = false;
+            } else {
+                animator.SetFloat("GetHitDamage", damage);
+                animator.SetTrigger("WhenHit");
+            }
         }
         return currentHealth <= 0;
     }

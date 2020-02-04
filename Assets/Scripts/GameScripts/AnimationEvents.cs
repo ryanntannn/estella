@@ -108,7 +108,11 @@ public class AnimationEvents : MonoBehaviour {
         Destroy(parent.gameObject, 5);
     }
 
-    void EnemyDmgTrigger(float damage, int needRange) {
-        parent.GetComponent<Enemy>().DealDamage(damage, needRange);
+    void EnemyDmgTrigger(float damage) {
+        if (parent.name.Equals("EnemyKnight")) {
+            parent.GetComponent<Enemy>().DealDamage(damage, 1);
+        }else {
+            parent.GetComponent<Enemy>().DealDamage(damage);
+        }
     }
 }
