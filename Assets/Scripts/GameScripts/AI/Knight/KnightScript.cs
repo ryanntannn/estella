@@ -5,7 +5,6 @@ using DG.Tweening;
 using System.Threading;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Enemy))]
 public class KnightScript : MonoBehaviour {
     public bool useFSM = true;
 	public float stoppingDist = 2, aggroRange = 10;

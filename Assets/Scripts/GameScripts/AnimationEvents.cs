@@ -8,7 +8,6 @@ public class AnimationEvents : MonoBehaviour {
 
 	GameObject parent;
 	Animator anim;
-	Shader def;
 	//player stuff
 	Hand lHand, rHand;
 	ElementControl ec;
@@ -98,6 +97,10 @@ public class AnimationEvents : MonoBehaviour {
     void ShootArrow() {
         parent.GetComponent<ArcherScript>().ShootArrow();
     }
+
+    void DoneShooting() {
+        parent.GetComponent<ArcherScript>().DoneShooting();
+    }
     #endregion
 
     void DieTrigger() {
@@ -105,7 +108,7 @@ public class AnimationEvents : MonoBehaviour {
         Destroy(parent.gameObject, 5);
     }
 
-    void EnemyDmgTrigger(float damage) {
-        parent.GetComponent<Enemy>().DealDamage(damage);
+    void EnemyDmgTrigger(float damage, int needRange) {
+        parent.GetComponent<Enemy>().DealDamage(damage, needRange);
     }
 }

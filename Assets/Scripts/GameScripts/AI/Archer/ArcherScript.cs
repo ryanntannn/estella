@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Enemy))]
 public class ArcherScript : MonoBehaviour {
     public float scareDist = 10;
     float scareSqr;
@@ -40,11 +39,14 @@ public class ArcherScript : MonoBehaviour {
         };
 
         Shoot = (gameObject) => {
+            //transform.LookAt(dataProvider.player.transform);
+
             dataProvider.anim.SetTrigger("WhenShoot");
             fsm.currentState = nullState;
         };
 
         Run = (gameObject) => {
+            //run away from player
 
         };
 
@@ -67,6 +69,7 @@ public class ArcherScript : MonoBehaviour {
         //instaniate arrow
         currentArrow = Instantiate(arrowPfb, instantiatePoint);
         currentArrow.GetComponent<ArrowScript>().firingPoint = firingPoint;
+        currentArrow.GetComponent<ArrowScript>().dataProvider = dataProvider;
     }
 
     public void ShootArrow() {
@@ -84,6 +87,10 @@ public class ArcherScript : MonoBehaviour {
             Gizmos.color = new Color(0, 1, 0, 0.4f);
             Gizmos.DrawSphere(transform.position, scareDist / 2);
         }
+    }
+
+    public void DoneShooting() {
+        fsm.currentState = Idle;
     }
 
     // Update is called once per frame

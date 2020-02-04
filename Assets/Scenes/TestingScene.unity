@@ -56174,6 +56174,7 @@ GameObject:
   - component: {fileID: 273088635}
   - component: {fileID: 273088639}
   - component: {fileID: 273088640}
+  - component: {fileID: 1730314409}
   m_Layer: 9
   m_Name: EnemyKnight
   m_TagString: Untagged
@@ -56196,6 +56197,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1730314409
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730314407}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &1730314410
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -61333,7 +61348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816608050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.864, y: 0.1, z: -0.34100002}
+  m_LocalPosition: {x: 1.8747, y: 0.1, z: -0.4987}
   m_LocalScale: {x: 0.6, y: 0.18700002, z: 0.1}
   m_Children: []
   m_Father: {fileID: 334488785}
@@ -76614,6 +76629,7 @@ GameObject:
   - component: {fileID: 2796522070208300200}
   - component: {fileID: 134742360475639663}
   - component: {fileID: 134742360475639662}
+  - component: {fileID: 134742360475639664}
   m_Layer: 0
   m_Name: EnemyArcher
   m_TagString: Untagged
@@ -76660,6 +76676,20 @@ MonoBehaviour:
   showDebug: 0
   firingPoint: {fileID: 5395628330347317732}
   instantiatePoint: {fileID: 1082973783134511140}
+--- !u!136 &134742360475639664
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134742360475639661}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &141321834845022074
 GameObject:
   m_ObjectHideFlags: 0
@@ -84245,7 +84275,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 9db5b6cdc30244f42928ad5a6a7cb9dc, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
     are already bound by a Humanoid avatar. These transforms can only be changed by
@@ -86388,14 +86418,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134742360475639661}
-  m_LocalRotation: {x: -0, y: -0.74746245, z: -0, w: 0.66430414}
-  m_LocalPosition: {x: 19.45, y: 1, z: 3.01}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.13, y: 1, z: 4.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5655677581589222487}
   m_Father: {fileID: 0}
   m_RootOrder: 17
-  m_LocalEulerAnglesHint: {x: 0, y: -96.742004, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4350227912745647728
 GameObject:
   m_ObjectHideFlags: 0

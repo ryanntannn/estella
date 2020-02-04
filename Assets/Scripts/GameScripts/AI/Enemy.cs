@@ -18,14 +18,14 @@ public class Enemy : MonoBehaviour {
     public float unfreezeThreshold = 2;
 
     public Rigidbody rb;
-	public Animator anim;
-	public PlayerControl player;
-	[HideInInspector]
-	public float currentSpeed = 12;
-	[HideInInspector]
-	public float currentResistance = 1;
-	[HideInInspector]
-	public float currentFreezeThreshold = 2;
+    public Animator anim;
+    public PlayerControl player;
+    [HideInInspector]
+    public float currentSpeed = 12;
+    [HideInInspector]
+    public float currentResistance = 1;
+    [HideInInspector]
+    public float currentFreezeThreshold = 2;
 
     //pathfinding
     public MapGrid map { get; private set; }
@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour {
 
         if (debuffTimer <= 0) {
             currentDebuff = Effects.None;
-        }else {
+        } else {
             debuffTimer = Mathf.Clamp(debuffTimer - deltaTime, 0, 100);
         }
 
@@ -104,26 +104,42 @@ public class Enemy : MonoBehaviour {
     }
 
     public void TakeDamage(float damage) {
-        if(currentDebuff == Effects.Freeze) {
+        if (currentDebuff == Effects.Freeze) {
             currentFreezeThreshold -= damage;
-            if(currentFreezeThreshold <= 0) {
+            if (currentFreezeThreshold <= 0) {
                 currentFreezeThreshold = unfreezeThreshold;
                 currentDebuff = Effects.None;
             }
         } else {
             health -= damage;
-            if(health <= 0) {
+            if (health <= 0) {
                 anim.SetTrigger("WhenDie");
             }
         }
     }
 
-    public void DealDamage(float amount) {
-        if((player.transform.position - transform.position).magnitude <= 1.5f) {
-            if(player.TakeDamage(amount, transform.position)) {
+    /// <summary>
+    /// Damage done to player should route through here
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <param name="needRange">put 1 if need to be in range</param>
+    public void DealDamage(float amount, int needRange) {
+        if ((player.transform.position - transform.position).magnitude <= 1.5f || needRange != 1) {
+            if (player.TakeDamage(amount, transform.position)) {
                 StartCoroutine(TriggerAfterDelay(1));
             }
         }
+    }
+
+    /// <summary>
+    /// Damage done to player should route through here, assuming no range constaint
+    /// </summary>
+    /// <param name="amount"></param>
+    public void DealDamage(float amount) {
+        if (player.TakeDamage(amount, transform.position)) {
+            StartCoroutine(TriggerAfterDelay(1));
+        }
+
     }
 
     IEnumerator TriggerAfterDelay(float delay) {
