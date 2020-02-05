@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f4049b7e1db565c448e8c2d5d3e32d88
+guid: ccc5862ef5e91b341be3269d6eaad136
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
@@ -37,9 +37,9 @@ ModelImporter:
     - serializedVersion: 16
       name: mixamo.com
       takeName: mixamo.com
-      internalID: -203655887218126122
+      internalID: 0
       firstFrame: 0
-      lastFrame: 68
+      lastFrame: 136
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -59,7 +59,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.33546242
+      - time: 0.33638728
         functionName: DoBig
         data: 
         objectReferenceParameter: {instanceID: 0}

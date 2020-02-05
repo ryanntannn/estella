@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f4049b7e1db565c448e8c2d5d3e32d88
+guid: 110fb9b69380381458175050a823e7c7
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
@@ -59,15 +59,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.33546242
-        functionName: DoBig
+      - time: 1
+        functionName: Done
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 1
-        functionName: Done
+      - time: 0.33827102
+        functionName: DoBig
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

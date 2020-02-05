@@ -5,7 +5,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Elements/Fire")]
 public class Fire : Element {
-    public override string BigAttackTrigger { get { return "WhenFirepit"; } }
+    public override string BigAttackTrigger { get { return "WhenFirePit"; } }
     public override string SmallAttackTrigger { get { return "WhenSmallAttack"; } }
 
     public override string ElementName { get { return "Fire"; } }
