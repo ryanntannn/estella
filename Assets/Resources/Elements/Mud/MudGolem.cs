@@ -26,17 +26,37 @@ public class MudGolem : MonoBehaviour, ISteamable {
         range = Mathf.Pow(range, 2);
         InitStates();
     }
-
+    
     void InitStates() {
         FindTarget = (gameObject) => {
-            //Dijkstras to find an enemy
-            //get positions
-            IEnumerable<Vector3> positions = from enemy in map.enemies select enemy.transform.position;
-            //set the path of the golem
-            path = Algorithms.Dijkstras(map, transform.position, positions.ToArray());
-            //set target
+            if (map) {
+                //Dijkstras to find an enemy
+                //get positions
+                IEnumerable<Vector3> positions = from enemy in map.enemies select enemy.transform.position;
+                //set the path of the golem
+                path = Algorithms.Dijkstras(map, transform.position, positions.ToArray());
+                //set target
+                fsm.currentState = path.Count > 0 ? Walk : Wander;
+            } else {
+                Collider[] hits = Physics.OverlapSphere(transform.position, 20, 1 << Layers.Enemy);
+                if (hits.Length > 0) {
+                    //find closests
+                    Collider closests = hits[0];
+                    float closestsSqrDist = (closests.transform.position - transform.position).sqrMagnitude;
+                    for(int count = 1; count <= hits.Length - 1; count++) {
+                        float sqrDist = (hits[count].transform.position - transform.position).sqrMagnitude;
+                        if(sqrDist < closestsSqrDist) {
+                            closests = hits[count];
+                            closestsSqrDist = sqrDist;
+                        }
+                    }
 
-            fsm.currentState = path.Count > 0 ? Walk : Wander;
+                    //set target
+                    target = closests.gameObject;
+                } else {
+                    fsm.currentState = Wander;
+                }
+            }
         };
 
         Walk = (gameObject) => {
@@ -57,7 +77,12 @@ public class MudGolem : MonoBehaviour, ISteamable {
         };
 
         Attack = (gameObject) => {
+            //anim.SetTrigger("WhenAttack");
+            if ((target.transform.position - transform.position).sqrMagnitude <= range) {
+                target.GetComponent<Enemy>().TakeDamage(isSteamed ? 100 : 50);
+            }
 
+            Destroy(gameObject);
         };
 
         fsm.currentState = FindTarget;
