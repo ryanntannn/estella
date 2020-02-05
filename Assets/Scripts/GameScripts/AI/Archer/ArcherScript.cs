@@ -39,7 +39,7 @@ public class ArcherScript : MonoBehaviour {
         };
 
         Shoot = (gameObject) => {
-            //transform.LookAt(dataProvider.player.transform);
+			Vector3 direction = (firingPoint.position - dataProvider.transform.position).normalized;
 
             dataProvider.anim.SetTrigger("WhenShoot");
             fsm.currentState = nullState;
