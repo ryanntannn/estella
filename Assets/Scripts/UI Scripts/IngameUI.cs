@@ -14,6 +14,7 @@ public class IngameUI : MonoBehaviour
     Slider energyBar;
     TextMeshProUGUI popupt;
     RectTransform popup;
+    TextMeshProUGUI bigpopupt;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +25,10 @@ public class IngameUI : MonoBehaviour
         sprintBar = GameObject.Find("sprintbar").GetComponent<Slider>();
         energyBar = GameObject.Find("energybar").GetComponent<Slider>();
         popupt = GameObject.Find("PopupT").GetComponent<TextMeshProUGUI>();
+        bigpopupt = GameObject.Find("Bigpopup").GetComponent<TextMeshProUGUI>();
         popup = GameObject.Find("Popup").GetComponent<RectTransform>();
         ShowPopUp("Test", 1f);
+        ShowBigPopUp("Test", 2f);
     }
 
     // Update is called once per frame
@@ -43,5 +46,15 @@ public class IngameUI : MonoBehaviour
         sequence.Append(popup.DOAnchorPos(new Vector2(150, 200), 0.5f));
         Sequence sequence2 = DOTween.Sequence();
         sequence2.Append(popup.DOAnchorPos(new Vector2(-150, 200), 0.5f)).PrependInterval(0.5f + duration);
+    }
+
+    public void ShowBigPopUp(string content, float duration)
+    {
+        bigpopupt.text = content;
+        RectTransform bigpopup = bigpopupt.gameObject.GetComponent<RectTransform>();
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(bigpopup.DOScaleY(1, 0.5f));
+        Sequence sequence2 = DOTween.Sequence();
+        sequence2.Append(bigpopup.DOScaleY(0, 0.5f)).PrependInterval(0.5f + duration);
     }
 }
