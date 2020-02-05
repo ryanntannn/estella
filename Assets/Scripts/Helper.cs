@@ -93,7 +93,9 @@ public static class Helper {
     }
 
     public static T FindComponentInScene<T>(string tag) {
-        return GameObject.FindWithTag(tag).GetComponent<T>();
+        GameObject go = GameObject.FindWithTag(tag);
+        if (go) return go.GetComponent<T>();
+        return default(T);
     }
 }
 

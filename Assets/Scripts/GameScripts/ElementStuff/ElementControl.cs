@@ -77,7 +77,10 @@ public class ElementControl : MonoBehaviour {
         hand.waitingOnOther = false;
         isCasting = true;
 
-        StartCoroutine(TurnTowards());
+        //StartCoroutine(TurnTowards());
+        Vector3 a = transform.rotation.eulerAngles;
+        a.y = Camera.main.transform.rotation.eulerAngles.y;
+        transform.rotation = Quaternion.Euler(a);
 
         //animations
         anim.SetBool("IsUsingRightHand", !hand.flipAnimation);

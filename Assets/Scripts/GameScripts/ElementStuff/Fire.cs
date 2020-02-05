@@ -19,10 +19,6 @@ public class Fire : Element {
 			Vector3 toLookAt = hitInfo.point;
 			toLookAt.y = instance.transform.position.y;
 			instance.transform.LookAt(toLookAt);
-		} else {
-			Vector3 toLookAt = ray.direction * hitInfo.distance;
-			toLookAt.y = instance.transform.position.y;
-			instance.transform.LookAt(toLookAt);
 		}
     }
 

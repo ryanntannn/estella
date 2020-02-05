@@ -7,7 +7,6 @@ public class BubbleShot : MonoBehaviour {
     public float timeToLive = 10;
     public GameObject waterDie;
 
-    public GameObject target;
     // Start is called before the first frame update
     void Start() {
         StartCoroutine(gameObject.KillSelf(timeToLive));
@@ -15,11 +14,7 @@ public class BubbleShot : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (target) {
-            transform.LookAt(target.transform.position);
-        }
         transform.position += transform.forward * speed * Time.deltaTime;
-
     }
 
     private void OnTriggerEnter(Collider other) {

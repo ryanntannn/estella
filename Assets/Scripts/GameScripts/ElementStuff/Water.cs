@@ -19,17 +19,12 @@ public class Water : Element {
 			Vector3 toLookAt = hitInfo.point;
 			toLookAt.y = instance.transform.position.y;
 			instance.transform.LookAt(toLookAt);
-		} else {
-			Vector3 toLookAt = ray.direction * hitInfo.distance;
-			toLookAt.y = instance.transform.position.y;
-			instance.transform.LookAt(toLookAt);
-		}
+		} 
 	}
 
 	public override void DoBig(ElementControl agent, Hand hand) {
 		//tsunami
 		GameObject tsunami = Resources.Load<GameObject>("Elements/Water/Tsunami");
 		tsunami = Instantiate(tsunami, agent.transform.position - agent.transform.forward - agent.transform.up, agent.transform.rotation);
-		//tsunami.transform.parent = createdByPlayer;
 	}
 }

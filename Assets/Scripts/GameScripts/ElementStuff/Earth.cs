@@ -13,8 +13,6 @@ public class Earth : Element {
     public override void DoBasic(ElementControl agent, Hand hand) {
         //fissure
         GameObject fissure = Instantiate(Resources.Load<GameObject>("Elements/Ground/FissureAttack"), agent.targetCircle.transform.position - agent.transform.up * 2, agent.targetCircle.transform.rotation);
-        //fissure.transform.parent = createdByPlayer;
-        agent.isCasting = false;
     }
 
     public override void DoBig(ElementControl agent, Hand hand) {
