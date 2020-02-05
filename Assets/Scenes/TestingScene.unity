@@ -10497,6 +10497,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1222245054, guid: 15e02319efd5f654aac752bd2a8b476b, type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222245054, guid: 15e02319efd5f654aac752bd2a8b476b, type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222245054, guid: 15e02319efd5f654aac752bd2a8b476b, type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222245054, guid: 15e02319efd5f654aac752bd2a8b476b, type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222245054, guid: 15e02319efd5f654aac752bd2a8b476b, type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1421014928, guid: 15e02319efd5f654aac752bd2a8b476b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -16911,8 +16931,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aa2b45144a35a4d4b82dd9cb63fdee8d, type: 2}
-  - {fileID: 2100000, guid: aa2b45144a35a4d4b82dd9cb63fdee8d, type: 2}
+  - {fileID: 2100000, guid: 6747ac2b51425e34692c536dd4281409, type: 2}
+  - {fileID: 2100000, guid: 1c05b239fcc4314479e7dff47f0d5273, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
