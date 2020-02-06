@@ -10309,7 +10309,7 @@ Transform:
   - {fileID: 1657491302}
   - {fileID: 1816608054}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &335551746
 GameObject:
@@ -10505,7 +10505,7 @@ PrefabInstance:
     - target: {fileID: 1105907478575738972, guid: 15e02319efd5f654aac752bd2a8b476b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1105907478575738972, guid: 15e02319efd5f654aac752bd2a8b476b,
         type: 3}
@@ -26710,7 +26710,7 @@ Transform:
   - {fileID: 837474682}
   - {fileID: 6494154258961646696}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: -405.099, z: 0}
 --- !u!65 &1092488054
 BoxCollider:
@@ -84005,7 +84005,7 @@ PrefabInstance:
     - target: {fileID: 2921247291468237796, guid: 400a65bbe643397488d8c7653b5c272a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2921247291468237796, guid: 400a65bbe643397488d8c7653b5c272a,
         type: 3}
@@ -97848,8 +97848,8 @@ MonoBehaviour:
   targetCircle: {fileID: 1540570545}
   showTargetCircle: 1
   currentMana: 100
-  maxMana: 100
-  manaRegenRate: 1
+  maxMana: 1e+10
+  manaRegenRate: 1000
 --- !u!54 &7841368637796515202
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -75,17 +75,21 @@ public class ElementControl : MonoBehaviour {
         hand.waitingOnOther = true;
         yield return new WaitForSeconds(delay);
         hand.waitingOnOther = false;
-        isCasting = true;
+		if ((Input.GetKey(KeyCode.LeftAlt) && currentMana >= hand.currentElement.BigAttackCost) || currentMana >= hand.currentElement.SmallAttackCost) {
 
-        //StartCoroutine(TurnTowards());
-        Vector3 a = transform.rotation.eulerAngles;
-        a.y = Camera.main.transform.rotation.eulerAngles.y;
-        transform.rotation = Quaternion.Euler(a);
+			isCasting = true;
 
-        //animations
-        anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
-        anim.SetTrigger(Input.GetKey(KeyCode.LeftAlt) ? hand.currentElement.BigAttackTrigger : hand.currentElement.SmallAttackTrigger);
-    }
+			//StartCoroutine(TurnTowards());
+			Vector3 a = transform.rotation.eulerAngles;
+			a.y = Camera.main.transform.rotation.eulerAngles.y;
+			transform.rotation = Quaternion.Euler(a);
+
+			//animations
+			anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
+			anim.SetTrigger(Input.GetKey(KeyCode.LeftAlt) ? hand.currentElement.BigAttackTrigger : hand.currentElement.SmallAttackTrigger);
+
+		}
+	}
 
     IEnumerator TurnTowards() {
         //look at same direction as camera

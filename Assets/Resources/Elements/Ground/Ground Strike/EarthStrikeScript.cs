@@ -25,6 +25,8 @@ public class EarthStrikeScript : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        
+        if(other.gameObject.layer == Layers.Enemy) {
+			other.GetComponent<Enemy>().TakeDamage(20);
+		}
     }
 }

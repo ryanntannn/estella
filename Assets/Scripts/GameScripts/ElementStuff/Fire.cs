@@ -10,7 +10,11 @@ public class Fire : Element {
 
     public override string ElementName { get { return "Fire"; } }
 
-    public override void DoBasic(ElementControl agent, Hand hand) {
+	public override int SmallAttackCost => 7;
+
+	public override int BigAttackCost => 10;
+
+	public override void DoBasic(ElementControl agent, Hand hand) {
         //fireball
         GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Fire/Fireball"), hand.handPos.position, hand.transform.rotation);
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -20,9 +24,10 @@ public class Fire : Element {
 			toLookAt.y = instance.transform.position.y;
 			instance.transform.LookAt(toLookAt);
 		}
-    }
+		agent.currentMana -= SmallAttackCost;
+	}
 
-    public override void DoBig(ElementControl agent, Hand hand) {
+	public override void DoBig(ElementControl agent, Hand hand) {
         //fire pit
         GameObject firepit = Instantiate(Resources.Load<GameObject>("Elements/Fire/Firepit"), agent.targetCircle.transform.position, Quaternion.identity);
     }

@@ -10,6 +10,8 @@ public class ChainLightningScript : MonoBehaviour {
     LineRenderer lr;
     List<GameObject> targets = new List<GameObject>();
     List<Vector3> positions = new List<Vector3>();
+	[HideInInspector]
+	ElementControl ec;
     float initalPlaybackSpeed = 1;
 
     // Start is called before the first frame update
@@ -38,9 +40,9 @@ public class ChainLightningScript : MonoBehaviour {
         //raycast forward
         if (Physics.Raycast(transform.position, ray.direction, out hitInfo, 5, 1 << Layers.Enemy)) {
             FindEnemy(hitInfo.collider.gameObject);
+			
         } else {
-			//make it go stright at cross hair
-			//positions.Add(ray.direction * 5);
+			//make it go stright
 			positions.Add(hand.transform.up * 5);
         }
 
@@ -54,6 +56,7 @@ public class ChainLightningScript : MonoBehaviour {
         targets.Add(target);
         positions.Add(targetPos);
         target.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime, Enemy.Effects.Stun);
+		target.GetComponent<Enemy>().DealDamage(10 * Time.deltaTime);
 
         if (targets.Count <= maxTargets) {
             //find more targets

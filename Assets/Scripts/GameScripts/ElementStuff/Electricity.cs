@@ -10,7 +10,11 @@ public class Electricity : Element {
 
     public override string ElementName { get { return "Electricity"; } }
 
-    public override void DoBasic(ElementControl agent, Hand hand) {
+	public override int SmallAttackCost => 3;
+
+	public override int BigAttackCost => 10;
+
+	public override void DoBasic(ElementControl agent, Hand hand) {
         //instantiate chain lightning
         GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Electricity/Shock_Chain"), hand.handPos);
         instance.GetComponent<ChainLightningScript>().hand = hand;
