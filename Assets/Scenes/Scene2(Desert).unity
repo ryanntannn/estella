@@ -173,6 +173,7 @@ Transform:
   - {fileID: 521178388}
   - {fileID: 2080355503}
   - {fileID: 1097426487}
+  - {fileID: 1713666689}
   - {fileID: 2046528748}
   m_Father: {fileID: 0}
   m_RootOrder: 19
@@ -6558,6 +6559,52 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300008, guid: ce8d79c79d11b8f9d00076e98d76c639, type: 3}
+--- !u!1 &1713666688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1713666689}
+  - component: {fileID: 1713666690}
+  m_Layer: 0
+  m_Name: LANDMARK
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1713666689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713666688}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 344.94, y: 15.13, z: 450}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 64580366}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1713666690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713666688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcaacba5df45e214b96994d9be98c0d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 50
+  landMarkName: Ruins of Alshazar
+  inArea: 0
 --- !u!1001 &1721201305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6713,12 +6760,12 @@ PrefabInstance:
     - target: {fileID: 4590939294264814348, guid: cabae6f271e8db84a90a3a38cceb449b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.64
+      value: 54.4
       objectReference: {fileID: 0}
     - target: {fileID: 4590939294264814348, guid: cabae6f271e8db84a90a3a38cceb449b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 181.45
+      value: 368.8
       objectReference: {fileID: 0}
     - target: {fileID: 4590939294264814349, guid: cabae6f271e8db84a90a3a38cceb449b,
         type: 3}
@@ -7739,7 +7786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 478986, guid: d5bab8429d90392458f4875637b97267, type: 3}
       propertyPath: m_RootOrder
-      value: 26
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 478986, guid: d5bab8429d90392458f4875637b97267, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

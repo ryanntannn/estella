@@ -53,8 +53,8 @@ public class IngameUI : MonoBehaviour
         bigpopupt.text = content;
         RectTransform bigpopup = bigpopupt.gameObject.GetComponent<RectTransform>();
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(bigpopup.DOScaleY(1, 0.5f));
+        sequence.Append(bigpopup.DOScaleX(1, 0.2f)).Append(bigpopup.DOScaleY(1, 0.2f));
         Sequence sequence2 = DOTween.Sequence();
-        sequence2.Append(bigpopup.DOScaleY(0, 0.5f)).PrependInterval(0.5f + duration);
+        sequence2.Append(bigpopup.DOScaleX(0, 0.2f)).Append(bigpopup.DOScaleY(0, 0.2f)).PrependInterval(0.2f + duration);
     }
 }
