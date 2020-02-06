@@ -97,7 +97,7 @@ public class PlayerControl : MonoBehaviour {
     void InputUpdate() {
         speedMult = 0;
         if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && !isInRadialMenu && !ec.isCasting) {
-            speedMult = ((Input.GetKey(KeyCode.LeftShift) && currentStamina > 0) ? 1.5f : 1);
+            speedMult = ((Input.GetKey(KeyCode.LeftShift) && currentStamina > 0) ? 2f : 1);
         }
         animator.SetFloat("Speed", speedMult);
         if(speedMult > 1) {
