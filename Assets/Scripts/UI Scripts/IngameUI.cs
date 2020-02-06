@@ -15,6 +15,10 @@ public class IngameUI : MonoBehaviour
     TextMeshProUGUI popupt;
     RectTransform popup;
     TextMeshProUGUI bigpopupt;
+    GameObject leftele;
+    GameObject rightele;
+    int activeLele = 0;
+    int activeRele = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +31,8 @@ public class IngameUI : MonoBehaviour
         popupt = GameObject.Find("PopupT").GetComponent<TextMeshProUGUI>();
         bigpopupt = GameObject.Find("Bigpopup").GetComponent<TextMeshProUGUI>();
         popup = GameObject.Find("Popup").GetComponent<RectTransform>();
+        leftele = GameObject.Find("lefteleholder");
+        rightele = GameObject.Find("righteleholder");
         ShowPopUp("Test", 1f);
         ShowBigPopUp("Test", 2f);
     }
@@ -56,5 +62,25 @@ public class IngameUI : MonoBehaviour
         sequence.Append(bigpopup.DOScaleX(1, 0.2f)).Append(bigpopup.DOScaleY(1, 0.2f));
         Sequence sequence2 = DOTween.Sequence();
         sequence2.Append(bigpopup.DOScaleX(0, 0.2f)).Append(bigpopup.DOScaleY(0, 0.2f)).PrependInterval(0.2f + duration);
+    }
+
+    public void ChangeElement (bool lefthand, int index)
+    {
+        if (lefthand)
+        {
+            leftele.transform.GetChild(activeLele).gameObject.SetActive(false);
+            leftele.transform.GetChild(index).gameObject.SetActive(true);
+            leftele.transform.GetChild(index).DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f)
+                , 0.5f, 4, 0.2f);
+            activeLele = index;
+        }
+        else
+        {
+            rightele.transform.GetChild(activeRele).gameObject.SetActive(false);
+            rightele.transform.GetChild(index).gameObject.SetActive(true);
+            rightele.transform.GetChild(index).DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f)
+                , 0.5f, 4, 0.2f);
+            activeRele = index;
+        }
     }
 }

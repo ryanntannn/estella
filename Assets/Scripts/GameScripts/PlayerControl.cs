@@ -33,8 +33,11 @@ public class PlayerControl : MonoBehaviour {
 	//element control
 	ElementControl ec;
 
+    IngameUI igui;
+
     // Start is called before the first frame update
     void Start() {
+        igui = GameObject.Find("UI (1)").GetComponent<IngameUI>();
         rb = GetComponent<Rigidbody>();
         pivot = GameObject.Find("camera-pivot");
         radialMenu1 = GameObject.Find("RadialMenu 1");
@@ -155,6 +158,7 @@ public class PlayerControl : MonoBehaviour {
         {
             ChangeElement2(i);
         }
+        igui.ChangeElement(!hand, i);
     }
 
     //rightHand
