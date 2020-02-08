@@ -33,6 +33,9 @@ public class PlayerControl : MonoBehaviour {
 	//element control
 	ElementControl ec;
 
+    //Interactable object
+    public InteractableObject currentInteractableObject = null;
+
     IngameUI igui;
 
     // Start is called before the first frame update
@@ -67,6 +70,27 @@ public class PlayerControl : MonoBehaviour {
         RadialMenuUpdate();
         InputUpdate();
         MovementUpdate();
+        InteractableObjectUpdate();
+    }
+
+    void InteractableObjectUpdate()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        {
+            Debug.Log(hitInfo.collider.gameObject.name);
+            Vector3 toLookAt = hitInfo.point;
+            if (hitInfo.transform.gameObject.GetComponent<InteractableObject>())
+            {
+                InteractableObject interactedObject
+                    = hitInfo.transform.gameObject.GetComponent<InteractableObject>();
+                currentInteractableObject = interactedObject;
+            } else
+            {
+                currentInteractableObject = null;
+            }
+        }
     }
 
     void RadialMenuUpdate() {
@@ -113,6 +137,11 @@ public class PlayerControl : MonoBehaviour {
             currentStamina -= 20;
             dodging = true;
             animator.SetTrigger("WhenDodge");
+        }
+
+        if (currentInteractableObject && Input.GetKey(KeyCode.E))
+        {
+            currentInteractableObject.IsActivating();
         }
     }
 

@@ -19,6 +19,7 @@ public class IngameUI : MonoBehaviour
     GameObject rightele;
     int activeLele = 0;
     int activeRele = 0;
+    bool interactingWithSomething = false;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,15 @@ public class IngameUI : MonoBehaviour
         healthBar.value = playerControl.currentHealth / playerControl.maxHealth;
         sprintBar.value = playerControl.currentStamina / playerControl.maxStamina;
         energyBar.value = elementControl.currentMana / elementControl.maxMana;
+    }
+
+    void DrawInteractableObject()
+    {
+        if(playerControl.currentInteractableObject == !interactingWithSomething)
+        {
+            interactingWithSomething = !interactingWithSomething;
+            //TODO INTERACTION POPUP;
+        }
     }
 
     public void ShowPopUp(string content, float duration)
