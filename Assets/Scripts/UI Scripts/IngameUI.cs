@@ -17,8 +17,11 @@ public class IngameUI : MonoBehaviour
     TextMeshProUGUI bigpopupt;
     GameObject leftele;
     GameObject rightele;
+    GameObject holdF;
+    Image holdFImage;
     int activeLele = 0;
     int activeRele = 0;
+    bool interactingWithSomething = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +36,9 @@ public class IngameUI : MonoBehaviour
         popup = GameObject.Find("Popup").GetComponent<RectTransform>();
         leftele = GameObject.Find("lefteleholder");
         rightele = GameObject.Find("righteleholder");
+        holdF = GameObject.Find("Hold F");
+        holdFImage = GameObject.Find("Hold F Fill").GetComponent<Image>();
+        holdF.SetActive(false);
         ShowPopUp("Test", 1f);
         ShowBigPopUp("Test", 2f);
     }
@@ -43,6 +49,37 @@ public class IngameUI : MonoBehaviour
         healthBar.value = playerControl.currentHealth / playerControl.maxHealth;
         sprintBar.value = playerControl.currentStamina / playerControl.maxStamina;
         energyBar.value = elementControl.currentMana / elementControl.maxMana;
+        if (holdF.activeSelf)
+        {
+            if (!playerControl.currentInteractableObject.isActivated)
+            {
+                holdFImage.fillAmount = playerControl.currentInteractableObject.timeToActivate - playerControl.currentInteractableObject.timeLeftToActivate /
+                    playerControl.currentInteractableObject.timeToActivate;
+            }
+            else
+            {
+                HideHoldF();
+            }
+        }
+    }
+
+    void DrawInteractableObject()
+    {
+        if(playerControl.currentInteractableObject == !interactingWithSomething)
+        {
+            interactingWithSomething = !interactingWithSomething;
+            //TODO INTERACTION POPUP;
+        }
+    }
+
+    public void ShowHoldF()
+    {
+        holdF.SetActive(true);
+    }
+
+    public void HideHoldF()
+    {
+        holdF.SetActive(false);
     }
 
     public void ShowPopUp(string content, float duration)
