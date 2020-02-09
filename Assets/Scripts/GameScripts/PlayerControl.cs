@@ -79,7 +79,6 @@ public class PlayerControl : MonoBehaviour {
         RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
-            Debug.Log(hitInfo.collider.gameObject.name);
             Vector3 toLookAt = hitInfo.point;
             if (hitInfo.transform.gameObject.GetComponent<InteractableObject>())
             {
@@ -88,7 +87,11 @@ public class PlayerControl : MonoBehaviour {
                 currentInteractableObject = interactedObject;
             } else
             {
-                currentInteractableObject = null;
+                if (currentInteractableObject)
+                {
+                    currentInteractableObject.CancelActivate();
+                    currentInteractableObject = null;
+                }
             }
         }
     }
@@ -142,6 +145,11 @@ public class PlayerControl : MonoBehaviour {
         if (currentInteractableObject && Input.GetKey(KeyCode.F))
         {
             currentInteractableObject.IsActivating();
+        }
+
+        if(currentInteractableObject && Input.GetKeyUp(KeyCode.F))
+        {
+            currentInteractableObject.CancelActivate();
         }
     }
 

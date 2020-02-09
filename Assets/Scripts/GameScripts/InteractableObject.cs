@@ -4,21 +4,35 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-    public float TimeToActivate;
-    public bool IsActivated;
+    public float timeToActivate;
+    public bool isActivated;
     //Time Left Before The Object is Activated
-    private float TimeLeftToActivate;
+    [SerializeField]
+    private float timeLeftToActivate;
+
+    void Start()
+    {
+        timeLeftToActivate = timeToActivate;
+    }
 
     public void IsActivating()
     {
-        if (!IsActivated)
+        if (!isActivated)
         {
-            TimeLeftToActivate -= Time.deltaTime;
+            timeLeftToActivate -= Time.deltaTime;
 
-            if(TimeLeftToActivate <= 0)
+            if(timeLeftToActivate <= 0)
             {
-                IsActivated = true;
+                isActivated = true;
             }
+        }
+    }
+
+    public void CancelActivate()
+    {
+        if (!isActivated)
+        {
+            timeLeftToActivate = timeToActivate;
         }
     }
 }
