@@ -84,11 +84,16 @@ public class PlayerControl : MonoBehaviour {
             {
                 InteractableObject interactedObject
                     = hitInfo.transform.gameObject.GetComponent<InteractableObject>();
-                currentInteractableObject = interactedObject;
+                if (!currentInteractableObject)
+                {
+                    igui.ShowHoldF();
+                    currentInteractableObject = interactedObject;
+                }
             } else
             {
                 if (currentInteractableObject)
                 {
+                    igui.HideHoldF();
                     currentInteractableObject.CancelActivate();
                     currentInteractableObject = null;
                 }

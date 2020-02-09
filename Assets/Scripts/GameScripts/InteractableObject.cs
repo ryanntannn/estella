@@ -7,8 +7,7 @@ public class InteractableObject : MonoBehaviour
     public float timeToActivate;
     public bool isActivated;
     //Time Left Before The Object is Activated
-    [SerializeField]
-    private float timeLeftToActivate;
+    public float timeLeftToActivate;
 
     void Start()
     {
