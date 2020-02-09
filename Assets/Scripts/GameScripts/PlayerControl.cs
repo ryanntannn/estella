@@ -139,7 +139,7 @@ public class PlayerControl : MonoBehaviour {
             animator.SetTrigger("WhenDodge");
         }
 
-        if (currentInteractableObject && Input.GetKey(KeyCode.E))
+        if (currentInteractableObject && Input.GetKey(KeyCode.F))
         {
             currentInteractableObject.IsActivating();
         }
