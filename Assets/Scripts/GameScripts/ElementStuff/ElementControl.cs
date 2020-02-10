@@ -236,55 +236,57 @@ public static class Elements {
                 if (agent.currentMana < SteamCost) break;
                 //debuff enemy / buff own attack
                 agent.anim.SetTrigger("WhenSteamPit");
-                break;
+                return;
             case Water | Earth:
                 //DoMud();
                 if (agent.currentMana < GolemCost) break;
                 agent.anim.SetTrigger("SummonGolem");
-                break;
+                return;
             case Water | Wind:
                 //DoBlizzard();
                 if (agent.currentMana < IceCost) break;
                 agent.anim.SetTrigger("WhenIce");
-                break;
+                return;
             case Water | Electricity:
                 if (agent.currentMana < ShockCost) break;
                 agent.anim.SetTrigger("WhenShock");
                 //DoShock();
-                break;
+                return;
             case Fire | Earth:
                 if (agent.currentMana < MagmaCost) break;
                 //DoMagma();
                 agent.anim.SetTrigger("WhenMagma");
-                break;
+                return;
             case Fire | Wind:
                 if (agent.currentMana < BlazeCost) break;
                 //DoBlaze();
                 agent.anim.SetTrigger("WhenFireTornado");
-                break;
+                return;
             case Fire | Electricity:
                 if (agent.currentMana < PlasmaCost) break;
                 //DoPlasma();
                 agent.anim.SetTrigger("WhenShootPlasma");
-                break;
+                return;
             case Earth | Wind:
                 if (agent.currentMana < DustCost) break;
                 //DoDust();
                 agent.anim.SetTrigger("WhenDustStorm");
-                break;
+                return;
             case Earth | Electricity:
                 if (agent.currentMana < MagnetiseCost) break;
                 //DoMagnetize();
                 agent.anim.SetTrigger("WhenMagnetise");
-                break;
+                return;
             case Wind | Electricity:
                 if (agent.currentMana < StormCost) break;
                 //DoStorm();
                 agent.anim.SetTrigger("WhenStorm");
-                break;
+                return;
             default:
                 MonoBehaviour.print("Something wrong");
                 break;
         }
+
+        agent.isCasting = false;
     }
 }
