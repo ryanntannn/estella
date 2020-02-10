@@ -77865,6 +77865,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 1590889727880635607, guid: daffffbbcef0ef9438dc7f257951d683,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1590889727880635608, guid: daffffbbcef0ef9438dc7f257951d683,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -97944,6 +97949,7 @@ MonoBehaviour:
   swapLeft: 113
   swapRight: 101
   isInRadialMenu: 0
+  currentInteractableObject: {fileID: 0}
 --- !u!1 &7841368637796515213
 GameObject:
   m_ObjectHideFlags: 0

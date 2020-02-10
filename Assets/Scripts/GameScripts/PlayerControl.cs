@@ -40,7 +40,7 @@ public class PlayerControl : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        igui = GameObject.Find("UI (1)").GetComponent<IngameUI>();
+        igui = GameObject.Find("UI (2)").GetComponent<IngameUI>();
         rb = GetComponent<Rigidbody>();
         pivot = GameObject.Find("camera-pivot");
         radialMenu1 = GameObject.Find("RadialMenu 1");
