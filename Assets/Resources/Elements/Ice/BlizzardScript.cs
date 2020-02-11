@@ -22,7 +22,7 @@ public class BlizzardScript : MonoBehaviour {
             //we can do another check here, but it is redundant
             hit.collider.GetComponent<Enemy>().DebuffEnemy(5, Enemy.Effects.Freeze);
         }
-		DisablePS(transform);
+		//DisablePS(transform);
         Destroy(gameObject, 10);
     }
 

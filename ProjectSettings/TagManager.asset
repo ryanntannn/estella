@@ -9,6 +9,7 @@ TagManager:
   - FireBall
   - Map
   - Puddle
+  - Fissure
   layers:
   - Default
   - TransparentFX

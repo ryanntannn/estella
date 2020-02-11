@@ -9,24 +9,7 @@ public class LightningStrikeScript : MonoBehaviour {
 		newPos.y = 0;
 		transform.position = newPos;
 		StartCoroutine(KillSelf(2));
-	}
 
-	IEnumerator KillSelf(float _ttl) {
-		yield return new WaitForSeconds(_ttl);
-		TurnOffPs(transform);
-		Destroy(gameObject, 3);
-	}
-
-	void TurnOffPs(Transform _t) {
-		ParticleSystem ps = _t.GetComponent<ParticleSystem>();
-		if (ps) ps.Stop();
-		foreach(Transform child in _t) {
-			TurnOffPs(child);
-		}
-	}
-
-	// Update is called once per frame
-	void Update() {
 		//raycast up and do damage
 		RaycastHit hitInfo;
 		if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, 100)) {
@@ -45,6 +28,25 @@ public class LightningStrikeScript : MonoBehaviour {
 		} else {
 			Debug.DrawRay(transform.position, Vector3.up * 20, Color.red);
 		}
+
+	}
+
+	IEnumerator KillSelf(float _ttl) {
+		yield return new WaitForSeconds(_ttl);
+		TurnOffPs(transform);
+		Destroy(gameObject, 3);
+	}
+
+	void TurnOffPs(Transform _t) {
+		ParticleSystem ps = _t.GetComponent<ParticleSystem>();
+		if (ps) ps.Stop();
+		foreach(Transform child in _t) {
+			TurnOffPs(child);
+		}
+	}
+
+	// Update is called once per frame
+	void Update() {
 
 	}
 }

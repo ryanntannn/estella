@@ -103,6 +103,17 @@ public class ElementControl : MonoBehaviour {
     }
 
     #region Combinations
+	public void WindslashHit() {
+		//raycast forward
+		float range = 1.0f;
+		RaycastHit hitInfo;
+		if(Physics.Raycast(transform.position, transform.forward, out hitInfo, range, ~(1 << Layers.Player))) {
+			if(hitInfo.collider.gameObject.layer == Layers.Enemy) {
+				hitInfo.collider.GetComponent<Enemy>().TakeDamage(10);
+			}
+		}
+	}
+
     public void SummonGolem() {
         currentMana -= Elements.GolemCost;
         GameObject golem = Instantiate(Resources.Load<GameObject>("Elements/Mud/MudGolem"), targetCircle.transform.position, targetCircle.transform.rotation);

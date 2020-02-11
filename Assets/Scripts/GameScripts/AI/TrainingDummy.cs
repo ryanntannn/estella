@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrainingDummy : Enemy {
+public class TrainingDummy : MonoBehaviour {
     public GameObject waterPS;
 
-    public override void Update() {
-        base.Update();
-    }
+    public void Update() {
+
+	}
   
    
 }

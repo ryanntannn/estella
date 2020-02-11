@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour {
     //pathfinding
     public MapGrid map { get; private set; }
 
-    public virtual void Start() {
+    public void Start() {
         rb = GetComponent<Rigidbody>();
         anim = transform.GetComponentInChildren<Animator>();
         player = GameObject.FindObjectOfType<PlayerControl>();
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour {
         _map.enemies.Add(this);
     }
 
-    public virtual void Update() {
+    public void Update() {
         float deltaTime = Time.deltaTime;
 
         if (debuffTimer <= 0) {
@@ -68,7 +68,6 @@ public class Enemy : MonoBehaviour {
                 currentResistance = Mathf.Clamp(currentResistance - 2, 0, Mathf.Infinity);
                 break;
             case Effects.Burn:
-                if (!onFirePs.isStopped) onFirePs.Play();
                 TakeDamage(deltaTime * (1 / currentResistance));
                 break;
             case Effects.Freeze:
@@ -98,7 +97,7 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    public virtual void DebuffEnemy(float duration, Effects effect) {
+    public void DebuffEnemy(float duration, Effects effect) {
         debuffTimer = duration;
         currentDebuff = effect;
     }
