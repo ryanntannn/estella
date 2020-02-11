@@ -7,6 +7,7 @@ using UnityEngine.AI;
 
 public class KnightScript : MonoBehaviour {
     public bool useFSM = true;
+    public bool wanderNear = false;
 	public float stoppingDist = 2, aggroRange = 10;
 	private float stoppingSqrt, aggroSqrt;
 
@@ -23,11 +24,14 @@ public class KnightScript : MonoBehaviour {
     float walkDist = 20;
     bool spinOnCd = false;
 
+    Vector3 startPos;
+
     public void Start() {
 		dataProvider = GetComponent<Enemy>();
 		navAgent = GetComponent<NavMeshAgent>();
         stoppingSqrt = Mathf.Pow(stoppingDist, 2);
         aggroSqrt = Mathf.Pow(aggroRange, 2);
+        startPos = transform.position;
 
         InitStates();
 	}
@@ -90,8 +94,10 @@ public class KnightScript : MonoBehaviour {
     }
 
 	private void OnDrawGizmos() {
-        Gizmos.color = new Color(1, 0, 0, 0.4f);
-        Gizmos.DrawSphere(transform.position, aggroRange / 2);
+        if (wanderNear) {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(startPos, walkDist);
+        }
 	}
 
     void CheckForPlayer() {
@@ -116,7 +122,7 @@ public class KnightScript : MonoBehaviour {
     public void GoIdle() {
         internalCounter = 0;
         currentIdleTime = Random.Range(2.0f, 5.0f);
-        Vector3 randomLoc = transform.position + Random.insideUnitSphere * walkDist;
+        Vector3 randomLoc = (wanderNear ? startPos : transform.position) + Random.insideUnitSphere * walkDist;
         NavMeshHit hitInfo;
         NavMesh.SamplePosition(randomLoc, out hitInfo, walkDist, 1);
         targetLocation = hitInfo.position;
