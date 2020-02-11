@@ -178,7 +178,6 @@ public class ElementControl : MonoBehaviour {
         }
 
         anim.speed = 1;
-        isCasting = false;
     }
     #endregion
 }

@@ -43,7 +43,15 @@ public class AnimationEvents : MonoBehaviour {
 		ec.isCasting = false;
 	}
 
-    void ECTrigger(string message) {
+	void Done(float _ttl) {
+		StartCoroutine(DoneDelay(_ttl));
+	}
+
+	IEnumerator DoneDelay(float _ttl) {
+		yield return new WaitForSeconds(_ttl);
+	}
+	
+	void ECTrigger(string message) {
         ec.SendMessage(message);
     }
 

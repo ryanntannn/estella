@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2921247291251705545}
   - component: {fileID: 2921247291251705544}
   - component: {fileID: 2921247291251705547}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 7991
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2921247291468237796}
   - component: {fileID: 2921247291468237799}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: camera-pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
