@@ -15,6 +15,7 @@ public class IngameUI : MonoBehaviour
     TextMeshProUGUI popupt;
     RectTransform popup;
     TextMeshProUGUI bigpopupt;
+    TextMeshProUGUI questText;
     GameObject leftele;
     GameObject rightele;
     GameObject holdF;
@@ -33,6 +34,7 @@ public class IngameUI : MonoBehaviour
         energyBar = GameObject.Find("energybar").GetComponent<Slider>();
         popupt = GameObject.Find("PopupT").GetComponent<TextMeshProUGUI>();
         bigpopupt = GameObject.Find("Bigpopup").GetComponent<TextMeshProUGUI>();
+        questText = GameObject.Find("QuestText").GetComponent<TextMeshProUGUI>();
         popup = GameObject.Find("Popup").GetComponent<RectTransform>();
         leftele = GameObject.Find("lefteleholder");
         rightele = GameObject.Find("righteleholder");
@@ -119,5 +121,10 @@ public class IngameUI : MonoBehaviour
                 , 0.5f, 4, 0.2f);
             activeRele = index;
         }
+    }
+
+    public void UpdateQuestString(string str)
+    {
+        questText.text = str;
     }
 }
