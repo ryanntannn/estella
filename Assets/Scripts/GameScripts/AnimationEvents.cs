@@ -8,40 +8,40 @@ public class AnimationEvents : MonoBehaviour {
 
 	GameObject parent;
 	Animator anim;
-	//player stuff
-	Hand lHand, rHand;
-	ElementControl ec;
 	// Start is called before the first frame update
 	void Start() {
 		parent = transform.parent.gameObject;
 		anim = GetComponent<Animator>();
-		if (parent.tag.Equals("Player")) {
-			ec = parent.GetComponent<ElementControl>();
-			lHand = ec.lHand;
-			rHand = ec.rHand;
+    }
+
+    #region Player animation events
+    void CastRegularAttack() {
+        if (!anim.GetBool("IsFlipped")) {   //right hand
+            ElementControlV2.Instance.RightHand.currentElement.CastRegularAttack();
+        } else {
+            ElementControlV2.Instance.LeftHand.currentElement.CastRegularAttack();
         }
     }
 
-	#region Player animation events
-	void DoBig() {
-		if (anim.GetBool("IsUsingRightHand")) {
-			rHand.currentElement.DoBig(ec, rHand);
-		} else {
-			lHand.currentElement.DoBig(ec, lHand);
-		}
-	}
-
-	void SmallAttack() {
-		if (anim.GetBool("IsUsingRightHand")) {
-			rHand.currentElement.DoBasic(ec, rHand);
-		} else {
-            lHand.currentElement.DoBasic(ec, lHand);
-		}
-	}
+    void CastUltimateAttack() {
+        if (!anim.GetBool("IsFlipped")) {   //right hand
+            ElementControlV2.Instance.RightHand.currentElement.CastUltimateAttack();
+        } else {
+            ElementControlV2.Instance.LeftHand.currentElement.CastUltimateAttack();
+        }
+    }
 
 	void Done() {
-		ec.isCasting = false;
-	}
+        if (!anim.GetBool("IsFlipped")) {   //right hand
+            ElementControlV2.Instance.RightHand.currentElement.DoneCasting();
+        }else {
+            ElementControlV2.Instance.LeftHand.currentElement.DoneCasting();
+        }
+    }
+
+    void CombinationDone() {
+        ElementControlV2.Instance.isCasting = false;
+    }
 
 	void Done(float _ttl) {
 		StartCoroutine(DoneDelay(_ttl));
@@ -52,7 +52,7 @@ public class AnimationEvents : MonoBehaviour {
 	}
 	
 	void ECTrigger(string message) {
-        ec.SendMessage(message);
+        ElementControlV2.Instance.SendMessage(message);
     }
 
 	void DoneJumping() {

@@ -5,8 +5,6 @@ using UnityEngine;
 public class WindSlashScript : MonoBehaviour {
 
     bool readyToDie = false;
-    [HideInInspector]
-    public ElementControl ec;
     // Start is called before the first frame update
     void Start() {
         
@@ -14,7 +12,7 @@ public class WindSlashScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if(!ec.isCasting && !readyToDie) {
+        if(!ElementControlV2.Instance.isCasting && !readyToDie) {
             readyToDie = true;
             OffPs(transform);
             Destroy(gameObject, 5);

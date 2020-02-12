@@ -43,7 +43,7 @@ public class ElementControl : MonoBehaviour {
                 lHand.waitingOnOther = false;
                 rHand.waitingOnOther = false;
                 isCasting = true;
-                Elements.Combination(lHand.currentElement, rHand.currentElement, this);
+                //Elements.Combination(lHand.currentElement, rHand.currentElement, this);
             }
         }
         //target circle
@@ -75,21 +75,21 @@ public class ElementControl : MonoBehaviour {
         hand.waitingOnOther = true;
         yield return new WaitForSeconds(delay);
         hand.waitingOnOther = false;
-		if ((Input.GetKey(KeyCode.LeftAlt) && currentMana >= hand.currentElement.BigAttackCost) || currentMana >= hand.currentElement.SmallAttackCost) {
+        //if ((Input.GetKey(KeyCode.LeftAlt) && currentMana >= hand.currentElement.BigAttackCost) || currentMana >= hand.currentElement.SmallAttackCost) {
 
-			isCasting = true;
+        //    isCasting = true;
 
-			//StartCoroutine(TurnTowards());
-			Vector3 a = transform.rotation.eulerAngles;
-			a.y = Camera.main.transform.rotation.eulerAngles.y;
-			transform.rotation = Quaternion.Euler(a);
+        //    //StartCoroutine(TurnTowards());
+        //    Vector3 a = transform.rotation.eulerAngles;
+        //    a.y = Camera.main.transform.rotation.eulerAngles.y;
+        //    transform.rotation = Quaternion.Euler(a);
 
-			//animations
-			anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
-			anim.SetTrigger(Input.GetKey(KeyCode.LeftAlt) ? hand.currentElement.BigAttackTrigger : hand.currentElement.SmallAttackTrigger);
+        //    //animations
+        //    anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
+        //    //anim.SetTrigger(Input.GetKey(KeyCode.LeftAlt) ? hand.currentElement.BigAttackTrigger : hand.currentElement.SmallAttackTrigger);
 
-		}
-	}
+        //}
+    }
 
     IEnumerator TurnTowards() {
         //look at same direction as camera
@@ -103,16 +103,16 @@ public class ElementControl : MonoBehaviour {
     }
 
     #region Combinations
-	public void WindslashHit() {
-		//raycast forward
-		float range = 1.0f;
-		RaycastHit hitInfo;
-		if(Physics.Raycast(transform.position, transform.forward, out hitInfo, range, ~(1 << Layers.Player))) {
-			if(hitInfo.collider.gameObject.layer == Layers.Enemy) {
-				hitInfo.collider.GetComponent<Enemy>().TakeDamage(10);
-			}
-		}
-	}
+    public void WindslashHit() {
+        //raycast forward
+        float range = 1.0f;
+        RaycastHit hitInfo;
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, ~(1 << Layers.Player))) {
+            if (hitInfo.collider.gameObject.layer == Layers.Enemy) {
+                hitInfo.collider.GetComponent<Enemy>().TakeDamage(10);
+            }
+        }
+    }
 
     public void SummonGolem() {
         currentMana -= Elements.GolemCost;
@@ -170,19 +170,19 @@ public class ElementControl : MonoBehaviour {
 
     public IEnumerator DoShock(float totalDamage, Collider[] enemies, float totalDuration) {
         anim.speed = 0;
-        
+
         //calculate damage to deal to each enemy
         float indvDmg = totalDamage / enemies.Length;
         //calculate downtime before going to next enemy
         float indvTime = totalDuration / enemies.Length;
 
         //if no enemies just teleport
-        if(enemies.Length <= 0) {
+        if (enemies.Length <= 0) {
             transform.position = targetCircle.transform.position + targetCircle.transform.up;
         }
 
         //start moving
-        for(int count = 0; count <= enemies.Length - 1; count++) {
+        for (int count = 0; count <= enemies.Length - 1; count++) {
             transform.position = enemies[count].transform.position - enemies[count].transform.forward;
             enemies[count].GetComponent<Enemy>().TakeDamage(indvDmg);
             yield return new WaitForSeconds(indvTime);

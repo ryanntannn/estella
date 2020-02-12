@@ -8,7 +8,6 @@ using DG.Tweening;
 public class IngameUI : MonoBehaviour
 {
     PlayerControl playerControl;
-    ElementControl elementControl;
     Slider healthBar;
     Slider sprintBar;
     Slider energyBar;
@@ -27,7 +26,6 @@ public class IngameUI : MonoBehaviour
     void Start()
     {
         playerControl = GameObject.Find("Player").GetComponent<PlayerControl>();
-        elementControl = playerControl.GetComponent<ElementControl>();
         healthBar = GameObject.Find("healthbar").GetComponent<Slider>();
         sprintBar = GameObject.Find("sprintbar").GetComponent<Slider>();
         energyBar = GameObject.Find("energybar").GetComponent<Slider>();
@@ -48,7 +46,7 @@ public class IngameUI : MonoBehaviour
     {
         healthBar.value = playerControl.currentHealth / playerControl.maxHealth;
         sprintBar.value = playerControl.currentStamina / playerControl.maxStamina;
-        energyBar.value = elementControl.currentMana / elementControl.maxMana;
+        energyBar.value = ElementControlV2.Instance.currentMana / ElementControlV2.Instance.maxMana;
         if (holdF.activeSelf)
         {
             if (!playerControl.currentInteractableObject.isActivated)
