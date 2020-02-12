@@ -32,7 +32,7 @@ public class IngameUI : MonoBehaviour
         energyBar = GameObject.Find("energybar").GetComponent<Slider>();
         popupt = GameObject.Find("PopupT").GetComponent<TextMeshProUGUI>();
         bigpopupt = GameObject.Find("Bigpopup").GetComponent<TextMeshProUGUI>();
-        questText = GameObject.Find("Quest").GetComponentInChildren<TextMeshProUGUI>();
+        questText = GameObject.Find("QuestText").GetComponentInChildren<TextMeshProUGUI>();
         popup = GameObject.Find("Popup").GetComponent<RectTransform>();
         leftele = GameObject.Find("lefteleholder");
         rightele = GameObject.Find("righteleholder");
