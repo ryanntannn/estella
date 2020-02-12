@@ -15,12 +15,16 @@ public class LevelManager : MonoBehaviour
     {
         playerControl = GameObject.Find("Player").GetComponent<PlayerControl>();
         igui = GameObject.Find("UI (1)").GetComponent<IngameUI>();
+        ChangeQuest(0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (QuestCheck()) CompleteQuest();
+        if (activeQuest > 0)
+        {
+            if (QuestCheck()) CompleteQuest();
+        }
     }
 
     bool QuestCheck() //Check if the active quest is completed;
@@ -37,14 +41,26 @@ public class LevelManager : MonoBehaviour
     {
         if(i < 0)
         {
+            activeQuest = -1;
+            igui.UpdateQuestString("No Quest Active");
             return;
         }
-
+        
         activeQuest = i;
+
+        //Build Quest String;
+        string questString = "";
+        foreach (SubQuest sq in quests[activeQuest].subQuests)
+        {
+            questString += sq.shortDesc + "\n";
+        }
+
+        igui.UpdateQuestString(questString);
     }
 
     public void CompleteQuest()
     {
         activeQuest = -1;
+        ChangeQuest(activeQuest);
     }
 }
