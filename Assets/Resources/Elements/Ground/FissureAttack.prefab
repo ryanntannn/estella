@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3686749137000166894}
   - component: {fileID: 2254187670430041112}
   - component: {fileID: 3992691696751410794}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FissureAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   riseTime: 2
+  combinationDelay: 2
+  timeToLive: 10
 --- !u!65 &3992691696751410794
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -66,11 +68,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3686749137000166894}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 7849f3dc393328b4b8ce7ef627c36fca,
-        type: 3}
-      propertyPath: m_Name
-      value: Fissure (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7849f3dc393328b4b8ce7ef627c36fca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -146,6 +143,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 791b5e8fa418687468531ffb427b1d5c, type: 2}
+    - target: {fileID: -927199367670048503, guid: 7849f3dc393328b4b8ce7ef627c36fca,
+        type: 3}
+      propertyPath: m_Name
+      value: Fissure (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7849f3dc393328b4b8ce7ef627c36fca,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7849f3dc393328b4b8ce7ef627c36fca, type: 3}
 --- !u!4 &8526231089324545123 stripped

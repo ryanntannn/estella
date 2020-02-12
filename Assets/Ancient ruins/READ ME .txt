@@ -1,0 +1,4 @@
+To ensure optimal visual quality in the demo scene please make sure of :
+
+- having "auto" checked in the lighting tab and wait for the build to finish.
+- Import the "effects" package from the standard assets of unity and then activate the scripts on the main camera prefab.

@@ -10,40 +10,40 @@ public class ChainLightningScript : MonoBehaviour {
     LineRenderer lr;
     List<GameObject> targets = new List<GameObject>();
     List<Vector3> positions = new List<Vector3>();
-    public LockOnTarget lockOn;
+	[HideInInspector]
+	ElementControl ec;
+    float initalPlaybackSpeed = 1;
 
     // Start is called before the first frame update
     void Start() {
         //lr
-        lr = GetComponent<LineRenderer>();
-        transform.parent = transform.parent;
-        transform.localPosition = Vector3.zero;
+        lr = transform.GetChild(0).GetComponent<LineRenderer>();
+        Animator anim = hand.transform.GetChild(0).GetComponent<Animator>();
+        initalPlaybackSpeed = anim.speed;
+        anim.speed = 0;
     }
 
     // Update is called once per frame
     void Update() {
-        initalTarget = lockOn.target;
-
         targets.Clear();
         positions.Clear();
 
         if (!Input.GetKey(hand.bind)) {
-            hand.elementControl.isCasting = false;
+            hand.transform.GetChild(0).GetComponent<Animator>().speed = initalPlaybackSpeed;
             Destroy(gameObject);
         }
-        positions.Add(transform.position);
+        positions.Add(Vector3.zero);
 
-        if (initalTarget) {
-            FindEnemy(initalTarget);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Debug.DrawRay(transform.position, hand.transform.forward * 5, Color.blue);
+        RaycastHit hitInfo;
+        //raycast forward
+        if (Physics.Raycast(transform.position, ray.direction, out hitInfo, 5, 1 << Layers.Enemy)) {
+            FindEnemy(hitInfo.collider.gameObject);
+			
         } else {
-            RaycastHit hitInfo;
-            //raycast forward
-            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, 5, 1 << Layers.Enemy)) {
-                FindEnemy(hitInfo.collider.gameObject);
-            } else {
-                //make it go stright
-                positions.Add(transform.position + transform.forward * 5);
-            }
+			//make it go stright
+			positions.Add(hand.transform.up * 5);
         }
 
         lr.positionCount = positions.Count;
@@ -56,11 +56,12 @@ public class ChainLightningScript : MonoBehaviour {
         targets.Add(target);
         positions.Add(targetPos);
         target.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime, Enemy.Effects.Stun);
+		target.GetComponent<Enemy>().DealDamage(10 * Time.deltaTime);
 
         if (targets.Count <= maxTargets) {
             //find more targets
             Collider[] hitInfo = Physics.OverlapSphere(targetPos, radius, 1 << Layers.Enemy);
-            foreach(Collider collision in hitInfo) {
+            foreach (Collider collision in hitInfo) {
                 if (!targets.Contains(collision.gameObject)) {
                     FindEnemy(collision.gameObject);
                     break;

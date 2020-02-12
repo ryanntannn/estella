@@ -5,21 +5,24 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Elements/Electricity")]
 public class Electricity : Element {
+    public override string BigAttackTrigger { get { return "WhenBigAttack"; } }
+    public override string SmallAttackTrigger { get { return "WhenSmallAttack"; } }
+
     public override string ElementName { get { return "Electricity"; } }
 
-    public override void DoBasic(ElementControl agent, Hand hand) {
-        //instantiate chain lightning
-        GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Electricity/ChainLightning"), hand.handPos);
-        instance.GetComponent<ChainLightningScript>().lockOn = agent.lockOn;
-        instance.GetComponent<ChainLightningScript>().hand = hand;
+	public override int SmallAttackCost => 3;
 
-        //start animation
-        //agent.anim.SetBool("IsShocking", true);
+	public override int BigAttackCost => 10;
+
+	public override void DoBasic(ElementControl agent, Hand hand) {
+        //instantiate chain lightning
+        GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Electricity/Shock_Chain"), hand.handPos);
+        instance.GetComponent<ChainLightningScript>().hand = hand;
     }
 
     public override void DoBig(ElementControl agent, Hand hand) {
-        //flash
-        /* TODO
+		//flash
+		/* TODO
              IEnumerator DoFlash() {
         float delay = 0.25f;
         //dash forward 
@@ -36,5 +39,8 @@ public class Electricity : Element {
         }
     }
          * */
-    }
+
+		GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Electricity/Lightningstrike"), agent.targetCircle.transform.position, Quaternion.Euler(-90, 0, 0));
+		
+	}
 }

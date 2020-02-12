@@ -22,9 +22,11 @@ public class Blackhole : MonoBehaviour {
 
     private void OnTriggerStay(Collider other) {
         if(other.gameObject.layer == Layers.Enemy) {
-            //drag to center slowly
-            //other.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime, Enemy.Effects.Magnatised);
-            Vector3 direction = transform.position - other.transform.position;
+			//drag to center slowly
+			//other.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime, Enemy.Effects.Magnatised);
+			other.GetComponent<Enemy>().currentSpeed = 0;
+
+			Vector3 direction = transform.position - other.transform.position;
             other.transform.position += direction * Time.deltaTime * multiplier;
         }
     }

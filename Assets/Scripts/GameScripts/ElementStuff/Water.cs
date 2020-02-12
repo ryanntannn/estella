@@ -5,26 +5,33 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Elements/Water")]
 public class Water : Element {
+    public override string BigAttackTrigger { get { return "WhenBigAttack"; } }
+    public override string SmallAttackTrigger { get { return "WhenSmallAttack"; } }
+
     public override string ElementName { get { return "Water"; } }
 
-    public override void DoBasic(ElementControl agent, Hand hand) {
-        //bubble shot
-        GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Water/BubbleShot"), hand.transform.position, agent.transform.rotation);
-        if (agent.lockOn.target && agent.enableLockOn) {
-            instance.GetComponent<BubbleShot>().target = agent.lockOn.target;
-        } else {
-            Vector3 newRot = Camera.main.transform.eulerAngles;
-            newRot.x = 0;
-            instance.transform.rotation = Quaternion.Euler(newRot);
-        }
-        agent.isCasting = false;
-        //instance.transform.parent = createdByPlayer;
-    }
+	public override int SmallAttackCost => 6;
 
-    public override void DoBig(ElementControl agent, Hand hand) {
-        //tsunami
-        GameObject tsunami = Resources.Load<GameObject>("Elements/Water/Tsunami");
-        tsunami = Instantiate(tsunami, agent.transform.position - agent.transform.forward - agent.transform.up, agent.transform.rotation);
-        //tsunami.transform.parent = createdByPlayer;
-    }
+	public override int BigAttackCost => 10;
+
+	public override void DoBasic(ElementControl agent, Hand hand) {
+		//bubble shot
+		GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Water/BubbleShot"), hand.handPos.position, hand.transform.rotation);
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hitInfo;
+		if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity)) {
+            Debug.Log(hitInfo.collider.gameObject.name);
+			Vector3 toLookAt = hitInfo.point;
+			//toLookAt.y = instance.transform.position.y;
+			instance.transform.LookAt(toLookAt);
+		}
+		agent.currentMana -= SmallAttackCost;
+	}
+
+	public override void DoBig(ElementControl agent, Hand hand) {
+		//tsunami
+		GameObject tsunami = Resources.Load<GameObject>("Elements/Water/Tsunami");
+		tsunami = Instantiate(tsunami, agent.transform.position - agent.transform.forward - agent.transform.up, agent.transform.rotation);
+		agent.currentMana -= BigAttackCost;
+	}
 }

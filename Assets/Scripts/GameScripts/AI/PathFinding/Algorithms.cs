@@ -132,19 +132,20 @@ public static class Algorithms {
     }
 
     private static float GetManhatten(MapGrid grid, Node start, Node end) {
-        Vector2 gridSize = (grid.mapSize / grid.nodeSize);
-        float x = Mathf.Abs(start.gridPos.x - end.gridPos.x);
-        x /= gridSize.x;    //normalise it
-        float y = Mathf.Abs(start.gridPos.y - end.gridPos.y);
-        y /= gridSize.y;
+        float gridX = grid.mapSize.x / (grid.centerToSide * 2);
+        float gridY = grid.mapSize.y / (grid.nodeSize * 1.5f);
 
+        float x = Mathf.Abs(start.gridPos.x - end.gridPos.x) / gridX;
+        float y = Mathf.Abs(start.gridPos.y - end.gridPos.y) / gridY;
         return (x + y);
     }
 
     private static float GetEuclidian(MapGrid grid, Node start, Node end) {
-        Vector2 gridSize = (grid.mapSize / grid.nodeSize);
+        float gridX = grid.mapSize.x / grid.centerToSide;
+        float gridY = grid.mapSize.y / (grid.nodeSize * 2);
+        float gridMagnitude = Mathf.Sqrt(Mathf.Pow(gridX, 2) + Mathf.Pow(gridY, 2));
         float eucDist = (start.gridPos - end.gridPos).magnitude;
-        return eucDist / gridSize.magnitude;
+        return eucDist / gridMagnitude;
     }
 
     private static Node FindClosestWalkable(MapGrid grid, Node _input) {
