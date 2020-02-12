@@ -116,7 +116,10 @@ public class PlayerControl : MonoBehaviour {
 
     void InputUpdate() {
         if (!dodging) {
-            rb.velocity = Vector3.zero;
+            Vector3 temp = rb.velocity;
+            temp.x = 0;
+            temp.z = 0;
+            rb.velocity = temp;
         }
         float xAxis = Input.GetAxis("Horizontal");
         float yAxis = Input.GetAxis("Vertical");
