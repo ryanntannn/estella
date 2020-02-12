@@ -4805,7 +4805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a8b2fe4df224b46a9496b783df7918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToLive: 5
+  timeToLive: 10
   isEmpowered: 0
 --- !u!54 &8965719259013543665
 Rigidbody:
@@ -4821,7 +4821,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &1198718918243679987
 BoxCollider:

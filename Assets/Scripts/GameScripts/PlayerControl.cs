@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour {
     public float speed;
     private float speedMult;
+    public float runMultiplier = 2;
     public float maxHealth = 100;
     public float currentHealth = 100;
     [Range(0, 10.0f)]
@@ -14,11 +15,9 @@ public class PlayerControl : MonoBehaviour {
     [Range(0, 10.0f)]
     public float staminaRegenRate = 1.0f;
     public Animator animator;
-    public Element[] elements;
     public bool InVulnerable = false;
 
     public Hand rHand, lHand;
-    public KeyCode swapLeft = KeyCode.Q, swapRight = KeyCode.E; //swapping elements
 
     private GameObject pivot;
     Rigidbody rb;
@@ -29,9 +28,6 @@ public class PlayerControl : MonoBehaviour {
     GameObject radialMenu1;
     GameObject radialMenu2;
     public bool isInRadialMenu;
-
-	//element control
-	ElementControl ec;
 
     //Interactable object
     public InteractableObject currentInteractableObject = null;
@@ -51,17 +47,6 @@ public class PlayerControl : MonoBehaviour {
         //init health
         currentHealth = maxHealth;
         currentStamina = maxStamina;
-
-		//set ec
-		ec = GetComponent<ElementControl>();
-
-        //check for lHand rHand
-        if (!lHand) {
-            lHand = ec.lHand;
-        }
-        if (!rHand) {
-            rHand = ec.rHand;
-        }
     }
 
     // Update is called once per frame
@@ -130,22 +115,36 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void InputUpdate() {
-        speedMult = 0;
-        if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && !isInRadialMenu && !ec.isCasting) {
-            speedMult = ((Input.GetKey(KeyCode.LeftShift) && currentStamina > 5) ? 2f : 1);
+        if (!dodging) {
+            rb.velocity = Vector3.zero;
+        }
+        float xAxis = Input.GetAxis("Horizontal");
+        float yAxis = Input.GetAxis("Vertical");
+        animator.SetBool("IsWalking", false);
+        animator.SetBool("IsRunning", false);
+
+        if (
+            (yAxis != 0 || xAxis != 0)
+            && !ElementControlV2.Instance.isCasting
+            && !isInRadialMenu
+            && !dodging
+        ) 
+        {
+            bool isRunning = Input.GetKey(KeyCode.LeftShift);
+            animator.SetBool("IsRunning", isRunning);
+            animator.SetBool("IsWalking", true);
+            Vector2 temp = Vector2.ClampMagnitude((new Vector2(xAxis, yAxis) * Mathf.Exp(2)), 1);
+
+            rb.velocity = transform.forward
+                * speed
+                * (isRunning ? runMultiplier : 1)
+                * temp.sqrMagnitude
+                * (yAxis < 0 ? 0.75f : 1);
         }
 
-		if (Input.GetKeyDown(KeyCode.Space) && !dodging && currentStamina > 20) {
-			currentStamina -= 20;
-			dodging = true;
-			animator.SetTrigger("WhenDodge");
-		}
-
-		animator.SetFloat("Speed", speedMult);
-        if(speedMult > 1) {
-            currentStamina -= Time.deltaTime * 2;
-        } else {
-            currentStamina = Mathf.Clamp(currentStamina + Time.deltaTime * (speedMult > 0.5f ? 1 : dodging ? 0 : 2) * staminaRegenRate, 0, maxStamina);
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            animator.SetTrigger("WhenDive");
+            dodging = true;
         }
 
         if (currentInteractableObject && Input.GetKey(KeyCode.F))
@@ -179,7 +178,7 @@ public class PlayerControl : MonoBehaviour {
     {
 		//animator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
 		//animator.SetFloat("Vertical", Input.GetAxis("Vertical"));
-		if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && !isInRadialMenu && !ec.isCasting && !dodging)
+		if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && !isInRadialMenu && !ElementControlV2.Instance.isCasting && !dodging)
         {
             rotation = Mathf.Atan2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * Mathf.Rad2Deg;
             //transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotAngle + pivot.transform.eulerAngles.y, transform.eulerAngles.z);
@@ -204,13 +203,16 @@ public class PlayerControl : MonoBehaviour {
     public void ChangeElement(int i)
     {
         //TODO Change Element Code Tiong ples do
-        rHand.currentElement = elements[i];
+        //rHand.currentElement = elements[i];
+        //set current element to null
+        ElementControlV2.Instance.ChangeRightHand(i + 1);
     }
 
     //leftHand
     public void ChangeElement2(int i)
     {
-        lHand.currentElement = elements[i];
+        // lHand.currentElement = elements[i];
+        ElementControlV2.Instance.ChangeLeftHandHand(i + 1);
     }
 
     /// <summary>

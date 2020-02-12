@@ -161,3 +161,39 @@ public class PiorityQueue<T> where T : IComparable {
         return m_queue.Contains(_input);
     }
 }
+
+//player class mainly
+public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
+    private static bool m_shuttingDown = false;
+    private static object m_lock = new object();
+    private static T m_instance;
+
+    public static T Instance {
+        get {
+            if (m_shuttingDown) return default(T);
+
+            lock (m_lock) {
+                if (!m_instance) {
+                    m_instance = FindObjectOfType<T>();
+
+                    if (!m_instance) {
+                        GameObject singletonObj = new GameObject();
+                        m_instance = singletonObj.AddComponent<T>();
+                        singletonObj.name = typeof(T).ToString() + " Singleton";
+
+                        DontDestroyOnLoad(singletonObj);
+                    }
+                }
+                return m_instance;
+            }
+        }
+    }
+
+    private void OnApplicationQuit() {
+        m_shuttingDown = true;
+    }
+
+    private void OnDestroy() {
+        m_shuttingDown = true;
+    }
+}
