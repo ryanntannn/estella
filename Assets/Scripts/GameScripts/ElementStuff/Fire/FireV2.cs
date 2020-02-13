@@ -23,12 +23,8 @@ public class FireV2 : BaseElementV2 {
     public override void CastRegularAttack() {
         //fireball
         GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Fire/Fireball"), HandUsing.handPos.position, transform.rotation);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, 100)) {
-            Vector3 toLookAt = hitInfo.point;
-            toLookAt.y = instance.transform.position.y;
-            instance.transform.LookAt(toLookAt);
+        if (Targeter.Instance.Target) {
+            instance.transform.LookAt(Targeter.Instance.CollisionPoint);
         }
         ElementControlV2.Instance.currentMana -= RegularManaCost;
     }

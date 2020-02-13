@@ -208,7 +208,7 @@ public class ElementControlV2 : Singleton<ElementControlV2> {
 
     public void DoMagma() {
         currentMana -= Elements.MagmaCost;
-        GameObject earthSplinter = Instantiate(Resources.Load<GameObject>("Elements/Magma/EarthShatter"), TargetingReticle.Instance.transform.position, TargetingReticle.Instance.transform.rotation);
+        GameObject earthSplinter = Instantiate(Resources.Load<GameObject>("Elements/Magma/Magma"), TargetingReticle.Instance.transform.position, TargetingReticle.Instance.transform.rotation);
     }
 
     public void DoBlaze() {

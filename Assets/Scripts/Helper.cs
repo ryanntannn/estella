@@ -111,7 +111,8 @@ public static class Layers {
         Enemy = 9,
         Player = 10,
         Terrain = 11,
-        Obstacles = 12;
+        Obstacles = 1,
+        CreatedObjects = 15;
 }
 
 //For aStar path finding

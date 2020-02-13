@@ -125,6 +125,7 @@ public class PlayerControl : MonoBehaviour {
         float yAxis = Input.GetAxis("Vertical");
         animator.SetBool("IsWalking", false);
         animator.SetBool("IsRunning", false);
+        float finalRateOfRegen = 2;
 
         if (
             (yAxis != 0 || xAxis != 0)
@@ -133,21 +134,35 @@ public class PlayerControl : MonoBehaviour {
             && !dodging
         ) 
         {
-            bool isRunning = Input.GetKey(KeyCode.LeftShift);
+            bool isRunning = Input.GetKey(KeyCode.LeftShift) && currentStamina > 0;
+            finalRateOfRegen = 1;
+            if (isRunning) {
+                currentStamina = Mathf.Clamp(currentStamina - Time.deltaTime, 0, maxStamina);
+                finalRateOfRegen = 0;
+            }
             animator.SetBool("IsRunning", isRunning);
             animator.SetBool("IsWalking", true);
             Vector2 temp = Vector2.ClampMagnitude((new Vector2(xAxis, yAxis) * Mathf.Exp(2)), 1);
 
-            rb.velocity = transform.forward
+            Vector3 xzVelo = transform.forward
                 * speed
                 * (isRunning ? runMultiplier : 1)
                 * temp.sqrMagnitude
                 * (yAxis < 0 ? 0.75f : 1);
+
+            xzVelo.y = rb.velocity.y;
+            rb.velocity = xzVelo;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space) && !dodging && currentStamina > 20) {
+            currentStamina -= 20;
             animator.SetTrigger("WhenDive");
             dodging = true;
+        }
+
+        if (!dodging) {
+            //regen stamina
+            currentStamina = Mathf.Clamp(currentStamina + Time.deltaTime * staminaRegenRate * finalRateOfRegen, 0, maxStamina);
         }
 
         if (currentInteractableObject && Input.GetKey(KeyCode.F))
@@ -162,7 +177,8 @@ public class PlayerControl : MonoBehaviour {
     }
 
     public void StartJump() {
-        rb.AddForce(transform.forward * 2 * speed, ForceMode.Impulse);
+        rb.velocity = Vector3.zero;
+        rb.AddForce(transform.forward * 4 * speed, ForceMode.Impulse);
     }
 
     public void DoneJumping() {

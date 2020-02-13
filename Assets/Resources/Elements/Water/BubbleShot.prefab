@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3390678890504420678}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Water Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,9 +43,9 @@ GameObject:
   - component: {fileID: 251922737283283243}
   - component: {fileID: 68855175358281184}
   - component: {fileID: 7794625498745530149}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: BubbleShot
-  m_TagString: Untagged
+  m_TagString: Bubbleshot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 2832377600240391607}
   - component: {fileID: 4697538317659447447}
   - component: {fileID: 1135710273244201990}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Water Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

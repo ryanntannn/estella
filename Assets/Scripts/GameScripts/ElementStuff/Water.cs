@@ -17,14 +17,9 @@ public class Water : Element {
 	public override void DoBasic(ElementControl agent, Hand hand) {
 		//bubble shot
 		GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Water/BubbleShot"), hand.handPos.position, hand.transform.rotation);
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hitInfo;
-		if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity)) {
-            Debug.Log(hitInfo.collider.gameObject.name);
-			Vector3 toLookAt = hitInfo.point;
-			//toLookAt.y = instance.transform.position.y;
-			instance.transform.LookAt(toLookAt);
-		}
+        if (Targeter.Instance.Target) {
+            instance.transform.LookAt(Targeter.Instance.Target.transform);
+        }
 		agent.currentMana -= SmallAttackCost;
 	}
 
