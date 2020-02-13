@@ -25,7 +25,6 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (activeQuest >= 0)
         {
-            Debug.Log("Checking");
             if (QuestCheck()) CompleteQuest();
         }
     }
@@ -73,6 +72,23 @@ public class LevelManager : Singleton<LevelManager>
                     WriteQuestString();
                 }
             }
+        }
+    }
+
+    public void PlayerEnterLocation(string locationName)
+    {
+        for (int i = 0; i < quests[activeQuest].subQuests.Count; i++)
+        {
+            SubQuest sq = quests[activeQuest].subQuests[i];
+            if (sq.questType == SubQuestType.Locate)
+            {
+                if ((sq as LocateSubquest).locationName.Equals(locationName))
+                {
+                    subQuestCompleted[i] = true;
+                    WriteQuestString();
+                }
+            }
+
         }
     }
 
