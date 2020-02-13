@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetingReticle : Singleton<TargetingReticle> {
+public class TargetingReticle : Singleton<TargetingReticle> { 
     public bool isShowing = true;
 
     private GameObject m_mesh;
     // Start is called before the first frame update
     void Start() {
-        m_mesh = transform.GetChild(0).gameObject;
+        if (transform.childCount > 0) {
+            m_mesh = transform.GetChild(0).gameObject;
+        }
     }
 
     // Update is called once per frame
     void Update() {
         SetPosition();
-        m_mesh.SetActive(isShowing);
+        if(m_mesh)
+            m_mesh.SetActive(isShowing);
     }
 
     void SetPosition() {
