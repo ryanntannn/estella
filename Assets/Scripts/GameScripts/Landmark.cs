@@ -10,6 +10,7 @@ public class Landmark : MonoBehaviour
     GameObject player;
     [SerializeField]
     private bool inArea = false;
+    public bool debug = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,13 @@ public class Landmark : MonoBehaviour
         if(inArea && Vector3.Distance(transform.position, player.transform.position) > radius)
         {
             inArea = false;
+        }
+    }
+
+    private void OnDrawGizmos() {
+        if (debug) {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, radius);
         }
     }
 }

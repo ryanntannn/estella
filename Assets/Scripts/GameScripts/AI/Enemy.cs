@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour {
     //element stuff
-    public enum Effects { None, Stun, Drenched, Burn, Freeze, Knockback, Slow }
+    public enum Effects { None, Stun, Burn, Freeze, Slow }
     public ParticleSystem onFirePs;
     public float debuffTimer = 0;
     public Effects currentDebuff = Effects.None;
@@ -63,10 +63,6 @@ public class Enemy : MonoBehaviour {
                 //cannot move
                 currentSpeed = 0;
                 break;
-            case Effects.Drenched:
-                //take more damage
-                currentResistance = Mathf.Clamp(currentResistance - 2, 0, Mathf.Infinity);
-                break;
             case Effects.Burn:
                 TakeDamage(deltaTime * (1 / currentResistance));
                 break;
@@ -74,24 +70,9 @@ public class Enemy : MonoBehaviour {
                 //cannot move
                 currentSpeed = 0;
                 break;
-            case Effects.Knockback:
-                break;
             case Effects.Slow:
-                currentSpeed *= 0.5f;
+                currentSpeed *= 0.7f;
                 break;
-            //case Effects.Magnatised:
-            //    //bullet magnetism
-            //    float range = 5;
-            //    //cast and look for projectiles
-            //    RaycastHit[] hitInfo = Physics.CapsuleCastAll(transform.position - transform.up, transform.position + transform.up, range, transform.up, 5);
-            //    foreach (RaycastHit hit in hitInfo) {
-            //        if (hit.collider.CompareTag("Bolt")) {
-            //            //drag bolt closer
-            //            Vector3 direction = transform.position - hit.transform.position;
-            //            hit.transform.position += direction * deltaTime;
-            //        }
-            //    }
-            //    break;
             default:
                 break;
         }

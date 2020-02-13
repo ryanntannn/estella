@@ -111,16 +111,25 @@ public class AnimationEvents : MonoBehaviour {
     }
     #endregion
 
+    #region Skeleington animation events
+    void SkeleDoneAttacking() {
+        parent.GetComponent<Skelington>().DoneAttacking();
+    }
+    #endregion
+
     void DieTrigger() {
-        Destroy(parent.GetComponent<Enemy>());
+        foreach(Component c in parent.GetComponents<MonoBehaviour>()) {
+            Destroy(c);
+        }
         Destroy(parent.gameObject, 5);
     }
 
-    void EnemyDmgTrigger(float damage) {
-        if (parent.name.Equals("EnemyKnight")) {
-            parent.GetComponent<Enemy>().DealDamage(damage, 1);
-        }else {
-            parent.GetComponent<Enemy>().DealDamage(damage);
-        }
+    //doesn't need range
+    void EnemyDmgNoRange(float damage) {
+        parent.GetComponent<Enemy>().DealDamage(damage);
+    }
+
+    void EnemyDmgNeedRange(float damage) {
+        parent.GetComponent<Enemy>().DealDamage(damage, 1);
     }
 }

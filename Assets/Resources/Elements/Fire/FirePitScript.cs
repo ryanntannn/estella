@@ -15,10 +15,10 @@ public class FirePitScript : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.layer == Layers.CreatedObjects) {
-            if (other.CompareTag("BubbleShot")) {
+            if (other.CompareTag("Bubbleshot")) {
                 GameObject steampit = Instantiate(Resources.Load<GameObject>("Elements/Steam/SteamPit"), transform.position, transform.rotation);
                 Helper.StopParticleSystem(transform);
-                Destroy(gameObject, 10);
+                //Destroy(gameObject, 10);
                 Destroy(this);
             }
         }

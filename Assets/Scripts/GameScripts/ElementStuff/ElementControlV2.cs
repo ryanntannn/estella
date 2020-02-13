@@ -113,21 +113,25 @@ public class ElementControlV2 : Singleton<ElementControlV2> {
     #region Casting
     public void CastRightHand() {
         Anim.SetBool("IsFlipped", false);
+        Targeter.Instance.LookAtTarget();
         m_rightHand.currentElement.StartCastRegularAttack();
     }
 
     public void CastRightHandUlti() {
         Anim.SetBool("IsFlipped", false);
+        Targeter.Instance.LookAtTarget();
         m_rightHand.currentElement.StartCastUltimateAttack();
     }
 
     public void CastLeftHand() {
         Anim.SetBool("IsFlipped", true);
+        Targeter.Instance.LookAtTarget();
         m_leftHand.currentElement.StartCastRegularAttack();
     }
 
     public void CastLeftHandUlti() {
         Anim.SetBool("IsFlipped", true);
+        Targeter.Instance.LookAtTarget();
         m_leftHand.currentElement.StartCastUltimateAttack();
     }
     #endregion

@@ -16,4 +16,12 @@ public class Targeter : Singleton<Targeter> {
             CollisionPoint = hitInfo.point;
         }
     }
+
+    public void LookAtTarget() {
+        transform.LookAt(CollisionPoint);
+        Vector3 rotationEuler = transform.rotation.eulerAngles;
+        rotationEuler.x = 0;
+        rotationEuler.z = 0;
+        transform.rotation = Quaternion.Euler(rotationEuler);
+    }
 }

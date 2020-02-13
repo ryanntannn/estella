@@ -33,16 +33,8 @@ public class LightningStrikeScript : MonoBehaviour {
 
 	IEnumerator KillSelf(float _ttl) {
 		yield return new WaitForSeconds(_ttl);
-		TurnOffPs(transform);
+		Helper.StopParticleSystem(transform);
 		Destroy(gameObject, 3);
-	}
-
-	void TurnOffPs(Transform _t) {
-		ParticleSystem ps = _t.GetComponent<ParticleSystem>();
-		if (ps) ps.Stop();
-		foreach(Transform child in _t) {
-			TurnOffPs(child);
-		}
 	}
 
 	// Update is called once per frame
