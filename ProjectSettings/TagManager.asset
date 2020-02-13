@@ -10,6 +10,7 @@ TagManager:
   - Map
   - Puddle
   - Fissure
+  - Bubbleshot
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Obstacles
   - MINIMAP ITEM
   - NAVMESHSTOP
-  - 
+  - CreatedObjects
   - 
   - 
   - 

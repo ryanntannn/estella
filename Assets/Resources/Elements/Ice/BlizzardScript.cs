@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BlizzardScript : MonoBehaviour {
     GameObject player;
+    List<Enemy> m_enemies = new List<Enemy>();
     // Start is called before the first frame update
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -13,24 +14,31 @@ public class BlizzardScript : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 		transform.position = player.transform.position + Vector3.up * 0.01f;
+
+        m_enemies.ForEach(x => {
+            x.TakeDamage(Time.deltaTime);
+            x.DebuffEnemy(Time.deltaTime, Enemy.Effects.Slow);
+        });
     }
 
     IEnumerator FreezeAll() {
         yield return new WaitForSeconds(5);
-        RaycastHit[] hits = Physics.BoxCastAll(transform.position + transform.up * 2.5f, Vector3.one * 2.5f, Vector3.up, Quaternion.identity, 2.5f, 1 << Layers.Enemy);
-        foreach(RaycastHit hit in hits) {
-            //we can do another check here, but it is redundant
-            hit.collider.GetComponent<Enemy>().DebuffEnemy(5, Enemy.Effects.Freeze);
-        }
-		//DisablePS(transform);
-        Destroy(gameObject, 10);
+        m_enemies.ForEach(x => {
+            x.TakeDamage(5);
+            x.DebuffEnemy(5, Enemy.Effects.Freeze);
+        });
+        Destroy(gameObject);
     }
 
-	void DisablePS(Transform _t) {
-		ParticleSystem ps = _t.GetComponent<ParticleSystem>();
-		if (ps) ps.Stop();
-		foreach(Transform child in _t) {
-			DisablePS(child);
-		}
-	}
+    private void OnTriggerEnter(Collider other) {
+        if(other.gameObject.layer == Layers.Enemy) {
+            m_enemies.Add(other.GetComponent<Enemy>());
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (other.gameObject.layer == Layers.Enemy) {
+            m_enemies.Remove(other.GetComponent<Enemy>());
+        }
+    }
 }

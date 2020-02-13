@@ -17,7 +17,7 @@ public class Wind : Element {
 	public override void DoBasic(ElementControl agent, Hand hand) {
         //wind slash
         GameObject ws = Instantiate(Resources.Load<GameObject>("Elements/Wind/WindSlash/WindSlash"), hand.handPos.transform);
-        ws.GetComponent<WindSlashScript>().ec = agent;
+        //ws.GetComponent<WindSlashScript>().ec = agent;
 
 		agent.currentMana -= SmallAttackCost;
     }
