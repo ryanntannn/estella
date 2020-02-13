@@ -38,9 +38,28 @@ public class TornadoScript : MonoBehaviour, ISteamable {
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.layer == Layers.Enemy) {
-            other.GetComponent<Enemy>().DebuffEnemy(5, Enemy.Effects.Slow);
+    protected virtual void OnTriggerEnter(Collider other) {
+        switch (other.gameObject.layer) {
+            case Layers.Enemy:
+                other.GetComponent<Enemy>().DebuffEnemy(5, Enemy.Effects.Slow);
+                break;
+            case Layers.CreatedObjects:
+                GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Blaze/FireTornado"), transform.position, transform.rotation);
+                SetPrewarm(instance.transform);
+                Destroy(gameObject);
+                break;
+        }
+    }
+
+    void SetPrewarm(Transform _t) {
+        ParticleSystem ps = _t.GetComponent<ParticleSystem>();
+        if (ps) {
+            ParticleSystem.MainModule main = ps.main;
+            main.prewarm = true;
+        }
+
+        foreach(Transform child in _t) {
+            SetPrewarm(child);
         }
     }
 }
