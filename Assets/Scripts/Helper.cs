@@ -97,6 +97,17 @@ public static class Helper {
         if (go) return go.GetComponent<T>();
         return default(T);
     }
+
+    /// <summary>
+    /// Stops all particle systems in transform and children
+    /// </summary>
+    public static void StopParticleSystem(Transform _t) {
+        ParticleSystem ps = _t.GetComponent<ParticleSystem>();
+        if (ps) ps.Stop();
+        foreach(Transform child in _t) {
+            StopParticleSystem(child);
+        }
+    }
 }
 
 public static class Layers {

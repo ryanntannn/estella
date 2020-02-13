@@ -1,21 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using System;
 
 public class FissureScript : MonoBehaviour {
     public float riseTime = 2;
-    public float combinationDelay = 2;
     public float timeToLive = 10;
 
     const float TOTAL_HEIGHT = 2;
     Vector3 direction;
     float internalCounter = 0;
+    bool onFire = false;
+    BoxCollider fireCollider;
     // Start is called before the first frame update
-    void Start() { 
+    void Start() {
         Vector3 properPosition = transform.position + transform.up * TOTAL_HEIGHT;
         direction = (properPosition - transform.position) / riseTime;
         StartCoroutine(gameObject.KillSelf(timeToLive));
+        fireCollider = GetComponents<BoxCollider>().First(x => x.isTrigger);
     }
 
     // Update is called once per frame
@@ -27,18 +30,24 @@ public class FissureScript : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("FireBall")) {
-            StartCoroutine(CreateSplinter());
-            Destroy(gameObject.GetComponent<BoxCollider>());
-            Destroy(transform.GetChild(0).gameObject);
-            Destroy(other.gameObject);
+        switch (other.tag) {
+            case "BubbleShot":
+                if (!onFire) {
+                    //mud
+                }
+                Destroy(other.gameObject);
+                break;
+            case "FireBall":
+                //flaming hot
+                onFire = true;
+                Destroy(other.gameObject);
+                break;
         }
     }
 
-    IEnumerator CreateSplinter() {
-        yield return new WaitForSeconds(combinationDelay);
-        GameObject magma = Resources.Load<GameObject>("Elements/Magma/EarthSplinter");
-        magma = Instantiate(magma, transform.position - transform.up * 5, transform.rotation);
-        Destroy(gameObject);
+    private void OnTriggerStay(Collider other) {
+        if (other.gameObject.layer == Layers.Enemy) {
+            other.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime * 1.5f, Enemy.Effects.Burn);
+        }
     }
 }
