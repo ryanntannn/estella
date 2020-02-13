@@ -15,7 +15,6 @@ public abstract class SubQuest : ScriptableObject
     public SubQuestType questType;
     public List<GameObject> objective;
     public int amount;
-    public bool completed;
 
-    public abstract void QuestCheck();
+    public abstract bool QuestCheck();
 }

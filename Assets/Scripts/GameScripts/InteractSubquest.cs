@@ -7,11 +7,14 @@ public class InteractSubquest : SubQuest
 {
     public string InteractableObjectName;
 
-    public override void QuestCheck()
+    public override bool QuestCheck()
     {
         if (GameObject.Find(InteractableObjectName).GetComponent<InteractableObject>().isActivated)
         {
-             completed = true;
+            Debug.Log("Done");
+            return true;
         }
+
+        return false;
     }
 }
