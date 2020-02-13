@@ -45,7 +45,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   rigidbody: {fileID: 0}
   giantBoss: {fileID: 0}
-  state: 0
+  state: 3
 --- !u!54 &409587539
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   rigidbody: {fileID: 0}
   giantBoss: {fileID: 0}
-  state: 0
+  state: 3
 --- !u!54 &1685508316
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   rigidbody: {fileID: 0}
   giantBoss: {fileID: 0}
-  state: 0
+  state: 3
 --- !u!54 &743610382
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -183,21 +183,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   rigidbody: {fileID: 0}
   giantBoss: {fileID: 0}
-  state: 0
---- !u!136 &1440279713
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6549738588288336658}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.23
-  m_Height: 0.73
-  m_Direction: 1
-  m_Center: {x: -0.05, y: 0.97, z: 0.18}
+  state: 3
 --- !u!54 &1440279715
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -214,6 +200,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 94
   m_CollisionDetection: 3
+--- !u!136 &1440279713
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6549738588288336658}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.23
+  m_Height: 0.73
+  m_Direction: 1
+  m_Center: {x: -0.05, y: 0.97, z: 0.18}
 --- !u!114 &1440279714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +291,7 @@ MonoBehaviour:
   bossArms: []
   player: {fileID: 0}
   isAttacking: 0
+  isAggro: 0
 --- !u!1001 &3009730137585818139
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -747,7 +748,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 6e7aef38059eac94dbaa4f37f6b04347,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: -14.33
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6e7aef38059eac94dbaa4f37f6b04347,
         type: 3}
@@ -853,7 +854,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 6e7aef38059eac94dbaa4f37f6b04347,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.2799988
+      value: -15.050001
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6e7aef38059eac94dbaa4f37f6b04347,
         type: 3}
@@ -959,7 +960,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 6e7aef38059eac94dbaa4f37f6b04347,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.3099995
+      value: -15.02
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6e7aef38059eac94dbaa4f37f6b04347,
         type: 3}
@@ -1065,7 +1066,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 6e7aef38059eac94dbaa4f37f6b04347,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: -14.33
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6e7aef38059eac94dbaa4f37f6b04347,
         type: 3}

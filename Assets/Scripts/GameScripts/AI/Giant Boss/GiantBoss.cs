@@ -10,6 +10,8 @@ public class GiantBoss : MonoBehaviour
 
     public bool isAttacking = false;
 
+    public bool isAggro = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,25 +24,36 @@ public class GiantBoss : MonoBehaviour
         player = GameObject.Find("Player");
     }
 
+    public void AwakeBoss()
+    {
+        foreach (BossArm ba in bossArms)
+        {
+            ba.AwakePillars();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (!isAttacking)
+        if (isAggro)
         {
-            int randArm = (int)Random.Range(0, 4);
-            int randMove = 0;//(int)Random.Range(0, 2);
-            //Attack
-            if (randMove == 0)
+            if (!isAttacking)
             {
-                Debug.Log(randArm + " " + randMove);
-                bossArms[randArm].Slam(player.transform.position);
-            }
-            else
-            {
-                bossArms[randArm].Swing(player.transform.position);
-            }
+                int randArm = (int)Random.Range(0, 4);
+                int randMove = 0;//(int)Random.Range(0, 2);
+                                 //Attack
+                if (randMove == 0)
+                {
+                    Debug.Log(randArm + " " + randMove);
+                    bossArms[randArm].Slam(player.transform.position);
+                }
+                else
+                {
+                    bossArms[randArm].Swing(player.transform.position);
+                }
 
-            isAttacking = true;
+                isAttacking = true;
+            }
         }
     }
 }

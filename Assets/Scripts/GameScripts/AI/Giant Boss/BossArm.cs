@@ -13,7 +13,7 @@ public class BossArm : MonoBehaviour
 
     public enum State
     {
-        IDLE, SWING, SLAM
+        IDLE, SWING, SLAM, DORMANT
     }
 
     public State state;
@@ -32,6 +32,15 @@ public class BossArm : MonoBehaviour
         {
             transform.eulerAngles += new Vector3(0, 10, 0) * Time.deltaTime;
         }
+    }
+
+    public void AwakePillars()
+    {
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(rigidbody.DOMove(originalPosition + new Vector3(0,19.6f,0), 4f)).OnComplete(() =>
+        {
+            state = State.IDLE;
+        });
     }
 
     public void Slam(Vector3 target)
