@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea5cb2769d18d746bf081a671e05b06, type: 3}
   m_Name: KillTheKnights
   m_EditorClassIdentifier: 
-  shortDesc: 
+  shortDesc: Kill The Knights
   longDesc: 
-  questType: 0
+  questType: 1
   objective: []
-  amount: 0
-  enemyName: 
+  amount: 5
+  enemyName: EnemyKnight

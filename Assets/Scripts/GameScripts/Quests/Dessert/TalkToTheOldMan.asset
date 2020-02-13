@@ -15,5 +15,6 @@ MonoBehaviour:
   shortDesc: Talk to the Old Man
   longDesc: 
   subQuests:
+  - {fileID: 11400000, guid: 4b7483c41c8bfc248895f1d77db10049, type: 2}
   - {fileID: 11400000, guid: d0d1813482a4f0846a657e903aaf5e2f, type: 2}
   - {fileID: 11400000, guid: 68b25e334183e664584b60a7ae36bab7, type: 2}
