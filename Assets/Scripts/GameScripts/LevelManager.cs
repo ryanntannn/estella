@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     public List<int> completedQuests;
     public PlayerControl playerControl;
     public IngameUI igui;
+    public List<bool> subQuestCompleted;
 
     // Start is called before the first frame update
     void Start()
@@ -21,20 +22,44 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (activeQuest > 0)
+        if (activeQuest >= 0)
         {
+            Debug.Log("Checking");
             if (QuestCheck()) CompleteQuest();
         }
     }
 
     bool QuestCheck() //Check if the active quest is completed;
     {
-        quests[activeQuest].QuestCheck();
+
+        for(int i = 0; i < quests[activeQuest].subQuests.Count; i++)
+        {
+            SubQuest sq = quests[activeQuest].subQuests[i];
+            if (subQuestCompleted[i] != sq.QuestCheck())
+            {
+                subQuestCompleted[i] = sq.QuestCheck();
+                WriteQuestString();
+            }
+        }
+
         foreach (SubQuest sq in quests[activeQuest].subQuests)
         {
-            if (!sq.completed) return false;
+            if (!sq.QuestCheck()) return false;
         }
+
         return true;
+    }
+
+    public void WriteQuestString()
+    {
+        string questString = "";
+        foreach (SubQuest sq in quests[activeQuest].subQuests)
+        {
+            subQuestCompleted.Add(false);
+            questString += sq.shortDesc + "\n";
+        }
+
+        igui.UpdateQuestString(questString);
     }
 
     public void ChangeQuest(int i)
@@ -43,23 +68,18 @@ public class LevelManager : MonoBehaviour
         {
             activeQuest = -1;
             igui.UpdateQuestString("No Quest Active");
+            subQuestCompleted = null;
             return;
         }
         
         activeQuest = i;
 
-        //Build Quest String;
-        string questString = "";
-        foreach (SubQuest sq in quests[activeQuest].subQuests)
-        {
-            questString += sq.shortDesc + "\n";
-        }
-
-        igui.UpdateQuestString(questString);
+        WriteQuestString();
     }
 
     public void CompleteQuest()
     {
+        igui.ShowPopUp("Quest Completed", 2.0f);
         activeQuest = -1;
         ChangeQuest(activeQuest);
     }
