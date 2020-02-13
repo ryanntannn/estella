@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b19385ddc67d017438e6f5e08d3f75b7, type: 3}
-  m_Name: OldManSQ
+  m_Script: {fileID: 11500000, guid: 4209205b2b534b94ebe78f2c8b1bac3d, type: 3}
+  m_Name: GOTOTown
   m_EditorClassIdentifier: 
-  shortDesc: Talk To Old Man
+  shortDesc: Go to Town of Alark
   longDesc: 
-  questType: 2
+  questType: 0
   objective: []
   amount: 1
-  InteractableObjectName: Old Man
+  locationName: Town of Alark
