@@ -4824,7 +4824,7 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: -8206235396573694922, guid: 5c2b0e6333db58a4990d0af5d07929d3, type: 3}
+  m_Mesh: {fileID: -2648160380467166521, guid: 0f6e73a36a7b15a42a3324cb6be8f81a, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -9653,7 +9653,7 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: -8206235396573694922, guid: 5c2b0e6333db58a4990d0af5d07929d3, type: 3}
+  m_Mesh: {fileID: 1482036887748920274, guid: 0f6e73a36a7b15a42a3324cb6be8f81a, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -24107,7 +24107,7 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: -8206235396573694922, guid: 5c2b0e6333db58a4990d0af5d07929d3, type: 3}
+  m_Mesh: {fileID: -2648160380467166521, guid: 0f6e73a36a7b15a42a3324cb6be8f81a, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -38576,7 +38576,7 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: -2648160380467166521, guid: 5c2b0e6333db58a4990d0af5d07929d3, type: 3}
+  m_Mesh: {fileID: -2648160380467166521, guid: 0f6e73a36a7b15a42a3324cb6be8f81a, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}

@@ -21,7 +21,13 @@ public class ElectricityV2 : BaseElementV2 {
     public override int ID => Electricity;
 
     public override void CastRegularAttack() {
-        //chain lightning
+        //plasmashotgun
+        GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Electricity/Plasma Shotgun/PlasmaShotgun"), HandUsing.handPos.transform.position, HandUsing.handPos.transform.rotation);
+        if (Targeter.Instance.Target) {
+            instance.transform.LookAt(Targeter.Instance.CollisionPoint);
+        }else {
+            instance.transform.LookAt(HandUsing.transform.position + HandUsing.transform.right);
+        }
     }
 
     public override void CastUltimateAttack() {

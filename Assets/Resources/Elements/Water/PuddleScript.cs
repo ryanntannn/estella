@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PuddleScript : MonoBehaviour {
+    public float ttl = 5;
 
+    Coroutine killing;
 	public bool isElectrified = false;
 	// Start is called before the first frame update
 	void Start() {
-
+        killing = StartCoroutine(KillSelf(ttl));
 	}
+
+    IEnumerator KillSelf(float _ttl) {
+        yield return new WaitForSeconds(_ttl);
+        Destroy(gameObject);
+    }
 
 	// Update is called once per frame
 	void Update() {
@@ -16,8 +23,26 @@ public class PuddleScript : MonoBehaviour {
 	}
 
 	public void Electrify() {
-		isElectrified = true;
-		//add shader to materials
-		transform.GetChild(0).GetComponent<MeshRenderer>().materials[1] = Resources.Load<Material>("Elements/Water/WaterSparks");
-	}
+        if (!isElectrified) {
+            isElectrified = true;
+            Material[] temp = new Material[2];
+            temp[0] = transform.GetChild(0).GetComponent<MeshRenderer>().materials[0];
+            //add shader to materials
+            temp[1] = Resources.Load<Material>("Elements/Water/WaterSparks");
+            transform.GetChild(0).GetComponent<MeshRenderer>().materials = temp;
+            StopCoroutine(killing);
+            StartCoroutine(KillSelf(10));
+        }
+    }
+
+    private void OnTriggerStay(Collider other) {
+        if(other.gameObject.layer == Layers.Enemy) {
+            if (isElectrified) {
+                //ministun
+                other.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime / 2, Enemy.Effects.Stun);
+            }else {
+                other.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime, Enemy.Effects.Slow);
+            }
+        }
+    }
 }

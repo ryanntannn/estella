@@ -118,7 +118,7 @@ public static class Algorithms {
                         try {
                             openList.Enqueue(n);
                         } catch (Exception) {
-                            Debug.Log(count);
+                            //Debug.Log(count);
                         }
                     }
                 }

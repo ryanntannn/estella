@@ -24,11 +24,7 @@ public class LightningStrikeScript : MonoBehaviour {
 				hitInfo.collider.GetComponent<Enemy>().DebuffEnemy(3, Enemy.Effects.Stun);
 				hitInfo.collider.GetComponent<Enemy>().TakeDamage(3);
 			}
-			Debug.DrawRay(transform.position, hitInfo.point, Color.red);
-		} else {
-			Debug.DrawRay(transform.position, Vector3.up * 20, Color.red);
-		}
-
+		} 
 	}
 
 	IEnumerator KillSelf(float _ttl) {
