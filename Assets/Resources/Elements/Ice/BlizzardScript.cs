@@ -30,14 +30,6 @@ public class BlizzardScript : MonoBehaviour {
         Destroy(gameObject);
     }
 
-	void DisablePS(Transform _t) {
-		ParticleSystem ps = _t.GetComponent<ParticleSystem>();
-		if (ps) ps.Stop();
-		foreach(Transform child in _t) {
-			DisablePS(child);
-		}
-	}
-
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.layer == Layers.Enemy) {
             m_enemies.Add(other.GetComponent<Enemy>());

@@ -254,14 +254,18 @@ public class PlayerControl : MonoBehaviour {
     public bool TakeDamage(float damage, Vector3 sourcePos) {
         if (!InVulnerable && !dodging) {
             currentHealth -= damage;
+            Vector3 targetDir = transform.position - sourcePos;
+            float angle = (Vector3.SignedAngle(targetDir, -transform.forward, Vector3.up) + 180) % 360;
+
             if (currentHealth <= 0) {
-                Vector3 targetDir = transform.position - sourcePos;
-                float angle = Vector3.SignedAngle(targetDir, -transform.forward, Vector3.up);
                 animator.SetFloat("DieRection", angle);
                 animator.SetTrigger("WhenDie");
-                //disable this component
+                //disable this
                 enabled = false;
+                InVulnerable = true;
             } else {
+                animator.SetFloat("HitY", Mathf.Sin(angle));
+                animator.SetFloat("HitX", Mathf.Cos(angle));
                 animator.SetFloat("GetHitDamage", damage);
                 animator.SetTrigger("WhenHit");
             }
