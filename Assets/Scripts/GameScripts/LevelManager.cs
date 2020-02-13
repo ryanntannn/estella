@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
     public List<Quest> quests;
     public int activeQuest;
@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     public PlayerControl playerControl;
     public IngameUI igui;
     public List<bool> subQuestCompleted;
+    public List<int> subQuestAmounts;
 
     // Start is called before the first frame update
     void Start()
@@ -35,28 +36,61 @@ public class LevelManager : MonoBehaviour
         for(int i = 0; i < quests[activeQuest].subQuests.Count; i++)
         {
             SubQuest sq = quests[activeQuest].subQuests[i];
-            if (subQuestCompleted[i] != sq.QuestCheck())
+            if (sq.questType == SubQuestType.Collect)
             {
-                subQuestCompleted[i] = sq.QuestCheck();
-                WriteQuestString();
+                if (subQuestCompleted[i] != sq.QuestCheck())
+                {
+                    subQuestCompleted[i] = sq.QuestCheck();
+                    WriteQuestString();
+                }
+            } else if (sq.questType == SubQuestType.Kill)
+            {
+                if(!subQuestCompleted[i] && (subQuestAmounts[i] == sq.amount))
+                {
+                    subQuestCompleted[i] = true;
+                    WriteQuestString();
+                }
             }
         }
 
-        foreach (SubQuest sq in quests[activeQuest].subQuests)
+        foreach (bool c in subQuestCompleted)
         {
-            if (!sq.QuestCheck()) return false;
+            if (!c) return false;
         }
 
         return true;
     }
 
+    public void EnemyDie(string enemyName) {
+        for (int i = 0; i < quests[activeQuest].subQuests.Count; i++)
+        {
+            SubQuest sq = quests[activeQuest].subQuests[i];
+            if(sq.questType == SubQuestType.Kill)
+            {
+                if ((sq as KillSubQuest).enemyName.Equals(enemyName))
+                {
+                    subQuestAmounts[i]++;
+                    WriteQuestString();
+                }
+            }
+        }
+    }
+
     public void WriteQuestString()
     {
         string questString = "";
-        foreach (SubQuest sq in quests[activeQuest].subQuests)
+        for (int i = 0; i < quests[activeQuest].subQuests.Count; i++)
         {
-            subQuestCompleted.Add(false);
-            questString += sq.shortDesc + "\n";
+            SubQuest sq = quests[activeQuest].subQuests[i];
+            questString += sq.shortDesc;
+            if (subQuestCompleted[i] == false)
+            {
+                questString += " [" + subQuestAmounts[i] + "/" + sq.amount + "]";
+            } else
+            {
+                questString += " [Completed]";
+            }
+            questString += "\n";
         }
 
         igui.UpdateQuestString(questString);
@@ -71,8 +105,17 @@ public class LevelManager : MonoBehaviour
             subQuestCompleted = null;
             return;
         }
-        
+
+        subQuestAmounts.Clear();
+        subQuestCompleted.Clear();
+
         activeQuest = i;
+
+        foreach (SubQuest sq in quests[activeQuest].subQuests)
+        {
+            subQuestCompleted.Add(false);
+            subQuestAmounts.Add(0);
+        }
 
         WriteQuestString();
     }

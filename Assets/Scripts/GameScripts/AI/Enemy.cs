@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour {
     public Effects currentDebuff = Effects.None;
 
     //stats
+    public string enemyName; // Used to track deaths in LevelManager
     public float health = 10;
     public float speed = 12;
     public float resistanceLevel = 1;
@@ -113,6 +114,7 @@ public class Enemy : MonoBehaviour {
             health -= damage;
             if (health <= 0) {
                 anim.SetTrigger("WhenDie");
+                LevelManager.Instance.EnemyDie(enemyName);
             }
         }
     }
