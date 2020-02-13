@@ -41,6 +41,7 @@ public class LevelManager : Singleton<LevelManager>
                 {
                     subQuestCompleted[i] = sq.QuestCheck();
                     WriteQuestString();
+                    igui.ShowPopUp("Objective Completed", 2.0f);
                 }
             } else if (sq.questType == SubQuestType.Kill)
             {
@@ -48,6 +49,7 @@ public class LevelManager : Singleton<LevelManager>
                 {
                     subQuestCompleted[i] = true;
                     WriteQuestString();
+                    igui.ShowPopUp("Objective Completed", 2.0f);
                 }
             }
         }
@@ -82,10 +84,11 @@ public class LevelManager : Singleton<LevelManager>
             SubQuest sq = quests[activeQuest].subQuests[i];
             if (sq.questType == SubQuestType.Locate)
             {
-                if ((sq as LocateSubquest).locationName.Equals(locationName))
+                if ((sq as LocateSubquest).locationName.Equals(locationName) && !subQuestCompleted[i])
                 {
                     subQuestCompleted[i] = true;
                     WriteQuestString();
+                    igui.ShowPopUp("Objective Completed", 2.0f);
                 }
             }
 
