@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b19385ddc67d017438e6f5e08d3f75b7, type: 3}
-  m_Name: OldManSQ
+  m_Script: {fileID: 11500000, guid: 9ea5cb2769d18d746bf081a671e05b06, type: 3}
+  m_Name: KillTheKnights
   m_EditorClassIdentifier: 
-  shortDesc: Talk To Old Man
+  shortDesc: Kill The Knights
   longDesc: 
-  questType: 2
+  questType: 1
   objective: []
-  amount: 1
-  InteractableObjectName: Old Man
+  amount: 5
+  enemyName: EnemyKnight

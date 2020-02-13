@@ -661,6 +661,7 @@ MonoBehaviour:
   onFirePs: {fileID: 0}
   debuffTimer: 0
   currentDebuff: 0
+  enemyName: EnemyKnight
   health: 10
   speed: 2
   resistanceLevel: 1

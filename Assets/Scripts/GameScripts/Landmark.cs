@@ -26,6 +26,7 @@ public class Landmark : MonoBehaviour
         {
             inArea = true;
             igui.ShowBigPopUp("-" + landMarkName + "-", 4f);
+            LevelManager.Instance.PlayerEnterLocation(landMarkName);
         }
 
         if(inArea && Vector3.Distance(transform.position, player.transform.position) > radius)
