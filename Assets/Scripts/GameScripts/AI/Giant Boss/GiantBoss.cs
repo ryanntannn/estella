@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GiantBoss : MonoBehaviour
 {
@@ -22,11 +23,11 @@ public class GiantBoss : MonoBehaviour
             ba.giantBoss = this;
         }
         player = GameObject.Find("Player");
-        AwakeBoss();
     }
 
     public void AwakeBoss()
     {
+        bossBody.GetComponent<Rigidbody>().DOMove(bossBody.transform.position + new Vector3(0, 13, 0), 4f);
         foreach (BossArm ba in bossArms)
         {
             ba.AwakePillars();
