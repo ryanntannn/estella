@@ -10,6 +10,7 @@ public class BossArm : MonoBehaviour
     public GiantBoss giantBoss;
 
     bool takenDamage = false;
+    bool damageCheck = false;
 
     public enum State
     {
@@ -40,15 +41,23 @@ public class BossArm : MonoBehaviour
         sequence.Append(rigidbody.DOMove(originalPosition + new Vector3(0,19.6f,0), 4f)).OnComplete(() =>
         {
             state = State.IDLE;
+            originalPosition = transform.position;
+            giantBoss.isAggro = true;
         });
     }
 
     public void Slam(Vector3 target)
     {
         state = State.SLAM;
-        rigidbody.DOMove(target + new Vector3(0,3,0), 2f);
+        rigidbody.DOMove(target + new Vector3(0,3,0), 2f).OnComplete(() =>
+        {
+            damageCheck = true;
+        });
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(rigidbody.DOMove(target + new Vector3(0, -2, 0), 0.1f)).PrependInterval(2.2f);
+        sequence.Append(rigidbody.DOMove(target + new Vector3(0, -2, 0), 0.1f)).PrependInterval(2.2f).OnComplete(() =>
+        {
+            damageCheck = false;
+        });
         Sequence sequence2 = DOTween.Sequence();
         sequence2.Append(rigidbody.DOMove(target + new Vector3(0, 3, 0), 0.3f)).PrependInterval(2.8f);
         Sequence sequence3 = DOTween.Sequence();
@@ -71,9 +80,9 @@ public class BossArm : MonoBehaviour
         giantBoss.isAttacking = false;
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.GetComponent<PlayerControl>() && !takenDamage)
+        if (other.gameObject.GetComponent<PlayerControl>() && !takenDamage && damageCheck)
         {
             giantBoss.bossBody.DealDamage(40.0f);
             takenDamage = true;

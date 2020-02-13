@@ -22,6 +22,7 @@ public class GiantBoss : MonoBehaviour
             ba.giantBoss = this;
         }
         player = GameObject.Find("Player");
+        AwakeBoss();
     }
 
     public void AwakeBoss()
