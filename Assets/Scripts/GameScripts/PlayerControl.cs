@@ -62,7 +62,7 @@ public class PlayerControl : MonoBehaviour {
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hitInfo, 10.0f))
         {
             Vector3 toLookAt = hitInfo.point;
             if (hitInfo.transform.gameObject.GetComponent<InteractableObject>())
