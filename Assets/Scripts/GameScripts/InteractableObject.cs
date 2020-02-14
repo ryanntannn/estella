@@ -34,4 +34,10 @@ public class InteractableObject : MonoBehaviour
             timeLeftToActivate = timeToActivate;
         }
     }
+
+    public void ResetAll()
+    {
+        timeLeftToActivate = timeToActivate;
+        isActivated = false;
+    }
 }

@@ -8,16 +8,19 @@ public class GiantBoss : MonoBehaviour
     public Enemy bossBody;
     public BossArm[] bossArms;
     public GameObject player;
+    public InteractableObject altar;
 
     public bool isAttacking = false;
-
     public bool isAggro = false;
+
+    bool activated = false;
 
     // Start is called before the first frame update
     void Start()
     {
         bossBody = transform.GetChild(0).GetComponent<Enemy>();
         bossArms = transform.GetComponentsInChildren<BossArm>();
+        altar = transform.GetComponentInChildren<InteractableObject>();
         foreach(BossArm ba in bossArms)
         {
             ba.giantBoss = this;
@@ -37,6 +40,13 @@ public class GiantBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (altar.isActivated && !activated)
+        {
+            activated = true;
+            Destroy(altar.gameObject);
+            AwakeBoss();
+        }
+
         if (isAggro)
         {
             if (!isAttacking)
