@@ -12,8 +12,9 @@ public class MinimapCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
+        transform.position = cameraPivot.transform.position + new Vector3(0, 100, 0);
         transform.eulerAngles = new Vector3(90, cameraPivot.eulerAngles.y, 0);
     }
 }
