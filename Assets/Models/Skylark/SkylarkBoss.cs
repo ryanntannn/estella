@@ -20,7 +20,8 @@ public class SkylarkBoss : MonoBehaviour {
     List<Node> pathToPlayer = new List<Node>();
     float m_stoppingDist = Mathf.Pow(1.5f, 2);
 
-    SkylarkSkill[] m_skillsAvaliable = new SkylarkSkill[4];
+    SkylarkSkill[] m_skillsAvaliable = new SkylarkSkill[5];
+    GameObject m_beamPfb;
 
     // Start is called before the first frame update
     void Start() {
@@ -34,14 +35,16 @@ public class SkylarkBoss : MonoBehaviour {
 
         InitStates();
 
+        m_beamPfb = Resources.Load<GameObject>("Skylark/SkylarkBeam");
+
         #region Initalising skills DONT LOOK IT'S BAD
         //As the wise Yandere dev once said
         //'The user will never see this'
         m_skillsAvaliable[0] = new TigerFist(this);
         m_skillsAvaliable[1] = new SparkWraith(this);
-        //m_skillsAvaliable[2] = new ChaosBeam(this);
-        m_skillsAvaliable[2] = new ChargingBlast(this);
-        m_skillsAvaliable[3] = new PlasmaThrow(this);
+        m_skillsAvaliable[2] = new ChaosBeam(this);
+        m_skillsAvaliable[3] = new ChargingBlast(this);
+        m_skillsAvaliable[4] = new PlasmaThrow(this);
         #endregion
     }
 
@@ -169,7 +172,7 @@ public class SkylarkBoss : MonoBehaviour {
         }
 
         public abstract bool IsAvaliable();
-        public virtual void Act() {
+        public void Act() {
             //go on cd
             agent.StartCoroutine(GoOnCd());
             agent.fsm.PushState(State);
@@ -212,14 +215,9 @@ public class SkylarkBoss : MonoBehaviour {
 
         public override float CoolDown => 30;
         public override FiniteStateMachineWithStack.State State => (gameObject) => {
+            Instantiate(Resources.Load<GameObject>("Skylark/Baller"), agent.transform);
             agent.PushIdle();//go idle
         };
-
-        public override void Act() {
-            base.Act();
-            //summon BALLS
-            
-        }
 
         public override bool IsAvaliable() {
             return
@@ -234,12 +232,16 @@ public class SkylarkBoss : MonoBehaviour {
 
         public override float CoolDown => 40;
         public override FiniteStateMachineWithStack.State State => (gameObject) => {
+            //make 3 lines at random locations
+            for(int count = 0; count < 3; count++) {
+                Vector2 randomLoc2d = UnityEngine.Random.insideUnitCircle * 10;
+                Vector3 randomLocation = new Vector3(randomLoc2d.x, agent.transform.position.y, randomLoc2d.y);
+                GameObject instance = Instantiate(agent.m_beamPfb, randomLocation, Quaternion.identity);
+                instance.GetComponent<SkylarkBeam>().playerPos = agent.m_playerPos;
+            }
 
+            agent.PushIdle();
         };
-
-        public override void Act() {
-            base.Act();
-        }
 
         public override bool IsAvaliable() {
             return !OnCd;
@@ -261,10 +263,6 @@ public class SkylarkBoss : MonoBehaviour {
             agent.fsm.PushState(agent.NullState);
         };
 
-        public override void Act() {
-            base.Act();
-        }
-
         public override bool IsAvaliable() {
             return
                 !OnCd   //not on cd
@@ -285,10 +283,6 @@ public class SkylarkBoss : MonoBehaviour {
             agent.fsm.PopState();
             agent.fsm.PushState(agent.NullState);
         };
-
-        public override void Act() {
-            base.Act();
-        }
 
         public override bool IsAvaliable() {
             //bool everythingElseOnCd =
