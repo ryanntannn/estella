@@ -39,7 +39,7 @@ public class GiantBoss : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
         if (altar.isActivated && !activated)
         {
             activated = true;
