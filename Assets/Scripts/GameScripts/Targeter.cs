@@ -14,14 +14,12 @@ public class Targeter : Singleton<Targeter> {
         if(Physics.Raycast(ray, out hitInfo, Mathf.Infinity)) {
             m_target = hitInfo.collider.gameObject;
             CollisionPoint = hitInfo.point;
+        }else {
+            m_target = null;
         }
     }
 
     public void LookAtTarget() {
-        transform.LookAt(CollisionPoint);
-        Vector3 rotationEuler = transform.rotation.eulerAngles;
-        rotationEuler.x = 0;
-        rotationEuler.z = 0;
-        transform.rotation = Quaternion.Euler(rotationEuler);
+        transform.rotation = Quaternion.Euler(0, Camera.main.transform.parent.rotation.eulerAngles.y, 0);
     }
 }

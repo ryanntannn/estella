@@ -117,6 +117,16 @@ public class AnimationEvents : MonoBehaviour {
     }
     #endregion
 
+    #region Skylark animation events
+    void SkylarkAnimationEvent(string _message) {
+        parent.GetComponent<SkylarkBoss>().SendMessage(_message);
+    }
+
+    void SkylarkDone() {
+        parent.GetComponent<SkylarkBoss>().PushIdle();
+    }
+    #endregion
+
     void DieTrigger() {
         foreach(Component c in parent.GetComponents<MonoBehaviour>()) {
             Destroy(c);

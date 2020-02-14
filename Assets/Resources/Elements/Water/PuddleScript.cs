@@ -14,6 +14,13 @@ public class PuddleScript : MonoBehaviour {
 
     IEnumerator KillSelf(float _ttl) {
         yield return new WaitForSeconds(_ttl);
+        Destroy(GetComponent<Collider>());
+        float timer = 0;
+        while (timer < 5) {
+            transform.position -= transform.up * Time.deltaTime;
+            timer += Time.deltaTime;
+            yield return null;
+        }
         Destroy(gameObject);
     }
 

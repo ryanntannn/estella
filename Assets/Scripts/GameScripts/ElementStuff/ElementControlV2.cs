@@ -26,9 +26,14 @@ public class ElementControlV2 : Singleton<ElementControlV2> {
     private Coroutine m_lhandcr, m_rhandcr;
 
     private CombinationElements[] m_combinations;
+    private PlayerControl m_playerControl;
+    private float m_empowerTime = 0;
+    public float EmpowerTime { get { return m_empowerTime; } }
 
     // Start is called before the first frame update
     void Start() {
+        m_playerControl = GetComponent<PlayerControl>();
+
         currentMana = maxMana;
         m_anim = GetComponentInChildren<Animator>();
         IEnumerable<Hand> hands = GetComponents<Hand>();
@@ -52,9 +57,21 @@ public class ElementControlV2 : Singleton<ElementControlV2> {
         CheckRightHand();
         CheckLeftHand();
         CheckForCombination();
+        EmpowerCheck();
 
         //update animator
         m_anim.SetBool("IsCasting", isCasting);
+
+    }
+
+    void EmpowerCheck() {
+        if (m_empowerTime > 0) {
+            m_empowerTime = Mathf.Clamp(m_empowerTime - Time.deltaTime, 0, 999);
+
+            if (m_playerControl.dodging) {
+
+            }
+        }
     }
 
     void CheckRightHand() {
@@ -202,7 +219,8 @@ public class ElementControlV2 : Singleton<ElementControlV2> {
 
     public void DoSteam() {
         currentMana -= Elements.SteamCost;
-        GameObject steampit = Instantiate(Resources.Load<GameObject>("Elements/Steam/SteamPit"), TargetingReticle.Instance.transform.position, Quaternion.identity);
+        //GameObject steampit = Instantiate(Resources.Load<GameObject>("Elements/Steam/SteamPit"), TargetingReticle.Instance.transform.position, Quaternion.identity);
+        m_empowerTime += 10;
     }
 
     public void DoIce() {
@@ -241,16 +259,14 @@ public class ElementControlV2 : Singleton<ElementControlV2> {
         currentMana -= Elements.ShockCost;
         //find enemies in sphere
         Collider[] hits = Physics.OverlapSphere(TargetingReticle.Instance.transform.position, 3, 1 << Layers.Enemy);
-        StartCoroutine(DoShock(100, hits, 2));
+        StartCoroutine(DoShock(100, hits));
     }
 
-    public IEnumerator DoShock(float totalDamage, Collider[] enemies, float totalDuration) {
+    public IEnumerator DoShock(float totalDamage, Collider[] enemies) {
         m_anim.speed = 0;
 
         //calculate damage to deal to each enemy
         float indvDmg = totalDamage / enemies.Length;
-        //calculate downtime before going to next enemy
-        float indvTime = totalDuration / enemies.Length;
 
         //if no enemies just teleport
         if (enemies.Length <= 0) {
@@ -261,7 +277,7 @@ public class ElementControlV2 : Singleton<ElementControlV2> {
         for (int count = 0; count <= enemies.Length - 1; count++) {
             transform.position = enemies[count].transform.position - enemies[count].transform.forward;
             enemies[count].GetComponent<Enemy>().TakeDamage(indvDmg);
-            yield return new WaitForSeconds(indvTime);
+            yield return new WaitForSeconds(0.1f);
         }
 
         m_anim.speed = 1;

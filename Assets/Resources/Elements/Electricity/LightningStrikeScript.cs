@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LightningStrikeScript : MonoBehaviour {
+    float radius = 8;
 	// Start is called before the first frame update
 	void Start() {
 		Vector3 newPos = transform.position;
@@ -14,11 +15,21 @@ public class LightningStrikeScript : MonoBehaviour {
 		RaycastHit hitInfo;
 		if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, 100)) {
 			transform.position = hitInfo.point;
-			print(hitInfo.point);
 			if (hitInfo.collider.gameObject.CompareTag("Puddle")) {
 				//start shocking that shit
 				hitInfo.collider.GetComponent<PuddleScript>().Electrify();
-			} else
+			}else
+            if (hitInfo.collider.gameObject.CompareTag("Tornado")) {
+                //sphere cast all
+                Collider[] hits = Physics.OverlapSphere(transform.position, radius, 1 << Layers.Enemy);
+                foreach(Collider hit in hits) {
+                    hit.GetComponent<Enemy>().TakeDamage(10);
+                }
+                //play effect
+                //kill tornado
+                Destroy(hitInfo.collider.gameObject);
+            }        
+            else
 			if (hitInfo.collider.gameObject.layer == Layers.Enemy) {
 				//when enemy
 				hitInfo.collider.GetComponent<Enemy>().DebuffEnemy(3, Enemy.Effects.Stun);

@@ -18,8 +18,9 @@ public class SkylarkBoss : MonoBehaviour {
     Thread m_pathFinder;
     Vector3 m_bossPos, m_playerPos; //threading
     List<Node> pathToPlayer = new List<Node>();
+    float m_stoppingDist = Mathf.Pow(1.5f, 2);
 
-    SkylarkSkill[] m_skillsAvaliable = new SkylarkSkill[5];
+    SkylarkSkill[] m_skillsAvaliable = new SkylarkSkill[4];
 
     // Start is called before the first frame update
     void Start() {
@@ -36,31 +37,41 @@ public class SkylarkBoss : MonoBehaviour {
         #region Initalising skills DONT LOOK IT'S BAD
         //As the wise Yandere dev once said
         //'The user will never see this'
-        m_skillsAvaliable[0] = new TigerFist();
-        m_skillsAvaliable[1] = new SparkWraith();
-        m_skillsAvaliable[2] = new ChaosBeam();
-        m_skillsAvaliable[3] = new ChargingBlast();
-        m_skillsAvaliable[4] = new PlasmaThrow();
+        m_skillsAvaliable[0] = new TigerFist(this);
+        m_skillsAvaliable[1] = new SparkWraith(this);
+        //m_skillsAvaliable[2] = new ChaosBeam(this);
+        m_skillsAvaliable[2] = new ChargingBlast(this);
+        m_skillsAvaliable[3] = new PlasmaThrow(this);
         #endregion
     }
 
     void InitStates() {
         Idle = (gameObject) => {
             //determine next state
+            //pop idle
             fsm.PopState();
+            m_anim.SetBool("IsWalking", false);
 
-            //foreach(SkylarkSkill s in m_skillsAvaliable) {
-            //    if (s.IsAvaliable(this)) {
-            //        s.Act(this);
-            //        break;
-            //    }
-            //}
+            foreach (SkylarkSkill s in m_skillsAvaliable) {
+                if (s.IsAvaliable()) {
+                    s.Act();
+                    return;
+                }
+            }
 
             //no actions avaliable
             fsm.PushState(pathToPlayer.Count > 1 ? Chase : Idle);
         };
 
         Chase = (gameObject) => {
+            foreach (SkylarkSkill s in m_skillsAvaliable) {
+                if (s.IsAvaliable()) {
+                    m_anim.SetBool("IsWalking", false);
+                    s.Act();
+                    return;
+                }
+            }
+
             m_anim.SetBool("IsWalking", true);
             if(pathToPlayer.Count > 1) {
                 transform.LookAt(pathToPlayer[1].worldPos);
@@ -69,8 +80,11 @@ public class SkylarkBoss : MonoBehaviour {
                 transform.rotation = Quaternion.Euler(temp);
                 transform.position += transform.forward * Time.deltaTime * m_dataProvider.currentSpeed;
             }else {
-                fsm.PopState();
-                fsm.PushState(Idle);
+                PushIdle();
+            }
+
+            if((m_playerPos - m_bossPos).sqrMagnitude <= m_stoppingDist) {
+                PushIdle();
             }
         };
 
@@ -114,6 +128,30 @@ public class SkylarkBoss : MonoBehaviour {
     }
     #endregion
 
+    #region State machine stuff
+    public void PushIdle() {
+        fsm.PopState();
+        fsm.PushState(Idle);
+    }
+
+    void DoTigerFist() {
+
+    }
+
+    void DoPlasmaThrow() {
+
+    }
+
+    void DoChargingBlast() {
+        m_dataProvider.rb.AddForce(transform.forward * 4 * m_dataProvider.currentSpeed, ForceMode.Impulse);
+    }
+
+    //generic do damage function
+    void DoDamage() {
+        m_dataProvider.DealDamage(20, 1);
+    }
+    #endregion
+
     /*
      * 
      * 
@@ -125,12 +163,16 @@ public class SkylarkBoss : MonoBehaviour {
         public abstract float CoolDown { get; } //in seconds
         public abstract FiniteStateMachineWithStack.State State { get; }
         public bool OnCd { get; private set; }
+        protected SkylarkBoss agent;
+        public SkylarkSkill(SkylarkBoss _agent) {
+            agent = _agent;
+        }
 
-        public abstract bool IsAvaliable(SkylarkBoss _agent);
-        public virtual void Act(SkylarkBoss _agent) {
+        public abstract bool IsAvaliable();
+        public virtual void Act() {
             //go on cd
-            _agent.StartCoroutine(GoOnCd());
-            _agent.fsm.PushState(State);
+            agent.StartCoroutine(GoOnCd());
+            agent.fsm.PushState(State);
         }
 
         protected IEnumerator GoOnCd() {
@@ -142,35 +184,44 @@ public class SkylarkBoss : MonoBehaviour {
 
     //tiger fist
     private class TigerFist : SkylarkSkill {
-        public override float CoolDown => 3;
-        private float m_minRage = Mathf.Pow(3, 2);   //sqred
-        public override FiniteStateMachineWithStack.State State => (gameObject) => {
+        public override float CoolDown => 10;
+        private float m_minRage = Mathf.Pow(1.5f, 2);   //sqred
 
-        };
-
-        public override void Act(SkylarkBoss _agent) {
-            base.Act(_agent);
+        public TigerFist(SkylarkBoss _agent) : base(_agent) {
         }
 
-        public override bool IsAvaliable(SkylarkBoss _agent) {
+        public override FiniteStateMachineWithStack.State State => (gameObject) => {
+            //punch infront 3 times and do damage
+            agent.Anim.SetTrigger("WhenTigerFist");
+            agent.transform.LookAt(agent.m_playerPos);
+            agent.fsm.PopState();
+            agent.fsm.PushState(agent.NullState);
+        };
+
+        public override bool IsAvaliable() {
             return
                 !OnCd   //not on cd
-                && ((_agent.m_playerPos - _agent.m_bossPos).sqrMagnitude <= m_minRage);    //and close to player
+                && ((agent.m_playerPos - agent.m_bossPos).sqrMagnitude <= m_minRage);    //and close to player
         }
     }
 
     //spark wraith
     private class SparkWraith : SkylarkSkill {
-        public override float CoolDown => 30;
-        public override FiniteStateMachineWithStack.State State => (gameObject) => {
-
-        };
-
-        public override void Act(SkylarkBoss _agent) {
-            base.Act(_agent);
+        public SparkWraith(SkylarkBoss _agent) : base(_agent) {
         }
 
-        public override bool IsAvaliable(SkylarkBoss _agent) {
+        public override float CoolDown => 30;
+        public override FiniteStateMachineWithStack.State State => (gameObject) => {
+            agent.PushIdle();//go idle
+        };
+
+        public override void Act() {
+            base.Act();
+            //summon BALLS
+            
+        }
+
+        public override bool IsAvaliable() {
             return
                 !OnCd;
         }
@@ -178,63 +229,83 @@ public class SkylarkBoss : MonoBehaviour {
 
     //chaos beam
     private class ChaosBeam : SkylarkSkill {
+        public ChaosBeam(SkylarkBoss _agent) : base(_agent) {
+        }
+
         public override float CoolDown => 40;
         public override FiniteStateMachineWithStack.State State => (gameObject) => {
 
         };
 
-        public override void Act(SkylarkBoss _agent) {
-            base.Act(_agent);
+        public override void Act() {
+            base.Act();
         }
 
-        public override bool IsAvaliable(SkylarkBoss _agent) {
+        public override bool IsAvaliable() {
             return !OnCd;
         }
     }
 
     //chargin blast
     private class ChargingBlast : SkylarkSkill {
-        public override float CoolDown => 5;
-        private float m_minRage = Mathf.Pow(3, 2);   //sqred
-        public override FiniteStateMachineWithStack.State State => (gameObject) => {
+        public override float CoolDown => 15;
+        private float m_minRage = Mathf.Pow(1.5f, 2);   //sqred
 
-        };
-
-        public override void Act(SkylarkBoss _agent) {
-            base.Act(_agent);
+        public ChargingBlast(SkylarkBoss _agent) : base(_agent) {
         }
 
-        public override bool IsAvaliable(SkylarkBoss _agent) {
+        public override FiniteStateMachineWithStack.State State => (gameObject) => {
+            agent.Anim.SetTrigger("WhenChargingBlast");
+            agent.transform.LookAt(agent.m_playerPos);
+            agent.fsm.PopState();
+            agent.fsm.PushState(agent.NullState);
+        };
+
+        public override void Act() {
+            base.Act();
+        }
+
+        public override bool IsAvaliable() {
             return
                 !OnCd   //not on cd
-                && ((_agent.m_playerPos - _agent.m_bossPos).sqrMagnitude >= m_minRage);    //and far from player
+                && ((agent.m_playerPos - agent.m_bossPos).sqrMagnitude >= m_minRage);    //and far from player
         }
     }
 
     //plasma throw
     private class PlasmaThrow : SkylarkSkill {
-        public override float CoolDown => 5;
+        public override float CoolDown => 15;
         private float m_minRage = Mathf.Pow(3, 2);   //sqred
-        public override FiniteStateMachineWithStack.State State => (gameObject) => {
 
-        };
-
-        public override void Act(SkylarkBoss _agent) {
-            base.Act(_agent);
+        public PlasmaThrow(SkylarkBoss _agent) : base(_agent) {
         }
 
-        public override bool IsAvaliable(SkylarkBoss _agent) {
-            bool everythingElseOnCd =
-               (from SkylarkSkill s in _agent.m_skillsAvaliable
-                where
-                (s.GetType() != typeof(PlasmaThrow)
-                && (s.IsAvaliable(_agent)))
-                select s).Count() > 0;
+        public override FiniteStateMachineWithStack.State State => (gameObject) => {
+            agent.Anim.SetTrigger("WhenPlasmaThrow");
+            agent.fsm.PopState();
+            agent.fsm.PushState(agent.NullState);
+        };
+
+        public override void Act() {
+            base.Act();
+        }
+
+        public override bool IsAvaliable() {
+            //bool everythingElseOnCd =
+            //   (from SkylarkSkill s in agent.m_skillsAvaliable
+            //    where
+            //    (s.GetType() != typeof(PlasmaThrow)
+            //    && (s.IsAvaliable()))
+            //    select s).Count() > 0;
+            foreach(SkylarkSkill s in agent.m_skillsAvaliable) {
+                if(s.GetType() != typeof(PlasmaThrow)) {
+                    if (s.IsAvaliable()) return false;
+                }
+            }
 
             return
                 !OnCd   //not on cd
-                && ((_agent.m_playerPos - _agent.m_bossPos).sqrMagnitude >= m_minRage)    //and far from player
-                && everythingElseOnCd;  //everything else is on cd
+                && ((agent.m_playerPos - agent.m_bossPos).sqrMagnitude >= m_minRage);    //and far from player
         }
     }
 }
