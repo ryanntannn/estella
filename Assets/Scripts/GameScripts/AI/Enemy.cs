@@ -93,9 +93,19 @@ public class Enemy : MonoBehaviour {
             }
         } else {
             health -= damage;
+            anim.SetTrigger("WhenHit");
+            //scuffed af but /shrug
+            Vector3 targetDir = transform.position - ElementControlV2.Instance.transform.position;
+            float angle = (Vector3.SignedAngle(targetDir, -transform.forward, Vector3.up) + 180) % 360;
+            anim.SetFloat("HitY", Mathf.Sin(angle));
+            anim.SetFloat("HitX", Mathf.Cos(angle));
+
             if (health <= 0) {
                 anim.SetTrigger("WhenDie");
                 LevelManager.Instance.EnemyDie(enemyName);
+                foreach(MonoBehaviour m in gameObject.transform) {
+                    Destroy(m);
+                }
             }
         }
     }

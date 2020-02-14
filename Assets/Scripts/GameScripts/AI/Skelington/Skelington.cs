@@ -28,9 +28,9 @@ public class Skelington : MonoBehaviour {
     void InitStates() {
         Waiting = (gameObject) => {
             if ((m_dataProvider.player.transform.position - transform.position).sqrMagnitude <= m_rangeSqrt) {
-                fsm.PopStack();
-                fsm.PushStack(Idle);
-                fsm.PushStack(JumpingOut);
+                fsm.PopState();
+                fsm.PushState(Idle);
+                fsm.PushState(JumpingOut);
             }
         };
 
@@ -41,20 +41,20 @@ public class Skelington : MonoBehaviour {
                 transform.position = hitInfo.point + transform.up;
             }
             m_navAgent.enabled = true;
-            fsm.PopStack();
+            fsm.PopState();
         };
 
         Idle = (gameObject) => {
             if ((m_dataProvider.player.transform.position - transform.position).sqrMagnitude <= m_rangeSqrt) {
-                fsm.PopStack();
-                fsm.PushStack(Chase);
+                fsm.PopState();
+                fsm.PushState(Chase);
             }
         };
 
         Chase = (gameObject) => {
             m_navAgent.SetDestination(m_dataProvider.player.transform.position);
             if ((m_dataProvider.player.transform.position - transform.position).sqrMagnitude <= 3) {
-                fsm.PushStack(Attack);
+                fsm.PushState(Attack);
             }
         };
 
@@ -62,7 +62,7 @@ public class Skelington : MonoBehaviour {
             m_anim.SetTrigger("WhenAttack");
         };
 
-        fsm.PushStack(Waiting);
+        fsm.PushState(Waiting);
     }
 
     private void OnDrawGizmos() {
@@ -71,7 +71,7 @@ public class Skelington : MonoBehaviour {
     }
 
     public void DoneAttacking() {
-        fsm.PopStack();
+        fsm.PopState();
     }
 
     // Update is called once per frame

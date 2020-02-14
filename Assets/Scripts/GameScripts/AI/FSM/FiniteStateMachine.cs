@@ -13,6 +13,6 @@ public class FiniteStateMachineWithStack {
         m_inStack.Peek()(agent);
     }
     public delegate void State(GameObject agent);
-    public void PopStack() { m_inStack.Pop(); }
-    public void PushStack(State _item) { m_inStack.Push(_item); }
+    public void PopState() { m_inStack.Pop(); }
+    public void PushState(State _item) { m_inStack.Push(_item); }
 }
