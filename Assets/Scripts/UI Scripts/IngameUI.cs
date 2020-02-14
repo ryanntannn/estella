@@ -15,6 +15,7 @@ public class IngameUI : Singleton<IngameUI>
     RectTransform popup;
     TextMeshProUGUI bigpopupt;
     TextMeshProUGUI questText;
+    TextMeshProUGUI dialogText;
     GameObject leftele;
     GameObject rightele;
     GameObject holdF;
@@ -33,6 +34,7 @@ public class IngameUI : Singleton<IngameUI>
         popupt = GameObject.Find("PopupT").GetComponent<TextMeshProUGUI>();
         bigpopupt = GameObject.Find("Bigpopup").GetComponent<TextMeshProUGUI>();
         questText = GameObject.Find("QuestText").GetComponentInChildren<TextMeshProUGUI>();
+        dialogText = GameObject.Find("Dialog").GetComponent<TextMeshProUGUI>();
         popup = GameObject.Find("Popup").GetComponent<RectTransform>();
         leftele = GameObject.Find("lefteleholder");
         rightele = GameObject.Find("righteleholder");
@@ -134,5 +136,10 @@ public class IngameUI : Singleton<IngameUI>
     public void UpdateQuestString(string str)
     {
         questText.text = str;
+    }
+
+    public void UpdateDialogText(string str)
+    {
+        dialogText.text = str;
     }
 }
