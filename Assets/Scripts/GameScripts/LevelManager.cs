@@ -9,8 +9,8 @@ public class LevelManager : Singleton<LevelManager>
     public List<int> completedQuests;
     public PlayerControl playerControl;
     public IngameUI igui;
-    public List<bool> subQuestCompleted;
-    public List<int> subQuestAmounts;
+    public List<bool> subQuestCompleted = new List<bool>();
+    public List<int> subQuestAmounts = new List<int>();
 
     // Start is called before the first frame update
     void Start()
@@ -130,8 +130,8 @@ public class LevelManager : Singleton<LevelManager>
             return;
         }
 
-        subQuestAmounts.Clear();
-        subQuestCompleted.Clear();
+        subQuestAmounts = new List<int>();
+        subQuestCompleted = new List<bool>();
 
         activeQuest = i;
 
