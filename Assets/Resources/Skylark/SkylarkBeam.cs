@@ -21,12 +21,14 @@ public class SkylarkBeam : MonoBehaviour {
         transform.Rotate(0, Random.Range(-30.0f, 30.0f), 0);
         //lmao
         transform.position -= transform.up * 1;
+        Destroy(gameObject, 10);
     }
 
     // Update is called once per frame
     void Update() {
         if (m_ready) {
-
+            transform.position += transform.forward * Time.deltaTime * 5;
+            
         }
     }
 
