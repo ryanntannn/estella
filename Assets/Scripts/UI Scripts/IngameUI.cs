@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-public class IngameUI : MonoBehaviour
+public class IngameUI : Singleton<IngameUI>
 {
     PlayerControl playerControl;
     Slider healthBar;
@@ -41,6 +41,11 @@ public class IngameUI : MonoBehaviour
         holdF.SetActive(false);
         ShowPopUp("Test", 1f);
         ShowBigPopUp("Test", 2f);
+
+        leftele.transform.GetChild(ElementControlV2.Instance.LeftHand.currentElement.ID).gameObject.SetActive(true);
+        rightele.transform.GetChild(ElementControlV2.Instance.RightHand.currentElement.ID).gameObject.SetActive(true);
+        activeLele = ElementControlV2.Instance.LeftHand.currentElement.ID;
+        activeRele = ElementControlV2.Instance.RightHand.currentElement.ID;
     }
 
     // Update is called once per frame
@@ -105,6 +110,9 @@ public class IngameUI : MonoBehaviour
     {
         if (lefthand)
         {
+            float li = Mathf.Log(ElementControlV2.Instance.LeftHand.currentElement.ID, 2)/Mathf.Log(2, 2);
+            index = (int)li;
+            Debug.Log(index);
             leftele.transform.GetChild(activeLele).gameObject.SetActive(false);
             leftele.transform.GetChild(index).gameObject.SetActive(true);
             leftele.transform.GetChild(index).DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f)
@@ -113,6 +121,8 @@ public class IngameUI : MonoBehaviour
         }
         else
         {
+            float li = Mathf.Log(ElementControlV2.Instance.RightHand.currentElement.ID, 2) / Mathf.Log(2, 2);
+            index = (int)li;
             rightele.transform.GetChild(activeRele).gameObject.SetActive(false);
             rightele.transform.GetChild(index).gameObject.SetActive(true);
             rightele.transform.GetChild(index).DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f)
