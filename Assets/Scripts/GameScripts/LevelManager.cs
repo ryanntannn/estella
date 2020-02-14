@@ -63,15 +63,18 @@ public class LevelManager : Singleton<LevelManager>
     }
 
     public void EnemyDie(string enemyName) {
-        for (int i = 0; i < quests[activeQuest].subQuests.Count; i++)
+        if (activeQuest >= 0)
         {
-            SubQuest sq = quests[activeQuest].subQuests[i];
-            if(sq.questType == SubQuestType.Kill)
+            for (int i = 0; i < quests[activeQuest].subQuests.Count; i++)
             {
-                if ((sq as KillSubQuest).enemyName.Equals(enemyName))
+                SubQuest sq = quests[activeQuest].subQuests[i];
+                if (sq.questType == SubQuestType.Kill)
                 {
-                    subQuestAmounts[i]++;
-                    WriteQuestString();
+                    if ((sq as KillSubQuest).enemyName.Equals(enemyName))
+                    {
+                        subQuestAmounts[i]++;
+                        WriteQuestString();
+                    }
                 }
             }
         }
@@ -79,19 +82,21 @@ public class LevelManager : Singleton<LevelManager>
 
     public void PlayerEnterLocation(string locationName)
     {
-        for (int i = 0; i < quests[activeQuest].subQuests.Count; i++)
+        if (activeQuest >= 0)
         {
-            SubQuest sq = quests[activeQuest].subQuests[i];
-            if (sq.questType == SubQuestType.Locate)
+            for (int i = 0; i < quests[activeQuest].subQuests.Count; i++)
             {
-                if ((sq as LocateSubquest).locationName.Equals(locationName) && !subQuestCompleted[i])
+                SubQuest sq = quests[activeQuest].subQuests[i];
+                if (sq.questType == SubQuestType.Locate)
                 {
-                    subQuestCompleted[i] = true;
-                    WriteQuestString();
-                    igui.ShowPopUp("Objective Completed", 2.0f);
+                    if ((sq as LocateSubquest).locationName.Equals(locationName) && !subQuestCompleted[i])
+                    {
+                        subQuestCompleted[i] = true;
+                        WriteQuestString();
+                        igui.ShowPopUp("Objective Completed", 2.0f);
+                    }
                 }
             }
-
         }
     }
 
