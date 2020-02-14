@@ -149,6 +149,16 @@ public class SkylarkBoss : MonoBehaviour {
         m_dataProvider.rb.AddForce(transform.forward * 4 * m_dataProvider.currentSpeed, ForceMode.Impulse);
     }
 
+    void DoBeam() {
+        //make 3 lines at random locations
+        for (int count = 0; count < 3; count++) {
+            Vector2 randomLoc2d = UnityEngine.Random.insideUnitCircle * 10;
+            Vector3 randomLocation = new Vector3(randomLoc2d.x, transform.position.y, randomLoc2d.y);
+            GameObject instance = Instantiate(m_beamPfb, randomLocation, Quaternion.identity);
+            instance.GetComponent<SkylarkBeam>().playerPos = m_playerPos;
+        }
+    }
+
     //generic do damage function
     void DoDamage() {
         m_dataProvider.DealDamage(20, 1);
@@ -232,15 +242,10 @@ public class SkylarkBoss : MonoBehaviour {
 
         public override float CoolDown => 40;
         public override FiniteStateMachineWithStack.State State => (gameObject) => {
-            //make 3 lines at random locations
-            for(int count = 0; count < 3; count++) {
-                Vector2 randomLoc2d = UnityEngine.Random.insideUnitCircle * 10;
-                Vector3 randomLocation = new Vector3(randomLoc2d.x, agent.transform.position.y, randomLoc2d.y);
-                GameObject instance = Instantiate(agent.m_beamPfb, randomLocation, Quaternion.identity);
-                instance.GetComponent<SkylarkBeam>().playerPos = agent.m_playerPos;
-            }
-
-            agent.PushIdle();
+            agent.Anim.SetTrigger("WhenChaosBeam");
+            agent.transform.LookAt(agent.m_playerPos);
+            agent.fsm.PopState();
+            agent.fsm.PushState(agent.NullState);
         };
 
         public override bool IsAvaliable() {
