@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PuddleScript : MonoBehaviour {
     public float ttl = 5;
@@ -43,13 +44,15 @@ public class PuddleScript : MonoBehaviour {
     }
 
     private void OnTriggerStay(Collider other) {
-        if(other.gameObject.layer == Layers.Enemy) {
-            if (isElectrified) {
-                //ministun
-                other.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime / 2, Enemy.Effects.Stun);
-            }else {
-                other.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime, Enemy.Effects.Slow);
+        try {
+            if (other.gameObject.layer == Layers.Enemy) {
+                if (isElectrified) {
+                    //ministun
+                    other.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime / 2, Enemy.Effects.Stun);
+                } else {
+                    other.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime, Enemy.Effects.Slow);
+                }
             }
-        }
+        } catch (Exception) { };
     }
 }

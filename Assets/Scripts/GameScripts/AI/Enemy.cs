@@ -32,9 +32,9 @@ public class Enemy : MonoBehaviour {
     public MapGrid map { get; private set; }
 
     public void Start() {
-        rb = GetComponent<Rigidbody>();
-        anim = transform.GetComponentInChildren<Animator>();
-        player = GameObject.FindObjectOfType<PlayerControl>();
+        if(!rb) rb = GetComponent<Rigidbody>();
+        if(!anim) anim = transform.GetComponentInChildren<Animator>();
+        if (!player) player = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();
         currentSpeed = speed;
         currentResistance = resistanceLevel;
         currentFreezeThreshold = unfreezeThreshold;

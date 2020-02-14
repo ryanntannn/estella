@@ -48,9 +48,13 @@ public class TornadoScript : MonoBehaviour, ISteamable {
                 if (other.CompareTag("FireBall")) {
                     GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Blaze/FireTornado"), transform.position, transform.rotation);
                     SetPrewarm(instance.transform);
+                    Destroy(other.gameObject);
                     Destroy(gameObject);
                 }else if (other.CompareTag("Bubbleshot")) {
                     //water tornado
+                    GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Water/Torrent"), transform.position, transform.rotation);
+                    Destroy(gameObject);
+                    Destroy(gameObject);
                 }
                 break;
         }

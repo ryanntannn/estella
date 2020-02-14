@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8588896102407497628}
   - component: {fileID: 6122748183191360619}
   - component: {fileID: 8269941615458637414}
+  - component: {fileID: 2900429567295651228}
   m_Layer: 12
   m_Name: FissureAttack
   m_TagString: Fissure
@@ -109,6 +110,20 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.5
+--- !u!136 &2900429567295651228
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3686749137000166893}
+  m_Material: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 7
+  m_Direction: 0
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &6349861357179649627
 GameObject:
   m_ObjectHideFlags: 0

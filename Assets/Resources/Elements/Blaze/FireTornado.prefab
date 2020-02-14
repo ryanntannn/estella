@@ -4762,10 +4762,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5706595222424790552}
+  - component: {fileID: 8186862695515575302}
   - component: {fileID: 8965719259013543665}
   - component: {fileID: 1198718918243679987}
   - component: {fileID: 555781497132775106}
-  - component: {fileID: 2429625615324384927}
   m_Layer: 0
   m_Name: FireTornado
   m_TagString: Untagged
@@ -4793,6 +4793,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8186862695515575302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5706595222424790553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a8b2fe4df224b46a9496b783df7918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToLive: 5
+  isEmpowered: 0
 --- !u!54 &8965719259013543665
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4807,7 +4821,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!65 &1198718918243679987
 BoxCollider:
@@ -4835,20 +4849,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 3.9, z: 0.1}
   m_Center: {x: 0, y: 2.1, z: 0}
---- !u!114 &2429625615324384927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5706595222424790553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e35ff1b09f5a1154c96ae71cb19ab47c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToLive: 15
-  isEmpowered: 0
 --- !u!1 &5706595222830465785
 GameObject:
   m_ObjectHideFlags: 0
