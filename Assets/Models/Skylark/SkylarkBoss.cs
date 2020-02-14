@@ -143,12 +143,12 @@ public class SkylarkBoss : MonoBehaviour {
     }
 
     void DoChargingBlast() {
-
+        m_dataProvider.rb.AddForce(transform.forward * 4 * m_dataProvider.currentSpeed, ForceMode.Impulse);
     }
 
     //generic do damage function
     void DoDamage() {
-        m_dataProvider.player.TakeDamage(20, m_bossPos);
+        m_dataProvider.DealDamage(20, 1);
     }
     #endregion
 
@@ -185,7 +185,7 @@ public class SkylarkBoss : MonoBehaviour {
     //tiger fist
     private class TigerFist : SkylarkSkill {
         public override float CoolDown => 10;
-        private float m_minRage = Mathf.Pow(3, 2);   //sqred
+        private float m_minRage = Mathf.Pow(1.5f, 2);   //sqred
 
         public TigerFist(SkylarkBoss _agent) : base(_agent) {
         }
@@ -193,6 +193,7 @@ public class SkylarkBoss : MonoBehaviour {
         public override FiniteStateMachineWithStack.State State => (gameObject) => {
             //punch infront 3 times and do damage
             agent.Anim.SetTrigger("WhenTigerFist");
+            agent.transform.LookAt(agent.m_playerPos);
             agent.fsm.PopState();
             agent.fsm.PushState(agent.NullState);
         };
@@ -248,13 +249,14 @@ public class SkylarkBoss : MonoBehaviour {
     //chargin blast
     private class ChargingBlast : SkylarkSkill {
         public override float CoolDown => 15;
-        private float m_minRage = Mathf.Pow(3, 2);   //sqred
+        private float m_minRage = Mathf.Pow(1.5f, 2);   //sqred
 
         public ChargingBlast(SkylarkBoss _agent) : base(_agent) {
         }
 
         public override FiniteStateMachineWithStack.State State => (gameObject) => {
             agent.Anim.SetTrigger("WhenChargingBlast");
+            agent.transform.LookAt(agent.m_playerPos);
             agent.fsm.PopState();
             agent.fsm.PushState(agent.NullState);
         };
