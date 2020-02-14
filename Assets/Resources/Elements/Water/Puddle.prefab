@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ce3865c46619a4389475a75db38f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ttl: 10
   isElectrified: 0
 --- !u!1001 &8312303801068205403
 PrefabInstance:

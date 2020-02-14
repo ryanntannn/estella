@@ -11,6 +11,7 @@ TagManager:
   - Puddle
   - Fissure
   - Bubbleshot
+  - Tornado
   layers:
   - Default
   - TransparentFX

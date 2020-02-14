@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TornadoScript : MonoBehaviour, ISteamable {
+    public float speed = 2;
     public float timeToLive = 5;
     public bool isEmpowered = false;
 
@@ -44,9 +45,13 @@ public class TornadoScript : MonoBehaviour, ISteamable {
                 other.GetComponent<Enemy>().DebuffEnemy(5, Enemy.Effects.Slow);
                 break;
             case Layers.CreatedObjects:
-                GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Blaze/FireTornado"), transform.position, transform.rotation);
-                SetPrewarm(instance.transform);
-                Destroy(gameObject);
+                if (other.CompareTag("FireBall")) {
+                    GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Blaze/FireTornado"), transform.position, transform.rotation);
+                    SetPrewarm(instance.transform);
+                    Destroy(gameObject);
+                }else if (other.CompareTag("Bubbleshot")) {
+                    //water tornado
+                }
                 break;
         }
     }

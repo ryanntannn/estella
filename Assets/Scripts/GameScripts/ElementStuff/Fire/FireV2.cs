@@ -25,6 +25,8 @@ public class FireV2 : BaseElementV2 {
         GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Fire/Fireball"), HandUsing.handPos.position, transform.rotation);
         if (Targeter.Instance.Target) {
             instance.transform.LookAt(Targeter.Instance.CollisionPoint);
+        }else {
+            instance.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         }
         ElementControlV2.Instance.currentMana -= RegularManaCost;
     }

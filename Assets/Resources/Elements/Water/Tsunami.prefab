@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7775852662676650667}
   - component: {fileID: 895575301585152064}
   - component: {fileID: 2021511516560995445}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Tsunami
-  m_TagString: Untagged
+  m_TagString: Bubbleshot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 2674585240206421873}
   - component: {fileID: 6360507254014121287}
   - component: {fileID: 826840228705954238}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Tsunamis
   m_TagString: Untagged
   m_Icon: {fileID: 0}

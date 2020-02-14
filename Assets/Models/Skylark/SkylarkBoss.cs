@@ -49,12 +49,12 @@ public class SkylarkBoss : MonoBehaviour {
             //determine next state
             fsm.PopState();
 
-            //foreach(SkylarkSkill s in m_skillsAvaliable) {
-            //    if (s.IsAvaliable(this)) {
-            //        s.Act(this);
-            //        break;
-            //    }
-            //}
+            foreach (SkylarkSkill s in m_skillsAvaliable) {
+                if (s.IsAvaliable(this)) {
+                    s.Act(this);
+                    return;
+                }
+            }
 
             //no actions avaliable
             fsm.PushState(pathToPlayer.Count > 1 ? Chase : Idle);
@@ -150,6 +150,7 @@ public class SkylarkBoss : MonoBehaviour {
 
         public override void Act(SkylarkBoss _agent) {
             base.Act(_agent);
+            //punch infront 3 times and do damage
         }
 
         public override bool IsAvaliable(SkylarkBoss _agent) {

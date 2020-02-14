@@ -13,6 +13,7 @@ public class FissureScript : MonoBehaviour {
     float internalCounter = 0;
     bool onFire = false;
     BoxCollider fireCollider;
+    public Material metorShader;
     // Start is called before the first frame update
     void Start() {
         Vector3 properPosition = transform.position + transform.up * TOTAL_HEIGHT;
@@ -40,6 +41,7 @@ public class FissureScript : MonoBehaviour {
             case "FireBall":
                 //flaming hot
                 onFire = true;
+                transform.GetChild(0).GetComponent<MeshRenderer>().material = metorShader;
                 Destroy(other.gameObject);
                 break;
         }

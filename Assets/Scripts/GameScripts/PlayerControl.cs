@@ -22,7 +22,8 @@ public class PlayerControl : MonoBehaviour {
     private GameObject pivot;
     Rigidbody rb;
     float rotation = 0;
-    bool dodging = false;
+    [HideInInspector]
+    public bool dodging = false;
 
     //Radial Menu
     GameObject radialMenu1;
@@ -178,7 +179,8 @@ public class PlayerControl : MonoBehaviour {
 
     public void StartJump() {
         rb.velocity = Vector3.zero;
-        rb.AddForce(transform.forward * 4 * speed, ForceMode.Impulse);
+        float factor = ElementControlV2.Instance.EmpowerTime > 0 ? 5 : 4;
+        rb.AddForce(transform.forward * factor * speed, ForceMode.Impulse);
     }
 
     public void DoneJumping() {
