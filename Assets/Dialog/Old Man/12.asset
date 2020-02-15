@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ae50b5cb659b474db33f574d5404d72, type: 3}
-  m_Name: 11
+  m_Name: 12
   m_EditorClassIdentifier: 
-  content: 'Old Man: Legends say that there is one hidden in these deserts, a tribute
-    to a priest who prayed for 1000 years.'
+  content: 'Old Man: You can slow down their progress by disrupting their search in
+    the ruins up north.'
   waitTime: 8

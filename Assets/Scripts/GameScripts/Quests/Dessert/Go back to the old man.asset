@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb630b84aa199b64c98331c80bf91485, type: 3}
   m_Name: Go back to the old man
   m_EditorClassIdentifier: 
-  shortDesc: 
+  shortDesc: Go back to the old man
   longDesc: 
-  subQuests: []
+  subQuests:
+  - {fileID: 11400000, guid: bfa64ba636cd3444b864c04e76394cac, type: 2}
   nextQuest: 0

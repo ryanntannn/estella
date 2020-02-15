@@ -15,6 +15,8 @@ public class GiantBoss : MonoBehaviour
 
     bool activated = false;
 
+    bool isDead = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,14 @@ public class GiantBoss : MonoBehaviour
         }
     }
 
+    void BossDie()
+    {
+        foreach(BossArm ba in bossArms)
+        {
+            ba.gameObject.SetActive(false);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {   
@@ -47,7 +57,12 @@ public class GiantBoss : MonoBehaviour
             AwakeBoss();
         }
 
-        if (isAggro)
+        if(!isDead && bossBody.health <= 0)
+        {
+            BossDie();
+        }
+
+        if (isAggro && bossBody.health > 0)
         {
             if (!isAttacking)
             {

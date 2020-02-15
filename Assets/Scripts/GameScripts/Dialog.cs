@@ -10,11 +10,13 @@ public class Dialog : MonoBehaviour
     bool isInDialog = false;
     public bool giveQuestAfter;
     public int indexQuestAfter;
+    PlayerControl pc;
 
     // Start is called before the first frame update
     void Start()
     {
         interactableObject = GetComponent<InteractableObject>();
+        pc = PlayerControl.Instance;
     }
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class Dialog : MonoBehaviour
     public void StartDialog()
     {
         StartCoroutine("SayDialog", 0);
+        pc.enabled = false;
     }
 
     IEnumerator SayDialog(int index)
@@ -50,7 +53,10 @@ public class Dialog : MonoBehaviour
                 LevelManager.Instance.ChangeQuest(indexQuestAfter);
             }
 
+            pc.enabled = true;
+            isInDialog = false;
             IngameUI.Instance.UpdateDialogText("");
+            interactableObject.ResetAll();
         }
         else
         {

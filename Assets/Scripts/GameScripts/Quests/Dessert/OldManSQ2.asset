@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b19385ddc67d017438e6f5e08d3f75b7, type: 3}
-  m_Name: New Interact Subquest
+  m_Name: OldManSQ2
   m_EditorClassIdentifier: 
-  shortDesc: 
+  shortDesc: Go back to the old man
   longDesc: 
-  questType: 0
+  questType: 2
   objective: []
-  amount: 0
-  InteractableObjectName: 
+  amount: 1
+  InteractableObjectName: Old Man

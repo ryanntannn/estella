@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: 'Old Man: Legends say that there is one hidden in these deserts, a tribute
     to a priest who prayed for 1000 years.'
-  waitTime: 8
+  waitTime: 7
