@@ -22,7 +22,6 @@ public class Earth : Element {
 
 	public override void DoBig(ElementControl agent, Hand hand) {
         //ground breaker
-        GameObject groundBreaker = Instantiate(Resources.Load<GameObject>("Elements/Ground/Ground Strike/EarthStrike"), agent.targetCircle.transform.position - agent.targetCircle.transform.up * 5, Quaternion.identity);
-        groundBreaker.GetComponent<EarthStrikeScript>().finalYPos = agent.targetCircle.transform.position.y;
+        GameObject groundBreaker = Instantiate(Resources.Load<GameObject>("Elements/Ground/Ground Strike/EarthStrike"), agent.targetCircle.transform.position, Quaternion.identity);
     }
 }

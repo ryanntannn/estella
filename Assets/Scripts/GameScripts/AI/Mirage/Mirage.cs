@@ -5,13 +5,16 @@ using UnityEngine;
 using System.Threading;
 
 //mirage boss fight
-public class Mirage : Enemy {
+public class Mirage : MonoBehaviour {
     public float maxIdleTime = 5;
+
+	Enemy dataProvider;
 
     public GameObject mirageShadow;
     FiniteStateMachine fsm = new FiniteStateMachine();
     //states
     FiniteStateMachine.State Idle, RegularAttack, JumpAttack, KnifeThrow, TeleToPlayer;
+	PlayerControl player;
 
     enum Skills { JumpBack, KnifeThrow, TeleToPlayer }
     bool[] skillCd = new bool[3];
@@ -24,10 +27,11 @@ public class Mirage : Enemy {
     Thread pathFinder;
     Vector3 playerPos = Vector3.zero, miragePos = Vector3.zero;
     // Start is called before the first frame update
-    public override void Start() {
-        base.Start();
-        ReferenceMap(Helper.FindComponentInScene<MapGrid>("Map"));  //set the reference to the map
+    void Start() {
+		dataProvider = GetComponent<Enemy>();
+		dataProvider.ReferenceMap(Helper.FindComponentInScene<MapGrid>("Map"));  //set the reference to the map
 
+		player = dataProvider.player;
         miragePos = transform.position;
         playerPos = player.transform.position;
         pathFinder = new Thread(FindPath);
@@ -62,32 +66,32 @@ public class Mirage : Enemy {
 
             if (directionOfPlayer.magnitude < 3) {
                 transform.LookAt(player.transform);
-                anim.SetBool("isWalking", false);
+				dataProvider.anim.SetBool("isWalking", false);
                 //set trigger
-                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
-                    anim.SetTrigger("whenAttack");
+                if (!dataProvider.anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
+					dataProvider.anim.SetTrigger("whenAttack");
                 }
-                GoToIdle(anim.GetCurrentAnimatorStateInfo(0).length);
+                GoToIdle(dataProvider.anim.GetCurrentAnimatorStateInfo(0).length);
             } else {
                 Vector3 toLookAt = path[1].worldPos;
                 toLookAt.y = transform.position.y;
                 transform.LookAt(toLookAt);
-                anim.SetBool("isWalking", true);
-                transform.position += transform.forward * speed * Time.deltaTime;
+				dataProvider.anim.SetBool("isWalking", true);
+                transform.position += transform.forward * dataProvider.currentSpeed * Time.deltaTime;
             }
         };
 
         JumpAttack = (gameObject) => {
             //set trigger
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("JumpBack")) {
-                anim.SetTrigger("whenJump");
+            if (!dataProvider.anim.GetCurrentAnimatorStateInfo(0).IsName("JumpBack")) {
+				dataProvider.anim.SetTrigger("whenJump");
             }
 
             //set it on cd
             skillCd[(int)Skills.JumpBack] = true;
             StartCoroutine(SetCd(Skills.JumpBack, 20));  //20 second cd
 
-            GoToIdle(anim.GetCurrentAnimatorStateInfo(0).length);
+            GoToIdle(dataProvider.anim.GetCurrentAnimatorStateInfo(0).length);
         };
 
         KnifeThrow = (gameObject) => {
@@ -95,15 +99,15 @@ public class Mirage : Enemy {
             transform.LookAt(player.transform);
 
             //set trigger
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("KnifeThrow")) {
-                anim.SetTrigger("whenThrowKnife");
+            if (!dataProvider.anim.GetCurrentAnimatorStateInfo(0).IsName("KnifeThrow")) {
+				dataProvider.anim.SetTrigger("whenThrowKnife");
             }
 
             //set it on cd
             skillCd[(int)Skills.KnifeThrow] = true;
             StartCoroutine(SetCd(Skills.KnifeThrow, 10));  //10 second cd
 
-            GoToIdle(anim.GetCurrentAnimatorStateInfo(0).length);
+            GoToIdle(dataProvider.anim.GetCurrentAnimatorStateInfo(0).length);
         };
 
 
@@ -139,19 +143,17 @@ public class Mirage : Enemy {
     }
 
     void FindPath() {
-        path = Algorithms.AStar(map, miragePos, playerPos);
+        path = Algorithms.AStar(dataProvider.map, miragePos, playerPos);
     }
 
     //Update is called once per frame
-    public override void Update() {
+    void Update() {
         miragePos = transform.position;
         playerPos = player.transform.position;
         if (!pathFinder.IsAlive) {
             pathFinder = new Thread(FindPath);
             pathFinder.Start();
         }
-
-        base.Update();
 
         fsm.currentState(gameObject);
     }
@@ -166,10 +168,10 @@ public class Mirage : Enemy {
     }
 
     public void JumpBack() {
-        //add force to the foot of mirage
-        //ey look man, the numbers work, so lets not change it
-        //rb.AddForce(transform.up * 4, ForceMode.Impulse);
-        rb.AddForce(-transform.forward * 10, ForceMode.Impulse);
+		//add force to the foot of mirage
+		//ey look man, the numbers work, so lets not change it
+		//rb.AddForce(transform.up * 4, ForceMode.Impulse);
+		dataProvider.rb.AddForce(-transform.forward * 10, ForceMode.Impulse);
         GameObject instance = Instantiate(mirageShadow, transform.position, Quaternion.identity);
         instance.transform.LookAt(player.transform.position, transform.up);
     }

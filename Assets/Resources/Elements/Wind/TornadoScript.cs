@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TornadoScript : MonoBehaviour, ISteamable {
+    public float speed = 2;
     public float timeToLive = 5;
     public bool isEmpowered = false;
 
@@ -38,9 +39,36 @@ public class TornadoScript : MonoBehaviour, ISteamable {
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.layer == Layers.Enemy) {
-            other.GetComponent<Enemy>().DebuffEnemy(5, Enemy.Effects.Slow);
+    protected virtual void OnTriggerEnter(Collider other) {
+        switch (other.gameObject.layer) {
+            case Layers.Enemy:
+                other.GetComponent<Enemy>().DebuffEnemy(5, Enemy.Effects.Slow);
+                break;
+            case Layers.CreatedObjects:
+                if (other.CompareTag("FireBall")) {
+                    GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Blaze/FireTornado"), transform.position, transform.rotation);
+                    SetPrewarm(instance.transform);
+                    Destroy(other.gameObject);
+                    Destroy(gameObject);
+                }else if (other.CompareTag("Bubbleshot")) {
+                    //water tornado
+                    GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Water/Torrent"), transform.position, transform.rotation);
+                    Destroy(gameObject);
+                    Destroy(gameObject);
+                }
+                break;
+        }
+    }
+
+    void SetPrewarm(Transform _t) {
+        ParticleSystem ps = _t.GetComponent<ParticleSystem>();
+        if (ps) {
+            ParticleSystem.MainModule main = ps.main;
+            main.prewarm = true;
+        }
+
+        foreach(Transform child in _t) {
+            SetPrewarm(child);
         }
     }
 }

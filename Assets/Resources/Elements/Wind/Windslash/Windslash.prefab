@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9039698531447812175}
   - component: {fileID: 9039698531447812169}
   - component: {fileID: 9039698531447812168}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4764,7 +4764,7 @@ GameObject:
   - component: {fileID: 9039698531461622585}
   - component: {fileID: 9039698531461622587}
   - component: {fileID: 9039698531461622586}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Wind(Add)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9517,7 +9517,7 @@ GameObject:
   - component: {fileID: 9039698532209583370}
   - component: {fileID: 9039698532209583348}
   - component: {fileID: 9039698532209583371}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Windslash(Trails (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14268,7 +14268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9039698532418649356}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: TrailParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14303,7 +14303,8 @@ GameObject:
   - component: {fileID: 9039698532523729928}
   - component: {fileID: 9039698532523729929}
   - component: {fileID: -8843026743204902303}
-  m_Layer: 0
+  - component: {fileID: 1391642510453870393}
+  m_Layer: 15
   m_Name: Windslash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14318,7 +14319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9039698532523729935}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.583483, y: 0.5710193, z: -20.136124}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9039698532418649356}
@@ -14351,4 +14352,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca99e4e9f287744ab155a45d41a8374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ec: {fileID: 0}
+--- !u!65 &1391642510453870393
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9039698532523729935}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.1, z: 2.5}
+  m_Center: {x: 0, y: 0, z: 0}

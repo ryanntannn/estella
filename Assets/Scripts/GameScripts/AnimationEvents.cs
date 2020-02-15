@@ -8,43 +8,51 @@ public class AnimationEvents : MonoBehaviour {
 
 	GameObject parent;
 	Animator anim;
-	//player stuff
-	Hand lHand, rHand;
-	ElementControl ec;
 	// Start is called before the first frame update
 	void Start() {
 		parent = transform.parent.gameObject;
 		anim = GetComponent<Animator>();
-		if (parent.tag.Equals("Player")) {
-			ec = parent.GetComponent<ElementControl>();
-			lHand = ec.lHand;
-			rHand = ec.rHand;
+    }
+
+    #region Player animation events
+    void CastRegularAttack() {
+        if (!anim.GetBool("IsFlipped")) {   //right hand
+            ElementControlV2.Instance.RightHand.currentElement.CastRegularAttack();
+        } else {
+            ElementControlV2.Instance.LeftHand.currentElement.CastRegularAttack();
         }
     }
 
-	#region Player animation events
-	void DoBig() {
-		if (anim.GetBool("IsUsingRightHand")) {
-			rHand.currentElement.DoBig(ec, rHand);
-		} else {
-			lHand.currentElement.DoBig(ec, lHand);
-		}
-	}
-
-	void SmallAttack() {
-		if (anim.GetBool("IsUsingRightHand")) {
-			rHand.currentElement.DoBasic(ec, rHand);
-		} else {
-            lHand.currentElement.DoBasic(ec, lHand);
-		}
-	}
+    void CastUltimateAttack() {
+        if (!anim.GetBool("IsFlipped")) {   //right hand
+            ElementControlV2.Instance.RightHand.currentElement.CastUltimateAttack();
+        } else {
+            ElementControlV2.Instance.LeftHand.currentElement.CastUltimateAttack();
+        }
+    }
 
 	void Done() {
-		ec.isCasting = false;
+        if (!anim.GetBool("IsFlipped")) {   //right hand
+            ElementControlV2.Instance.RightHand.currentElement.DoneCasting();
+        }else {
+            ElementControlV2.Instance.LeftHand.currentElement.DoneCasting();
+        }
+    }
+
+    void CombinationDone() {
+        ElementControlV2.Instance.isCasting = false;
+    }
+
+	void Done(float _ttl) {
+		StartCoroutine(DoneDelay(_ttl));
 	}
 
-    void ECTrigger(string message) {
-        ec.SendMessage(message);
+	IEnumerator DoneDelay(float _ttl) {
+		yield return new WaitForSeconds(_ttl);
+	}
+	
+	void ECTrigger(string message) {
+        ElementControlV2.Instance.SendMessage(message);
     }
 
 	void DoneJumping() {
@@ -103,16 +111,57 @@ public class AnimationEvents : MonoBehaviour {
     }
     #endregion
 
+    #region Skeleington animation events
+    void SkeleDoneAttacking() {
+        parent.GetComponent<Skelington>().DoneAttacking();
+    }
+    #endregion
+
+    #region Skylark animation events
+    void SkylarkAnimationEvent(string _message) {
+        parent.GetComponent<SkylarkBoss>().SendMessage(_message);
+    }
+
+    void SkylarkDone() {
+        parent.GetComponent<SkylarkBoss>().PushIdle();
+    }
+    #endregion
+
+    #region FriendlyGolem
+    void GolemReady() {
+        parent.GetComponent<MudGolem>().Ready();
+    }
+    #endregion
+
     void DieTrigger() {
-        Destroy(parent.GetComponent<Enemy>());
+        foreach(Component c in parent.GetComponents<MonoBehaviour>()) {
+            Destroy(c);
+        }
         Destroy(parent.gameObject, 5);
     }
 
-    void EnemyDmgTrigger(float damage) {
-        if (parent.name.Equals("EnemyKnight")) {
-            parent.GetComponent<Enemy>().DealDamage(damage, 1);
-        }else {
-            parent.GetComponent<Enemy>().DealDamage(damage);
+    //doesn't need range
+    void EnemyDmgNoRange(float damage) {
+        parent.GetComponent<Enemy>().DealDamage(damage);
+    }
+
+    void EnemyDmgNeedRange(float damage) {
+        parent.GetComponent<Enemy>().DealDamage(damage, 1);
+    }
+
+    void StartSinking(float _duration) {
+        StartCoroutine(SinkDown(_duration));
+    }
+
+    IEnumerator SinkDown(float _duration) {
+        float timer = 0;
+        anim.playbackTime = 0;
+        while (timer < _duration) {
+            timer += Time.deltaTime;
+            parent.transform.position -= parent.transform.up * Time.deltaTime * 0.3f;
+            yield return null;
         }
+
+        Destroy(parent);
     }
 }

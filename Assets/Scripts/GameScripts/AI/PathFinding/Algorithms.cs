@@ -118,7 +118,7 @@ public static class Algorithms {
                         try {
                             openList.Enqueue(n);
                         } catch (Exception) {
-                            Debug.Log(count);
+                            //Debug.Log(count);
                         }
                     }
                 }
@@ -135,17 +135,18 @@ public static class Algorithms {
         float gridX = grid.mapSize.x / (grid.centerToSide * 2);
         float gridY = grid.mapSize.y / (grid.nodeSize * 1.5f);
 
-        float x = Mathf.Abs(start.gridPos.x - end.gridPos.x) / gridX;
-        float y = Mathf.Abs(start.gridPos.y - end.gridPos.y) / gridY;
-        return (x + y);
+        //float x = Mathf.Abs(start.gridPos.x - end.gridPos.x) / gridX;
+        //float y = Mathf.Abs(start.gridPos.y - end.gridPos.y) / gridY;
+        return gridX + gridY;
     }
 
     private static float GetEuclidian(MapGrid grid, Node start, Node end) {
-        float gridX = grid.mapSize.x / grid.centerToSide;
-        float gridY = grid.mapSize.y / (grid.nodeSize * 2);
-        float gridMagnitude = Mathf.Sqrt(Mathf.Pow(gridX, 2) + Mathf.Pow(gridY, 2));
-        float eucDist = (start.gridPos - end.gridPos).magnitude;
-        return eucDist / gridMagnitude;
+        //float gridX = grid.mapSize.x / grid.centerToSide;
+        //float gridY = grid.mapSize.y / (grid.nodeSize * 2);
+        //float gridMagnitude = Mathf.Sqrt(Mathf.Pow(gridX, 2) + Mathf.Pow(gridY, 2));
+        //float eucDist = (start.gridPos - end.gridPos).magnitude;
+        //return eucDist / gridMagnitude;
+        return (start.gridPos - end.gridPos).magnitude;
     }
 
     private static Node FindClosestWalkable(MapGrid grid, Node _input) {

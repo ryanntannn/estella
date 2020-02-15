@@ -16,6 +16,7 @@ public class StormScript : MonoBehaviour {
         float step = 360 / noOfSparks;
         for(int count = 0; count <= noOfSparks - 1; count++) {
             sparkWraiths[count] = Instantiate(sparkWraith, transform.position, Quaternion.Euler(-30, count * step, 0));
+            sparkWraiths[count].GetComponent<SparkWraith>().center = centerOfStorm;
         }
     }
 

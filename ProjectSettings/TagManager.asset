@@ -9,6 +9,10 @@ TagManager:
   - FireBall
   - Map
   - Puddle
+  - Fissure
+  - Bubbleshot
+  - Tornado
+  - Golem
   layers:
   - Default
   - TransparentFX
@@ -24,8 +28,8 @@ TagManager:
   - Terrain
   - Obstacles
   - MINIMAP ITEM
-  - 
-  - 
+  - NAVMESHSTOP
+  - CreatedObjects
   - 
   - 
   - 

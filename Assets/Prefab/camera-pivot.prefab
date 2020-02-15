@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2921247291251705545}
   - component: {fileID: 2921247291251705544}
   - component: {fileID: 2921247291251705547}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 40759
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -98,7 +98,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2921247291468237796}
   - component: {fileID: 2921247291468237799}
-  m_Layer: 0
+  - component: {fileID: 1942074652503078396}
+  m_Layer: 11
   m_Name: camera-pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,3 +137,30 @@ MonoBehaviour:
   sensitivity: 10
   followDampening: 0.8
   clampAngle: 60
+--- !u!114 &1942074652503078396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2921247291468237798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []

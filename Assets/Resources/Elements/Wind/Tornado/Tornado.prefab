@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4384090478913783741}
   - component: {fileID: 4384090478913783743}
   - component: {fileID: 4384090478913783740}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ps_Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4693,7 +4693,7 @@ ParticleSystem:
 --- !u!199 &4384090478913783740
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -4717,6 +4717,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4763,7 +4764,7 @@ GameObject:
   - component: {fileID: 4384090479136103574}
   - component: {fileID: 4384090479136103560}
   - component: {fileID: 4384090479136103561}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ps_Dirt Alpha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9445,7 +9446,7 @@ ParticleSystem:
 --- !u!199 &4384090479136103561
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9469,6 +9470,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -9515,7 +9517,7 @@ GameObject:
   - component: {fileID: 4384090479688007582}
   - component: {fileID: 4384090479688007568}
   - component: {fileID: 4384090479688007569}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ps_TornadoMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14197,7 +14199,7 @@ ParticleSystem:
 --- !u!199 &4384090479688007569
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -14221,6 +14223,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -14267,7 +14270,7 @@ GameObject:
   - component: {fileID: 4384090479733299351}
   - component: {fileID: 4384090479733299337}
   - component: {fileID: 4384090479733299350}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ps_TornadoMid (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18949,7 +18952,7 @@ ParticleSystem:
 --- !u!199 &4384090479733299350
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -18973,6 +18976,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -19021,9 +19025,10 @@ GameObject:
   - component: {fileID: 5397308605367301427}
   - component: {fileID: 2103875021528518599}
   - component: {fileID: 6668825808684868268}
-  m_Layer: 0
+  - component: {fileID: 6951751772101749743}
+  m_Layer: 15
   m_Name: Tornado
-  m_TagString: Untagged
+  m_TagString: Tornado
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19059,6 +19064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a8b2fe4df224b46a9496b783df7918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
   timeToLive: 5
   isEmpowered: 0
 --- !u!65 &5397308605367301427
@@ -19103,6 +19109,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &6951751772101749743
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4384090480347330679}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.1, z: 3}
+  m_Center: {x: 0, y: 4, z: 0}
 --- !u!1 &4384090480719596885
 GameObject:
   m_ObjectHideFlags: 0
@@ -19114,7 +19133,7 @@ GameObject:
   - component: {fileID: 4384090480719596884}
   - component: {fileID: 4384090480719596886}
   - component: {fileID: 4384090480719596887}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ps_TornadoDiffuse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23796,7 +23815,7 @@ ParticleSystem:
 --- !u!199 &4384090480719596887
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -23820,6 +23839,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

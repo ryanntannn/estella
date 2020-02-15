@@ -43,7 +43,7 @@ public class ElementControl : MonoBehaviour {
                 lHand.waitingOnOther = false;
                 rHand.waitingOnOther = false;
                 isCasting = true;
-                Elements.Combination(lHand.currentElement, rHand.currentElement, this);
+                //Elements.Combination(lHand.currentElement, rHand.currentElement, this);
             }
         }
         //target circle
@@ -75,21 +75,21 @@ public class ElementControl : MonoBehaviour {
         hand.waitingOnOther = true;
         yield return new WaitForSeconds(delay);
         hand.waitingOnOther = false;
-		if ((Input.GetKey(KeyCode.LeftAlt) && currentMana >= hand.currentElement.BigAttackCost) || currentMana >= hand.currentElement.SmallAttackCost) {
+        //if ((Input.GetKey(KeyCode.LeftAlt) && currentMana >= hand.currentElement.BigAttackCost) || currentMana >= hand.currentElement.SmallAttackCost) {
 
-			isCasting = true;
+        //    isCasting = true;
 
-			//StartCoroutine(TurnTowards());
-			Vector3 a = transform.rotation.eulerAngles;
-			a.y = Camera.main.transform.rotation.eulerAngles.y;
-			transform.rotation = Quaternion.Euler(a);
+        //    //StartCoroutine(TurnTowards());
+        //    Vector3 a = transform.rotation.eulerAngles;
+        //    a.y = Camera.main.transform.rotation.eulerAngles.y;
+        //    transform.rotation = Quaternion.Euler(a);
 
-			//animations
-			anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
-			anim.SetTrigger(Input.GetKey(KeyCode.LeftAlt) ? hand.currentElement.BigAttackTrigger : hand.currentElement.SmallAttackTrigger);
+        //    //animations
+        //    anim.SetBool("IsUsingRightHand", !hand.flipAnimation);
+        //    //anim.SetTrigger(Input.GetKey(KeyCode.LeftAlt) ? hand.currentElement.BigAttackTrigger : hand.currentElement.SmallAttackTrigger);
 
-		}
-	}
+        //}
+    }
 
     IEnumerator TurnTowards() {
         //look at same direction as camera
@@ -103,6 +103,17 @@ public class ElementControl : MonoBehaviour {
     }
 
     #region Combinations
+    public void WindslashHit() {
+        //raycast forward
+        float range = 1.0f;
+        RaycastHit hitInfo;
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, ~(1 << Layers.Player))) {
+            if (hitInfo.collider.gameObject.layer == Layers.Enemy) {
+                hitInfo.collider.GetComponent<Enemy>().TakeDamage(10);
+            }
+        }
+    }
+
     public void SummonGolem() {
         currentMana -= Elements.GolemCost;
         GameObject golem = Instantiate(Resources.Load<GameObject>("Elements/Mud/MudGolem"), targetCircle.transform.position, targetCircle.transform.rotation);
@@ -159,26 +170,25 @@ public class ElementControl : MonoBehaviour {
 
     public IEnumerator DoShock(float totalDamage, Collider[] enemies, float totalDuration) {
         anim.speed = 0;
-        
+
         //calculate damage to deal to each enemy
         float indvDmg = totalDamage / enemies.Length;
         //calculate downtime before going to next enemy
         float indvTime = totalDuration / enemies.Length;
 
         //if no enemies just teleport
-        if(enemies.Length <= 0) {
+        if (enemies.Length <= 0) {
             transform.position = targetCircle.transform.position + targetCircle.transform.up;
         }
 
         //start moving
-        for(int count = 0; count <= enemies.Length - 1; count++) {
+        for (int count = 0; count <= enemies.Length - 1; count++) {
             transform.position = enemies[count].transform.position - enemies[count].transform.forward;
             enemies[count].GetComponent<Enemy>().TakeDamage(indvDmg);
             yield return new WaitForSeconds(indvTime);
         }
 
         anim.speed = 1;
-        isCasting = false;
     }
     #endregion
 }
@@ -236,55 +246,57 @@ public static class Elements {
                 if (agent.currentMana < SteamCost) break;
                 //debuff enemy / buff own attack
                 agent.anim.SetTrigger("WhenSteamPit");
-                break;
+                return;
             case Water | Earth:
                 //DoMud();
                 if (agent.currentMana < GolemCost) break;
                 agent.anim.SetTrigger("SummonGolem");
-                break;
+                return;
             case Water | Wind:
                 //DoBlizzard();
                 if (agent.currentMana < IceCost) break;
                 agent.anim.SetTrigger("WhenIce");
-                break;
+                return;
             case Water | Electricity:
                 if (agent.currentMana < ShockCost) break;
                 agent.anim.SetTrigger("WhenShock");
                 //DoShock();
-                break;
+                return;
             case Fire | Earth:
                 if (agent.currentMana < MagmaCost) break;
                 //DoMagma();
                 agent.anim.SetTrigger("WhenMagma");
-                break;
+                return;
             case Fire | Wind:
                 if (agent.currentMana < BlazeCost) break;
                 //DoBlaze();
                 agent.anim.SetTrigger("WhenFireTornado");
-                break;
+                return;
             case Fire | Electricity:
                 if (agent.currentMana < PlasmaCost) break;
                 //DoPlasma();
                 agent.anim.SetTrigger("WhenShootPlasma");
-                break;
+                return;
             case Earth | Wind:
                 if (agent.currentMana < DustCost) break;
                 //DoDust();
                 agent.anim.SetTrigger("WhenDustStorm");
-                break;
+                return;
             case Earth | Electricity:
                 if (agent.currentMana < MagnetiseCost) break;
                 //DoMagnetize();
                 agent.anim.SetTrigger("WhenMagnetise");
-                break;
+                return;
             case Wind | Electricity:
                 if (agent.currentMana < StormCost) break;
                 //DoStorm();
                 agent.anim.SetTrigger("WhenStorm");
-                break;
+                return;
             default:
                 MonoBehaviour.print("Something wrong");
                 break;
         }
+
+        agent.isCasting = false;
     }
 }

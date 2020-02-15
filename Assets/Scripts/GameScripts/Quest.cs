@@ -8,4 +8,5 @@ public class Quest : ScriptableObject
     public string shortDesc;
     public string longDesc;
     public List<SubQuest> subQuests;
+    public int nextQuest;
 }

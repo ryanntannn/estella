@@ -5,16 +5,17 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-public class IngameUI : MonoBehaviour
+public class IngameUI : Singleton<IngameUI>
 {
     PlayerControl playerControl;
-    ElementControl elementControl;
     Slider healthBar;
     Slider sprintBar;
     Slider energyBar;
     TextMeshProUGUI popupt;
     RectTransform popup;
     TextMeshProUGUI bigpopupt;
+    TextMeshProUGUI questText;
+    TextMeshProUGUI dialogText;
     GameObject leftele;
     GameObject rightele;
     GameObject holdF;
@@ -27,20 +28,24 @@ public class IngameUI : MonoBehaviour
     void Start()
     {
         playerControl = GameObject.Find("Player").GetComponent<PlayerControl>();
-        elementControl = playerControl.GetComponent<ElementControl>();
         healthBar = GameObject.Find("healthbar").GetComponent<Slider>();
         sprintBar = GameObject.Find("sprintbar").GetComponent<Slider>();
         energyBar = GameObject.Find("energybar").GetComponent<Slider>();
         popupt = GameObject.Find("PopupT").GetComponent<TextMeshProUGUI>();
         bigpopupt = GameObject.Find("Bigpopup").GetComponent<TextMeshProUGUI>();
+        questText = GameObject.Find("QuestText").GetComponentInChildren<TextMeshProUGUI>();
+        dialogText = GameObject.Find("Dialog").GetComponent<TextMeshProUGUI>();
         popup = GameObject.Find("Popup").GetComponent<RectTransform>();
         leftele = GameObject.Find("lefteleholder");
         rightele = GameObject.Find("righteleholder");
         holdF = GameObject.Find("Hold F");
         holdFImage = GameObject.Find("Hold F Fill").GetComponent<Image>();
         holdF.SetActive(false);
-        ShowPopUp("Test", 1f);
-        ShowBigPopUp("Test", 2f);
+
+        leftele.transform.GetChild(ElementControlV2.Instance.LeftHand.currentElement.ID).gameObject.SetActive(true);
+        rightele.transform.GetChild(ElementControlV2.Instance.RightHand.currentElement.ID).gameObject.SetActive(true);
+        activeLele = ElementControlV2.Instance.LeftHand.currentElement.ID;
+        activeRele = ElementControlV2.Instance.RightHand.currentElement.ID;
     }
 
     // Update is called once per frame
@@ -48,7 +53,7 @@ public class IngameUI : MonoBehaviour
     {
         healthBar.value = playerControl.currentHealth / playerControl.maxHealth;
         sprintBar.value = playerControl.currentStamina / playerControl.maxStamina;
-        energyBar.value = elementControl.currentMana / elementControl.maxMana;
+        energyBar.value = ElementControlV2.Instance.currentMana / ElementControlV2.Instance.maxMana;
         if (holdF.activeSelf)
         {
             if (!playerControl.currentInteractableObject.isActivated)
@@ -105,6 +110,9 @@ public class IngameUI : MonoBehaviour
     {
         if (lefthand)
         {
+            float li = Mathf.Log(ElementControlV2.Instance.LeftHand.currentElement.ID, 2)/Mathf.Log(2, 2);
+            index = (int)li;
+            Debug.Log(index);
             leftele.transform.GetChild(activeLele).gameObject.SetActive(false);
             leftele.transform.GetChild(index).gameObject.SetActive(true);
             leftele.transform.GetChild(index).DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f)
@@ -113,11 +121,23 @@ public class IngameUI : MonoBehaviour
         }
         else
         {
+            float li = Mathf.Log(ElementControlV2.Instance.RightHand.currentElement.ID, 2) / Mathf.Log(2, 2);
+            index = (int)li;
             rightele.transform.GetChild(activeRele).gameObject.SetActive(false);
             rightele.transform.GetChild(index).gameObject.SetActive(true);
             rightele.transform.GetChild(index).DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f)
                 , 0.5f, 4, 0.2f);
             activeRele = index;
         }
+    }
+
+    public void UpdateQuestString(string str)
+    {
+        questText.text = str;
+    }
+
+    public void UpdateDialogText(string str)
+    {
+        dialogText.text = str;
     }
 }
