@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae50b5cb659b474db33f574d5404d72, type: 3}
   m_Name: 3
   m_EditorClassIdentifier: 
-  content: test3
-  waitTime: 1
+  content: 'Old Man: They came a week ago, raided our town for supplies for their
+    quary'
+  waitTime: 4

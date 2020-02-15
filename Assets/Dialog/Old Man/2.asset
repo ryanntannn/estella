@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae50b5cb659b474db33f574d5404d72, type: 3}
   m_Name: 2
   m_EditorClassIdentifier: 
-  content: test2
-  waitTime: 1
+  content: 'Old Man: It....It was raided by skylarks army'
+  waitTime: 4

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae50b5cb659b474db33f574d5404d72, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  content: test1
-  waitTime: 1
+  content: 'Estella: What happened to this place?'
+  waitTime: 4
