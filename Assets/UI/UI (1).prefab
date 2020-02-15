@@ -1008,16 +1008,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: This is a Popup
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 64d8863e9a1d6234685455c6fa6986e9, type: 2}
-  m_sharedMaterial: {fileID: -2746028107797260146, guid: 64d8863e9a1d6234685455c6fa6986e9,
+  m_fontAsset: {fileID: 11400000, guid: cb43cc0f98c41db408bc7f016dec1c9d, type: 2}
+  m_sharedMaterial: {fileID: -2746028107797260146, guid: cb43cc0f98c41db408bc7f016dec1c9d,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4279440147
+  m_fontColor: {r: 0.0754717, g: 0.0754717, b: 0.0754717, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1823,9 +1823,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-'
+  m_text: test
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 64d8863e9a1d6234685455c6fa6986e9, type: 2}
   m_sharedMaterial: {fileID: -2746028107797260146, guid: 64d8863e9a1d6234685455c6fa6986e9,
@@ -1835,8 +1833,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4288872373
+  m_fontColor: {r: 0.7122827, g: 1, b: 0.6367924, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1895,9 +1893,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1304081480}
-    characterCount: 1
+    characterCount: 4
     spriteCount: 0
-    spaceCount: 1
+    spaceCount: 0
     wordCount: 1
     linkCount: 0
     lineCount: 1

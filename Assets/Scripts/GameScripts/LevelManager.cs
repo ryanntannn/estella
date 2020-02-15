@@ -147,8 +147,8 @@ public class LevelManager : Singleton<LevelManager>
     public void CompleteQuest()
     {
         igui.ShowPopUp("Quest Completed", 2.0f);
-        activeQuest = -1;
         completedQuests.Add(activeQuest);
+        activeQuest = quests[activeQuest].nextQuest;
         ChangeQuest(activeQuest);
     }
 }
