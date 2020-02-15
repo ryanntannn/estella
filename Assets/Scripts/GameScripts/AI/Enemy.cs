@@ -18,6 +18,10 @@ public class Enemy : MonoBehaviour {
     public float resistanceLevel = 1;
     public float unfreezeThreshold = 2;
 
+    public bool stunable = true;
+    public bool slowable = true;
+    public bool freezable = true;
+
     public Rigidbody rb;
     public Animator anim;
     public PlayerControl player;
@@ -61,18 +65,24 @@ public class Enemy : MonoBehaviour {
                 currentResistance = resistanceLevel;
                 break;
             case Effects.Stun:
-                //cannot move
-                currentSpeed = 0;
+                if (stunable) {
+                    //cannot move
+                    currentSpeed = 0;
+                }
                 break;
             case Effects.Burn:
                 TakeDamage(deltaTime * (1 / currentResistance));
                 break;
             case Effects.Freeze:
-                //cannot move
-                currentSpeed = 0;
+                if (freezable) {
+                    //cannot move
+                    currentSpeed = 0;
+                }
                 break;
             case Effects.Slow:
-                currentSpeed *= 0.7f;
+                if (slowable) {
+                    currentSpeed = speed * 0.7f;
+                }
                 break;
             default:
                 break;
