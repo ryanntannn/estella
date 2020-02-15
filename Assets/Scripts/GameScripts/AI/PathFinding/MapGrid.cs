@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 //main map grid used for path finding
 [System.Serializable]
@@ -86,6 +87,36 @@ public class MapGrid : MonoBehaviour {
                 bool walkable = !Physics.CheckBox(worldPos, Vector3.one * nodeSize, Quaternion.identity, obstacles) && hasSpace;
                 Vector2Int gridPos = new Vector2Int(x, y);
                 grid[x, y] = new Node(worldPos, gridPos, walkable);
+            }
+        }
+
+        //go to each unwalkable node and check if they have any walkable neighbours
+        //if they do, raycast down and check again
+        bool timeToGo = true;
+        while (timeToGo) {
+            timeToGo = false;
+            foreach (Node n in grid) {
+                if (!n.walkable) {
+                    if (GetNeighbours(n).Any(x => x.walkable)) {
+                        bool hasSpace = true;
+                        //raycast down and check
+                        if (!Physics.CheckBox(n.worldPos, Vector3.one * nodeSize, Quaternion.identity, 1 << Layers.Terrain)) { //no terrain
+                            //raycast down
+                            float stepHeight = 3;
+                            RaycastHit hitInfo;
+                            if (Physics.Raycast(n.worldPos, -transform.up, out hitInfo, stepHeight)) {
+                                n.worldPos = hitInfo.point;
+
+                                bool walkable = !Physics.CheckBox(n.worldPos, Vector3.one * nodeSize, Quaternion.identity, obstacles) && hasSpace;
+                                n.walkable = walkable && hasSpace;
+
+                                if (n.walkable) timeToGo = true;
+                            } else {
+                                hasSpace = false;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
