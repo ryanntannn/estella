@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour {
+public class PlayerControl : Singleton<PlayerControl> {
     public float speed;
     private float speedMult;
     public float runMultiplier = 2;
