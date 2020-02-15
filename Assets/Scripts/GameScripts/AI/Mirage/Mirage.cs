@@ -43,21 +43,22 @@ public class Mirage : MonoBehaviour {
 
     void InitStates() {
         Idle = (gameObject) => {
-            //only idle for a set amount of time
-            if (Time.time - timeStartIdle >= idleTime) {
-                //decide which state to go to next
-                Vector3 directionOfPlayer = player.transform.position - transform.position;
-                if (directionOfPlayer.magnitude > 15 && !skillCd[(int)Skills.JumpBack]) {
-                    fsm.currentState = JumpAttack;
-                } else if (directionOfPlayer.magnitude > 10 && !skillCd[(int)Skills.KnifeThrow]) {
-                    fsm.currentState = KnifeThrow;
-                } else {
-                    fsm.currentState = RegularAttack;
+            if (path.Count > 0) {
+                //only idle for a set amount of time
+                if (Time.time - timeStartIdle >= idleTime) {
+                    //decide which state to go to next
+                    Vector3 directionOfPlayer = player.transform.position - transform.position;
+                    if (directionOfPlayer.magnitude > 15 && !skillCd[(int)Skills.JumpBack]) {
+                        fsm.currentState = JumpAttack;
+                    } else if (directionOfPlayer.magnitude > 10 && !skillCd[(int)Skills.KnifeThrow]) {
+                        fsm.currentState = KnifeThrow;
+                    } else {
+                        fsm.currentState = RegularAttack;
+                    }
                 }
             }
 
             //watch out for incomming projectiles and try to dodge
-
         };
 
         RegularAttack = (gameObject) => {
@@ -143,7 +144,9 @@ public class Mirage : MonoBehaviour {
     }
 
     void FindPath() {
-        path = Algorithms.AStar(dataProvider.map, miragePos, playerPos);
+        try {
+            path = Algorithms.AStar(dataProvider.map, miragePos, playerPos);
+        } catch (Exception) { };
     }
 
     //Update is called once per frame

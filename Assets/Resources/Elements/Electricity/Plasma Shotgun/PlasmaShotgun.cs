@@ -12,4 +12,11 @@ public class PlasmaShotgun : MonoBehaviour {
     void Update() {
 
     }
+
+    private void OnTriggerEnter(Collider other) {
+        if(other.gameObject.layer == Layers.Enemy) {
+            other.GetComponent<Enemy>().TakeDamage(20);
+            other.GetComponent<Enemy>().DebuffEnemy(2, Enemy.Effects.Stun);
+        }
+    }
 }

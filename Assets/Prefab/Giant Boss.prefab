@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 454713273}
   - component: {fileID: 454713272}
   m_Layer: 9
-  m_Name: Altar
+  m_Name: Cat Monument
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -710,6 +710,9 @@ MonoBehaviour:
   speed: 12
   resistanceLevel: 1
   unfreezeThreshold: 2
+  stunable: 1
+  slowable: 1
+  freezable: 1
   rb: {fileID: 0}
   anim: {fileID: 0}
   player: {fileID: 0}

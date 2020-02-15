@@ -34,6 +34,7 @@ public class Dialog : MonoBehaviour
     {
         StartCoroutine("SayDialog", 0);
         pc.enabled = false;
+        ElementControlV2.Instance.enabled = false;
     }
 
     IEnumerator SayDialog(int index)
@@ -54,6 +55,8 @@ public class Dialog : MonoBehaviour
             }
 
             pc.enabled = true;
+            ElementControlV2.Instance.enabled = true;
+
             isInDialog = false;
             IngameUI.Instance.UpdateDialogText("");
             interactableObject.ResetAll();
