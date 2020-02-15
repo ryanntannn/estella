@@ -41,8 +41,6 @@ public class IngameUI : Singleton<IngameUI>
         holdF = GameObject.Find("Hold F");
         holdFImage = GameObject.Find("Hold F Fill").GetComponent<Image>();
         holdF.SetActive(false);
-        ShowPopUp("Test", 1f);
-        ShowBigPopUp("Test", 2f);
 
         leftele.transform.GetChild(ElementControlV2.Instance.LeftHand.currentElement.ID).gameObject.SetActive(true);
         rightele.transform.GetChild(ElementControlV2.Instance.RightHand.currentElement.ID).gameObject.SetActive(true);
