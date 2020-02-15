@@ -133,6 +133,16 @@ public class AnimationEvents : MonoBehaviour {
     }
     #endregion
 
+    #region Wizard
+    void WizardSendMessage(string _message) {
+        parent.GetComponent<WizardScript>().SendMessage(_message);
+    }
+
+    void GolemSendMessage(string _message) {
+        parent.GetComponent<EnemyGolem>().SendMessage(_message);
+    }
+    #endregion
+
     void DieTrigger() {
         foreach(Component c in parent.GetComponents<MonoBehaviour>()) {
             Destroy(c);

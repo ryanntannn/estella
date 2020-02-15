@@ -72,7 +72,18 @@ public class MapGrid : MonoBehaviour {
                 Vector3 worldPos = bottomLeft +
                 (right * (x * centerToSide * 2 + centerToSide * (y & 1))) +
                 (forward * (y * nodeSize * 1.5f));
-                bool walkable = !Physics.CheckBox(worldPos, Vector3.one * nodeSize, Quaternion.identity, obstacles) && Physics.CheckBox(worldPos, Vector3.one * nodeSize, Quaternion.identity, 1 << Layers.Terrain);
+                bool hasSpace = true;
+                if (!Physics.CheckBox(worldPos, Vector3.one * nodeSize, Quaternion.identity, 1 << Layers.Terrain)) { //no terrain
+                    //raycast down
+                    float stepHeight = 3;
+                    RaycastHit hitInfo;
+                    if(Physics.Raycast(worldPos, -transform.up, out hitInfo, stepHeight)) {
+                        worldPos = hitInfo.point;
+                    }else {
+                        hasSpace = false;
+                    }
+                }
+                bool walkable = !Physics.CheckBox(worldPos, Vector3.one * nodeSize, Quaternion.identity, obstacles) && hasSpace;
                 Vector2Int gridPos = new Vector2Int(x, y);
                 grid[x, y] = new Node(worldPos, gridPos, walkable);
             }
