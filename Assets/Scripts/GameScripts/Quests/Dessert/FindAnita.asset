@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb630b84aa199b64c98331c80bf91485, type: 3}
-  m_Name: Take Back Ruins
+  m_Name: FindAnita
   m_EditorClassIdentifier: 
-  shortDesc: Go to the Ruins of Alshazar
+  shortDesc: Find Anita
   longDesc: 
   subQuests:
-  - {fileID: 11400000, guid: ab340c1e5cc8dc04580a62e2688a31ee, type: 2}
-  - {fileID: 11400000, guid: 68b25e334183e664584b60a7ae36bab7, type: 2}
-  - {fileID: 11400000, guid: 625e8a7a990ad8d4f9bd508b4d65db54, type: 2}
-  nextQuest: 2
+  - {fileID: 11400000, guid: 4ee0afec5dbe41d43bf121d875472141, type: 2}
+  nextQuest: -1

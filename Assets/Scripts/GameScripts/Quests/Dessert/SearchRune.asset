@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb630b84aa199b64c98331c80bf91485, type: 3}
-  m_Name: Go back to the old man
+  m_Script: {fileID: 11500000, guid: b19385ddc67d017438e6f5e08d3f75b7, type: 3}
+  m_Name: SearchRune
   m_EditorClassIdentifier: 
-  shortDesc: Go back to the old man
+  shortDesc: Search for ???
   longDesc: 
-  subQuests:
-  - {fileID: 11400000, guid: bfa64ba636cd3444b864c04e76394cac, type: 2}
-  nextQuest: -1
+  questType: 2
+  objective: []
+  amount: 1
+  InteractableObjectName: RuinRunes

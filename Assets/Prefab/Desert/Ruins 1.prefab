@@ -5230,6 +5230,7 @@ MonoBehaviour:
   radius: 50
   landMarkName: Ruins of Alshazar
   inArea: 0
+  debug: 0
 --- !u!1 &4183952301285237682
 GameObject:
   m_ObjectHideFlags: 0

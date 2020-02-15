@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb630b84aa199b64c98331c80bf91485, type: 3}
-  m_Name: Go back to the old man
+  m_Script: {fileID: 11500000, guid: 7ae50b5cb659b474db33f574d5404d72, type: 3}
+  m_Name: 4
   m_EditorClassIdentifier: 
-  shortDesc: Go back to the old man
-  longDesc: 
-  subQuests:
-  - {fileID: 11400000, guid: bfa64ba636cd3444b864c04e76394cac, type: 2}
-  nextQuest: -1
+  content: 'Old man: Shes a mysterious person who can read many languages. Find her
+    at the boats!'
+  waitTime: 6
