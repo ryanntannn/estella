@@ -11264,6 +11264,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 990a0fb596233804282b9a9e16e0276c, type: 2}
   - {fileID: 11400000, guid: 35d316dc1a84bbb419982e445adc76a8, type: 2}
   - {fileID: 11400000, guid: f1a404d26e04c5c40a175bc373f55e14, type: 2}
+  - {fileID: 11400000, guid: 34bb6c3c4ace1b7468118606340ef39c, type: 2}
+  - {fileID: 11400000, guid: f6204ba4c679c1c45b0419f034866f82, type: 2}
   activeQuest: 0
   completedQuests: 
   playerControl: {fileID: 0}
@@ -26277,7 +26279,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90044a872c1fe2648bd831061d6e9048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  findAlshazar: []
+  findAlshazar:
+  - {fileID: 11400000, guid: 9eed5d0fc84d44843a2ad25f01a90a4a, type: 2}
+  - {fileID: 11400000, guid: 986f11d16780cfe419a46ec2937aea7d, type: 2}
+  - {fileID: 11400000, guid: a290277bc5d9d4542aaee93506749caf, type: 2}
+  - {fileID: 11400000, guid: c654f1209d1d24e4d9a4ca1e58a8c277, type: 2}
+  - {fileID: 11400000, guid: 7775094b19054624085a0fe64f9a6efe, type: 2}
+  - {fileID: 11400000, guid: 81addb8fbb282a943940221d98367308, type: 2}
+  - {fileID: 11400000, guid: 0ca32a56b835a77428845bd6b622c780, type: 2}
+  - {fileID: 11400000, guid: d8cf5146d022d9f49a07d055c9116c78, type: 2}
+  - {fileID: 11400000, guid: 00003395caf4234469bb1a86ea0204e8, type: 2}
+  - {fileID: 11400000, guid: b466772184f78bb4e85c32de953dc955, type: 2}
+  - {fileID: 11400000, guid: a0459ac70ac21c643868d08393822165, type: 2}
+  - {fileID: 11400000, guid: 2162d9f20ae6a4e4f8e4b993c24bb630, type: 2}
 --- !u!1 &8296172669032922110
 GameObject:
   m_ObjectHideFlags: 0

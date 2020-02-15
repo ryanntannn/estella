@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ae50b5cb659b474db33f574d5404d72, type: 3}
-  m_Name: 12
+  m_Script: {fileID: 11500000, guid: eb630b84aa199b64c98331c80bf91485, type: 3}
+  m_Name: GOTOCat
   m_EditorClassIdentifier: 
-  content: 'Anita: Maybe the cat is the statue at on the north east hill...'
-  waitTime: 5
+  shortDesc: Go to the Cat Monument
+  longDesc: 
+  subQuests:
+  - {fileID: 11400000, guid: c91b0794a1a51cb44b055e903f700ae0, type: 2}
+  nextQuest: 5
