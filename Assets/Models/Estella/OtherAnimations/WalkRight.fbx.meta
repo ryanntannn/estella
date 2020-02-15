@@ -493,48 +493,48 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Player(Clone)
+    - name: PlayerMesh(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Eyelashes
-      parentName: Player(Clone)
+      parentName: PlayerMesh(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: default
-      parentName: Player(Clone)
+      parentName: PlayerMesh(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Body
-      parentName: Player(Clone)
+      parentName: PlayerMesh(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Hair
-      parentName: Player(Clone)
+      parentName: PlayerMesh(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Shoes
-      parentName: Player(Clone)
+      parentName: PlayerMesh(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Bottoms
-      parentName: Player(Clone)
+      parentName: PlayerMesh(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Tops
-      parentName: Player(Clone)
+      parentName: PlayerMesh(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Hips
-      parentName: Player(Clone)
+      parentName: PlayerMesh(Clone)
       position: {x: 0.0000012384452, y: 0.97391325, z: 0.014581435}
       rotation: {x: -6.769294e-11, y: -0.00000007387722, z: 0.0000023439488, w: 1}
       scale: {x: 1, y: 1, z: 1}

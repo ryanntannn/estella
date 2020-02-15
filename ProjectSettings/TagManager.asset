@@ -12,6 +12,7 @@ TagManager:
   - Fissure
   - Bubbleshot
   - Tornado
+  - Golem
   layers:
   - Default
   - TransparentFX
