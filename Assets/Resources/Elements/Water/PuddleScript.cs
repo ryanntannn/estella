@@ -49,6 +49,7 @@ public class PuddleScript : MonoBehaviour {
                 if (isElectrified) {
                     //ministun
                     other.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime / 2, Enemy.Effects.Stun);
+                    other.GetComponent<Enemy>().TakeDamage(Time.deltaTime * 5);
                 } else {
                     other.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime, Enemy.Effects.Slow);
                 }

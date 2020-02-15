@@ -73,7 +73,7 @@ public class MudGolem : MonoBehaviour, ISteamable {
                     m_navAgent.SetDestination(target.transform.position);
                 }
 
-                if ((target.transform.position - transform.position).sqrMagnitude < 10.0f) {
+                if ((target.transform.position - transform.position).sqrMagnitude < 5.0f) {
                     fsm.currentState = Attack;
                 }
             } else {
@@ -100,7 +100,7 @@ public class MudGolem : MonoBehaviour, ISteamable {
         };
 
         Attack = (gameObject) => {
-            if ((target.transform.position - transform.position).sqrMagnitude < 7.0f) {
+            if ((target.transform.position - transform.position).sqrMagnitude < 4.0f) {
                 if (useNavmesh) m_navAgent.isStopped = true;
                 anim.SetTrigger("WhenHit");
                 StartCoroutine(HitEnemy());

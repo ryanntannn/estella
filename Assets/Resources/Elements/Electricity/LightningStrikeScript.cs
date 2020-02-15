@@ -40,14 +40,16 @@ public class LightningStrikeScript : MonoBehaviour {
                 Destroy(hitInfo.collider.gameObject);
             } else
             if (hitInfo.collider.gameObject.CompareTag("Fissure")) {
-                Collider[] hits = Physics.OverlapSphere(transform.position, radius, 1 << Layers.Enemy);
-                foreach (Collider hit in hits) {
-                    hit.GetComponent<Enemy>().TakeDamage(10);
-                }
+                print("XD");
 
                 GameObject effect = Instantiate(Resources.Load<GameObject>("Elements/Meteor/vfx_MeteorImpact"), hitInfo.collider.transform.position, Quaternion.identity);
                 Destroy(effect, 5);
                 Destroy(hitInfo.collider.gameObject);
+
+                Collider[] hits = Physics.OverlapSphere(transform.position, radius, 1 << Layers.Enemy);
+                foreach (Collider hit in hits) {
+                    hit.GetComponent<Enemy>().TakeDamage(10);
+                }
             } else
             if (hitInfo.collider.gameObject.layer == Layers.Enemy) {
                 //when enemy

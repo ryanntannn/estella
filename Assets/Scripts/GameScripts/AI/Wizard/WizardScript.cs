@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class WizardScript : MonoBehaviour {
     public GameObject golemPfb;
+    public GameObject fireballPfb;
 
     //dataprovider
     Enemy m_dataProvider;
@@ -95,7 +96,10 @@ public class WizardScript : MonoBehaviour {
             fsm.PushState(NullState);
         };
 
-        NullState = (gameObject) => { };
+        NullState = (gameObject) => {
+            transform.LookAt(m_dataProvider.player.transform.position);
+
+        };
 
         fsm.PushState(Idle);
     }
@@ -109,7 +113,7 @@ public class WizardScript : MonoBehaviour {
     }
 
     void DoFireball() {
-
+        Instantiate(fireballPfb, transform.position, transform.rotation).GetComponent<WizardBallScript>().EnemyParent = m_dataProvider;
     }
 
     void DoGolem() {

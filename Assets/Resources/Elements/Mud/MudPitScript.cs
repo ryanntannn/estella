@@ -5,7 +5,19 @@ using UnityEngine;
 public class MudPitScript : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
-        gameObject.KillSelf(10);
+        StartCoroutine(GoDown());
+    }
+
+    IEnumerator GoDown() {
+        yield return new WaitForSeconds(10);
+        float timer = 0;
+        while(timer < 7) {
+            transform.position -= transform.up * Time.deltaTime * 2;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 
     // Update is called once per frame

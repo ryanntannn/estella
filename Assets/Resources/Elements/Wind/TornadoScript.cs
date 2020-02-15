@@ -36,6 +36,7 @@ public class TornadoScript : MonoBehaviour, ISteamable {
         isEmpowered = state;
         if (state) {
             timeToLive += 10;
+            speed += 10;
         }
     }
 

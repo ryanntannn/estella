@@ -259,26 +259,35 @@ public class ElementControlV2 : Singleton<ElementControlV2> {
         currentMana -= Elements.ShockCost;
         //find enemies in sphere
         Collider[] hits = Physics.OverlapSphere(TargetingReticle.Instance.transform.position, 3, 1 << Layers.Enemy);
-        StartCoroutine(DoShock(100, hits));
+        StartCoroutine(DoShock(hits));
     }
 
-    public IEnumerator DoShock(float totalDamage, Collider[] enemies) {
+    public IEnumerator DoShock(Collider[] enemies) {
         m_anim.speed = 0;
-
-        //calculate damage to deal to each enemy
-        float indvDmg = totalDamage / enemies.Length;
 
         //if no enemies just teleport
         if (enemies.Length <= 0) {
             transform.position = TargetingReticle.Instance.transform.position + TargetingReticle.Instance.transform.up;
         }
 
-        //start moving
-        for (int count = 0; count <= enemies.Length - 1; count++) {
-            transform.position = enemies[count].transform.position - enemies[count].transform.forward;
-            enemies[count].GetComponent<Enemy>().TakeDamage(indvDmg);
-            yield return new WaitForSeconds(0.1f);
+        List<Vector3> gotohere = new List<Vector3>();
+        List<Vector3> lightninghere = new List<Vector3>();
+        foreach (Collider e in enemies) {
+            lightninghere.Add(e.transform.position);
+            gotohere.Add(e.transform.position - e.transform.forward);
         }
+
+        m_playerControl.InVulnerable = true;
+
+        //start moving
+        for (int count = 0; count <= gotohere.Count - 1; count++) {
+            transform.position = gotohere[count];
+            GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Electricity/LightningStrikeOne"), lightninghere[count] - Vector3.down, Quaternion.identity);
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        transform.position = TargetingReticle.Instance.transform.position + TargetingReticle.Instance.transform.up;
+        m_playerControl.InVulnerable = false;
 
         m_anim.speed = 1;
     }

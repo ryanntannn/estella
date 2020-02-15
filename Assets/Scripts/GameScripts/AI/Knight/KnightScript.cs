@@ -116,7 +116,7 @@ public class KnightScript : MonoBehaviour {
             fsm.currentState(gameObject);
 		}
 
-        dataProvider.anim.SetBool("IsWalking", navAgent.velocity.sqrMagnitude > 0.5f);
+        dataProvider.anim.SetBool("IsWalking", navAgent.velocity.sqrMagnitude > 0.3f);
     }
 
     public void GoIdle() {

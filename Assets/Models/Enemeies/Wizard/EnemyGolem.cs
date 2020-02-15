@@ -18,9 +18,6 @@ public class EnemyGolem : MonoBehaviour {
         m_dataProvider = GetComponent<Enemy>();
         m_anim = m_dataProvider.anim;
         m_navAgent = GetComponent<NavMeshAgent>();
-        //if (!m_dataProvider.player) {
-        //    m_dataProvider.player = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();
-        //}
 
         InitStates();
     }

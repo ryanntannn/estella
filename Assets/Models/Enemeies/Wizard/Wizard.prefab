@@ -1097,6 +1097,7 @@ GameObject:
   - component: {fileID: 3661719455848832836}
   - component: {fileID: 3661719455848832837}
   - component: {fileID: 3661719455848832841}
+  - component: {fileID: 1637491949}
   m_Layer: 9
   m_Name: Wizard
   m_TagString: Untagged
@@ -1153,7 +1154,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1200,6 +1201,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   golemPfb: {fileID: 4299923190394745941, guid: 65b5bf348d6efcc418221816e2b98e35,
     type: 3}
+  fireballPfb: {fileID: 9196047444605692828, guid: 2b50a4ad496030749b457643c29697ad,
+    type: 3}
+--- !u!136 &1637491949
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3661719455848832834}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3710716419485680476
 GameObject:
   m_ObjectHideFlags: 0
