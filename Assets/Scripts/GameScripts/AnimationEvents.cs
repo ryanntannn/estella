@@ -127,6 +127,12 @@ public class AnimationEvents : MonoBehaviour {
     }
     #endregion
 
+    #region FriendlyGolem
+    void GolemReady() {
+        parent.GetComponent<MudGolem>().Ready();
+    }
+    #endregion
+
     void DieTrigger() {
         foreach(Component c in parent.GetComponents<MonoBehaviour>()) {
             Destroy(c);
@@ -141,5 +147,21 @@ public class AnimationEvents : MonoBehaviour {
 
     void EnemyDmgNeedRange(float damage) {
         parent.GetComponent<Enemy>().DealDamage(damage, 1);
+    }
+
+    void StartSinking(float _duration) {
+        StartCoroutine(SinkDown(_duration));
+    }
+
+    IEnumerator SinkDown(float _duration) {
+        float timer = 0;
+        anim.playbackTime = 0;
+        while (timer < _duration) {
+            timer += Time.deltaTime;
+            parent.transform.position -= parent.transform.up * Time.deltaTime * 0.3f;
+            yield return null;
+        }
+
+        Destroy(parent);
     }
 }
