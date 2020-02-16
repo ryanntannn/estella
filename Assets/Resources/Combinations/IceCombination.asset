@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CombinationName: Ice
   ID: 9
+  ManaCost: 20
+  IsUnlocked: 1
   animation: {fileID: 7400000, guid: 483e6dc410e20cc478229b9e42df0eaf, type: 2}

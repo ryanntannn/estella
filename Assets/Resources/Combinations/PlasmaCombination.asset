@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CombinationName: Plasma
   ID: 18
+  ManaCost: 90
+  IsUnlocked: 1
   animation: {fileID: 7400000, guid: ae008222ec4fb3541b17081ec983bcf4, type: 2}

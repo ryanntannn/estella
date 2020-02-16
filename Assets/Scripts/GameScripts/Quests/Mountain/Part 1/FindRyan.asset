@@ -16,4 +16,4 @@ MonoBehaviour:
   longDesc: 
   subQuests:
   - {fileID: 11400000, guid: cfb75ae0c267f0340a42f31b7253012b, type: 2}
-  nextQuest: 0
+  nextQuest: 1

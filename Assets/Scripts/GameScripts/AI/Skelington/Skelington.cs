@@ -38,7 +38,8 @@ public class Skelington : MonoBehaviour {
             //raycast up
             RaycastHit hitInfo;
             if(Physics.Raycast(transform.position, transform.up, out hitInfo, Mathf.Infinity, 1 << Layers.Terrain)) {
-                transform.position = hitInfo.point + transform.up;
+                //transform.position = hitInfo.point + transform.up;
+                m_navAgent.Warp(hitInfo.point + transform.up);
             }
             m_navAgent.enabled = true;
             fsm.PopState();

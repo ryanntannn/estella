@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb630b84aa199b64c98331c80bf91485, type: 3}
   m_Name: GetFirewood
   m_EditorClassIdentifier: 
-  shortDesc: 
+  shortDesc: Get firewood
   longDesc: 
-  subQuests: []
-  nextQuest: 0
+  subQuests:
+  - {fileID: 11400000, guid: ef3aaf97db175af408405b3ffaa08f8f, type: 2}
+  nextQuest: 2
