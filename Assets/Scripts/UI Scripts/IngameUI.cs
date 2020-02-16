@@ -20,6 +20,7 @@ public class IngameUI : Singleton<IngameUI>
     GameObject rightele;
     GameObject holdF;
     Image holdFImage;
+    GameObject deathScreen;
     int activeLele = 0;
     int activeRele = 0;
     bool interactingWithSomething = false;
@@ -36,11 +37,13 @@ public class IngameUI : Singleton<IngameUI>
         questText = GameObject.Find("QuestText").GetComponentInChildren<TextMeshProUGUI>();
         dialogText = GameObject.Find("Dialog").GetComponent<TextMeshProUGUI>();
         popup = GameObject.Find("Popup").GetComponent<RectTransform>();
+        deathScreen = GameObject.Find("DeathScreen");
         leftele = GameObject.Find("lefteleholder");
         rightele = GameObject.Find("righteleholder");
         holdF = GameObject.Find("Hold F");
         holdFImage = GameObject.Find("Hold F Fill").GetComponent<Image>();
         holdF.SetActive(false);
+        deathScreen.SetActive(false);
 
         float li = Mathf.Log(ElementControlV2.Instance.LeftHand.currentElement.ID, 2) / Mathf.Log(2, 2);
         int index = (int)li;
@@ -147,5 +150,11 @@ public class IngameUI : Singleton<IngameUI>
     public void UpdateDialogText(string str)
     {
         dialogText.text = str;
+    }
+
+
+    public void ShowDeathScreen()
+    {
+        deathScreen.SetActive(true);
     }
 }
