@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb630b84aa199b64c98331c80bf91485, type: 3}
   m_Name: (Quest)Head to Sklark's Castle
   m_EditorClassIdentifier: 
-  shortDesc: 
+  shortDesc: Head to Skylark's Castle
   longDesc: 
-  subQuests: []
-  nextQuest: 6
+  subQuests:
+  - {fileID: 11400000, guid: 6e5a75dd02eb1194d840f4708b422b14, type: 2}
+  nextQuest: -1

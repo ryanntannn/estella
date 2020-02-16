@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shortDesc: Talk to Absjorn Again
   longDesc: 
-  subQuests: []
+  subQuests:
+  - {fileID: 11400000, guid: fa2adfddc33689c48bb0a1c9a13470d9, type: 2}
   nextQuest: -1

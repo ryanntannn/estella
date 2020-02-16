@@ -17,4 +17,4 @@ MonoBehaviour:
   questType: 1
   objective: []
   amount: 3
-  enemyName: Knight
+  enemyName: EnemyKnight
