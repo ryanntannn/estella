@@ -184,20 +184,17 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
         get {
             if (m_shuttingDown) return default(T);
 
-            lock (m_lock) {
+            //lock (m_lock) {
                 if (!m_instance) {
                     m_instance = FindObjectOfType<T>();
-
                     if (!m_instance) {
                         GameObject singletonObj = new GameObject();
                         m_instance = singletonObj.AddComponent<T>();
                         singletonObj.name = typeof(T).ToString() + " Singleton";
-
-                        DontDestroyOnLoad(singletonObj);
                     }
                 }
                 return m_instance;
-            }
+           // }
         }
     }
 
@@ -206,6 +203,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
     }
 
     private void OnDestroy() {
-        m_shuttingDown = true;
+        //WHAT THE FUCK
+        //m_shuttingDown = true;
     }
 }
