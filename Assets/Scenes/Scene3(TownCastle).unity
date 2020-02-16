@@ -610,28 +610,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 21476413}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &140020530 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4276710767291066283, guid: f764639298f39c64a8cbc70874007ecf,
-    type: 3}
-  m_PrefabInstance: {fileID: 1640468941}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &140020531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 140020530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcaacba5df45e214b96994d9be98c0d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 150
-  landMarkName: Skylark's Castle
-  inArea: 1
-  debug: 1
 --- !u!1 &148863801
 GameObject:
   m_ObjectHideFlags: 0
