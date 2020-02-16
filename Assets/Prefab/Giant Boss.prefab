@@ -705,7 +705,7 @@ MonoBehaviour:
   onFirePs: {fileID: 0}
   debuffTimer: 0
   currentDebuff: 0
-  enemyName: Ghost Of Alshazar
+  enemyName: Alshazar
   health: 150
   speed: 12
   resistanceLevel: 1
