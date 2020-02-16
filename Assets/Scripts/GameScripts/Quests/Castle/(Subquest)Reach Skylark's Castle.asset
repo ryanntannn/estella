@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4209205b2b534b94ebe78f2c8b1bac3d, type: 3}
   m_Name: (Subquest)Reach Skylark's Castle
   m_EditorClassIdentifier: 
-  shortDesc: Finds Skylark's Castle
+  shortDesc: Find Skylark's Castle
   longDesc: 
   questType: 0
   objective: []
   amount: 0
-  locationName: 
+  locationName: Skylark's Castle
