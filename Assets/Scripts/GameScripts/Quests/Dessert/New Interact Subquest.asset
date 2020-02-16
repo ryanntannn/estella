@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb630b84aa199b64c98331c80bf91485, type: 3}
-  m_Name: Mirage
+  m_Script: {fileID: 11500000, guid: b19385ddc67d017438e6f5e08d3f75b7, type: 3}
+  m_Name: New Interact Subquest
   m_EditorClassIdentifier: 
-  shortDesc: m
+  shortDesc: Go to the cave
   longDesc: 
-  subQuests:
-  - {fileID: 11400000, guid: 8bfb906b24134054fb1e0f7b4d75aedb, type: 2}
-  nextQuest: 9
+  questType: 2
+  objective: []
+  amount: 1
+  InteractableObjectName: Cave

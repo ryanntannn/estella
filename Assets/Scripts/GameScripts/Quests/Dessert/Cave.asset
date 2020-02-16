@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb630b84aa199b64c98331c80bf91485, type: 3}
-  m_Name: Mirage
+  m_Name: Cave
   m_EditorClassIdentifier: 
-  shortDesc: m
+  shortDesc: 
   longDesc: 
   subQuests:
-  - {fileID: 11400000, guid: 8bfb906b24134054fb1e0f7b4d75aedb, type: 2}
-  nextQuest: 9
+  - {fileID: 0}
+  nextQuest: 0
