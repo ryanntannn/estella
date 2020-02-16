@@ -46,4 +46,4 @@ MonoBehaviour:
   ballPfb: {fileID: 6659743736829664659, guid: 940a37bbf96f32645a40b012d87d2402, type: 3}
   numberOfBalls: 5
   speedOfRotation: 100
-  speedOfExpension: 0.3
+  speedOfExpension: 2

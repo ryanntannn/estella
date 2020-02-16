@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//im hard coding this idc
 public class MoveRyanToLocation : MonoBehaviour {
-    public GameObject toMove;
-    public GameObject moveTo;
+    public GameObject ryan;
+    public GameObject[] enemies;
 
     private InteractableObject m_interectionHook;
     // Start is called before the first frame update
@@ -15,8 +16,11 @@ public class MoveRyanToLocation : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (m_interectionHook.isActivated) {
-            toMove.SetActive(false);
-            moveTo.SetActive(true);
+            ryan.GetComponentInChildren<Animator>().SetTrigger("WhenDie");
+            //spawn in enemies
+            foreach(GameObject e in enemies) {
+                e.SetActive(true);
+            }
             Destroy(this);
         }
     }

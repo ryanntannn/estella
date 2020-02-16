@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : Singleton<LevelManager>
 {
@@ -150,5 +151,9 @@ public class LevelManager : Singleton<LevelManager>
         completedQuests.Add(activeQuest);
         activeQuest = quests[activeQuest].nextQuest;
         ChangeQuest(activeQuest);
+    }
+
+    public void RestartLevel() {
+        SceneManager.SetActiveScene(SceneManager.GetActiveScene());
     }
 }

@@ -120,7 +120,9 @@ public class SkylarkBoss : MonoBehaviour {
     #region Threading
     void FindPath() {
         while (true) {  //monkaS loop
-            pathToPlayer = Algorithms.AStar(m_map, m_bossPos, m_playerPos);
+            try {
+                pathToPlayer = Algorithms.AStar(m_map, m_bossPos, m_playerPos);
+            } catch (Exception) { };
         }
     }
 
@@ -145,7 +147,8 @@ public class SkylarkBoss : MonoBehaviour {
 
     void DoPlasmaThrow() {
         GameObject instace = Instantiate(plasmaBall, transform.position, Quaternion.identity);
-        instace.transform.LookAt(m_dataProvider.player.transform);
+        instace.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+        //instace.transform.LookAt(m_dataProvider.player.transform);
     }
 
     void DoChargingBlast() {
@@ -156,7 +159,7 @@ public class SkylarkBoss : MonoBehaviour {
         //make 3 lines at random locations
         for (int count = 0; count < 3; count++) {
             Vector2 randomLoc2d = UnityEngine.Random.insideUnitCircle * 10;
-            Vector3 randomLocation = new Vector3(randomLoc2d.x, transform.position.y, randomLoc2d.y);
+            Vector3 randomLocation = transform.position + new Vector3(randomLoc2d.x, 0, randomLoc2d.y);
             GameObject instance = Instantiate(m_beamPfb, randomLocation, Quaternion.identity);
             instance.GetComponent<SkylarkBeam>().playerPos = m_playerPos;
         }

@@ -246,6 +246,8 @@ public class PlayerControl : Singleton<PlayerControl> {
             if (currentHealth <= 0) {
                 //die
                 print("PlayerDied");
+                igui.ShowDeathScreen();
+                Cursor.lockState = CursorLockMode.None;
                 animator.SetTrigger("WhenDie");
             }
         }
@@ -260,6 +262,8 @@ public class PlayerControl : Singleton<PlayerControl> {
             float angle = (Vector3.SignedAngle(targetDir, -transform.forward, Vector3.up) + 180) % 360;
 
             if (currentHealth <= 0) {
+                igui.ShowDeathScreen();
+                Cursor.lockState = CursorLockMode.None;
                 animator.SetFloat("DieRection", angle);
                 animator.SetTrigger("WhenDie");
                 //disable this
