@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb630b84aa199b64c98331c80bf91485, type: 3}
-  m_Name: Alshazar
+  m_Name: Quarry
   m_EditorClassIdentifier: 
-  shortDesc: Alshazar
+  shortDesc: 
   longDesc: 
   subQuests:
-  - {fileID: 11400000, guid: 5f9c63a8a66422b41b98d0e0fe92294d, type: 2}
-  nextQuest: 6
+  - {fileID: 11400000, guid: 29b310d02bdcfaf4a812afa30eec9946, type: 2}
+  - {fileID: 11400000, guid: 58ea46c1f4712d04494e7f4309bdacc0, type: 2}
+  nextQuest: 8
