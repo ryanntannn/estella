@@ -60,7 +60,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.38595825
-        functionName: EnemyDamageNeedRange
+        functionName: EnemyDmgNeedRange
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 40

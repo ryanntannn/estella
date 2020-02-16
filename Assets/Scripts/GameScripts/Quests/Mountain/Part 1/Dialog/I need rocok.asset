@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae50b5cb659b474db33f574d5404d72, type: 3}
   m_Name: I need rocok
   m_EditorClassIdentifier: 
-  content: You're finally awake...been waiting for awhile now
-  waitTime: 3
+  content: 'Ryan: Hey...you''re finally awake...fancy making someone you owe a favor
+    to wait huh'
+  waitTime: 5

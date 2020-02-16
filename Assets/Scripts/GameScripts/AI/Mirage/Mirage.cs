@@ -65,7 +65,7 @@ public class Mirage : MonoBehaviour {
             //walk up to player and slap him
             Vector3 directionOfPlayer = player.transform.position - transform.position;
 
-            if (directionOfPlayer.magnitude < 3) {
+            if (directionOfPlayer.sqrMagnitude < 2) {
                 transform.LookAt(player.transform);
 				dataProvider.anim.SetBool("isWalking", false);
                 //set trigger

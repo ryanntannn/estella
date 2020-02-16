@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb630b84aa199b64c98331c80bf91485, type: 3}
   m_Name: HelpRyanQuest
   m_EditorClassIdentifier: 
-  shortDesc: Ryan needs the rocok
-  longDesc: 
+  shortDesc: Help ryan
+  longDesc: Ryan needs help!
   subQuests:
   - {fileID: 11400000, guid: 3035e4222c8169042b105e6f80f2df2b, type: 2}
   - {fileID: 11400000, guid: 3871ec2d9fe681743a0beaf074a8962c, type: 2}

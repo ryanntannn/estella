@@ -2098,7 +2098,7 @@ GameObject:
   - component: {fileID: 3121242404771595908}
   - component: {fileID: 3121242404771595929}
   m_Layer: 0
-  m_Name: Mirage 1
+  m_Name: Mirage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2155,6 +2155,9 @@ MonoBehaviour:
   speed: 3
   resistanceLevel: 1
   unfreezeThreshold: 2
+  stunable: 0
+  slowable: 1
+  freezable: 1
   rb: {fileID: 3121242404771595930}
   anim: {fileID: 45130970892842238}
   player: {fileID: 0}
