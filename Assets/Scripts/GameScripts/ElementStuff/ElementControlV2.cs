@@ -92,10 +92,12 @@ public class ElementControlV2 : Singleton<ElementControlV2> {
             StopCoroutine(m_lhandcr);
             m_rightHand.waitingOnOther = false;
             m_leftHand.waitingOnOther = false;
-            isCasting = true;
-            //combination
             CombinationElements combination = m_combinations.First(comb => comb.ID == (m_rightHand.currentElement.ID | m_leftHand.currentElement.ID));
-            AnimOverride["NullAnimation"] = combination.animation;
+            if (currentMana >= combination.ManaCost && combination.IsUnlocked) {
+                isCasting = true;
+                //combination
+                AnimOverride["NullAnimation"] = combination.animation;
+            }
         }
     }
 

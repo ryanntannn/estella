@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CombinationName: Shock
   ID: 17
+  ManaCost: 30
+  IsUnlocked: 1
   animation: {fileID: 7400000, guid: 45f9f2eb017177e41bada370b4d33b84, type: 2}
