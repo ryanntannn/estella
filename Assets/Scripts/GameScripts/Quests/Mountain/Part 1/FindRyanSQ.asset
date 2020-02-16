@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19385ddc67d017438e6f5e08d3f75b7, type: 3}
   m_Name: FindRyanSQ
   m_EditorClassIdentifier: 
-  shortDesc: 
+  shortDesc: Look for Ryan
   longDesc: 
   questType: 0
   objective: []
   amount: 0
-  InteractableObjectName: 
+  InteractableObjectName: Ryan
