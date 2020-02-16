@@ -6,6 +6,8 @@ using System.Threading;
 using System.Linq;
 
 public class SkylarkBoss : MonoBehaviour {
+    public GameObject plasmaBall;
+
     FiniteStateMachineWithStack fsm = new FiniteStateMachineWithStack();
     FiniteStateMachineWithStack.State Idle, Chase, NullState;
     //dataprovider
@@ -138,11 +140,12 @@ public class SkylarkBoss : MonoBehaviour {
     }
 
     void DoTigerFist() {
-
+        m_dataProvider.DealDamage(20, 1);
     }
 
     void DoPlasmaThrow() {
-
+        GameObject instace = Instantiate(plasmaBall, transform.position, Quaternion.identity);
+        instace.transform.LookAt(m_dataProvider.player.transform);
     }
 
     void DoChargingBlast() {

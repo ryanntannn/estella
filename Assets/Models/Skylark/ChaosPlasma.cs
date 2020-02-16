@@ -13,12 +13,12 @@ public class ChaosPlasma : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
     }
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.layer == Layers.Player) {
             m_dataProvider.DealDamage(30);
+            Destroy(gameObject);
         }
     }
 }

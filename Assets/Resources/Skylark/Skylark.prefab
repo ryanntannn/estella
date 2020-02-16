@@ -2675,6 +2675,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cfd5544a4aad6041bb0f6436ff19da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plasmaBall: {fileID: 6794680442381278824, guid: 9a188607fa6069341aa1a1d00fadebda,
+    type: 3}
 --- !u!136 &5221750476548036952
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2709,6 +2711,9 @@ MonoBehaviour:
   speed: 3
   resistanceLevel: 1
   unfreezeThreshold: 2
+  stunable: 0
+  slowable: 1
+  freezable: 0
   rb: {fileID: 5221750476548036951}
   anim: {fileID: 4888858178705552296}
   player: {fileID: 0}
