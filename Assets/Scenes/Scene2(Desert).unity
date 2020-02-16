@@ -7920,7 +7920,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4537a8fdb7f8c6844a796c384640b1db, type: 2}
   - {fileID: 11400000, guid: 373342aea5d5b96469748298dfb792ae, type: 2}
   - {fileID: 11400000, guid: acf107b40f6e1d14e883f6345efa82da, type: 2}
-  goToQuarryDialog: []
+  goToQuarryDialog:
+  - {fileID: 11400000, guid: d9519ab633f6fc14d886aa387293d60c, type: 2}
+  - {fileID: 11400000, guid: 0580d0bd048b1bd4fafae889ebbf9538, type: 2}
+  - {fileID: 11400000, guid: f74224e61f2aa924fa1ec625549680c7, type: 2}
+  - {fileID: 11400000, guid: 316472a735e0ff645945ecafad644e5d, type: 2}
 --- !u!1 &1194036867
 GameObject:
   m_ObjectHideFlags: 0
@@ -12226,6 +12230,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f1a404d26e04c5c40a175bc373f55e14, type: 2}
   - {fileID: 11400000, guid: 34bb6c3c4ace1b7468118606340ef39c, type: 2}
   - {fileID: 11400000, guid: f6204ba4c679c1c45b0419f034866f82, type: 2}
+  - {fileID: 11400000, guid: c90b3a6e1c2a387438227d9e4b4921d3, type: 2}
+  - {fileID: 11400000, guid: 5bf7d47499ebd23408055a24c71aaebc, type: 2}
+  - {fileID: 11400000, guid: 1ab7d0ba4eec38e45bc39f5840c8b19f, type: 2}
   activeQuest: 0
   completedQuests: 
   playerControl: {fileID: 0}

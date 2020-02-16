@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae50b5cb659b474db33f574d5404d72, type: 3}
   m_Name: 3
   m_EditorClassIdentifier: 
-  content: 'Old Man: I think they''re looking for you. Better beware around these
-    parts now.'
+  content: 'Old Man: I think they''re looking for you. They took some of our stuff
+    and told us to turn you in if we saw you. Better beware around these parts now.'
   waitTime: 5
