@@ -9,6 +9,7 @@ public class InteractSubquest : SubQuest
 
     public override bool QuestCheck()
     {
+        Debug.Log(GameObject.Find(InteractableObjectName).GetComponent<InteractableObject>().isActivated);
         if (GameObject.Find(InteractableObjectName).GetComponent<InteractableObject>().isActivated)
         {
             Debug.Log("Done");

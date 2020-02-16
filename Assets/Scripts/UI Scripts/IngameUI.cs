@@ -42,10 +42,18 @@ public class IngameUI : Singleton<IngameUI>
         holdFImage = GameObject.Find("Hold F Fill").GetComponent<Image>();
         holdF.SetActive(false);
 
-        leftele.transform.GetChild(ElementControlV2.Instance.LeftHand.currentElement.ID).gameObject.SetActive(true);
-        rightele.transform.GetChild(ElementControlV2.Instance.RightHand.currentElement.ID).gameObject.SetActive(true);
-        activeLele = ElementControlV2.Instance.LeftHand.currentElement.ID;
-        activeRele = ElementControlV2.Instance.RightHand.currentElement.ID;
+        float li = Mathf.Log(ElementControlV2.Instance.LeftHand.currentElement.ID, 2) / Mathf.Log(2, 2);
+        int index = (int)li;
+
+        leftele.transform.GetChild(index).gameObject.SetActive(true);
+
+        li = Mathf.Log(ElementControlV2.Instance.RightHand.currentElement.ID, 2) / Mathf.Log(2, 2);
+        int index2 = (int)li;
+
+        rightele.transform.GetChild(index2).gameObject.SetActive(true);
+
+        activeLele = index;
+        activeRele = index2;
     }
 
     // Update is called once per frame

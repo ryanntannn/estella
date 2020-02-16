@@ -32,7 +32,11 @@ public class GiantBoss : MonoBehaviour
 
     public void AwakeBoss()
     {
-        bossBody.GetComponent<Rigidbody>().DOMove(bossBody.transform.position + new Vector3(0, 13, 0), 4f);
+        bossBody.GetComponent<Rigidbody>().DOMove(bossBody.transform.position + new Vector3(0, 13, 0), 4f).OnComplete(() =>
+        {
+            IngameUI.Instance.UpdateDialogText("");
+        });
+        IngameUI.Instance.UpdateDialogText("Ghost of Alshazar: Who dares awaken the Almighty Alshazar?");
         foreach (BossArm ba in bossArms)
         {
             ba.AwakePillars();
@@ -45,6 +49,15 @@ public class GiantBoss : MonoBehaviour
         {
             ba.gameObject.SetActive(false);
         }
+
+        IngameUI.Instance.UpdateDialogText("Ghost of Alshazar: Darkness will reign again");
+
+        bossBody.GetComponent<Rigidbody>().DOMove(bossBody.transform.position + new Vector3(0, -13, 0), 8f).OnComplete(() =>
+        {
+            IngameUI.Instance.UpdateDialogText("");
+            Destroy(bossBody.gameObject);
+            Destroy(gameObject);
+        });
     }
 
     // Update is called once per frame
@@ -66,6 +79,7 @@ public class GiantBoss : MonoBehaviour
         {
             if (!isAttacking)
             {
+
                 int randArm = (int)Random.Range(0, 4);
                 int randMove = 0;//(int)Random.Range(0, 2);
                                  //Attack

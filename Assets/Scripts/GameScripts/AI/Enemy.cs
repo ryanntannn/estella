@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour {
         currentDebuff = effect;
     }
 
-    public void TakeDamage(float damage) {
+    public bool TakeDamage(float damage) {
         if (currentDebuff == Effects.Freeze) {
             currentFreezeThreshold -= damage;
             if (currentFreezeThreshold <= 0) {
@@ -114,10 +114,15 @@ public class Enemy : MonoBehaviour {
                 anim.SetTrigger("WhenDie");
                 LevelManager.Instance.EnemyDie(enemyName);
                 foreach(MonoBehaviour m in gameObject.transform) {
+                    if (m == this) continue;
                     Destroy(m);
                 }
+
+                return true;
             }
         }
+
+        return false;
     }
 
     /// <summary>

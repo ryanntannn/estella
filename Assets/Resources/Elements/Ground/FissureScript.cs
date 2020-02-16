@@ -42,13 +42,14 @@ public class FissureScript : MonoBehaviour {
                 //flaming hot
                 onFire = true;
                 transform.GetChild(0).GetComponent<MeshRenderer>().material = metorShader;
+                fireCollider.enabled = true;
                 Destroy(other.gameObject);
                 break;
         }
     }
 
     private void OnTriggerStay(Collider other) {
-        if (other.gameObject.layer == Layers.Enemy) {
+        if (other.gameObject.layer == Layers.Enemy && onFire) {
             other.GetComponent<Enemy>().DebuffEnemy(Time.deltaTime * 1.5f, Enemy.Effects.Burn);
         }
     }

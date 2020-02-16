@@ -24,5 +24,13 @@ public class OldMan : MonoBehaviour
             dialog.giveQuestAfter = true;
             dialog.indexQuestAfter = 3;
         }
+
+        if (LevelManager.Instance.completedQuests.Contains(5) && dialogIndex == 1)
+        {
+            dialogIndex = 2;
+            dialog.dialogLines = goToQuarryDialog;
+            dialog.giveQuestAfter = true;
+            dialog.indexQuestAfter = 7;
+        }
     }
 }

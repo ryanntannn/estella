@@ -27,6 +27,6 @@ public class ElectricityV2 : BaseElementV2 {
 
     public override void CastUltimateAttack() {
         //lightning strike
-        GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Electricity/Lightningstrike"), TargetingReticle.Instance.transform.position, Quaternion.Euler(-90, 0, 0));
+        GameObject instance = Instantiate(Resources.Load<GameObject>("Elements/Electricity/LightningStrikeOne"), TargetingReticle.Instance.transform.position, Quaternion.identity);
     }
 }
