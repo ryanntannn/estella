@@ -16,6 +16,4 @@ MonoBehaviour:
   longDesc: Ryan needs help!
   subQuests:
   - {fileID: 11400000, guid: 3035e4222c8169042b105e6f80f2df2b, type: 2}
-  - {fileID: 11400000, guid: 3871ec2d9fe681743a0beaf074a8962c, type: 2}
-  - {fileID: 11400000, guid: 041c1e474cad7ac4e9b7cddd0e1d5a79, type: 2}
   nextQuest: 0
