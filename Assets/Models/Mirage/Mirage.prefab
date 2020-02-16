@@ -2152,7 +2152,7 @@ MonoBehaviour:
   currentDebuff: 0
   enemyName: Mirage
   health: 200
-  speed: 3
+  speed: 2
   resistanceLevel: 1
   unfreezeThreshold: 2
   stunable: 0
