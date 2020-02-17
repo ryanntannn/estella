@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class Cave : MonoBehaviour
 {
     InteractableObject interactableObject;
+    public bool debug;
+    bool activated;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,12 +17,19 @@ public class Cave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(LevelManager.Instance.completedQuests.Contains(8) && interactableObject.isActivated)
+        if (debug && interactableObject.isActivated && !activated)
+        {
+            StartCoroutine(LoadAsyncOperation());
+            activated = true;
+        }
+
+        if(LevelManager.Instance.completedQuests.Contains(8) && interactableObject.isActivated && !activated)
         {
             //Load Scene 3
             StartCoroutine(LoadAsyncOperation());
-
-        } else
+            activated = true;
+        }
+        else
         {
             interactableObject.isActivated = false;
         }
