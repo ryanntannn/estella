@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4209205b2b534b94ebe78f2c8b1bac3d, type: 3}
   m_Name: GotoportSQ
   m_EditorClassIdentifier: 
-  shortDesc: 
+  shortDesc: Chase the attackers on the boat
   longDesc: 
   questType: 0
   objective: []
