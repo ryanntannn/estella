@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CombinationName: Magnetise
   ID: 20
+  ManaCost: 45
+  IsUnlocked: 1
   animation: {fileID: 7400000, guid: 408633982fef1694fa1553b6988096a8, type: 2}

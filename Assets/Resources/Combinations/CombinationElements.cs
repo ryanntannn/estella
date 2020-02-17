@@ -7,6 +7,8 @@ using System;
 public class CombinationElements : ScriptableObject {
     public string CombinationName;
     public int ID;
+    public int ManaCost;
+    public bool IsUnlocked = true;
 
     public AnimationClip animation;
 }

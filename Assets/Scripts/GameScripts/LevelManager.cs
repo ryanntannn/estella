@@ -46,7 +46,7 @@ public class LevelManager : Singleton<LevelManager>
                 }
             } else if (sq.questType == SubQuestType.Kill)
             {
-                if(!subQuestCompleted[i] && (subQuestAmounts[i] == sq.amount))
+                if(!subQuestCompleted[i] && (subQuestAmounts[i] >= sq.amount))
                 {
                     subQuestCompleted[i] = true;
                     WriteQuestString();

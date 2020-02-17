@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CombinationName: Storm
   ID: 24
+  ManaCost: 45
+  IsUnlocked: 1
   animation: {fileID: 7400000, guid: b1cda6e989f1ffb4e90b73b41c118d58, type: 2}

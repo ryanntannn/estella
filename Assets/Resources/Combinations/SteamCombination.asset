@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CombinationName: Steam
   ID: 3
+  ManaCost: 20
+  IsUnlocked: 1
   animation: {fileID: 7400000, guid: 7cf2f29ef7a9af04198193cd7711aa9d, type: 2}
