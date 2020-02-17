@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 8f846af047fb875419e8afacc6cedb5f
 ModelImporter:
-  serializedVersion: 25
+  serializedVersion: 26
   internalIDToNameTable:
   - first:
       1: 100000
@@ -18,7 +18,12 @@ ModelImporter:
   - first:
       43: 4300000
     second: build_village_fence_01
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_build_village_fence_01
+    second: {fileID: 2100000, guid: 357bd12e1a6714f22b049266447b5d64, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -51,8 +56,9 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
