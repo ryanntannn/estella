@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   berryType: 2
-  ammount: 10
+  ammount: 30
 --- !u!1001 &7436310929955265946
 PrefabInstance:
   m_ObjectHideFlags: 0
