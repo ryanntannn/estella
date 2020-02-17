@@ -13,7 +13,6 @@ TagManager:
   - Bubbleshot
   - Tornado
   - Golem
-  - Checkpoint
   layers:
   - Default
   - TransparentFX
