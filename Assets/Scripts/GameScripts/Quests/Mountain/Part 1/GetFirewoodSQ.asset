@@ -16,5 +16,5 @@ MonoBehaviour:
   longDesc: 
   questType: 2
   objective: []
-  amount: 0
+  amount: 1
   InteractableObjectName: RocokBush

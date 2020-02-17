@@ -16,5 +16,5 @@ MonoBehaviour:
   longDesc: 
   questType: 0
   objective: []
-  amount: 0
+  amount: 1
   locationName: Port
