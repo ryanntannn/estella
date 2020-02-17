@@ -33689,6 +33689,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio Elementals
       objectReference: {fileID: 0}
+    - target: {fileID: 2857521153857647350, guid: 8746eae37b40b4547a4d8a3a6e06903d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4672411714303842558, guid: 8746eae37b40b4547a4d8a3a6e06903d,
         type: 3}
       propertyPath: MinDistance
