@@ -16393,12 +16393,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1958227007}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1973044218 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4736751193479095633, guid: 1a0ee52e89665e54b8450f8bb06f3554,
-    type: 3}
-  m_PrefabInstance: {fileID: 1322074434}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1979279642
 GameObject:
   m_ObjectHideFlags: 0
@@ -31171,7 +31165,8 @@ PrefabInstance:
         type: 3}
       propertyPath: steamEmpoweredPrefab
       value: 
-      objectReference: {fileID: 1973044218}
+      objectReference: {fileID: 4863971500789720619, guid: 7cdddc4612afb8d40afa1e5201b95bc1,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2cff8129f12fdf4286433f3d0ad51dc, type: 3}
 --- !u!114 &5932890687865501672 stripped
