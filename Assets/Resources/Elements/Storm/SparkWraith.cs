@@ -28,11 +28,13 @@ public class SparkWraith : MonoBehaviour {
                 //idle
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(center - transform.position, transform.up), Time.deltaTime);
                 transform.position += transform.forward * Time.deltaTime * speed;
+                
             } else {
                 //look at target
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(target.transform.position - transform.position, transform.up), Time.deltaTime * 360);
                 transform.position += transform.forward * Time.deltaTime * speed;
                 StopCoroutine(cr);
+                cr = StartCoroutine(KillSelf());
             }
         }else {
             transform.position += transform.forward * Time.deltaTime * speed * 2;
