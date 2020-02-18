@@ -8,6 +8,8 @@ public class Timelinetrigger : MonoBehaviour
     public PlayableDirector timeline;
     public GameObject Player;
 
+    private bool HasPlayed;
+    private double time;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,17 +21,31 @@ public class Timelinetrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (HasPlayed == true)
+        {
+            time -= Time.deltaTime;
+            if (time <= 0)
+            {
+                Player.GetComponent<PlayerControl>().enabled = true;
+            }
+
+        }
+
     }
 
  void OnTriggerEnter(Collider player)
      {
-        if (player.gameObject.tag == "Player")
+        if (player.gameObject.tag == "Player" && HasPlayed == false)
         {
             print("Trying to play");
             timeline.Play();
+            time = timeline.duration;
+            Player.GetComponent<PlayerControl>().enabled = false;
 
+            HasPlayed = true;
         }
         
      }
+
+
 }

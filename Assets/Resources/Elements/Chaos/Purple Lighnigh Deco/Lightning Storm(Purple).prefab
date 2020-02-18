@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 6102849052722421768}
   - component: {fileID: 6312190225671716155}
   - component: {fileID: 4779880535190601063}
-  - component: {fileID: 2486257000440725352}
+  - component: {fileID: 5647535330565179613}
   m_Layer: 0
   m_Name: Lightning Field
   m_TagString: Untagged
@@ -4942,7 +4942,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &2486257000440725352
+--- !u!114 &5647535330565179613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4951,10 +4951,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4530352058484764614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f6e86c02fc2e7941bb5c8d98c35dce8, type: 3}
+  m_Script: {fileID: 11500000, guid: 474cd6b47ad37064cba430ab326b095a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentParticleSystem: {fileID: 0}
+  parentParticleSystem: {fileID: 6312190225671716155}
   BornSounds: {fileID: 1865792332761305276}
   DieSounds: {fileID: 0}
 --- !u!1 &6652598557396683493

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 5f643dd3063229e4380c16656cb6cb25
 ModelImporter:
-  serializedVersion: 25
+  serializedVersion: 26
   internalIDToNameTable:
   - first:
       1: 100000
@@ -81,7 +81,17 @@ ModelImporter:
   - first:
       95: 9500000
     second: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_build_gate_01_metal
+    second: {fileID: 2100000, guid: 52d1c0ebb126f9648b8035de9aea00e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_build_gate_01_wood
+    second: {fileID: 2100000, guid: 975604f735eeb1947bc6e3ca9383f969, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -114,8 +124,9 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0

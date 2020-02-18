@@ -18,7 +18,7 @@ public class Pause_Menu : MonoBehaviour
     {
 
         
-       if (SceneManager.GetActiveScene().name == "Level") { 
+       if (SceneManager.GetActiveScene().buildIndex > 0 ) { 
        if (Input.GetKeyDown(KeyCode.Escape) && OptionsUI.activeSelf == false) //allow player to press escape to open up pause menu only when: 
         {                                                                    //Is in level, not in options menu.
             if (isPause == false)
