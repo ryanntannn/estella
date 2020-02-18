@@ -7,9 +7,11 @@ public class Timelinetrigger : MonoBehaviour
 {
     public PlayableDirector timeline;
     public GameObject Player;
+    public SkylarkBoss skylarkstop;
 
     private bool HasPlayed;
     private double time;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class Timelinetrigger : MonoBehaviour
             time -= Time.deltaTime;
             if (time <= 0)
             {
+                skylarkstop.enabled = true;
                 Player.GetComponent<PlayerControl>().enabled = true;
             }
 
@@ -41,7 +44,7 @@ public class Timelinetrigger : MonoBehaviour
             timeline.Play();
             time = timeline.duration;
             Player.GetComponent<PlayerControl>().enabled = false;
-
+            skylarkstop.enabled = false;
             HasPlayed = true;
         }
         

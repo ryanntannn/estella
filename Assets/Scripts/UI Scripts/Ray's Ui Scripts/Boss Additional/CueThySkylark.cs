@@ -9,7 +9,7 @@ public class CueThySkylark : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Skylark.SetActive(false);
     }
 
     // Update is called once per frame
