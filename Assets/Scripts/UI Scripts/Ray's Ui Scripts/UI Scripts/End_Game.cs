@@ -10,12 +10,13 @@ public class End_Game : MonoBehaviour
     public GameObject victoryScreen;
     public AudioSource victoryMusic;
     public AudioSource fightMusic;
+    private Canvas_Elements canvas;
 
     private bool hasBeenCalled = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        canvas = FindObjectOfType<Canvas_Elements>();
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class End_Game : MonoBehaviour
         //playerControl.enabled = false;
         victoryMusic.Play();
         victoryScreen.SetActive(true);
+        canvas.UpdateGuiSettings("Main Menu");
         fightMusic.Stop();
       
         player.GetComponent<MonoBehaviour>().enabled = false;
