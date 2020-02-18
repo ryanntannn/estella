@@ -34,6 +34,7 @@ public class Settings_Video : MonoBehaviour
                 currentResolutionIndex = i;
             }
         }
+        resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options); //converts list into a displayed UI elemnt;
         resolutionDropdown.value = currentResolutionIndex; //give dropdown the correct resolution;
         resolutionDropdown.RefreshShownValue();//refresh the box;
