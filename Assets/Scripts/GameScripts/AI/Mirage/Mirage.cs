@@ -159,6 +159,10 @@ public class Mirage : MonoBehaviour {
         }
 
         fsm.currentState(gameObject);
+
+        if(dataProvider.health <= 0) {
+            Destroy(gameObject);
+        }
     }
 
     private void OnApplicationQuit() {
