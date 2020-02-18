@@ -28,18 +28,6 @@ public class LevelManager : Singleton<LevelManager>
         {
             if (QuestCheck()) CompleteQuest();
         }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            int currQuest = activeQuest;
-            CompleteQuest();
-            ChangeQuest(currQuest + 1);
-        }
     }
 
     bool QuestCheck() //Check if the active quest is completed;
