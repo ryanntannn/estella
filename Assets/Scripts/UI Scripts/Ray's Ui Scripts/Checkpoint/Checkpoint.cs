@@ -34,7 +34,7 @@ public class Checkpoint : MonoBehaviour
         if (collider.gameObject.tag == "Checkpoint")
         {
             checkpointCoordinates = collider.transform.position;
-            print("Checkpoint Collided");
+            IngameUI.Instance.ShowPopUp("Checkpoint saved", 3.0f);
         }
 
     }

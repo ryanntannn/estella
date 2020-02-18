@@ -29,12 +29,7 @@ public class Sound_Trigger_Script : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            if (PlaysoundonEnter == true && soundsource.isPlaying == true)
-            {
-                 soundsource.Stop();
-                
-                //using a coroutine we can fade in and out sound
-            }
+           
 
             if (PlaysoundonEnter == true && soundsource.isPlaying == false)
             {
