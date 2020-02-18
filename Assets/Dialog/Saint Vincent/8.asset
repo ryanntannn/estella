@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae50b5cb659b474db33f574d5404d72, type: 3}
   m_Name: 8
   m_EditorClassIdentifier: 
-  content: 'Absjorn: I can point you to the fort but first prove your worth by creating
-    some ruckus at the Eastern camp. I don''t want to bag anymore bodies.'
-  waitTime: 7
+  content: 'Absjorn: Well, as their "hired" gatekeeper I have access to the fort but
+    first prove your worth by creating some ruckus at the Eastern camp. I don''t want
+    to bag anymore bodies.'
+  waitTime: 8
