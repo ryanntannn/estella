@@ -72,6 +72,7 @@ public class Enemy : MonoBehaviour {
                 break;
             case Effects.Burn:
                 TakeDamage(deltaTime * (1 / currentResistance));
+                
                 break;
             case Effects.Freeze:
                 if (freezable) {

@@ -30,6 +30,8 @@ public class ElementControlV2 : Singleton<ElementControlV2> {
     private float m_empowerTime = 0;
     public float EmpowerTime { get { return m_empowerTime; } }
 
+    public GameObject steamEmpoweredPrefab;
+
     // Start is called before the first frame update
     void Start() {
         m_playerControl = GetComponent<PlayerControl>();
@@ -65,12 +67,20 @@ public class ElementControlV2 : Singleton<ElementControlV2> {
     }
 
     void EmpowerCheck() {
-        if (m_empowerTime > 0) {
+        if (m_empowerTime > 0)
+        {
             m_empowerTime = Mathf.Clamp(m_empowerTime - Time.deltaTime, 0, 999);
 
-            if (m_playerControl.dodging) {
+            steamEmpoweredPrefab.SetActive(true);
+
+            if (m_playerControl.dodging)
+            {
 
             }
+        }
+        else
+        {
+            steamEmpoweredPrefab.SetActive(false);
         }
     }
 
