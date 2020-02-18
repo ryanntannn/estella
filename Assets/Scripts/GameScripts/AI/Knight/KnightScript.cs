@@ -6,6 +6,7 @@ using System.Threading;
 using UnityEngine.AI;
 
 public class KnightScript : MonoBehaviour {
+    public bool useAStar = false;
     public bool useFSM = true;
     public bool wanderNear = false;
 	public float stoppingDist = 2, aggroRange = 10;
@@ -25,16 +26,34 @@ public class KnightScript : MonoBehaviour {
     bool spinOnCd = false;
 
     Vector3 startPos;
+    Thread m_pathFinder;
+    MapGrid m_map;
+    List<Node> path = new List<Node>();
+    Vector3 m_pos;
 
     public void Start() {
 		dataProvider = GetComponent<Enemy>();
-		navAgent = GetComponent<NavMeshAgent>();
         stoppingSqrt = Mathf.Pow(stoppingDist, 2);
         aggroSqrt = Mathf.Pow(aggroRange, 2);
         startPos = transform.position;
+        m_pos = transform.position;
+        if (useAStar) {
+            m_map = Helper.FindComponentInScene<MapGrid>("Map");
+            m_pathFinder = new Thread(PathFinder);
+            m_pathFinder.Start();
+            m_pathFinder.IsBackground = true;
+        } else {
+            navAgent = GetComponent<NavMeshAgent>();
+        }
 
         InitStates();
-	}
+    }
+
+    void PathFinder() {
+        while (true) {
+            path = Algorithms.AStar(m_map, m_pos, targetLocation);
+        }
+    }
 
 	void InitStates() {
 		//well, idle
@@ -51,7 +70,11 @@ public class KnightScript : MonoBehaviour {
 
         Wander = (gameObject) => {
             //walk to radom pos
-            navAgent.SetDestination(targetLocation);
+            if (!useAStar) {
+                navAgent.SetDestination(targetLocation);
+            }else {
+
+            }
             if((transform.position - targetLocation).sqrMagnitude <= 3) {
                 GoIdle();
             }
@@ -60,11 +83,21 @@ public class KnightScript : MonoBehaviour {
         };
 
 		ChasePlayer = (gameObject) => {
-            navAgent.SetDestination(dataProvider.player.transform.position);		
+            if (!useAStar) {
+                navAgent.SetDestination(dataProvider.player.transform.position);
+            }else {
+                targetLocation = dataProvider.player.transform.position;
+                transform.LookAt(path[1].worldPos);
+                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+            }
 
 			//check for stopping distance
 			if ((transform.position - dataProvider.player.transform.position).sqrMagnitude < stoppingSqrt) {
-				navAgent.isStopped = true;
+                if (!useAStar) {
+                    navAgent.isStopped = true;
+                }else {
+
+                }
 				fsm.currentState = spinOnCd ? RegularAttack : SpinAttack;
 			}
 		};
@@ -98,6 +131,15 @@ public class KnightScript : MonoBehaviour {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(startPos, walkDist);
         }
+
+        if (useAStar) {
+            Gizmos.color = Color.red;
+            if (path != null) {
+                for (int count = 0; count < path.Count - 1; count++) {
+                    Gizmos.DrawLine(path[count].worldPos, path[count + 1].worldPos);
+                }
+            }
+        }
 	}
 
     void CheckForPlayer() {
@@ -112,22 +154,44 @@ public class KnightScript : MonoBehaviour {
 
 	public void Update() {
 		if (useFSM) {
-            navAgent.speed = dataProvider.currentSpeed;
             fsm.currentState(gameObject);
-		}
 
-        dataProvider.anim.SetBool("IsWalking", navAgent.velocity.sqrMagnitude > 0.3f);
+            if (!useAStar) {
+                navAgent.speed = dataProvider.currentSpeed;
+                dataProvider.anim.SetBool("IsWalking", navAgent.velocity.sqrMagnitude > 0.3f);
+            } else {
+                m_pos = transform.position;
+                if(path != null) {
+                    if (path.Count > 0) {
+                        targetLocation = dataProvider.player.transform.position;
+                        transform.LookAt(path[1].worldPos);
+                        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+                    }
+                }
+            }
+        }
     }
 
     public void GoIdle() {
         internalCounter = 0;
         currentIdleTime = Random.Range(2.0f, 5.0f);
         Vector3 randomLoc = (wanderNear ? startPos : transform.position) + Random.insideUnitSphere * walkDist;
-        NavMeshHit hitInfo;
-        NavMesh.SamplePosition(randomLoc, out hitInfo, walkDist, 1);
-        targetLocation = hitInfo.position;
 
-        navAgent.isStopped = false;
+        if (!useAStar) {
+            NavMeshHit hitInfo;
+            NavMesh.SamplePosition(randomLoc, out hitInfo, walkDist, 1);
+            targetLocation = hitInfo.position;
+
+            navAgent.isStopped = false;
+        }else {
+            ////find on grid
+            //Node myPos = m_map.WorldPointToNode(transform.position);
+            //Vector2Int randomGridPos = myPos.gridPos + new Vector2Int((Random.Range(-10, 10)), (Random.Range(-10, 10)));
+            //Node finalPos = m_map.Grid[randomGridPos.x, randomGridPos.y];
+            //targetLocation = finalPos.worldPos;
+            print(dataProvider.player.transform.position);
+            targetLocation = m_map.WorldPointToNode(dataProvider.player.transform.position).worldPos;
+        }
 		fsm.currentState = IdleState;
     }
 }
