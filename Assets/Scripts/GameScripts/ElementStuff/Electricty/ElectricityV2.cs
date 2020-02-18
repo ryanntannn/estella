@@ -10,7 +10,7 @@ public class ElectricityV2 : BaseElementV2 {
     private AnimationClip m_regularAttackAnimation;
     public override AnimationClip RegularAttackAnimation { get { return m_regularAttackAnimation; } }
 
-    public override float RegularManaCost => 10;
+    public override float RegularManaCost => 20;
 
     [SerializeField]
     private AnimationClip m_ultimateAttackAnimation;

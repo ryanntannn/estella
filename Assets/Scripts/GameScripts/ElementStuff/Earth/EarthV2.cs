@@ -10,7 +10,7 @@ public class EarthV2 : BaseElementV2 {
     private AnimationClip m_regularAttackAnimation;
     public override AnimationClip RegularAttackAnimation { get { return m_regularAttackAnimation; } }
 
-    public override float RegularManaCost => 5;
+    public override float RegularManaCost => 20;
 
     [SerializeField]
     private AnimationClip m_ultimateAttackAnimation;

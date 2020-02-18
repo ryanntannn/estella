@@ -17,4 +17,4 @@ MonoBehaviour:
   subQuests:
   - {fileID: 11400000, guid: af7878236b2ed384d8c1655272c2e968, type: 2}
   - {fileID: 11400000, guid: a01691e14f31f3a41831f95d6e3ffa3b, type: 2}
-  nextQuest: 4
+  nextQuest: 3

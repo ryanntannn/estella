@@ -17,7 +17,7 @@ public class Retalk_to_Absjorn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LevelManager.Instance.completedQuests.Contains(3))
+        if (LevelManager.Instance.completedQuests.Contains(2))
         {
             dialogIndex = 1;
             dialog.dialogLines = talkbackD;
