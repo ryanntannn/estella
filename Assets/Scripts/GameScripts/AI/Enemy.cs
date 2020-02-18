@@ -72,6 +72,7 @@ public class Enemy : MonoBehaviour {
                 break;
             case Effects.Burn:
                 TakeDamage(deltaTime * (1 / currentResistance));
+                
                 break;
             case Effects.Freeze:
                 if (freezable) {
@@ -111,6 +112,9 @@ public class Enemy : MonoBehaviour {
             anim.SetFloat("HitX", Mathf.Cos(angle));
 
             if (health <= 0) {
+                currentSpeed = 0;
+                speed = 0;
+
                 anim.SetTrigger("WhenDie");
                 LevelManager.Instance.EnemyDie(enemyName);
                 foreach(MonoBehaviour m in gameObject.transform) {

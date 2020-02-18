@@ -654,7 +654,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b85feb7ba0c434e92aba051c736df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onFirePs: {fileID: 0}
+  onFirePs: {fileID: 5636663363978029270, guid: e4ecd4d156e5df04e8a2512d675b5b40,
+    type: 3}
   debuffTimer: 0
   currentDebuff: 0
   enemyName: EnemyKnight
@@ -662,6 +663,9 @@ MonoBehaviour:
   speed: 2
   resistanceLevel: 1
   unfreezeThreshold: 2
+  stunable: 1
+  slowable: 1
+  freezable: 1
   rb: {fileID: 0}
   anim: {fileID: 0}
   player: {fileID: 0}

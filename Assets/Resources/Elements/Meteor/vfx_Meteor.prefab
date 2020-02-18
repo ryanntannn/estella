@@ -4727,7 +4727,7 @@ ParticleSystem:
 --- !u!199 &6041952387603686422
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -4751,6 +4751,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4762,7 +4763,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -5070,7 +5071,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
+      scalar: 3
       minScalar: 2
       maxCurve:
         serializedVersion: 2
@@ -9479,7 +9480,7 @@ ParticleSystem:
 --- !u!199 &6041952387899741427
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9503,6 +9504,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -14289,7 +14291,7 @@ ParticleSystem:
 --- !u!199 &6041952388263315726
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -14313,6 +14315,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -14355,11 +14358,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6041952387205807578}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: ff19a5545e3745940a8cbfcda6d9befb,
-        type: 3}
-      propertyPath: m_Name
-      value: Metoer
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ff19a5545e3745940a8cbfcda6d9befb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14435,6 +14433,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2e7329d22c9bfc34faae1595b58ecb87, type: 2}
+    - target: {fileID: -927199367670048503, guid: ff19a5545e3745940a8cbfcda6d9befb,
+        type: 3}
+      propertyPath: m_Name
+      value: Metoer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff19a5545e3745940a8cbfcda6d9befb, type: 3}
 --- !u!4 &1631401896712435292 stripped

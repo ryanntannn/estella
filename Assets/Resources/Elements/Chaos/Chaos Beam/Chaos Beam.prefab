@@ -33692,22 +33692,22 @@ PrefabInstance:
     - target: {fileID: 2857521153857647350, guid: 8746eae37b40b4547a4d8a3a6e06903d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4672411714303842558, guid: 8746eae37b40b4547a4d8a3a6e06903d,
         type: 3}
       propertyPath: MinDistance
-      value: 13.678442
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4672411714303842558, guid: 8746eae37b40b4547a4d8a3a6e06903d,
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: e12d3f478b29079488fbcf9601e6c065, type: 3}
+      objectReference: {fileID: 8300000, guid: afe9f781608d76b41a5278aa0752b989, type: 3}
     - target: {fileID: 4672411714303842558, guid: 8746eae37b40b4547a4d8a3a6e06903d,
         type: 3}
       propertyPath: Loop
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8746eae37b40b4547a4d8a3a6e06903d, type: 3}
