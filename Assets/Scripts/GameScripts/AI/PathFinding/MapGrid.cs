@@ -45,19 +45,19 @@ public class MapGrid : MonoBehaviour {
             }
 
             //DEBUGGING SHIT
-            //if (start && end) {
-            //    Node startN = WorldPointToNode(start.transform.position);
-            //    Node endN = WorldPointToNode(end.transform.position);
+            //    if (start && end) {
+            //        Node startN = WorldPointToNode(start.transform.position);
+            //        Node endN = WorldPointToNode(end.transform.position);
 
-            //    List<Node> path = Algorithms.AStar(this, start.transform.position, end.transform.position);
-            //    for (int count = 0; count <= path.Count - 2; count++) {
-            //        Gizmos.color = Color.red;
-            //        Gizmos.DrawLine(path[count].worldPos, path[count + 1].worldPos);
+            //        List<Node> path = Algorithms.AStar(this, start.transform.position, end.transform.position);
+            //        for (int count = 0; count <= path.Count - 2; count++) {
+            //            Gizmos.color = Color.red;
+            //            Gizmos.DrawLine(path[count].worldPos, path[count + 1].worldPos);
+            //        }
+
+            //        Gizmos.DrawCube(startN.worldPos, Vector3.one * 0.5f);
+            //        Gizmos.DrawCube(endN.worldPos, Vector3.one * 0.5f);
             //    }
-
-            //    Gizmos.DrawCube(startN.worldPos, Vector3.one * 0.5f);
-            //    Gizmos.DrawCube(endN.worldPos, Vector3.one * 0.5f);
-            //}
         }
     }
 
@@ -78,9 +78,9 @@ public class MapGrid : MonoBehaviour {
                     //raycast down
                     float stepHeight = 3;
                     RaycastHit hitInfo;
-                    if(Physics.Raycast(worldPos, -transform.up, out hitInfo, stepHeight)) {
+                    if (Physics.Raycast(worldPos, -transform.up, out hitInfo, stepHeight)) {
                         worldPos = hitInfo.point;
-                    }else {
+                    } else {
                         hasSpace = false;
                     }
                 }
